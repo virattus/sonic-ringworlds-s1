@@ -41,7 +41,4 @@ func HandleJump() -> void:
 
 
 func HandleAttack() -> void:
-	#First, check if there's an object we can interact with
-	if !owner.InteractHandler.Interact():
-		#Okay, attack
-		pass
+	return
