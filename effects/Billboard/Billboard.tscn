@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dalhl2vmi5cfi"]
+
+[ext_resource type="Material" uid="uid://b62wlpt1cvln7" path="res://effects/Billboard/Mat_BillboardRotating_unshaded.tres" id="1_x7t2c"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_l01i7"]
+
+[node name="Billboard" type="MeshInstance3D"]
+gi_mode = 0
+mesh = SubResource("QuadMesh_l01i7")
+surface_material_override/0 = ExtResource("1_x7t2c")

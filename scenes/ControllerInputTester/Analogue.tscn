@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhy3rn8hcuaf6"]
+
+[ext_resource type="Script" path="res://scenes/ControllerInputTester/Analogue.gd" id="1_uq8nl"]
+
+[node name="Analogue" type="Label"]
+offset_right = 86.0
+offset_bottom = 26.0
+text = "L Analogue"
+horizontal_alignment = 1
+script = ExtResource("1_uq8nl")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 90.0
+offset_bottom = 110.0
+color = Color(0, 0, 0, 0.34902)
+
+[node name="Control" type="Control" parent="Background"]
+anchors_preset = 0
+offset_left = 38.0
+offset_top = 38.0
+offset_right = 78.0
+offset_bottom = 78.0
+
+[node name="Position" type="ColorRect" parent="Background/Control"]
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(1, 0, 0, 1)

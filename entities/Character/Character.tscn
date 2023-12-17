@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c38nbc66jwdhn"]
+
+[ext_resource type="Script" path="res://entities/Character/Character.gd" id="1_vr0xf"]
+[ext_resource type="PackedScene" uid="uid://ben70shfg7cdp" path="res://entities/CharacterMesh/CharacterMesh.tscn" id="2_r3kgk"]
+[ext_resource type="PackedScene" uid="uid://cw4gtu5hyf53i" path="res://effects/SpotShadow/SpotShadow.tscn" id="3_a22of"]
+
+[node name="Character" type="CharacterBody3D" groups=["Character"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_vr0xf")
+
+[node name="WorldCollision" type="CollisionShape3D" parent="."]
+
+[node name="CharacterMesh" parent="." instance=ExtResource("2_r3kgk")]
+
+[node name="GroundCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, -25, 0)
+
+[node name="SpotShadow" parent="." node_paths=PackedStringArray("TargetRay") instance=ExtResource("3_a22of")]
+TargetRay = NodePath("../GroundCast")

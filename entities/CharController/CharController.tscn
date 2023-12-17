@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dntof21or60eq"]
+
+[ext_resource type="Script" path="res://entities/CharController/CharController.gd" id="1_ey7hy"]
+
+[node name="CharController" type="Node"]
+script = ExtResource("1_ey7hy")

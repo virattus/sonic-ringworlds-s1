@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bixybwlawbku3"]
+
+[ext_resource type="Texture2D" uid="uid://dta1tqpor5ua4" path="res://effects/SpotShadow/SpotShadow.png" id="2_0hlfu"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("2_0hlfu")
+texture_filter = 0

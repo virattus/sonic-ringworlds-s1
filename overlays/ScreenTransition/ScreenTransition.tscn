@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://6xgja1ytmg4i"]
+
+[ext_resource type="Script" path="res://overlays/ScreenTransition/ScreenTransition.gd" id="1_imqxb"]
+
+[node name="ScreenTransition" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+script = ExtResource("1_imqxb")
+
+[node name="FadeLayer" type="ColorRect" parent="."]
+visible = false
+offset_right = 854.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjssgei6ynjvj"]
+
+[ext_resource type="Script" path="res://overlays/ScreenTransition/Fade/Fade.gd" id="1_qshl0"]
+
+[node name="Fade" type="CanvasLayer"]
+layer = 98
+script = ExtResource("1_qshl0")
+
+[node name="FadeLayer" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FadeTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FadeTimer" to="." method="_on_fade_timer_timeout"]

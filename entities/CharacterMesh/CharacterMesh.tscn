@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ben70shfg7cdp"]
+
+[ext_resource type="Script" path="res://entities/CharacterMesh/CharacterMesh.gd" id="1_3n2rm"]
+
+[node name="CharacterMesh" type="Node3D"]
+script = ExtResource("1_3n2rm")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cawfhpkmd7dyu"]
+
+[ext_resource type="Script" path="res://entities/CharacterTarget/CharacterTarget.gd" id="1_q1r3o"]
+[ext_resource type="Texture2D" uid="uid://b3jasmhu3jyr6" path="res://icons/CameraTarget.png" id="2_0ovp2"]
+
+[node name="CharacterTarget" type="Node3D"]
+script = ExtResource("1_q1r3o")
+OffsetRange = Vector2(2, 1)
+
+[node name="RayCastToCamera" type="RayCast3D" parent="."]
+collision_mask = 512
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["CameraDebug"]]
+visible = false
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_0ovp2")

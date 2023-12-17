@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6u5xpf6udsjv"]
+
+[ext_resource type="Script" path="res://scenes/ControllerInputTester/Trigger.gd" id="1_ns4in"]
+
+[node name="Trigger" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "L Trigger"
+script = ExtResource("1_ns4in")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 50.0
+offset_bottom = 90.0
+color = Color(0, 0, 0, 0.32549)
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 60.0
+offset_right = 60.0
+offset_bottom = 120.0
+rotation = 3.14159
+color = Color(1, 0, 0, 1)

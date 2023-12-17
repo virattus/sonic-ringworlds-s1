@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://baeptqewfeutp"]
+
+[ext_resource type="Shader" path="res://effects/SkyQuad/SkyQuad.gdshader" id="1_myyri"]
+[ext_resource type="Texture2D" uid="uid://cl0w12jm78jtl" path="res://textures/SkyTextures/Wispy_Sky-Blue_03-512.png" id="2_dr25f"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_myyri")
+shader_parameter/modulate_colour = Color(1, 1, 1, 1)
+shader_parameter/uv_scale = Vector2(1.7, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/texture_albedo = ExtResource("2_dr25f")

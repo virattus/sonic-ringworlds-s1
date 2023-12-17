@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhl050he6o8ya"]
+
+[ext_resource type="Script" path="res://overlays/DebugMenu/MonitorOverlay/MonitorOverlay.gd" id="1_pf8fy"]
+
+[node name="MonitorOverlay" type="MarginContainer"]
+offset_right = 854.0
+offset_bottom = 480.0
+mouse_filter = 2
+script = ExtResource("1_pf8fy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.156863)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2

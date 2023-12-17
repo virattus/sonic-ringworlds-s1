@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://blv6c1vdrcm2t"]
+
+[ext_resource type="Script" path="res://entities/MouseCamera/MouseCamera.gd" id="1_i64j7"]
+
+[node name="MouseCamera" type="Node3D"]
+script = ExtResource("1_i64j7")
+
+[node name="Vert" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Vert"]

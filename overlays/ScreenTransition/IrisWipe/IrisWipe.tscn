@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://hy7xalomalld"]
+
+[ext_resource type="Shader" path="res://overlays/ScreenTransition/IrisWipe/IrisWipe.gdshader" id="1_vgap1"]
+[ext_resource type="Script" path="res://overlays/ScreenTransition/IrisWipe/IrisWipe.gd" id="2_p7mg3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_62jf1"]
+shader = ExtResource("1_vgap1")
+shader_parameter/WipeRange = 0.0
+
+[node name="IrisWipe" type="ColorRect"]
+process_mode = 3
+z_index = 5
+material = SubResource("ShaderMaterial_62jf1")
+offset_right = 854.0
+offset_bottom = 480.0
+script = ExtResource("2_p7mg3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 426.0
+offset_top = 239.0
+offset_right = 428.0
+offset_bottom = 241.0
+color = Color(1, 0, 0, 1)

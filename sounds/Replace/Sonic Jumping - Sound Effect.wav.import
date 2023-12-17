@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c30nb2qp134ve"
+path="res://.godot/imported/Sonic Jumping - Sound Effect.wav-8ff4cd9e34ba4981a3a8d0667444113c.sample"
+
+[deps]
+
+source_file="res://sounds/Replace/Sonic Jumping - Sound Effect.wav"
+dest_files=["res://.godot/imported/Sonic Jumping - Sound Effect.wav-8ff4cd9e34ba4981a3a8d0667444113c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

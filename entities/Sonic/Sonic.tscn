@@ -1,0 +1,118 @@
+[gd_scene load_steps=25 format=3 uid="uid://tximpab5mrch"]
+
+[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
+[ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
+[ext_resource type="PackedScene" uid="uid://cga0gbap1aupl" path="res://entities/StateMachine/StateMachine.tscn" id="6_vxgru"]
+[ext_resource type="Script" path="res://entities/Sonic/Idle.gd" id="7_wafk6"]
+[ext_resource type="Script" path="res://entities/Sonic/Move.gd" id="9_3et1g"]
+[ext_resource type="Script" path="res://entities/Sonic/Dash.gd" id="9_t20lu"]
+[ext_resource type="Script" path="res://entities/Sonic/SkidStop.gd" id="10_phi0i"]
+[ext_resource type="AudioStream" uid="uid://d0hbvsuiui5t4" path="res://sounds/Freesound/bruno_boselli/488335__brunoboselli__dragging-kayak.wav" id="12_b3ojk"]
+[ext_resource type="AudioStream" uid="uid://byuk20ymy4qxn" path="res://sounds/Freesound/kwahmah_02/262893__kwahmah_02__videogame-jump_edit.wav" id="13_4fcpe"]
+[ext_resource type="Script" path="res://entities/Sonic/Land.gd" id="13_s3plp"]
+[ext_resource type="AudioStream" uid="uid://w8bmil60hyjv" path="res://sounds/Freesound/newagesoup/364740__newagesoup__open-cardboard-box-compartment.wav" id="18_gq1gs"]
+[ext_resource type="Script" path="res://entities/Sonic/SpinAttack.gd" id="21_4gn0w"]
+[ext_resource type="Script" path="res://entities/Sonic/Bounce.gd" id="27_yx7s7"]
+[ext_resource type="Script" path="res://entities/Sonic/Hurt.gd" id="28_jmqmt"]
+[ext_resource type="Script" path="res://entities/Sonic/Hurt_Flyback.gd" id="30_3hfdc"]
+[ext_resource type="Script" path="res://entities/Sonic/Death.gd" id="33_pypui"]
+[ext_resource type="Script" path="res://entities/Sonic/Inactive.gd" id="35_2pmgl"]
+[ext_resource type="Script" path="res://entities/Sonic/Slide.gd" id="37_pvv7r"]
+[ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="39_jijta"]
+[ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="41_0dxtr"]
+[ext_resource type="Script" path="res://entities/Sonic/WallBonk.gd" id="45_cwlpp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d4iho"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_5iy7w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omts7"]
+albedo_color = Color(0, 0, 1, 1)
+
+[node name="Sonic" instance=ExtResource("1_paxei")]
+collision_mask = 31
+floor_snap_length = 0.15
+script = ExtResource("2_p6xw2")
+
+[node name="WorldCollision" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_d4iho")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterMesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_5iy7w")
+surface_material_override/0 = SubResource("StandardMaterial3D_omts7")
+
+[node name="StateMachine" parent="." index="4" node_paths=PackedStringArray("ActiveState") instance=ExtResource("6_vxgru")]
+ActiveState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("7_wafk6")
+
+[node name="Move" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("9_3et1g")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/Move" index="0"]
+wait_time = 0.05
+one_shot = true
+
+[node name="Dash" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("9_t20lu")
+
+[node name="DashLifeTimer" type="Timer" parent="StateMachine/Dash" index="0"]
+wait_time = 0.2
+one_shot = true
+
+[node name="SkidStop" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("10_phi0i")
+
+[node name="SkidSound" type="AudioStreamPlayer" parent="StateMachine/SkidStop" index="0"]
+stream = ExtResource("12_b3ojk")
+volume_db = 5.0
+bus = &"SoundEffects"
+
+[node name="Slide" type="Node" parent="StateMachine" index="4"]
+script = ExtResource("37_pvv7r")
+
+[node name="Jump" type="Node" parent="StateMachine" index="5"]
+script = ExtResource("39_jijta")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="StateMachine/Jump" index="0"]
+stream = ExtResource("13_4fcpe")
+volume_db = -10.0
+bus = &"SoundEffects"
+
+[node name="Fall" type="Node" parent="StateMachine" index="6"]
+script = ExtResource("41_0dxtr")
+
+[node name="WallBonk" type="Node" parent="StateMachine" index="7"]
+script = ExtResource("45_cwlpp")
+
+[node name="Bounce" type="Node" parent="StateMachine" index="8"]
+script = ExtResource("27_yx7s7")
+
+[node name="Land" type="Node" parent="StateMachine" index="9"]
+script = ExtResource("13_s3plp")
+
+[node name="LandSound" type="AudioStreamPlayer" parent="StateMachine/Land" index="0"]
+stream = ExtResource("18_gq1gs")
+volume_db = -15.0
+bus = &"SoundEffects"
+
+[node name="SpinAttack" type="Node" parent="StateMachine" index="10"]
+script = ExtResource("21_4gn0w")
+
+[node name="Hurt" type="Node" parent="StateMachine" index="11"]
+script = ExtResource("28_jmqmt")
+
+[node name="Hurt_Flyback" type="Node" parent="StateMachine" index="12"]
+script = ExtResource("30_3hfdc")
+
+[node name="Death" type="Node" parent="StateMachine" index="13"]
+script = ExtResource("33_pypui")
+
+[node name="Inactive" type="Node" parent="StateMachine" index="14"]
+script = ExtResource("35_2pmgl")
+
+[connection signal="timeout" from="StateMachine/Move/DashTimer" to="StateMachine/Move" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Dash/DashLifeTimer" to="StateMachine/Dash" method="_on_dash_life_timer_timeout"]

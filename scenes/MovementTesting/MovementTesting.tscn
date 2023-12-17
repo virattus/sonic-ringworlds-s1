@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://db5ju6ees4ngi"]
+
+[ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
+[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="2_dtuf0"]
+[ext_resource type="PackedScene" uid="uid://cawfhpkmd7dyu" path="res://entities/CharacterTarget/CharacterTarget.tscn" id="3_y6ahl"]
+[ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="4_o6euw"]
+[ext_resource type="PackedScene" uid="uid://70ipciyf48qy" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.tscn" id="5_1yhjy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ijf0q"]
+
+[sub_resource type="Sky" id="Sky_jehaj"]
+sky_material = SubResource("ProceduralSkyMaterial_ijf0q")
+
+[sub_resource type="Environment" id="Environment_xirmo"]
+background_mode = 2
+background_color = Color(0.647059, 0.8, 0.996078, 1)
+sky = SubResource("Sky_jehaj")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+
+[node name="MovementTesting" type="Node3D"]
+
+[node name="MovementTesting" parent="." instance=ExtResource("1_aqers")]
+
+[node name="Sonic" parent="." node_paths=PackedStringArray("Controller") instance=ExtResource("2_dtuf0")]
+Controller = NodePath("../PlayerController")
+
+[node name="CharacterTarget" parent="Sonic" node_paths=PackedStringArray("TargetChar", "TargetCamera") instance=ExtResource("3_y6ahl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+TargetChar = NodePath("..")
+TargetCamera = NodePath("../../ThirdPersonCamera")
+
+[node name="PlayerController" parent="." node_paths=PackedStringArray("Camera_Node") instance=ExtResource("4_o6euw")]
+Camera_Node = NodePath("../ThirdPersonCamera")
+
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_1yhjy")]
+Target = NodePath("../Sonic/CharacterTarget")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xirmo")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.589901, 0.557758, -0.583885, 0, 0.7231, 0.690744, 0.807475, -0.40747, 0.426557, 0, 6.26844, 0)
+light_energy = 0.5

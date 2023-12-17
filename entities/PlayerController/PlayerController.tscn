@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5hnh3fqc7u4p"]
+
+[ext_resource type="PackedScene" uid="uid://dntof21or60eq" path="res://entities/CharController/CharController.tscn" id="1_2ggb5"]
+[ext_resource type="Script" path="res://entities/PlayerController/PlayerController.gd" id="1_lyck8"]
+
+[node name="PlayerController" instance=ExtResource("1_2ggb5")]
+script = ExtResource("1_lyck8")
+PlayerID = 0

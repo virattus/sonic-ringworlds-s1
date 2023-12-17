@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbi06mtbf6dxl"]
+
+[ext_resource type="Script" path="res://effects/Decal/Decal.gd" id="1_i8wwe"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_icrul"]
+subdivide_width = 1
+subdivide_depth = 1
+
+[node name="Decal" type="MeshInstance3D"]
+top_level = true
+mesh = SubResource("PlaneMesh_icrul")
+script = ExtResource("1_i8wwe")

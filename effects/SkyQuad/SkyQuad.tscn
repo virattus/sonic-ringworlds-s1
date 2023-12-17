@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxt1his2prw62"]
+
+[ext_resource type="Script" path="res://effects/SkyQuad/SkyQuad.gd" id="1_jh0f8"]
+[ext_resource type="Material" uid="uid://baeptqewfeutp" path="res://effects/SkyQuad/Mat_SkyQuad.tres" id="1_p6m0r"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_6ymxr"]
+size = Vector2(1.7, 1)
+
+[node name="SkyQuad" type="MeshInstance3D"]
+transform = Transform3D(2.2, 0, 0, 0, 2.2, 0, 0, 0, 2.2, 0, 0, 0)
+sorting_offset = -10000.0
+gi_mode = 0
+mesh = SubResource("QuadMesh_6ymxr")
+surface_material_override/0 = ExtResource("1_p6m0r")
+script = ExtResource("1_jh0f8")

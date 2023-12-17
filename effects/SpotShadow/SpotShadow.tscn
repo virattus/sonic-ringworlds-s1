@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw4gtu5hyf53i"]
+
+[ext_resource type="PackedScene" uid="uid://bbi06mtbf6dxl" path="res://effects/Decal/Decal.tscn" id="1_3va0n"]
+[ext_resource type="Texture2D" uid="uid://dta1tqpor5ua4" path="res://effects/SpotShadow/SpotShadow.png" id="2_ih7rg"]
+[ext_resource type="Script" path="res://effects/SpotShadow/SpotShadow.gd" id="3_8uyel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tnpt"]
+transparency = 1
+albedo_texture = ExtResource("2_ih7rg")
+texture_filter = 0
+
+[node name="SpotShadow" instance=ExtResource("1_3va0n")]
+visibility_range_end = 25.0
+surface_material_override/0 = SubResource("StandardMaterial3D_7tnpt")
+script = ExtResource("3_8uyel")
+VerticalOffset = 0.1
