@@ -3,10 +3,8 @@ extends "res://entities/Sonic/AirMove.gd"
 
 
 func Enter(_msg := {}) -> void:
-	VerticalVelocity = 0.0
-
 	super(_msg)
-	
+	VerticalVelocity = 0.0
 	owner.Controller.JumpJustPressed.connect(HandleJump)
 
 

@@ -5,7 +5,7 @@ extends "res://entities/Sonic/AirMove.gd"
 func Enter(_msg := {}) -> void:
 	$JumpSound.play()
 	
-	VerticalVelocity = owner.JUMP_POWER
+	VerticalVelocity = owner.PARAMETERS.JUMP_POWER
 
 	super(_msg)
 

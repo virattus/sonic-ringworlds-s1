@@ -14,7 +14,7 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	Speed = lerp(Speed, owner.DASH_MAX_SPEED, _delta * 2.75)
+	Speed = lerp(Speed, owner.PARAMETERS.DASH_MAX_SPEED, _delta * 2.75)
 	
 	owner.Move(Direction.normalized() * Speed)
 	owner.CharMesh.LerpMeshOrientation(owner.velocity, _delta)

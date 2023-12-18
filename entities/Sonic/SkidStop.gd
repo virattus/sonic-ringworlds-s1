@@ -4,9 +4,6 @@ extends BasicState
 var InitialVelocity := Vector3.ZERO
 
 
-const MIN_VEL_TO_IDLE = 1.0
-
-
 func Enter(_msg := {}) -> void:
 	$SkidSound.play()
 	if _msg.has("Speed"):
@@ -20,13 +17,13 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move(lerp(owner.velocity, Vector3.ZERO, _delta * owner.SKID_SPEED_LERP_MODIFIER))
+	owner.Move(lerp(owner.velocity, Vector3.ZERO, _delta * owner.PARAMETERS.SKID_SPEED_LERP_MODIFIER))
 
 	if !owner.GroundCollision:
 		ChangeState("Fall")
 		return
 	
-	if owner.velocity.length() <= MIN_VEL_TO_IDLE:
+	if owner.velocity.length() <= owner.PARAMETERS.SKID_MIN_VEL_TO_IDLE:
 		ChangeState("Idle")
 		return
 		

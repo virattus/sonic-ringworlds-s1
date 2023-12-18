@@ -22,7 +22,7 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	VerticalVelocity -= (owner.Gravity * 
-		(owner.JUMP_BUTTON_HELD_GRAVITY_MODIFIER 
+		(owner.PARAMETERS.JUMP_BUTTON_HELD_GRAVITY_MODIFIER 
 		if owner.Controller.InputJump == CharController.BUTTON_PRESSED else 1.0)) * _delta
 	
 	#JumpVelocity += (owner.Controller.InputVelocity * 0.1) * Vector3(1, 0, 1)

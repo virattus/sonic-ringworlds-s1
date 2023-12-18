@@ -5,11 +5,6 @@ var Speed := 0.0
 var TimeSinceStart := 0
 
 
-const MIN_INPUT_LENGTH = 0.8
-const SPEED_MULTIPLIER = 3.0
-
-
-
 func Enter(_msg := {}) -> void:
 	if _msg["PrevState"] == "Idle":
 		$DashTimer.start()
@@ -39,23 +34,23 @@ func Update(_delta: float) -> void:
 	#	return
 	
 	if owner.Controller.InputVelocity.length() > 0.0:
-		Speed += owner.MOVE_SPEED_ADD_MODIFIER * _delta * owner.Controller.InputVelocity.length()
-		if Speed > owner.SPRINT_MAX_SPEED:
-			Speed = owner.SPRINT_MAX_SPEED
-		elif Speed > owner.RUN_MAX_SPEED:
-			Speed += owner.MOVE_SPEED_SUB_MODIFIER * _delta * 0.45
+		Speed += owner.PARAMETERS.MOVE_SPEED_ADD_MODIFIER * _delta * owner.Controller.InputVelocity.length()
+		if Speed > owner.PARAMETERS.SPRINT_MAX_SPEED:
+			Speed = owner.PARAMETERS.SPRINT_MAX_SPEED
+		elif Speed > owner.PARAMETERS.RUN_MAX_SPEED:
+			Speed += owner.PARAMETERS.MOVE_SPEED_SUB_MODIFIER * _delta * 0.45
 	else:
-		Speed += owner.MOVE_SPEED_SUB_MODIFIER * _delta
+		Speed += owner.PARAMETERS.MOVE_SPEED_SUB_MODIFIER * _delta
 		if Speed <= 0.0:
 			ChangeState("Idle")
 			return
 	
 	if owner.InputIsSkidding():
-		if owner.Speed > owner.WALK_MAX_SPEED:
+		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
 			ChangeState("SkidStop")
 			return
 		else:
-			Speed += owner.MOVE_SPEED_SUB_MODIFIER * _delta
+			Speed += owner.PARAMETERS.MOVE_SPEED_SUB_MODIFIER * _delta
 			if Speed <= 0.0:
 				ChangeState("Idle")
 				return
@@ -67,7 +62,7 @@ func Update(_delta: float) -> void:
 	
 	owner.Move(vel * Speed)
 	
-	var orientation = (owner.Controller.InputVelocity + (owner.velocity.normalized() * owner.Speed * owner.MOVE_STICK_VEL_RATIO_MODIFIER)).normalized()
+	var orientation = (owner.Controller.InputVelocity + (owner.velocity.normalized() * owner.Speed * owner.PARAMETERS.MOVE_STICK_VEL_RATIO_MODIFIER)).normalized()
 	
 	owner.CharMesh.LerpMeshOrientation(orientation, _delta)
 	
@@ -76,7 +71,7 @@ func Update(_delta: float) -> void:
 
 func _on_dash_timer_timeout() -> void:
 	return
-	if owner.Controller.InputVelocity.length() > 0.9:
+	if owner.Controller.InputVelocity.length() > owner.PARAMETERS.MOVE_DASH_STICK_MIN_ACTIVATION:
 		ChangeState("Dash")
 
 
