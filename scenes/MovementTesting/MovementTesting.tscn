@@ -1,45 +1,60 @@
-[gd_scene load_steps=9 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=11 format=3 uid="uid://db5ju6ees4ngi"]
 
+[ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
-[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="2_dtuf0"]
-[ext_resource type="PackedScene" uid="uid://cawfhpkmd7dyu" path="res://entities/CharacterTarget/CharacterTarget.tscn" id="3_y6ahl"]
-[ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="4_o6euw"]
-[ext_resource type="PackedScene" uid="uid://70ipciyf48qy" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.tscn" id="5_1yhjy"]
+[ext_resource type="PackedScene" uid="uid://y5djm215ls8v" path="res://entities/Coin/Coin.tscn" id="6_fynam"]
+[ext_resource type="PackedScene" uid="uid://cyk3iwoyy776q" path="res://entities/RingBounce/RingBounce.tscn" id="8_dur5e"]
+[ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/HurtBox/HurtBox.tscn" id="9_cvnib"]
+[ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
+[ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="11_yd8q3"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ijf0q"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xi2am"]
 
-[sub_resource type="Sky" id="Sky_jehaj"]
-sky_material = SubResource("ProceduralSkyMaterial_ijf0q")
+[sub_resource type="SphereMesh" id="SphereMesh_u3ak1"]
 
-[sub_resource type="Environment" id="Environment_xirmo"]
-background_mode = 2
-background_color = Color(0.647059, 0.8, 0.996078, 1)
-sky = SubResource("Sky_jehaj")
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0cpv"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.6)
 
-[node name="MovementTesting" type="Node3D"]
+[node name="MovementTesting" instance=ExtResource("1_8w2gn")]
 
-[node name="MovementTesting" parent="." instance=ExtResource("1_aqers")]
+[node name="Sonic" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
-[node name="Sonic" parent="." node_paths=PackedStringArray("Controller") instance=ExtResource("2_dtuf0")]
-Controller = NodePath("../PlayerController")
+[node name="ThirdPersonCamera" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
-[node name="CharacterTarget" parent="Sonic" node_paths=PackedStringArray("TargetChar", "TargetCamera") instance=ExtResource("3_y6ahl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-TargetChar = NodePath("..")
-TargetCamera = NodePath("../../ThirdPersonCamera")
+[node name="MovementTesting" parent="." index="7" instance=ExtResource("1_aqers")]
 
-[node name="PlayerController" parent="." node_paths=PackedStringArray("Camera_Node") instance=ExtResource("4_o6euw")]
-Camera_Node = NodePath("../ThirdPersonCamera")
+[node name="Coin" parent="." index="8" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -8.34181)
 
-[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_1yhjy")]
-Target = NodePath("../Sonic/CharacterTarget")
+[node name="Coin2" parent="." index="9" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -10.3207)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_xirmo")
+[node name="Coin3" parent="." index="10" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -12.1216)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.589901, 0.557758, -0.583885, 0, 0.7231, 0.690744, 0.807475, -0.40747, 0.426557, 0, 6.26844, 0)
-light_energy = 0.5
+[node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)
+
+[node name="HurtBox" parent="." index="12" instance=ExtResource("9_cvnib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0736, 1.20191, -1.94937)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" index="0"]
+shape = SubResource("SphereShape3D_xi2am")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HurtBox" index="1"]
+mesh = SubResource("SphereMesh_u3ak1")
+surface_material_override/0 = SubResource("StandardMaterial3D_g0cpv")
+
+[node name="Elevator" parent="." index="13" instance=ExtResource("10_0e4rn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83589, 3.1834, -7.76926)
+
+[node name="Elevator2" parent="." index="14" instance=ExtResource("10_0e4rn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2832, 3.1834, -7.76926)
+Direction = Vector3(0, 0, 1)
+
+[node name="EnemyCrabmeat" parent="." index="15" instance=ExtResource("11_yd8q3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.616)

@@ -1,68 +1,51 @@
 class_name ThirdPersonCamera
 extends Node3D
 
+@export var Active := true
+@export var RightAnalogue := true
+@export var char : CharacterBody3D
 
-@export var Target : CharacterTarget
-@export var CameraDistance := 5.0
-@export var ForwardSensitivity := 1.0
-@export var ReverseSensitivity := 1.0
+var CurrentBasis := Basis.IDENTITY
 
-
-var Rot := Vector2(0.0, -0.25)
-
-
-const VERTICAL_CLAMP = 1.5
-
-const CAM_Y_LERP_ROT_SPEED = 4.0
-const CAM_Y_REGULAR_ROT = -0.4
-const CAM_Y_OBSTACLE_AVOID_ROT = -0.65
-
-@onready var Cam = $SpringArm3D/CameraTriggerBody/Camera3D
-@onready var SpringArm = $SpringArm3D
-@onready var StateMachine = $StateMachine
+var up_axis := Vector3.UP
 
 
-func _ready():
-	DebugMenu.AddMonitor(self, "global_position")
-	DebugMenu.AddMonitor(self, "Rot")
-	SpringArm.spring_length = CameraDistance
-
-
-func GetCamera() -> Camera3D:
-	return Cam
-
-
-func GetCameraPosition() -> Vector3:
-	return Cam.global_position
-
-
-func GetCameraBasis() -> Basis:
-	return Cam.get_camera_transform().basis
-
-
-func GetCameraDistance() -> float:
-	return Cam.position.z
-
-
-func Activate() -> void:
-	Cam.current = true
-	Globals.CurrentCamera = Cam
-
-
-func UpdateRotation() -> void:
-	transform.basis = Basis()
-	Rot.y = clamp(Rot.y, -VERTICAL_CLAMP, VERTICAL_CLAMP)
+func _process(delta: float) -> void:
+	if !Active:
+		return
 	
-	rotate_object_local(Vector3(0, 1, 0), Rot.x)
-	rotate_object_local(Vector3(1, 0, 0), Rot.y)
-	#SpringArm.rotate_y(Rot.x - SpringArm.rotation.y)
-	#SpringArm.rotate_x(Rot.y - SpringArm.rotation.x)
+	up_axis = self.transform.basis.y
 	
-	while Rot.x < 0.0:
-		Rot.x += TAU
-	while Rot.x > TAU:
-		Rot.x -= TAU
+	position = char.position
+	
+	var alignment = basis_aligned_y(transform.basis, char.up_direction)
+	transform.basis = transform.basis.slerp(alignment, 0.2)
+	if RightAnalogue:
+		cam_input()
+	else:
+		shoulder_cam_input()
+	CurrentBasis = transform.basis
 
 
-func ChangeState(newState: String, msg := {}) -> void:
-	StateMachine.ChangeState(newState, msg)
+func shoulder_cam_input() -> void:
+	var cam_input = Input.get_axis("Shoulder_Cam_Left", "Shoulder_Cam_Right")
+	
+	transform.basis = transform.basis.rotated(up_axis, -cam_input * 0.1)
+	
+
+
+func cam_input() -> void:
+	var CAM_INPUT = Input.get_vector("Camera_Right", "Camera_Left", "Camera_Down", "Camera_Up")
+	
+	transform.basis = transform.basis.rotated(up_axis, -CAM_INPUT.x * 0.1)
+	
+	$SpringArm3D.rotation.x -= CAM_INPUT.y * 0.1
+	$SpringArm3D.rotation.x = clamp($SpringArm3D.rotation.x, deg_to_rad(-80), deg_to_rad(60))
+	
+
+
+func basis_aligned_y(basis_to_align: Basis, vector_to_align_with: Vector3) -> Basis:
+	basis_to_align.y = vector_to_align_with
+	basis_to_align.x = -basis_to_align.z.cross(basis_to_align.y)
+	basis_to_align = basis_to_align.orthonormalized()
+	return basis_to_align

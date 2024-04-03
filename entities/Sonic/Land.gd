@@ -2,17 +2,26 @@ extends BasicState
 
 
 
+
 func Enter(_msg := {}) -> void:
-	$LandSound.play()
+	var UpDir := Vector3.UP
+	if _msg.has("UpDir"):
+		UpDir = _msg["UpDir"]
 	
-	if owner.Speed < owner.PARAMETERS.WALK_MAX_SPEED and owner.InputIsSkidding():
-		ChangeState("SkidStop", {
-			"Speed": owner.Speed * owner.PARAMETERS.LAND_SPEED_LOSS_MODIFIER
-		})
+	owner.SndLand.play()
+	
+	var landDot = UpDir.dot(owner.FloorNormal)
+	print("LandDot: %s" % landDot)
+	owner.CharMesh.AlignToY(owner.FloorNormal)
+	owner.up_direction = owner.FloorNormal
+	
+	if landDot > owner.PARAMETERS.LAND_ANGLE_MIN:
+		if owner.Speed > owner.PARAMETERS.MOVE_MIN_SPEED:
+			ChangeState("Move")
+		else:
+			ChangeState("Idle")
 	else:
-		ChangeState("Move", {
-			"Speed": owner.Speed * owner.PARAMETERS.LAND_SPEED_LOSS_MODIFIER
-		})
+		ChangeState("Wipeout")
 
 
 func Exit() -> void:
@@ -21,4 +30,3 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	pass
-

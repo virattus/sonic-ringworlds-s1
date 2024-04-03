@@ -1,43 +1,57 @@
 extends BasicState
 
 
-var Pause := true
-var PauseAccumulator := 0.0
 var LeftGround := false
-var VerticalVelocity := 0.0
-var InitialVelocity := Vector3.ZERO
-var CameraPosition := Vector3.ZERO
+
+const RING = preload("res://entities/RingBounce/RingBounce.tscn")
 
 
 func Enter(_msg := {}) -> void:
-	InitialVelocity = -owner.CharMesh.GetForwardVector().normalized()
-	VerticalVelocity = owner.PARAMETERS.HURT_VERT_VELOCITY_START
-	owner.global_position += Vector3(0.0, 0.1, 0.0) #keep getting stuck in ground, should test against the ceiling
+	owner.AnimTree.set("parameters/Hurt/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/OSHurt/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
+	owner.Invincible = true
+	owner.SndRingDrop.play()
+	owner.set_collision_layer_value(2, false)
+	
+	owner.up_direction = Vector3(0, 1, 0)
+	owner.FloorNormal = Vector3(0, 1, 0)
+	owner.velocity = Vector3(0, owner.PARAMETERS.HURT_INITIAL_UP_SPEED, 0)
+	if _msg.has("Direction"):
+		owner.velocity = _msg["Direction"] + owner.velocity
+	
+	owner.CharMesh.look_at(owner.global_position - (owner.velocity * Vector3(1, 0, 1)).normalized())
+	
+	if owner.is_on_floor():
+		LeftGround = false
+	else:
+		LeftGround = true
+	
+	for i in range(20 if Globals.RingCount > 20 else Globals.RingCount):
+		var newRing = RING.instantiate()
+		owner.get_parent().add_child(newRing)
+		newRing.global_position = owner.global_position
+	
+	Globals.RingCount = 0
+
 
 func Exit() -> void:
-	Pause = true
-	PauseAccumulator = 0.0
-	LeftGround = false
+	owner.AnimTree.set("parameters/Hurt/blend_amount", 0.0)
+	owner.AnimTree.set("parameters/OSHurt/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	
+	owner.Flicker = true
+	owner.TimerInvincibility.start(owner.PARAMETERS.HURT_INVINCIBILITY_TIME)
+	owner.set_collision_layer_value(2, true)
 
 
 func Update(_delta: float) -> void:
-	if Pause:
-		if PauseAccumulator > owner.PARAMETERS.HURT_PAUSE_DURATION:
-			Pause = false
-		else:
-			PauseAccumulator += _delta
-		return
+	if owner.is_on_floor():
+		if LeftGround:
+			ChangeState("Idle")
+			return
+	else:
+		LeftGround = true
 	
-	if LeftGround and owner.GroundCollision:
-		ChangeState("Idle")
-		return
+	owner.velocity.y -= owner.PARAMETERS.GRAVITY * _delta
 	
-	if !LeftGround:
-		if !owner.GroundCollision:
-			LeftGround = true
-
-	VerticalVelocity -= owner.Gravity * _delta
-	
-	owner.Move((InitialVelocity * owner.PARAMETERS.HURT_HORIZ_VELOCITY) + (Vector3(0, VerticalVelocity, 0)))
-	owner.CharMesh.LerpMeshOrientation(-InitialVelocity, _delta)
+	owner.Move(owner.velocity)

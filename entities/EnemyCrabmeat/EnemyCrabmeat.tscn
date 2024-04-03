@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://b54file0qwj7e"]
+
+[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_eflwk"]
+[ext_resource type="PackedScene" uid="uid://dd14kspiykhby" path="res://models/Crabmeat/ModelCrabmeat.tscn" id="2_6d2dm"]
+[ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/HurtBox/HurtBox.tscn" id="3_fcmvm"]
+[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_ojqh3"]
+[ext_resource type="Script" path="res://entities/EnemyCrabmeat/Idle.gd" id="5_gb616"]
+[ext_resource type="Script" path="res://entities/EnemyCrabmeat/Chase.gd" id="6_8trow"]
+[ext_resource type="Script" path="res://entities/EnemyCrabmeat/Wander.gd" id="7_lpetq"]
+[ext_resource type="Script" path="res://entities/EnemyCrabmeat/Victory.gd" id="8_k2k6m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_e8igs"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_50ks0"]
+radius = 0.308944
+
+[node name="EnemyCrabmeat" instance=ExtResource("1_eflwk")]
+
+[node name="ModelCrabmeat" parent="CharacterMesh" index="0" instance=ExtResource("2_6d2dm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="PlayerSearch" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSearch" index="0"]
+shape = SubResource("SphereShape3D_e8igs")
+
+[node name="HurtBox" parent="." index="5" instance=ExtResource("3_fcmvm")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.269524, 0)
+shape = SubResource("SphereShape3D_50ks0")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HurtBox" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666749, 0.557141, 0.366058)
+shape = SubResource("SphereShape3D_50ks0")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="HurtBox" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.647138, 0.557141, 0.366058)
+shape = SubResource("SphereShape3D_50ks0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+
+[node name="StateMachine" type="Node" parent="." index="7" node_paths=PackedStringArray("ActiveState")]
+script = ExtResource("4_ojqh3")
+ActiveState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("5_gb616")
+
+[node name="Chase" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("6_8trow")
+
+[node name="Wander" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("7_lpetq")
+
+[node name="Victory" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("8_k2k6m")
+
+[connection signal="body_entered" from="PlayerSearch" to="StateMachine/Idle" method="_on_player_search_body_entered"]
+[connection signal="HurtboxActivated" from="HurtBox" to="StateMachine/Chase" method="_on_hurt_box_hurtbox_activated"]

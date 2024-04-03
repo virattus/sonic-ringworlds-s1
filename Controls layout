@@ -1,0 +1,61 @@
+Sonic
+	States: Regular, Jumping, Ball, Strike Dash, Air Dash, Crash Bandicoot Spin, Olympics Race Crouch 
+	Ground Controls:
+		Jump press: Jump
+		Jump Hold: 
+			Regular mode: Jump higher
+			Dash State: Sonic Advance 2 Forward spin trick, continue holding to home in on enemies
+		Spin Hold:
+			Stationary: "Olympics Race Crouch"
+			Moving: Roll
+		Jump and Spin Press: "charge strike dash", sets Dash State
+		
+	Air Controls:
+		Jump Press:	Heroes Air Dash
+		Spin Press:	Set Ball State
+		Jump and Spin Press: Pose (for style points)
+		
+
+Tails
+	States: Regular, Jumping, Ball, Fly, 
+	Ground Controls:
+		Jump Press: Jump
+		Jump Hold: Jump Higher
+		Jump and Spin Hold: Spindash
+	
+	Air Controls:
+		Jump Press: Sets Fly State
+		Spin Press: Set Ball State
+		Jump and Spin Press: Pose (for style points)
+
+Amy
+	States: Regular, Jumping, Ball, Hammer Bounce, Hammer Shield Richochet, 
+	Ground Controls:
+		Jump Press: Jump
+		Jump Hold: 
+			Regular State: Jump Higher
+			Spindash State: "trip move, hit box, drag landing"
+		Spin Press: Swing hammer "onto floor"
+		Jump and Spin Press: Jump during hammer hit to flip high, like in SA1
+		 
+	Air Controls:
+		Jump Press: "Confused looking side-to-side with end lag"
+		Spin Press: Hammer Insta-Shield, sets Richochet State
+		Jump and Spin Press: Pose (for style points)
+		
+Knuckles
+	States: 
+	Ground Controls:
+		Jump Press: Jump
+		Jump Hold: Jump Higher
+		Spin Press:
+			Stationary
+		Jump and Spin Press: Strike dash 
+		
+	Air Controls:
+		Jump Press: ???
+		Jump Hold: Glide
+		Spin Hold: Drill Dive
+		Jump and Spin Press: Pose (for style points)
+		
+		

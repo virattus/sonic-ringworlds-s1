@@ -1,83 +1,78 @@
 extends BasicState
 
 
-var Speed := 0.0
-var TimeSinceStart := 0
 
 
 func Enter(_msg := {}) -> void:
-	if _msg["PrevState"] == "Idle":
-		$DashTimer.start()
-	
-	if _msg.has("Speed"):
-		Speed = _msg["Speed"]
-	else:
-		Speed = owner.Speed
-	
-	owner.Controller.JumpJustPressed.connect(HandleJump)
-	owner.Controller.AttackJustPressed.connect(HandleAttack)
+	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
+	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
+	owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
 
 
 func Exit() -> void:
-	TimeSinceStart = 0
-	owner.Controller.JumpJustPressed.disconnect(HandleJump)
-	owner.Controller.AttackJustPressed.disconnect(HandleAttack)
-	
+	pass
+
 
 func Update(_delta: float) -> void:
-	if !owner.GroundCollision:
-		ChangeState("Fall")
-		return
+	owner.UpdateUpDir()
+	owner.CheckCharGroundCast()
+	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized())
 	
-	#if owner.Controller.InputJump == CharController.BUTTON_JUST_PRESSED:
-	#	ChangeState("Jump")
-	#	return
+	var vel = owner.velocity
 	
 	if owner.Controller.InputVelocity.length() > 0.0:
-		Speed += owner.PARAMETERS.MOVE_SPEED_ADD_MODIFIER * _delta * owner.Controller.InputVelocity.length()
-		if Speed > owner.PARAMETERS.SPRINT_MAX_SPEED:
-			Speed = owner.PARAMETERS.SPRINT_MAX_SPEED
-		elif Speed > owner.PARAMETERS.RUN_MAX_SPEED:
-			Speed += owner.PARAMETERS.MOVE_SPEED_SUB_MODIFIER * _delta * 0.45
+		vel += owner.Controller.InputVelocity
 	else:
-		Speed += owner.PARAMETERS.MOVE_SPEED_SUB_MODIFIER * _delta
-		if Speed <= 0.0:
-			ChangeState("Idle")
-			return
+		vel = lerp(vel, Vector3.ZERO, _delta)
 	
-	if owner.InputIsSkidding():
-		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
-			ChangeState("SkidStop")
+	owner.Move(vel)
+	
+	#owner.CharGroundCast.force_raycast_update()
+	#if owner.CharGroundCast.is_colliding():
+	#	owner.global_position = owner.CharGroundCast.get_collision_point() + (Vector3.UP * 0.5)
+	
+	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
+	owner.CharMesh.AlignToY(owner.up_direction)
+	#owner.CharMesh.LerpMeshOrientation(owner.Controller.InputVelocity.normalized(), _delta)
+	
+	owner.up_direction = owner.FloorNormal
+	
+	if !owner.is_on_floor():
+		owner.CharGroundCast.force_raycast_update()
+		if !owner.CharGroundCast.is_colliding():
+			ChangeState("Fall")
 			return
 		else:
-			Speed += owner.PARAMETERS.MOVE_SPEED_SUB_MODIFIER * _delta
-			if Speed <= 0.0:
-				ChangeState("Idle")
-				return
+			owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
 	
-	var vel = owner.velocity.normalized()
+	#var DotToGround = (owner.up_direction.dot(owner.GroundCast.target_position.normalized()) + 1.0) / 2.0
+	#if owner.Speed < (DotToGround * owner.PARAMETERS.MOVE_GROUND_STICK_REQ_SPEED):
+	#	print(DotToGround)
+	#	ChangeState("Fall")
+	#	return
 	
-	#As the character speeds up, we want the controller input's "weight" to reduce
-	vel = ((vel * Speed) + owner.Controller.InputVelocity).normalized() 
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Jump")
+		return
 	
-	owner.Move(vel * Speed)
+	if owner.Speed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
+		ChangeState("Skid")
+		return
 	
-	var orientation = (owner.Controller.InputVelocity + (owner.velocity.normalized() * owner.Speed * owner.PARAMETERS.MOVE_STICK_VEL_RATIO_MODIFIER)).normalized()
-	
-	owner.CharMesh.LerpMeshOrientation(orientation, _delta)
-	
-	Speed = owner.Speed
+	if owner.Speed <= owner.PARAMETERS.MOVE_MIN_SPEED:
+		ChangeState("Idle")
+		return
 
 
-func _on_dash_timer_timeout() -> void:
-	return
-	if owner.Controller.InputVelocity.length() > owner.PARAMETERS.MOVE_DASH_STICK_MIN_ACTIVATION:
-		ChangeState("Dash")
 
-
-func HandleJump() -> void:
-	ChangeState("Jump")
-
-
-func HandleAttack() -> void:
-	return
+func IsInputSkidding() -> bool:
+	return false
+	
+	if owner.Controller.InputVelocity.length() > owner.PARAMETERS.SKID_INPUT_MIN:
+		var InputDir = owner.velocity.normalized().dot(owner.Controller.InputVelocity)
+		if InputDir < owner.PARAMETERS.SKID_ANGLE_MIN:
+			print("Skid ratio: %s" % InputDir)
+			return true
+		
+	return false

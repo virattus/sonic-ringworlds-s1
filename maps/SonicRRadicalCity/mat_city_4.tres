@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c6il1l8gwhp8o"]
+
+[ext_resource type="Texture2D" uid="uid://0u5txffqf0c5" path="res://maps/SonicRRadicalCity/ISLAND03.png" id="1_c1rc8"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_c1rc8")
+texture_filter = 0

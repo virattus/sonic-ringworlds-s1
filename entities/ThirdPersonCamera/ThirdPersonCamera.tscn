@@ -1,49 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://70ipciyf48qy"]
+[gd_scene load_steps=3 format=3 uid="uid://b4cv687hr7c4p"]
 
 [ext_resource type="Script" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.gd" id="1"]
-[ext_resource type="Script" path="res://entities/ThirdPersonCamera/Manual.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://cga0gbap1aupl" path="res://entities/StateMachine/StateMachine.tscn" id="3"]
-[ext_resource type="Script" path="res://entities/ThirdPersonCamera/Reset.gd" id="4"]
-[ext_resource type="Script" path="res://entities/ThirdPersonCamera/Follow.gd" id="5"]
-[ext_resource type="Script" path="res://entities/ThirdPersonCamera/Target.gd" id="6_r17s5"]
-[ext_resource type="Script" path="res://entities/ThirdPersonCamera/Freeze.gd" id="7_ht1u8"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_cxpfo"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_pp5kt"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_2j2m6"]
 
 [node name="ThirdPersonCamera" type="Node3D"]
 script = ExtResource("1")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-collision_mask = 512
-shape = SubResource("SphereShape3D_cxpfo")
-spring_length = 7.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62293, 0)
+shape = SubResource("SphereShape3D_2j2m6")
+spring_length = 3.0
 
-[node name="CameraTriggerBody" type="CharacterBody3D" parent="SpringArm3D"]
-collision_layer = 512
-collision_mask = 512
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SpringArm3D/CameraTriggerBody"]
-shape = SubResource("SphereShape3D_pp5kt")
-disabled = true
-
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D/CameraTriggerBody"]
-
-[node name="StateMachine" parent="." node_paths=PackedStringArray("ActiveState") instance=ExtResource("3")]
-ActiveState = NodePath("Follow")
-
-[node name="Manual" type="Node" parent="StateMachine"]
-script = ExtResource("2")
-
-[node name="Reset" type="Node" parent="StateMachine"]
-script = ExtResource("4")
-
-[node name="Follow" type="Node" parent="StateMachine"]
-script = ExtResource("5")
-
-[node name="Target" type="Node" parent="StateMachine"]
-script = ExtResource("6_r17s5")
-
-[node name="Freeze" type="Node" parent="StateMachine"]
-script = ExtResource("7_ht1u8")
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]

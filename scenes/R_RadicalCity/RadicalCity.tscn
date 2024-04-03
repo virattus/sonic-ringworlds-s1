@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bte2xds3my4rk"]
+
+[ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_b8q1r"]
+[ext_resource type="PackedScene" uid="uid://bt3e41ek421or" path="res://maps/SonicRRadicalCity/RadicalCity.tscn" id="5_8uw1g"]
+
+[node name="RadicalCity" instance=ExtResource("1_b8q1r")]
+
+[node name="Sonic" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80455, 17.2688, 8.44519)
+
+[node name="ThirdPersonCamera" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80455, 17.2688, 8.44519)
+
+[node name="RadicalCity" parent="." index="7" instance=ExtResource("5_8uw1g")]

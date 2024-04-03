@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://erm1ioljnpjw"]
+
+[ext_resource type="Texture2D" uid="uid://cr4kulqb05jvo" path="res://maps/SonicRRadicalCity/CITY00.png" id="1_ac0ha"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_ac0ha")
+texture_filter = 0

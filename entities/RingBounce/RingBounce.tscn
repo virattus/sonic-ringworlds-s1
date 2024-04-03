@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyk3iwoyy776q"]
+
+[ext_resource type="Script" path="res://entities/RingBounce/RingBounce.gd" id="1_c0pbu"]
+[ext_resource type="PackedScene" uid="uid://y5djm215ls8v" path="res://entities/Coin/Coin.tscn" id="2_lvau5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1y4fo"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v7rtg"]
+radius = 0.60681
+
+[node name="RingBounce" type="RigidBody3D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_1y4fo")
+script = ExtResource("1_c0pbu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v7rtg")
+
+[node name="Coin" parent="." instance=ExtResource("2_lvau5")]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerFlicker" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="Collected" from="Coin" to="." method="_on_coin_collected"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerFlicker" to="." method="_on_timer_flicker_timeout"]

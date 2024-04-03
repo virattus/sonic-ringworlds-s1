@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cvf65uckma26i"
+path="res://.godot/imported/ruin.obj-b21d0950e6f59b311ef9319a8c4e733b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ruin.obj-b21d0950e6f59b311ef9319a8c4e733b.mesh"]
+
+source_file="res://maps/SonicRRegalRuin/ruin.obj"
+dest_files=["res://.godot/imported/ruin.obj-b21d0950e6f59b311ef9319a8c4e733b.mesh", "res://.godot/imported/ruin.obj-b21d0950e6f59b311ef9319a8c4e733b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

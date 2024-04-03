@@ -9,6 +9,6 @@ signal HurtboxActivated
 
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("Character"):
-		body.ReceiveDamage(Damage)
+		body.ReceiveDamage(self, Damage)
 	
 	HurtboxActivated.emit()

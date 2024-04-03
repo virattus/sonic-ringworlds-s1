@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdpqe4ih8wpjf"]
+
+[ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_a3iih"]
+[ext_resource type="PackedScene" uid="uid://cw0lk8wu01c0w" path="res://maps/SonicRReactiveFactory/ReactiveFactory.tscn" id="5_ads68"]
+
+[node name="ReactiveFactory" instance=ExtResource("1_a3iih")]
+
+[node name="Sonic" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.70022, 48.7991)
+
+[node name="ThirdPersonCamera" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.70022, 48.7991)
+
+[node name="ReactiveFactory" parent="." index="7" instance=ExtResource("5_ads68")]

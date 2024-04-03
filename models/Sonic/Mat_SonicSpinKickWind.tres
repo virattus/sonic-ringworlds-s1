@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dmf1brhk80gvp"]
+
+[ext_resource type="Texture2D" uid="uid://8idc6v1baucb" path="res://models/Sonic/SpinKickWind.png" id="1_kbpte"]
+
+[resource]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_kbpte")

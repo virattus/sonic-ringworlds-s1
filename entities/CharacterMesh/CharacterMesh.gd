@@ -2,7 +2,7 @@ class_name CharacterMesh
 extends Node3D
 
 
-@export var MeshTurningSpeed := 6.0
+@export var MeshTurningSpeed := 24.0
 @export var MinTargetLength := 0.01
 
 
@@ -27,6 +27,7 @@ func LerpMeshOrientation(target: Vector3, delta: float, ignoreY := true) -> void
 	#TODO potential bug: rotation DOES NOT rollover, see if there's a way to clamp the value automatically
 	# to avoid an INF
 	rotation.y = lerp_angle(rotation.y, lerpTo, MeshTurningSpeed * delta)
+	#rotation.y = lerpTo
 	while rotation.y < 0.0:
 		rotation.y += TAU
 	while rotation.y > TAU:
@@ -47,3 +48,9 @@ func GetForwardVector() -> Vector3:
 
 func LookAt(target: Vector3) -> void:
 	look_at((target * Vector3(1, 0, 1)) + (global_position * Vector3(0, 1, 0)))
+
+
+func AlignToY(newY: Vector3) -> void:
+	global_transform.basis.y = newY
+	global_transform.basis.x = -global_transform.basis.z.cross(global_transform.basis.y)
+	global_transform.basis = global_transform.basis.orthonormalized()

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqupsbafdsr2x"]
+
+[ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_4h384"]
+[ext_resource type="PackedScene" uid="uid://chk1vpsxom2d1" path="res://maps/SonicRResortIsland/ResortIsland.tscn" id="2_mtbu1"]
+
+[node name="ResortIsland" instance=ExtResource("1_4h384")]
+
+[node name="Sonic" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2298, 9.39549, 29.4337)
+
+[node name="ThirdPersonCamera" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2298, 9.39549, 29.4337)
+
+[node name="ResortIsland" parent="." index="7" instance=ExtResource("2_mtbu1")]

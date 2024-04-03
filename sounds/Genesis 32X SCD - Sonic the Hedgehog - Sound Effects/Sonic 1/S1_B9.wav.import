@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwwiundglq3ti"
+path="res://.godot/imported/S1_B9.wav-8b4913479cf7fda4eae0852263248eb3.sample"
+
+[deps]
+
+source_file="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_B9.wav"
+dest_files=["res://.godot/imported/S1_B9.wav-8b4913479cf7fda4eae0852263248eb3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dp7tmraim53up"
+path="res://.godot/imported/city.obj-c455d2ce01f4adc62e7a3eb7b163adb0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/city.obj-c455d2ce01f4adc62e7a3eb7b163adb0.mesh"]
+
+source_file="res://maps/SonicRRadicalCity/city.obj"
+dest_files=["res://.godot/imported/city.obj-c455d2ce01f4adc62e7a3eb7b163adb0.mesh", "res://.godot/imported/city.obj-c455d2ce01f4adc62e7a3eb7b163adb0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

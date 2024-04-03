@@ -18,7 +18,7 @@ const GROUND_CAST_MIN_DISTANCE = 0.1
 
 @onready var Gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var CharMesh: CharacterMesh = $CharacterMesh
+@onready var CharMesh = $CharacterMesh
 @onready var WorldCollision: CollisionShape3D = $WorldCollision
 @onready var GroundCast: RayCast3D = $GroundCast
 
@@ -48,7 +48,7 @@ func _process(_delta: float) -> void:
 		GroundCollisionShape = "None"
 
 
-func ReceiveDamage(damage: int) -> void:
+func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:
 	if Health <= 0:
 		return
 	
@@ -61,9 +61,7 @@ func ReceiveDamage(damage: int) -> void:
 
 func Move(newVelocity: Vector3) -> void:
 	velocity = newVelocity
-	
 	move_and_slide()
-	
 	Speed = velocity.length()
 
 

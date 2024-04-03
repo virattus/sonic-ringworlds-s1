@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1qri5bywfs8x"]
+
+[ext_resource type="Script" path="res://entities/Elevator/Elevator.gd" id="1_jca17"]
+[ext_resource type="Texture2D" uid="uid://c4lggjtgcu2qx" path="res://textures/Sonic1Wall.png" id="2_df3l1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n4dal"]
+size = Vector3(3, 0.5, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ui0r5"]
+albedo_texture = ExtResource("2_df3l1")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_emdi6"]
+size = Vector3(3, 0.5, 3)
+
+[node name="Elevator" type="CharacterBody3D"]
+script = ExtResource("1_jca17")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_n4dal")
+surface_material_override/0 = SubResource("StandardMaterial3D_ui0r5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_emdi6")

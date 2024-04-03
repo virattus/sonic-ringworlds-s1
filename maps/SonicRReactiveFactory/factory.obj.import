@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://br7r3h3pok0a0"
+path="res://.godot/imported/factory.obj-cf10169f46e57679704096e9ef1e4b8e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/factory.obj-cf10169f46e57679704096e9ef1e4b8e.mesh"]
+
+source_file="res://maps/SonicRReactiveFactory/factory.obj"
+dest_files=["res://.godot/imported/factory.obj-cf10169f46e57679704096e9ef1e4b8e.mesh", "res://.godot/imported/factory.obj-cf10169f46e57679704096e9ef1e4b8e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

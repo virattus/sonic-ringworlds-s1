@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://calg7td71k0di"]
+
+[ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_j7jm6"]
+[ext_resource type="PackedScene" uid="uid://crclqertr0nup" path="res://maps/SonicRRegalRuin/RegalRuin.tscn" id="5_px6x5"]
+
+[node name="RegalRuin" instance=ExtResource("1_j7jm6")]
+
+[node name="Sonic" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
+
+[node name="ThirdPersonCamera" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
+
+[node name="RegalRuin" parent="." index="7" instance=ExtResource("5_px6x5")]

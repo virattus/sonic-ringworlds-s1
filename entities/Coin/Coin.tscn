@@ -1,31 +1,73 @@
-[gd_scene load_steps=8 format=3 uid="uid://y5djm215ls8v"]
+[gd_scene load_steps=12 format=3 uid="uid://y5djm215ls8v"]
 
 [ext_resource type="PackedScene" uid="uid://ct1lpq76lo75q" path="res://entities/Collectible/Collectible.tscn" id="2_6hck0"]
-[ext_resource type="Texture2D" uid="uid://c6ltjwwy6csju" path="res://entities/Coin/Coin.png" id="2_smna3"]
+[ext_resource type="Texture2D" uid="uid://dq4glfdh08lsm" path="res://entities/Coin/Ring.png" id="3_mshvc"]
 [ext_resource type="Script" path="res://entities/Coin/Coin.gd" id="3_wvgqs"]
-[ext_resource type="PackedScene" uid="uid://dalhl2vmi5cfi" path="res://effects/Billboard/Billboard.tscn" id="3_wxq6p"]
-[ext_resource type="Shader" path="res://effects/Billboard/BillboardRotating.gdshader" id="4_1y3nm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_js1ma"]
 radius = 0.6
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_et083"]
-render_priority = 0
-shader = ExtResource("4_1y3nm")
-shader_parameter/precision_multiplier = 1.0
-shader_parameter/modulate_colour = Color(1, 1, 0.266667, 1)
-shader_parameter/uv_scale = Vector2(0.25, 0.5)
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/rotation = 0.0
-shader_parameter/enable_fog = true
-shader_parameter/texture_albedo = ExtResource("2_smna3")
+[sub_resource type="AtlasTexture" id="AtlasTexture_hocpl"]
+atlas = ExtResource("3_mshvc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8ymg"]
+atlas = ExtResource("3_mshvc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdtdu"]
+atlas = ExtResource("3_mshvc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r8hl"]
+atlas = ExtResource("3_mshvc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwwr4"]
+atlas = ExtResource("3_mshvc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tmsg"]
+atlas = ExtResource("3_mshvc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh0c2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hocpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8ymg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdtdu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r8hl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwwr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tmsg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Coin" instance=ExtResource("2_6hck0")]
+collision_layer = 0
 script = ExtResource("3_wvgqs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 shape = SubResource("SphereShape3D_js1ma")
 
-[node name="Billboard" parent="." index="1" instance=ExtResource("3_wxq6p")]
-transform = Transform3D(1.295, 0, 0, 0, 1.295, 0, 0, 0, 1.295, 0, 0, 0)
-surface_material_override/0 = SubResource("ShaderMaterial_et083")
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." index="1"]
+pixel_size = 0.04
+billboard = 1
+double_sided = false
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_jh0c2")
+autoplay = "default"
