@@ -1877,7 +1877,6 @@ node_connections = [&"Air", 0, &"TimeScale 2", &"Air", 1, &"TimeScale 3", &"Air"
 collision_layer = 18
 collision_mask = 1
 floor_stop_on_slope = false
-floor_block_on_wall = false
 script = ExtResource("2_p6xw2")
 
 [node name="WorldCollision" parent="." index="0"]
@@ -1887,16 +1886,16 @@ shape = SubResource("SphereShape3D_d4iho")
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, 0, 2.8757)
-bones/2/position = Vector3(-5.13685, 0.239806, 3.45513)
-bones/2/rotation = Quaternion(2.42623e-08, -0.735427, 0.677604, -3.75032e-08)
-bones/3/position = Vector3(-2.48036, -1.43514, 1.57936)
-bones/3/rotation = Quaternion(-0.115052, -4.27282e-17, 0, 0.99336)
-bones/4/position = Vector3(5.13685, -0.0425208, 3.45513)
-bones/4/rotation = Quaternion(3.63054e-08, -0.706188, 0.708025, -2.55118e-08)
-bones/5/position = Vector3(2.48036, -0.965165, 1.49567)
-bones/5/rotation = Quaternion(-0.077379, 0, 0, 0.997002)
-bones/6/position = Vector3(0, 0, 5.11465)
+bones/1/position = Vector3(0, 0, 2.90919)
+bones/2/position = Vector3(-5.13685, -0.248308, 3.48393)
+bones/2/rotation = Quaternion(2.20333e-08, -0.684233, 0.729264, -3.97526e-08)
+bones/3/position = Vector3(-2.48036, -0.624529, 1.435)
+bones/3/rotation = Quaternion(-0.0500277, -4.269e-17, 0, 0.998748)
+bones/4/position = Vector3(5.13685, 0.445593, 3.48393)
+bones/4/rotation = Quaternion(3.84671e-08, -0.755781, 0.654825, -2.31924e-08)
+bones/5/position = Vector3(2.48036, -1.77577, 1.64002)
+bones/5/rotation = Quaternion(-0.142231, 0, 0, 0.989833)
+bones/6/position = Vector3(0, 0, 5.14814)
 
 [node name="GroundCast" parent="." index="2"]
 hit_from_inside = true

@@ -33,6 +33,19 @@ func Update(_delta: float) -> void:
 	owner.Move(vel)
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
+	var groundDot = owner.FloorNormal.dot(Vector3.UP)
+	
+	if owner.is_on_ceiling():
+		ChangeState("Wipeout", {
+			"UpDir": UpDir,
+		})
+		return
+	
+	if owner.is_on_wall():
+		ChangeState("Wipeout", {
+			"UpDir": UpDir,
+		})
+	
 	if owner.is_on_floor():
 		
 		

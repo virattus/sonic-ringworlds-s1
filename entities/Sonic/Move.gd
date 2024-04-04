@@ -17,6 +17,17 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	var vel = owner.velocity
 	
+	#var newBasis = owner.global_transform.basis
+	#newBasis.y = owner.FloorNormal
+	#newBasis.x = -newBasis.z.cross(newBasis.y)
+	#newBasis = newBasis.orthonormalized()
+	
+	#vel = newBasis * vel
+	
+	#global_transform.basis.y = newY
+	#global_transform.basis.x = -global_transform.basis.z.cross(global_transform.basis.y)
+	#global_transform.basis = global_transform.basis.orthonormalized()
+	
 	if owner.Controller.InputVelocity.length() > 0.0:
 		var InputVel = (owner.Controller.InputVelocity * owner.PARAMETERS.RUN_INPUT_MAGNITUDE)
 		InputVel *= 1.0 - clamp(owner.Speed / owner.PARAMETERS.RUN_MAX_SPEED, 0.0, 1.0)

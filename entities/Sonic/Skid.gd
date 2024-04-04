@@ -23,6 +23,11 @@ func Update(_delta: float) -> void:
 	
 	owner.Move(owner.velocity)
 	
+	if !owner.is_on_floor():
+		ChangeState("Fall")
+		return
+	
 	if owner.Speed <= owner.PARAMETERS.SKID_END_MIN_SPEED:
 		ChangeState("Idle")
 		return
+ 

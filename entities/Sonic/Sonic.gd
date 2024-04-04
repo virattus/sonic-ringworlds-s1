@@ -75,7 +75,7 @@ func _process(delta: float) -> void:
 		InputIndicator.look_at(global_position - Controller.InputVelocity.normalized())
 		
 	if velocity.length() > 0.0:
-		VelocityIndicator.look_at(VelocityIndicator.global_position - velocity.normalized())
+		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()))
 	
 
 
