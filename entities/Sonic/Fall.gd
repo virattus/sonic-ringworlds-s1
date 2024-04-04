@@ -1,6 +1,7 @@
 extends BasicState
 
 
+var CanStick := true
 var UpDir := Vector3.ZERO
 
 func Enter(_msg := {}) -> void:
@@ -8,6 +9,11 @@ func Enter(_msg := {}) -> void:
 		UpDir = _msg["UpDir"]
 	else:
 		UpDir = owner.up_direction
+	
+	if _msg.has("CanStick"):
+		CanStick = _msg["CanStick"]
+	else:
+		CanStick = true
 	
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", 0.0)
@@ -18,7 +24,18 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	if owner.CheckGroundCollision():
+	var vel = owner.velocity
+	vel += owner.Controller.InputVelocity
+	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
+	
+	owner.CharGroundCast.target_position = (owner.velocity.normalized()) * owner.CharGroundCastLength
+	
+	owner.Move(vel)
+	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
+	
+	if owner.is_on_floor():
+		
+		
 		ChangeState("Land", {
 			"UpDir": UpDir,
 		})
@@ -30,19 +47,11 @@ func Update(_delta: float) -> void:
 	#	})
 	#	return
 	
+	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Airdash")
 		return
 	
-	
-	var vel = owner.velocity
-	#vel += owner.Controller.InputVelocity
-	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
-	
-	owner.CharGroundCast.target_position = (owner.velocity.normalized())
-	
-	owner.Move(vel)
-	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
 	if owner.CheckFixedGroundCast():
 		print("fixed found ground")

@@ -34,11 +34,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.269524, 0)
 shape = SubResource("SphereShape3D_50ks0")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HurtBox" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666749, 0.557141, 0.366058)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666749, 0.557141, -0.38463)
 shape = SubResource("SphereShape3D_50ks0")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="HurtBox" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.647138, 0.557141, 0.366058)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.647138, 0.557141, -0.38463)
 shape = SubResource("SphereShape3D_50ks0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]

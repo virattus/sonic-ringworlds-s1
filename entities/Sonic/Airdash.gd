@@ -37,7 +37,7 @@ func Update(_delta: float) -> void:
 	var vel = HorizVelocity * AirDashSpeed
 	vel.y += VerticalVelocity
 	
-	owner.CharGroundCast.target_position = (owner.velocity.normalized())
+	owner.CharGroundCast.target_position = (owner.velocity.normalized()) * owner.CharGroundCastLength
 	
 	owner.Move(vel)
 	owner.CharMesh.look_at(owner.global_position + HorizVelocity)

@@ -14,8 +14,26 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
+	owner.Move(Vector3.ZERO)
+	owner.CharMesh.AlignToY(owner.up_direction)
+	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
 	
-	if !owner.CheckGroundCollision():
+	var groundCollision := false
+	
+	if owner.is_on_floor():
+		owner.FloorNormal = owner.get_floor_normal()
+		groundCollision = true
+	else:
+		owner.CharGroundCast.force_raycast_update()
+		if owner.CharGroundCast.is_colliding():
+			owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
+			groundCollision = true
+	
+	
+	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized()) * owner.CharGroundCastLength
+	owner.up_direction = owner.FloorNormal
+	
+	if !groundCollision:
 		ChangeState("Fall")
 		return
 	
@@ -30,11 +48,3 @@ func Update(_delta: float) -> void:
 	if owner.Controller.InputVelocity.length() > 0.0:
 		ChangeState("Move")
 		return
-		
-	
-	owner.UpdateUpDir()
-	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized())
-	owner.CheckCharGroundCast()
-	owner.CharMesh.AlignToY(owner.up_direction)
-	owner.Move(Vector3.ZERO)
-	

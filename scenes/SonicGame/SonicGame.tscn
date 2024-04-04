@@ -29,7 +29,6 @@ Sonic = NodePath("../Sonic")
 Controller = NodePath("../PlayerController")
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("char") instance=ExtResource("3_t4fox")]
-RightAnalogue = false
 char = NodePath("../Sonic")
 
 [node name="PlayerController" parent="." node_paths=PackedStringArray("Camera_Node") instance=ExtResource("4_31dce")]

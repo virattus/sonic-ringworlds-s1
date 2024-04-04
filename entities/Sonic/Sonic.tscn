@@ -53,7 +53,7 @@ albedo_color = Color(0.796078, 0, 0.905882, 0.52549)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc5ap"]
 albedo_color = Color(0, 1, 0, 0.52549)
 
-[sub_resource type="Animation" id="Animation_cewcl"]
+[sub_resource type="Animation" id="Animation_6byum"]
 resource_name = "Pose"
 length = 1.66667
 tracks/0/type = "position_3d"
@@ -155,7 +155,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_y0hkf"]
+[sub_resource type="Animation" id="Animation_nha2a"]
 resource_name = "WallBonkInitial"
 length = 1.66667
 tracks/0/type = "position_3d"
@@ -257,7 +257,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_1ae0o"]
+[sub_resource type="Animation" id="Animation_ojhc5"]
 resource_name = "Airdash-loop"
 length = 1.66667
 loop_mode = 1
@@ -360,7 +360,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_76wso"]
+[sub_resource type="Animation" id="Animation_751pu"]
 resource_name = "Death-loop"
 length = 1.66667
 loop_mode = 1
@@ -463,7 +463,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_0rgsu"]
+[sub_resource type="Animation" id="Animation_x633f"]
 resource_name = "Fall-loop"
 length = 1.66667
 loop_mode = 1
@@ -566,7 +566,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_m47aj"]
+[sub_resource type="Animation" id="Animation_kyk6u"]
 resource_name = "Hurt-loop"
 length = 1.66667
 loop_mode = 1
@@ -669,7 +669,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_ex0pp"]
+[sub_resource type="Animation" id="Animation_4d7p5"]
 resource_name = "Idle-loop"
 length = 1.66667
 loop_mode = 1
@@ -772,7 +772,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_ujud8"]
+[sub_resource type="Animation" id="Animation_ec06k"]
 resource_name = "Jump-loop"
 length = 1.66667
 loop_mode = 1
@@ -875,7 +875,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_cm1bd"]
+[sub_resource type="Animation" id="Animation_ri1bf"]
 resource_name = "OlympicsSquat-loop"
 length = 1.66667
 loop_mode = 1
@@ -978,7 +978,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_idec2"]
+[sub_resource type="Animation" id="Animation_olhrc"]
 resource_name = "Run-loop"
 length = 1.66667
 loop_mode = 1
@@ -1081,7 +1081,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_mcigh"]
+[sub_resource type="Animation" id="Animation_5d3xr"]
 resource_name = "Skid-loop"
 length = 1.66667
 loop_mode = 1
@@ -1184,7 +1184,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_li2qv"]
+[sub_resource type="Animation" id="Animation_cgq1k"]
 resource_name = "SpinKick-loop"
 length = 1.66667
 loop_mode = 1
@@ -1287,7 +1287,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
-[sub_resource type="Animation" id="Animation_jt4le"]
+[sub_resource type="Animation" id="Animation_71ops"]
 resource_name = "StrikeDash-loop"
 length = 1.66667
 loop_mode = 1
@@ -1390,7 +1390,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_ybhmj"]
+[sub_resource type="Animation" id="Animation_rfdq3"]
 resource_name = "Walk-loop"
 length = 1.66667
 loop_mode = 1
@@ -1493,7 +1493,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_y8k4v"]
+[sub_resource type="Animation" id="Animation_5nxqu"]
 resource_name = "WallBonk-loop"
 length = 1.66667
 loop_mode = 1
@@ -1596,7 +1596,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_yqxui"]
+[sub_resource type="Animation" id="Animation_s1qk0"]
 resource_name = "Wipeout-loop"
 length = 1.66667
 loop_mode = 1
@@ -1699,24 +1699,24 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rdcp1"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rluue"]
 _data = {
-"Airdash": SubResource("Animation_1ae0o"),
-"Death": SubResource("Animation_76wso"),
-"Fall": SubResource("Animation_0rgsu"),
-"Hurt": SubResource("Animation_m47aj"),
-"Idle": SubResource("Animation_ex0pp"),
-"Jump": SubResource("Animation_ujud8"),
-"OlympicsSquat": SubResource("Animation_cm1bd"),
-"Pose": SubResource("Animation_cewcl"),
-"Run": SubResource("Animation_idec2"),
-"Skid": SubResource("Animation_mcigh"),
-"SpinKick": SubResource("Animation_li2qv"),
-"StrikeDash": SubResource("Animation_jt4le"),
-"Walk": SubResource("Animation_ybhmj"),
-"WallBonk": SubResource("Animation_y8k4v"),
-"WallBonkInitial": SubResource("Animation_y0hkf"),
-"Wipeout": SubResource("Animation_yqxui")
+"Airdash": SubResource("Animation_ojhc5"),
+"Death": SubResource("Animation_751pu"),
+"Fall": SubResource("Animation_x633f"),
+"Hurt": SubResource("Animation_kyk6u"),
+"Idle": SubResource("Animation_4d7p5"),
+"Jump": SubResource("Animation_ec06k"),
+"OlympicsSquat": SubResource("Animation_ri1bf"),
+"Pose": SubResource("Animation_6byum"),
+"Run": SubResource("Animation_olhrc"),
+"Skid": SubResource("Animation_5d3xr"),
+"SpinKick": SubResource("Animation_cgq1k"),
+"StrikeDash": SubResource("Animation_71ops"),
+"Walk": SubResource("Animation_rfdq3"),
+"WallBonk": SubResource("Animation_5nxqu"),
+"WallBonkInitial": SubResource("Animation_nha2a"),
+"Wipeout": SubResource("Animation_s1qk0")
 }
 
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_x3pje"]
@@ -1878,7 +1878,6 @@ collision_layer = 18
 collision_mask = 1
 floor_stop_on_slope = false
 floor_block_on_wall = false
-floor_snap_length = 1.1
 script = ExtResource("2_p6xw2")
 
 [node name="WorldCollision" parent="." index="0"]
@@ -1888,16 +1887,16 @@ shape = SubResource("SphereShape3D_d4iho")
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, 0, 2.98923)
-bones/2/position = Vector3(-5.13685, 0.719865, 3.56397)
-bones/2/rotation = Quaternion(2.632e-08, -0.781773, 0.623564, -3.51092e-08)
-bones/3/position = Vector3(-2.48036, -2.23081, 1.72105)
-bones/3/rotation = Quaternion(-0.178261, -4.25893e-17, -1.09723e-26, 0.983983)
-bones/4/position = Vector3(5.13685, -0.522579, 3.56397)
-bones/4/rotation = Quaternion(3.40033e-08, -0.654025, 0.756473, -2.76515e-08)
-bones/5/position = Vector3(2.48036, -0.169488, 1.35397)
-bones/5/rotation = Quaternion(-0.013544, 0, 0, 0.999908)
-bones/6/position = Vector3(0, 0, 5.22818)
+bones/1/position = Vector3(0, 0, 2.8757)
+bones/2/position = Vector3(-5.13685, 0.239806, 3.45513)
+bones/2/rotation = Quaternion(2.42623e-08, -0.735427, 0.677604, -3.75032e-08)
+bones/3/position = Vector3(-2.48036, -1.43514, 1.57936)
+bones/3/rotation = Quaternion(-0.115052, -4.27282e-17, 0, 0.99336)
+bones/4/position = Vector3(5.13685, -0.0425208, 3.45513)
+bones/4/rotation = Quaternion(3.63054e-08, -0.706188, 0.708025, -2.55118e-08)
+bones/5/position = Vector3(2.48036, -0.965165, 1.49567)
+bones/5/rotation = Quaternion(-0.077379, 0, 0, 0.997002)
+bones/6/position = Vector3(0, 0, 5.11465)
 
 [node name="GroundCast" parent="." index="2"]
 hit_from_inside = true
@@ -1906,7 +1905,6 @@ hit_from_inside = true
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
 [node name="AngledGroundCast" type="RayCast3D" parent="." index="4"]
-target_position = Vector3(0, -0.7, 0)
 hit_from_inside = true
 
 [node name="UpVectorIndicator" type="Node3D" parent="." index="5"]
@@ -1943,7 +1941,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
 [node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 root_node = NodePath("../CharacterMesh/SonicModel")
 libraries = {
-"": SubResource("AnimationLibrary_rdcp1")
+"": SubResource("AnimationLibrary_rluue")
 }
 tree_root = SubResource("AnimationNodeBlendTree_v8mdo")
 anim_player = NodePath("../CharacterMesh/SonicModel/AnimationPlayer")
