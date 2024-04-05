@@ -58,12 +58,9 @@ func Update(_delta: float) -> void:
 	else:
 		owner.CharGroundCast.force_raycast_update()
 		if owner.CharGroundCast.is_colliding():
-			var dist = owner.global_position.distance_to(owner.CharGroundCast.get_collision_point())
-			
-			
 			var dot = owner.FloorNormal.dot(owner.CharGroundCast.get_collision_normal())
-			print("Move: not on floor, angle of charraycast: ", dot)
-			if dot < owner.PARAMETERS.MOVE_FLOOR_NORMAL_DOT_MAX:
+			if dot < owner.PARAMETERS.MOVE_FLOOR_NORMAL_DOT_MIN:
+				print("Move: not on floor, angle of charraycast: ", dot)
 				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
 				owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
 			else:
@@ -81,7 +78,7 @@ func Update(_delta: float) -> void:
 		#owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
 		
 	var DotToGround = owner.up_direction.dot(Vector3.UP)
-	if DotToGround > owner.PARAMETERS.MOVE_GROUND_STICK_MIN_ANGLE:
+	if DotToGround < owner.PARAMETERS.MOVE_GROUND_STICK_MIN_ANGLE:
 		if owner.Speed < owner.PARAMETERS.MOVE_GROUND_STICK_REQ_SPEED:
 			print("Too slow to stick: %s, DotToGround: %s" % [owner.Speed, DotToGround])
 			owner.velocity += owner.up_direction * owner.PARAMETERS.MOVE_GRIP_LOST_EJECTION_MAGNITUDE

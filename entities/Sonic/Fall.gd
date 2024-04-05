@@ -33,6 +33,10 @@ func Update(_delta: float) -> void:
 	owner.Move(vel)
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
+	owner.CharGroundCast.force_raycast_update()
+	#if owner.CharGroundCast.is_collding():
+		
+	
 	var groundDot = owner.FloorNormal.dot(Vector3.UP)
 	
 	if owner.is_on_ceiling():
@@ -43,6 +47,7 @@ func Update(_delta: float) -> void:
 	
 	if owner.is_on_wall_only():
 		var wallDot = owner.velocity.normalized().dot(owner.get_wall_normal())
+		owner.FloorNormal = owner.get_wall_normal()
 		print("wall dot: ", wallDot)
 		if wallDot > 0.0:
 			ChangeState("Wipeout", {

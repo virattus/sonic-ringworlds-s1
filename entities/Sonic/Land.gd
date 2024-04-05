@@ -11,7 +11,7 @@ func Enter(_msg := {}) -> void:
 	owner.SndLand.play()
 	
 	var landDot = UpDir.dot(owner.FloorNormal)
-	print("LandDot: %s" % landDot)
+	#print("LandDot: %s" % landDot)
 	owner.CharMesh.AlignToY(owner.FloorNormal)
 	owner.up_direction = owner.FloorNormal
 	

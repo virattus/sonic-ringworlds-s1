@@ -65,5 +65,10 @@ func Move(newVelocity: Vector3) -> void:
 	Speed = velocity.length()
 
 
+func SetVelocity(newVelocity: Vector3) -> void:
+	velocity = newVelocity
+	Speed = velocity.length()
+
+
 func LookAt(target: Vector3) -> void:
 	CharMesh.look_at(target)

@@ -37,7 +37,7 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
-	if owner.up_direction.dot(Vector3.UP) > owner.PARAMETERS.IDLE_MAX_GRONUD_ANGLE:
+	if owner.up_direction.dot(Vector3.UP) < owner.PARAMETERS.IDLE_MIN_GROUND_ANGLE:
 		ChangeState("Fall")
 		return
 	
