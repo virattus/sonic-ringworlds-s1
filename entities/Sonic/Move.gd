@@ -15,9 +15,11 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var vel = owner.velocity
+	var vel : Vector3 = owner.velocity
 	
-	#var newBasis = owner.global_transform.basis
+	var newBasis = owner.Camera.CurrentBasis
+	
+	#var newBasis = owner.CharMesh.global_transform.basis
 	#newBasis.y = owner.FloorNormal
 	#newBasis.x = -newBasis.z.cross(newBasis.y)
 	#newBasis = newBasis.orthonormalized()
@@ -48,7 +50,7 @@ func Update(_delta: float) -> void:
 	
 	var groundCollision := false
 	var groundDot = owner.FloorNormal.dot(Vector3.UP)
-	print("groundDot: ", groundDot)
+	#print("groundDot: ", groundDot)
 	
 	if owner.is_on_floor():
 		owner.FloorNormal = owner.get_floor_normal()
@@ -60,9 +62,10 @@ func Update(_delta: float) -> void:
 			
 			
 			var dot = owner.FloorNormal.dot(owner.CharGroundCast.get_collision_normal())
-			print(dot)
+			print("Move: not on floor, angle of charraycast: ", dot)
 			if dot < owner.PARAMETERS.MOVE_FLOOR_NORMAL_DOT_MAX:
-				pass
+				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
+				owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
 			else:
 				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
 				groundCollision = true
@@ -81,6 +84,7 @@ func Update(_delta: float) -> void:
 	if DotToGround > owner.PARAMETERS.MOVE_GROUND_STICK_MIN_ANGLE:
 		if owner.Speed < owner.PARAMETERS.MOVE_GROUND_STICK_REQ_SPEED:
 			print("Too slow to stick: %s, DotToGround: %s" % [owner.Speed, DotToGround])
+			owner.velocity += owner.up_direction * owner.PARAMETERS.MOVE_GRIP_LOST_EJECTION_MAGNITUDE
 			ChangeState("Fall", {
 				"CanStick": false,
 			})

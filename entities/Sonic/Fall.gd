@@ -41,10 +41,14 @@ func Update(_delta: float) -> void:
 		})
 		return
 	
-	if owner.is_on_wall():
-		ChangeState("Wipeout", {
-			"UpDir": UpDir,
-		})
+	if owner.is_on_wall_only():
+		var wallDot = owner.velocity.normalized().dot(owner.get_wall_normal())
+		print("wall dot: ", wallDot)
+		if wallDot > 0.0:
+			ChangeState("Wipeout", {
+				"UpDir": UpDir,
+			})
+			return
 	
 	if owner.is_on_floor():
 		
@@ -66,5 +70,5 @@ func Update(_delta: float) -> void:
 		return
 	
 	
-	if owner.CheckFixedGroundCast():
-		print("fixed found ground")
+	#if owner.CheckFixedGroundCast():
+	#	print("fixed found ground")

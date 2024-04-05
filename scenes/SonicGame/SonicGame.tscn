@@ -25,7 +25,8 @@ script = ExtResource("1_hlded")
 [node name="HUD" parent="." node_paths=PackedStringArray("Sonic") instance=ExtResource("5_yctne")]
 Sonic = NodePath("../Sonic")
 
-[node name="Sonic" parent="." node_paths=PackedStringArray("Controller") instance=ExtResource("2_mpqm8")]
+[node name="Sonic" parent="." node_paths=PackedStringArray("Camera", "Controller") instance=ExtResource("2_mpqm8")]
+Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("char") instance=ExtResource("3_t4fox")]

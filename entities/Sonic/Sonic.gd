@@ -1,6 +1,9 @@
 extends Character
 
 
+
+@export var Camera: ThirdPersonCamera
+
 var FloorNormal := Vector3.UP
 var GroundPoint := Vector3.ZERO
 

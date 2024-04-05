@@ -8,6 +8,14 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", 0.0)
 	
 	owner.SndSkid.play()
+	
+	#owner.FloorNormal = owner.get_floor_normal()
+	owner.up_direction = owner.FloorNormal
+	
+	if owner.Speed <= 0.0:
+		owner.velocity = owner.CharMesh.GetForwardVector().normalized() * 3.0
+		owner.Speed = owner.velocity.length() #maybe have a function handle this
+	
 
 
 func Exit() -> void:

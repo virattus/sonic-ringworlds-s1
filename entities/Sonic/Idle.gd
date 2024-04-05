@@ -37,6 +37,10 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	if owner.up_direction.dot(Vector3.UP) > owner.PARAMETERS.IDLE_MAX_GRONUD_ANGLE:
+		ChangeState("Fall")
+		return
+	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Jump")
 		return
