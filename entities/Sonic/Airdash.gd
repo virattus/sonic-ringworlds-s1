@@ -40,6 +40,7 @@ func Update(_delta: float) -> void:
 	if owner.is_on_wall_only():
 		print("Airdash: bounce off wall")
 		ChangeState("Hurt", {
+			"Bonk": true,
 			"BounceDirection" : owner.get_wall_normal() * 3.0
 		})
 		return

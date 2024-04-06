@@ -24,10 +24,10 @@ func Update(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_released("Attack"):
+		owner.StrikeDash = true
 		owner.SndSpinLaunch.play()
+		owner.velocity = owner.CharMesh.GetForwardVector() * AccumulatedSpeed
 		ChangeState("Move", {
-			"StrikeDash": true,
-			"Speed": AccumulatedSpeed,
 		})
 		return
 	

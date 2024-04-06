@@ -4,11 +4,12 @@ extends BasicState
 
 
 func Enter(_msg := {}) -> void:
-	pass
+	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/OSPose/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 
 func Exit() -> void:
-	pass
+	owner.AnimTree.set("parameters/OSPose/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
 
 func Update(_delta: float) -> void:

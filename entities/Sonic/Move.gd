@@ -1,21 +1,11 @@
 extends BasicState
 
 
-var StrikeDash := false
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
-	
-	if _msg.has("StrikeDash") and _msg["StrikeDash"] == true:
-		StrikeDash = true
-		var _speed = 1.0
-		if _msg.has("Speed"):
-			_speed = _msg["Speed"]
-		owner.velocity = owner.CharMesh.GetForwardVector() * _speed
-	else:
-		StrikeDash = false
 	
 	UpdateMoveAnim()
 
@@ -113,8 +103,9 @@ func Update(_delta: float) -> void:
 
 
 func UpdateMoveAnim() -> void:
-	if StrikeDash:
+	if owner.StrikeDash:
 		owner.AnimTree.set("parameters/Run/blend_amount", 1.0)
+		owner.AnimTree.set("parameters/TSStrikeDash/scale", owner.Speed * owner.PARAMETERS.MOVE_STRIKEDASH_ANIM_SPEED_MODIFIER)
 		return
 	
 	if owner.Speed < owner.PARAMETERS.MOVE_WALK_ANIM_MAX_SPEED:

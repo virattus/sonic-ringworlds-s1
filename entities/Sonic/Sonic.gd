@@ -7,7 +7,7 @@ extends Character
 var FloorNormal := Vector3.UP
 var GroundPoint := Vector3.ZERO
 
-
+var StrikeDash := false
 var Invincible := false
 var Flicker := false
 
@@ -32,6 +32,7 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var SndJump = $SndJump
 @onready var SndAirdash = $SndAirdash
 @onready var SndLand = $SndLand
+@onready var SndBonk = $SndBonk
 @onready var SndSkid = $SndSkid
 @onready var SndRingCollect = $SndRingCollect
 @onready var SndRingDrop = $SndRingDrop

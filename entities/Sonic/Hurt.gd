@@ -24,7 +24,10 @@ func Enter(_msg := {}) -> void:
 	else:
 		LeftGround = true
 	
-	if _msg.has("DropRings"):
+	if _msg.has("Bonk") and _msg["Bonk"]:
+		owner.SndBonk.play()
+	
+	if _msg.has("DropRings") and _msg["DropRings"]:
 		for i in range(20 if Globals.RingCount > 20 else Globals.RingCount):
 			var newRing = RING.instantiate()
 			owner.get_parent().add_child(newRing)

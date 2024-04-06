@@ -12,8 +12,9 @@ func Enter(_msg := {}) -> void:
 	
 	var landDot = UpDir.dot(owner.FloorNormal)
 	#print("LandDot: %s" % landDot)
-	owner.CharMesh.AlignToY(owner.FloorNormal)
 	owner.up_direction = owner.FloorNormal
+	owner.CharMesh.AlignToY(owner.FloorNormal)
+
 	
 	if landDot > owner.PARAMETERS.LAND_ANGLE_MIN:
 		if owner.Speed > owner.PARAMETERS.MOVE_MIN_SPEED:

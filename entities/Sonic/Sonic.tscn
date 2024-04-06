@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=90 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://entities/Sonic/Death.gd" id="15_ulagb"]
 [ext_resource type="AudioStream" uid="uid://ci4mwgnbes8o2" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BC.wav" id="16_4apbf"]
 [ext_resource type="AudioStream" uid="uid://y2ekxqu62ugy" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BE.wav" id="16_805h7"]
+[ext_resource type="AudioStream" uid="uid://dbfgnbue70wig" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A2.wav" id="20_yjean"]
 [ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="39_jijta"]
 [ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="41_0dxtr"]
 
@@ -1732,6 +1733,9 @@ animation = &"Wipeout"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g67m2"]
 animation = &"Skid"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qc5sf"]
+animation = &"Pose"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ijync"]
 animation = &"Walk"
 
@@ -1773,6 +1777,8 @@ animation = &"Idle"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cdx7c"]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_njuro"]
+
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_kqgwt"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_eq0he"]
@@ -1787,6 +1793,8 @@ animation = &"Idle"
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_d26tf"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ql5xr"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_idnnx"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_j214e"]
@@ -1800,19 +1808,21 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_403m5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v8mdo"]
-graph_offset = Vector2(-1515.83, 388.48)
+graph_offset = Vector2(-482.163, 173.597)
 nodes/Air/node = SubResource("AnimationNodeBlend3_x3pje")
-nodes/Air/position = Vector2(-60, 900)
+nodes/Air/position = Vector2(-520, 940)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_aacsx")
 nodes/Animation/position = Vector2(-600, 60)
 "nodes/Animation 10/node" = SubResource("AnimationNodeAnimation_xgdq0")
-"nodes/Animation 10/position" = Vector2(-540, 1080)
+"nodes/Animation 10/position" = Vector2(-1000, 1120)
 "nodes/Animation 11/node" = SubResource("AnimationNodeAnimation_t8scg")
 "nodes/Animation 11/position" = Vector2(820, 800)
 "nodes/Animation 12/node" = SubResource("AnimationNodeAnimation_l2ee3")
 "nodes/Animation 12/position" = Vector2(-940, 540)
 "nodes/Animation 13/node" = SubResource("AnimationNodeAnimation_g67m2")
 "nodes/Animation 13/position" = Vector2(-940, 660)
+"nodes/Animation 14/node" = SubResource("AnimationNodeAnimation_qc5sf")
+"nodes/Animation 14/position" = Vector2(-600, 1180)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_ijync")
 "nodes/Animation 2/position" = Vector2(-1360, 300)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_mlt63")
@@ -1820,9 +1830,9 @@ nodes/Animation/position = Vector2(-600, 60)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_77j5q")
 "nodes/Animation 4/position" = Vector2(-620, 200)
 "nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_k4tha")
-"nodes/Animation 5/position" = Vector2(-540, 800)
+"nodes/Animation 5/position" = Vector2(-1000, 840)
 "nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_rfch1")
-"nodes/Animation 6/position" = Vector2(-540, 940)
+"nodes/Animation 6/position" = Vector2(-1000, 980)
 "nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_1le77")
 "nodes/Animation 7/position" = Vector2(-1360, 560)
 "nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_ouf7y")
@@ -1843,6 +1853,8 @@ nodes/Movement/node = SubResource("AnimationNodeBlend2_v1035")
 nodes/Movement/position = Vector2(320, 500)
 nodes/OSHurt/node = SubResource("AnimationNodeOneShot_cdx7c")
 nodes/OSHurt/position = Vector2(600, 760)
+nodes/OSPose/node = SubResource("AnimationNodeOneShot_njuro")
+nodes/OSPose/position = Vector2(-280, 920)
 nodes/Run/node = SubResource("AnimationNodeBlend3_kqgwt")
 nodes/Run/position = Vector2(-1000, 340)
 nodes/TSRun/node = SubResource("AnimationNodeTimeScale_eq0he")
@@ -1856,21 +1868,23 @@ nodes/TimeScale/position = Vector2(-460, 60)
 "nodes/TimeScale 10/node" = SubResource("AnimationNodeTimeScale_it55g")
 "nodes/TimeScale 10/position" = Vector2(-800, 660)
 "nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_1iv5j")
-"nodes/TimeScale 2/position" = Vector2(-380, 800)
+"nodes/TimeScale 2/position" = Vector2(-840, 840)
 "nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_d26tf")
-"nodes/TimeScale 3/position" = Vector2(-380, 940)
+"nodes/TimeScale 3/position" = Vector2(-840, 980)
+"nodes/TimeScale 4/node" = SubResource("AnimationNodeTimeScale_ql5xr")
+"nodes/TimeScale 4/position" = Vector2(-440, 1160)
 "nodes/TimeScale 5/node" = SubResource("AnimationNodeTimeScale_idnnx")
 "nodes/TimeScale 5/position" = Vector2(420, 760)
 "nodes/TimeScale 6/node" = SubResource("AnimationNodeTimeScale_j214e")
 "nodes/TimeScale 6/position" = Vector2(420, 900)
 "nodes/TimeScale 7/node" = SubResource("AnimationNodeTimeScale_qfbv3")
-"nodes/TimeScale 7/position" = Vector2(-380, 1080)
+"nodes/TimeScale 7/position" = Vector2(-840, 1120)
 "nodes/TimeScale 8/node" = SubResource("AnimationNodeTimeScale_u4xp1")
 "nodes/TimeScale 8/position" = Vector2(980, 780)
 "nodes/TimeScale 9/node" = SubResource("AnimationNodeTimeScale_lh6ay")
 "nodes/TimeScale 9/position" = Vector2(-800, 540)
 nodes/output/position = Vector2(1260, 300)
-node_connections = [&"Air", 0, &"TimeScale 2", &"Air", 1, &"TimeScale 3", &"Air", 2, &"TimeScale 7", &"Death", 0, &"Hurt", &"Death", 1, &"TimeScale 8", &"Ground", 0, &"Idle", &"Ground", 1, &"GroundSecondary", &"GroundSecondary", 0, &"Run", &"GroundSecondary", 1, &"TimeScale 9", &"GroundSecondary", 2, &"TimeScale 10", &"Hurt", 0, &"Movement", &"Hurt", 1, &"OSHurt", &"Idle", 0, &"TimeScale", &"Idle", 1, &"Animation 4", &"Movement", 0, &"Ground", &"Movement", 1, &"Air", &"OSHurt", 0, &"TimeScale 5", &"OSHurt", 1, &"TimeScale 6", &"Run", 0, &"TSWalk", &"Run", 1, &"TSRun", &"Run", 2, &"TSStrikeDash", &"TSRun", 0, &"Animation 3", &"TSStrikeDash", 0, &"Animation 7", &"TSWalk", 0, &"Animation 2", &"TimeScale", 0, &"Animation", &"TimeScale 10", 0, &"Animation 13", &"TimeScale 2", 0, &"Animation 5", &"TimeScale 3", 0, &"Animation 6", &"TimeScale 5", 0, &"Animation 8", &"TimeScale 6", 0, &"Animation 9", &"TimeScale 7", 0, &"Animation 10", &"TimeScale 8", 0, &"Animation 11", &"TimeScale 9", 0, &"Animation 12", &"output", 0, &"Death"]
+node_connections = [&"Air", 0, &"TimeScale 2", &"Air", 1, &"TimeScale 3", &"Air", 2, &"TimeScale 7", &"Death", 0, &"Hurt", &"Death", 1, &"TimeScale 8", &"Ground", 0, &"Idle", &"Ground", 1, &"GroundSecondary", &"GroundSecondary", 0, &"Run", &"GroundSecondary", 1, &"TimeScale 9", &"GroundSecondary", 2, &"TimeScale 10", &"Hurt", 0, &"Movement", &"Hurt", 1, &"OSHurt", &"Idle", 0, &"TimeScale", &"Idle", 1, &"Animation 4", &"Movement", 0, &"Ground", &"Movement", 1, &"OSPose", &"OSHurt", 0, &"TimeScale 5", &"OSHurt", 1, &"TimeScale 6", &"OSPose", 0, &"Air", &"OSPose", 1, &"TimeScale 4", &"Run", 0, &"TSWalk", &"Run", 1, &"TSRun", &"Run", 2, &"TSStrikeDash", &"TSRun", 0, &"Animation 3", &"TSStrikeDash", 0, &"Animation 7", &"TSWalk", 0, &"Animation 2", &"TimeScale", 0, &"Animation", &"TimeScale 10", 0, &"Animation 13", &"TimeScale 2", 0, &"Animation 5", &"TimeScale 3", 0, &"Animation 6", &"TimeScale 4", 0, &"Animation 14", &"TimeScale 5", 0, &"Animation 8", &"TimeScale 6", 0, &"Animation 9", &"TimeScale 7", 0, &"Animation 10", &"TimeScale 8", 0, &"Animation 11", &"TimeScale 9", 0, &"Animation 12", &"output", 0, &"Death"]
 
 [node name="Sonic" instance=ExtResource("1_paxei")]
 collision_layer = 18
@@ -1885,16 +1899,16 @@ shape = SubResource("SphereShape3D_d4iho")
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, 0, 2.92207)
-bones/2/position = Vector3(-5.13685, 0.501217, 3.49681)
-bones/2/rotation = Quaternion(2.53998e-08, -0.761167, 0.648556, -3.62211e-08)
-bones/3/position = Vector3(-2.48036, -1.86806, 1.65645)
-bones/3/rotation = Quaternion(-0.149568, 0, 0, 0.988751)
-bones/4/position = Vector3(5.13685, -0.303932, 3.49681)
-bones/4/rotation = Quaternion(3.50727e-08, -0.678182, 0.734894, -2.66948e-08)
-bones/5/position = Vector3(2.48036, -0.532243, 1.41857)
-bones/5/rotation = Quaternion(-0.0426189, 4.26742e-17, 1.65596e-24, 0.999091)
-bones/6/position = Vector3(0, 0, 5.16103)
+bones/1/position = Vector3(0, 0, 2.86769)
+bones/2/position = Vector3(-5.13685, 0.155477, 3.45254)
+bones/2/rotation = Quaternion(2.38888e-08, -0.726914, 0.686728, -3.79035e-08)
+bones/3/position = Vector3(-2.48036, -1.29613, 1.5546)
+bones/3/rotation = Quaternion(-0.103925, -4.27346e-17, 0, 0.994585)
+bones/4/position = Vector3(5.13685, 0.041808, 3.45254)
+bones/4/rotation = Quaternion(3.66902e-08, -0.714968, 0.699157, -2.51232e-08)
+bones/5/position = Vector3(2.48036, -1.10417, 1.52042)
+bones/5/rotation = Quaternion(-0.0885345, 0, 0, 0.996073)
+bones/6/position = Vector3(0, 0, 5.10664)
 
 [node name="GroundCast" parent="." index="2"]
 hit_from_inside = true
@@ -1954,6 +1968,9 @@ parameters/Movement/blend_amount = 0.0
 parameters/OSHurt/active = false
 parameters/OSHurt/internal_active = false
 parameters/OSHurt/request = 0
+parameters/OSPose/active = false
+parameters/OSPose/internal_active = false
+parameters/OSPose/request = 0
 parameters/Run/blend_amount = -1.0
 parameters/TSRun/scale = 1.0
 parameters/TSStrikeDash/scale = 1.0
@@ -1962,6 +1979,7 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 10/scale" = 5.0
 "parameters/TimeScale 2/scale" = 1.0
 "parameters/TimeScale 3/scale" = 1.0
+"parameters/TimeScale 4/scale" = 1.0
 "parameters/TimeScale 5/scale" = 1.0
 "parameters/TimeScale 6/scale" = 5.0
 "parameters/TimeScale 7/scale" = 1.0
@@ -2023,27 +2041,31 @@ bus = &"SoundEffects"
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="15"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="15"]
+stream = ExtResource("20_yjean")
+bus = &"SoundEffects"
+
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="16"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="16"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="17"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="17"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="18"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 
