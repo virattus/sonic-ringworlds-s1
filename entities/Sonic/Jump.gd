@@ -5,8 +5,8 @@ extends BasicState
 var JumpUpDir := Vector3.ZERO
 var JumpPower := 0.0
 
-var LeftGround := false
 
+const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func _ready():
 	DebugMenu.AddMonitor(self, "JumpUpDir")
@@ -25,7 +25,7 @@ func Enter(_msg := {}) -> void:
 
 
 func Exit() -> void:
-	LeftGround = false
+	pass
 
 
 func Update(_delta: float) -> void:
@@ -47,18 +47,38 @@ func Update(_delta: float) -> void:
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
 	
-	if owner.is_on_floor():
-		if LeftGround:
-			ChangeState("Land", {
-				"UpDir": JumpUpDir.normalized()
-			})
+	for i in range(owner.get_slide_collision_count()):
+		var collision = owner.get_slide_collision(i)
+		var coll = COLLISION_INDICATOR.instantiate()
+		owner.get_parent().add_child(coll)
+		coll.SetToCollision(collision)
+		
+		var dot = owner.up_direction.dot(collision.get_normal())
+		print(dot)
+		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
+			print("Jump: Floor hit")
+			owner.FloorNormal = collision.get_normal()
+			owner.up_direction = collision.get_normal()
+			ChangeState("Land")
 			return
-	else:
-		LeftGround = true
-	
-	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Airdash")
-		return
+		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MAX:
+			print("Jump: wipeout hit")
+			owner.FloorNormal = collision.get_normal()
+			owner.up_direction = collision.get_normal()
+			ChangeState("Wipeout")
+			return
+		else:
+			print("Jump: Ceiling hit?")
+			var groundDot = owner.up_direction.dot(Vector3(0, 1, 0))
+			if groundDot < 0.75:
+				print("upside down")
+				owner.FloorNormal = collision.get_normal()
+				owner.up_direction = collision.get_normal()
+				ChangeState("Wipeout")
+				return
+			else:
+				print("should be ceiling hit")
+				JumpPower = 0.0
 	
 	JumpPower -= owner.PARAMETERS.JUMP_POWER_DECEL * _delta
 	if JumpPower <= 0.0:
@@ -66,3 +86,8 @@ func Update(_delta: float) -> void:
 			"UpDir": JumpUpDir.normalized()
 		})
 		return
+	
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Airdash")
+		return
+	

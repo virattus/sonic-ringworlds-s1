@@ -45,13 +45,23 @@ func Update(_delta: float) -> void:
 		print(dot)
 		owner.FloorNormal = collision.get_normal()
 		owner.up_direction = collision.get_normal()
-		if dot > 0.0:
+		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
+			print("Fall: Floor hit")
 			ChangeState("Land")
+			return
+		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MAX:
+			print("Fall: wipeout hit")
+			ChangeState("Wipeout")
 			return
 		else:
-			ChangeState("Land")
-			return
-
+			print("Fall: Ceiling hit?")
+			var groundDot = owner.up_direction.dot(Vector3(0, 1, 0))
+			if groundDot < 0.75:
+				print("upside down")
+				ChangeState("Wipeout")
+				return
+			else:
+				print("should be ceiling hit")
 	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Airdash")

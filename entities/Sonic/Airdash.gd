@@ -5,6 +5,7 @@ var HorizVelocity := Vector3.ZERO
 var VerticalVelocity := 0.0
 var AirDashSpeed := 0.0
 
+const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
@@ -33,17 +34,31 @@ func Update(_delta: float) -> void:
 	owner.CharMesh.look_at(owner.global_position + HorizVelocity)
 	
 	
-	if owner.is_on_floor():
-		ChangeState("Land")
-		return
-	
-	if owner.is_on_wall_only():
-		print("Airdash: bounce off wall")
-		ChangeState("Hurt", {
-			"Bonk": true,
-			"BounceDirection" : owner.get_wall_normal() * 3.0
-		})
-		return
+	for i in range(owner.get_slide_collision_count()):
+		var collision = owner.get_slide_collision(i)
+		var coll = COLLISION_INDICATOR.instantiate()
+		owner.get_parent().add_child(coll)
+		coll.SetToCollision(collision)
+		
+		var dot = owner.up_direction.dot(collision.get_normal())
+		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
+			owner.FloorNormal = collision.get_normal()
+			owner.up_direction = collision.get_normal()
+			ChangeState("Land")
+			return
+		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MAX:
+			var walldot = collision.get_normal().dot(owner.CharMesh.GetForwardVector().normalized())
+			if walldot < -0.5:
+				print("Airdash: bounce off wall: ", walldot)
+				owner.FloorNormal = collision.get_normal()
+				owner.up_direction = collision.get_normal()
+				ChangeState("Hurt", {
+					"Bonk": true,
+					"BounceDirection" : owner.get_wall_normal() * 3.0
+				})
+				return
+		else:
+			print("Ceiling hit?")
 	
 	AirDashSpeed -= owner.PARAMETERS.AIRDASH_SPEED_DECREASE_RATE * _delta
 	if AirDashSpeed <= 0.0:

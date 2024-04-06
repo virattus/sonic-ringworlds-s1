@@ -15,7 +15,7 @@ func Enter(_msg := {}) -> void:
 		owner.up_direction = owner.FloorNormal
 	
 	if owner.Speed <= 0.0:
-		owner.velocity = owner.CharMesh.GetForwardVector().normalized()
+		owner.SetVelocity(owner.CharMesh.GetForwardVector())
 		
 	owner.SetVelocity(owner.velocity.normalized() * owner.PARAMETERS.WIPEOUT_MIN_SLIDE_SPEED)
 
