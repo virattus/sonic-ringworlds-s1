@@ -14,11 +14,11 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	if !owner.is_on_floor():
-		ChangeState("Fall")
-		return
-	
 	var vel = (owner.Controller.InputVelocity) * 10.0
 	
 	owner.Move(vel)
 	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
+
+	if !owner.is_on_floor():
+		ChangeState("Fall")
+		return

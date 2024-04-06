@@ -28,16 +28,14 @@ func Update(_delta: float) -> void:
 	vel += owner.Controller.InputVelocity
 	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 	
-	owner.CharGroundCast.target_position = (owner.velocity.normalized()) * owner.CharGroundCastLength
-	
 	owner.Move(vel)
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
-	owner.CharGroundCast.force_raycast_update()
-	#if owner.CharGroundCast.is_collding():
-		
-	
 	var groundDot = owner.FloorNormal.dot(Vector3.UP)
+	
+	owner.CharGroundCast.target_position = (owner.velocity.normalized()) * owner.CharGroundCastLength
+	owner.CharGroundCast.force_raycast_update()
+	
 	
 	if owner.is_on_ceiling():
 		ChangeState("Wipeout", {
@@ -48,32 +46,27 @@ func Update(_delta: float) -> void:
 	if owner.is_on_wall_only():
 		var wallDot = owner.velocity.normalized().dot(owner.get_wall_normal())
 		owner.FloorNormal = owner.get_wall_normal()
-		print("wall dot: ", wallDot)
-		if wallDot > 0.0:
+		if wallDot < owner.PARAMETERS.FALL_WALL_DOT_MIN:
+			print("Fall: Wall collision with dot ", wallDot)
 			ChangeState("Wipeout", {
 				"UpDir": UpDir,
 			})
 			return
 	
 	if owner.is_on_floor():
-		
-		
 		ChangeState("Land", {
 			"UpDir": UpDir,
 		})
 		return
-	#elif owner.CheckFixedGroundCast():
-	#	print("didn't find ground, but raycast did")
-	#	ChangeState("Land", {
-	#		"UpDir": UpDir,
-	#	})
-	#	return
-	
+		
+	if owner.CharGroundCast.is_colliding():
+		if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.AIR_RAYCAST_SNAP_MAX_DIST:
+			owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+			ChangeState("Land", {
+				"UpDir": owner.CharGroundCast.get_collision_normal()
+			})
+			return
 	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Airdash")
 		return
-	
-	
-	#if owner.CheckFixedGroundCast():
-	#	print("fixed found ground")

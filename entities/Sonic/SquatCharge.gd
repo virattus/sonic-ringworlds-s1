@@ -17,6 +17,12 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
+	owner.Move(Vector3.ZERO)
+	
+	if !owner.is_on_floor():
+		ChangeState("Fall")
+		return
+	
 	if Input.is_action_just_released("Attack"):
 		owner.SndSpinLaunch.play()
 		ChangeState("StrikeDash", {

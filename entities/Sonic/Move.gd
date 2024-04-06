@@ -7,7 +7,8 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
-	owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
+	
+	UpdateMoveAnim()
 
 
 func Exit() -> void:
@@ -45,6 +46,9 @@ func Update(_delta: float) -> void:
 	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
 	owner.CharMesh.AlignToY(owner.up_direction)
 	#owner.CharMesh.LerpMeshOrientation(owner.Controller.InputVelocity.normalized(), _delta)
+	
+	UpdateMoveAnim()
+	
 	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
 	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized()) * owner.CharGroundCastLength
 	
@@ -58,17 +62,16 @@ func Update(_delta: float) -> void:
 	else:
 		owner.CharGroundCast.force_raycast_update()
 		if owner.CharGroundCast.is_colliding():
-			var dot = owner.FloorNormal.dot(owner.CharGroundCast.get_collision_normal())
-			if dot < owner.PARAMETERS.MOVE_FLOOR_NORMAL_DOT_MIN:
-				print("Move: not on floor, angle of charraycast: ", dot)
-				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
-				owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+			var dot : float = owner.FloorNormal.dot(owner.CharGroundCast.get_collision_normal())
+			if dot > owner.PARAMETERS.MOVE_FLOOR_NORMAL_DOT_MIN:
+				if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.MOVE_RAYCAST_SNAP_MAX_DISTANCE:
+					owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
+					owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+					groundCollision = true
+				else:
+					print("Move: raycast found floor, but distance too great: ", owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()))
 			else:
-				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
-				groundCollision = true
-		else:
-			pass
-	
+				print("Move: Found floor with raycast, but dot product is ", dot)
 	
 	if !groundCollision:
 		ChangeState("Fall")
@@ -80,7 +83,7 @@ func Update(_delta: float) -> void:
 	var DotToGround = owner.up_direction.dot(Vector3.UP)
 	if DotToGround < owner.PARAMETERS.MOVE_GROUND_STICK_MIN_ANGLE:
 		if owner.Speed < owner.PARAMETERS.MOVE_GROUND_STICK_REQ_SPEED:
-			print("Too slow to stick: %s, DotToGround: %s" % [owner.Speed, DotToGround])
+			print("Move: Too slow to stick: %s, DotToGround: %s" % [owner.Speed, DotToGround])
 			owner.velocity += owner.up_direction * owner.PARAMETERS.MOVE_GRIP_LOST_EJECTION_MAGNITUDE
 			ChangeState("Fall", {
 				"CanStick": false,
@@ -100,12 +103,20 @@ func Update(_delta: float) -> void:
 		return
 
 
+func UpdateMoveAnim() -> void:
+	if owner.Speed < owner.PARAMETERS.MOVE_WALK_ANIM_MAX_SPEED:
+		owner.AnimTree.set("parameters/Run/blend_amount", -1.0)
+		owner.AnimTree.set("parameters/TSWalk/scale", owner.Speed * owner.PARAMETERS.MOVE_WALK_ANIM_SPEED_MODIFIER)
+	elif owner.Speed < owner.PARAMETERS.MOVE_RUN_ANIM_MAX_SPEED:
+		owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
+		owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
+
 
 func IsInputSkidding() -> bool:
 	if owner.Controller.InputVelocity.length() > owner.PARAMETERS.SKID_INPUT_MIN:
 		var InputDir = owner.velocity.normalized().dot(owner.Controller.InputVelocity)
 		if InputDir < owner.PARAMETERS.SKID_ANGLE_MIN:
-			print("Skid ratio: %s" % InputDir)
+			print("Move: Skid ratio: %s" % InputDir)
 			return true
 		
 	return false

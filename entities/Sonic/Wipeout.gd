@@ -9,7 +9,10 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SndSkid.play()
 	
-	owner.up_direction = owner.FloorNormal
+	if _msg.has("UpDir"):
+		owner.up_direction = _msg["UpDir"]
+	else:
+		owner.up_direction = owner.FloorNormal
 	
 	if owner.Speed <= 0.0:
 		owner.velocity = owner.CharMesh.GetForwardVector().normalized()

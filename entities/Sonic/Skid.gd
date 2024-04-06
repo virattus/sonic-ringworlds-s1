@@ -15,7 +15,6 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	
 	owner.velocity = lerp(owner.velocity, Vector3.ZERO, owner.PARAMETERS.SKID_SPEED_REDUCTION_RATE * _delta)
 	
 	if !owner.is_on_floor():

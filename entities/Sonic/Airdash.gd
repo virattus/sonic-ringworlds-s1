@@ -22,16 +22,6 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	if owner.CheckGroundCollision():
-		ChangeState("Land")
-		return
-	
-	AirDashSpeed -= owner.PARAMETERS.AIRDASH_SPEED_DECREASE_RATE * _delta
-	if AirDashSpeed <= 0.0:
-		ChangeState("Fall")
-		return
-	
-	
 	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta
 	
 	var vel = HorizVelocity * AirDashSpeed
@@ -41,3 +31,20 @@ func Update(_delta: float) -> void:
 	
 	owner.Move(vel)
 	owner.CharMesh.look_at(owner.global_position + HorizVelocity)
+	
+	
+	if owner.is_on_floor():
+		ChangeState("Land")
+		return
+	
+	if owner.is_on_wall_only():
+		print("Airdash: bounce off wall")
+		ChangeState("Hurt", {
+			"BounceDirection" : owner.get_wall_normal() * 3.0
+		})
+		return
+	
+	AirDashSpeed -= owner.PARAMETERS.AIRDASH_SPEED_DECREASE_RATE * _delta
+	if AirDashSpeed <= 0.0:
+		ChangeState("Fall")
+		return

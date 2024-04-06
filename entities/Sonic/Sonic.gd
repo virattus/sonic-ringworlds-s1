@@ -139,7 +139,8 @@ func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:
 	if !Invincible:
 		if Globals.RingCount > 0:
 			StateM.ChangeState("Hurt", {
-				"Direction": hurtbox.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+				"BounceDirection": hurtbox.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+				"DropRings": true,
 			})
 		else:
 			HealthEmpty.emit()

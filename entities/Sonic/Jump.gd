@@ -29,7 +29,25 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	if owner.CheckGroundCollision():
+	var vel = owner.velocity
+	
+	if owner.Controller.InputVelocity.length() > 0.0:
+		var InputVel = (owner.Controller.InputVelocity * owner.PARAMETERS.AIR_INPUT_MAGNITUDE)
+		InputVel *= 1.0 - clamp(owner.Speed / owner.PARAMETERS.AIR_MAX_SPEED, 0.0, 1.0)
+	
+		vel += InputVel
+	else:
+		vel = lerp(vel, Vector3.ZERO, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
+	
+	vel += JumpUpDir * JumpPower * _delta
+	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
+	
+	
+	owner.Move(vel)
+	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
+	
+	
+	if owner.is_on_floor():
 		if LeftGround:
 			ChangeState("Land", {
 				"UpDir": JumpUpDir.normalized()
@@ -48,22 +66,3 @@ func Update(_delta: float) -> void:
 			"UpDir": JumpUpDir.normalized()
 		})
 		return
-
-	
-	var vel = owner.velocity
-	
-	if owner.Controller.InputVelocity.length() > 0.0:
-		var InputVel = (owner.Controller.InputVelocity * owner.PARAMETERS.AIR_INPUT_MAGNITUDE)
-		InputVel *= 1.0 - clamp(owner.Speed / owner.PARAMETERS.AIR_MAX_SPEED, 0.0, 1.0)
-	
-		vel += InputVel
-	else:
-		vel = lerp(vel, Vector3.ZERO, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
-	
-	vel += JumpUpDir * JumpPower * _delta
-	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
-	
-	
-	owner.Move(vel)
-	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
-	
