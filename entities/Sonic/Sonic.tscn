@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=86 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://entities/Sonic/Skid.gd" id="8_yskjs"]
 [ext_resource type="Script" path="res://entities/Sonic/Move.gd" id="9_3et1g"]
 [ext_resource type="Script" path="res://entities/Sonic/Hurt.gd" id="9_pbmsm"]
-[ext_resource type="Script" path="res://entities/Sonic/StrikeDash.gd" id="10_718f0"]
 [ext_resource type="Script" path="res://entities/Sonic/Airdash.gd" id="11_2je5t"]
 [ext_resource type="AudioStream" uid="uid://bgwe6pbgsc4tj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A0.wav" id="11_sc7a7"]
 [ext_resource type="AudioStream" uid="uid://dle6efyausde4" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BB.wav" id="12_24j27"]
@@ -1886,16 +1885,16 @@ shape = SubResource("SphereShape3D_d4iho")
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, 0, 2.98632)
-bones/2/position = Vector3(-5.13685, 0.711305, 3.56106)
-bones/2/rotation = Quaternion(2.62845e-08, -0.780982, 0.624553, -3.51534e-08)
-bones/3/position = Vector3(-2.48036, -2.21661, 1.71853)
-bones/3/rotation = Quaternion(-0.177142, -4.25933e-17, -4.33801e-26, 0.984185)
-bones/4/position = Vector3(5.13685, -0.51402, 3.56106)
-bones/4/rotation = Quaternion(3.40458e-08, -0.654982, 0.755644, -2.76146e-08)
-bones/5/position = Vector3(2.48036, -0.183688, 1.3565)
-bones/5/rotation = Quaternion(-0.0146813, 0, 0, 0.999892)
-bones/6/position = Vector3(0, 0, 5.22528)
+bones/1/position = Vector3(0, 0, 2.92207)
+bones/2/position = Vector3(-5.13685, 0.501217, 3.49681)
+bones/2/rotation = Quaternion(2.53998e-08, -0.761167, 0.648556, -3.62211e-08)
+bones/3/position = Vector3(-2.48036, -1.86806, 1.65645)
+bones/3/rotation = Quaternion(-0.149568, 0, 0, 0.988751)
+bones/4/position = Vector3(5.13685, -0.303932, 3.49681)
+bones/4/rotation = Quaternion(3.50727e-08, -0.678182, 0.734894, -2.66948e-08)
+bones/5/position = Vector3(2.48036, -0.532243, 1.41857)
+bones/5/rotation = Quaternion(-0.0426189, 4.26742e-17, 1.65596e-24, 0.999091)
+bones/6/position = Vector3(0, 0, 5.16103)
 
 [node name="GroundCast" parent="." index="2"]
 hit_from_inside = true
@@ -1988,31 +1987,28 @@ script = ExtResource("8_yskjs")
 [node name="SquatCharge" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("6_imrjj")
 
-[node name="StrikeDash" type="Node" parent="StateMachine" index="4"]
-script = ExtResource("10_718f0")
-
-[node name="Jump" type="Node" parent="StateMachine" index="5"]
+[node name="Jump" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("39_jijta")
 
-[node name="Airdash" type="Node" parent="StateMachine" index="6"]
+[node name="Airdash" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("11_2je5t")
 
-[node name="Fall" type="Node" parent="StateMachine" index="7"]
+[node name="Fall" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("41_0dxtr")
 
-[node name="Land" type="Node" parent="StateMachine" index="8"]
+[node name="Land" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("13_70mwn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="9"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("14_flkpp")
 
-[node name="Pose" type="Node" parent="StateMachine" index="10"]
+[node name="Pose" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("13_gkm31")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="11"]
+[node name="Hurt" type="Node" parent="StateMachine" index="10"]
 script = ExtResource("9_pbmsm")
 
-[node name="Death" type="Node" parent="StateMachine" index="12"]
+[node name="Death" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("15_ulagb")
 
 [node name="SndJump" type="AudioStreamPlayer" parent="." index="12"]

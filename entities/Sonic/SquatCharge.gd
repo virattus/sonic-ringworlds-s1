@@ -25,7 +25,8 @@ func Update(_delta: float) -> void:
 	
 	if Input.is_action_just_released("Attack"):
 		owner.SndSpinLaunch.play()
-		ChangeState("StrikeDash", {
+		ChangeState("Move", {
+			"StrikeDash": true,
 			"Speed": AccumulatedSpeed,
 		})
 		return

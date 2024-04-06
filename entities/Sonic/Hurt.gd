@@ -51,13 +51,13 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
+	owner.velocity.y -= owner.PARAMETERS.GRAVITY * _delta
+	
+	owner.Move(owner.velocity)
+	
 	if owner.is_on_floor():
 		if LeftGround:
 			ChangeState("Idle")
 			return
 	else:
 		LeftGround = true
-	
-	owner.velocity.y -= owner.PARAMETERS.GRAVITY * _delta
-	
-	owner.Move(owner.velocity)
