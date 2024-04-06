@@ -34,9 +34,12 @@ func _on_ob_vsync_item_selected(index: int) -> void:
 func _on_btn_fps_pressed() -> void:
 	var currentFPS = Engine.physics_ticks_per_second
 	if currentFPS == 240:
-		currentFPS = 30
+		currentFPS = 15
 	else:
-		currentFPS += 30
+		if currentFPS == 15:
+			currentFPS += 15
+		else:
+			currentFPS += 30
 	
 	btnFPS.text = "FPS: " + str(currentFPS)
 	Engine.physics_ticks_per_second = currentFPS

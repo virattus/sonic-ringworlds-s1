@@ -4,25 +4,14 @@ extends BasicState
 
 
 func Enter(_msg := {}) -> void:
-	var UpDir := Vector3.UP
-	if _msg.has("UpDir"):
-		UpDir = _msg["UpDir"]
-	
 	owner.SndLand.play()
-	
-	var landDot = UpDir.dot(owner.FloorNormal)
-	#print("LandDot: %s" % landDot)
 	owner.up_direction = owner.FloorNormal
 	owner.CharMesh.AlignToY(owner.FloorNormal)
 
-	
-	if landDot > owner.PARAMETERS.LAND_ANGLE_MIN:
-		if owner.Speed > owner.PARAMETERS.MOVE_MIN_SPEED:
-			ChangeState("Move")
-		else:
-			ChangeState("Idle")
+	if owner.Speed > owner.PARAMETERS.MOVE_MIN_SPEED:
+		ChangeState("Move")
 	else:
-		ChangeState("Wipeout")
+		ChangeState("Idle")
 
 
 func Exit() -> void:

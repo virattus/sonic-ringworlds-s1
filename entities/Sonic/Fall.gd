@@ -4,6 +4,9 @@ extends BasicState
 var CanStick := true
 var UpDir := Vector3.ZERO
 
+
+const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+
 func Enter(_msg := {}) -> void:
 	if _msg.has("UpDir"):
 		UpDir = _msg["UpDir"]
@@ -31,61 +34,23 @@ func Update(_delta: float) -> void:
 	owner.Move(vel)
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
-	owner.CharGroundCast.target_position = (owner.velocity.normalized()) * owner.CharGroundCastLength
-	owner.CharGroundCast.force_raycast_update()
-	if owner.CharGroundCast.is_colliding():
-		if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.AIR_RAYCAST_SNAP_MAX_DIST:
-			var raydot = owner.CharGroundCast.get_collision_normal().dot(owner.up_direction)
-			if raydot < owner.PARAMETERS.FALL_CEILING_DOT_MIN: #Hit ceiling
-				ChangeState("Pose")
-				return
-			elif raydot < owner.PARAMETERS.FALL_WALL_DOT_MIN: #wall hit
-				ChangeState("Hurt", {
-					"Bonk": true,
-					"BounceDirection": owner.CharGroundCast.get_collision_normal(),
-				})
-				return
-			#should be in range to land on
-			else:
-				owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
-				ChangeState("Land", {
-					"UpDir": owner.CharGroundCast.get_collision_normal()
-				})
-				return
 	
 	for i in range(owner.get_slide_collision_count()):
 		var collision = owner.get_slide_collision(i)
+		var coll = COLLISION_INDICATOR.instantiate()
+		owner.get_parent().add_child(coll)
+		coll.SetToCollision(collision)
 		
-	
-	#We need to set the floornormal before transitioning to landing state
-	#So this is disabled until I figure out how to get the ceiling's normal
-	#if owner.is_on_ceiling():
-	#	var groundDot = owner.FloorNormal.dot(Vector3.UP)
-	#	if groundDot > 0.0: #Rising up, bonking on ceiling
-	#		ChangeState("Land", {
-	#			"UpDir": UpDir,
-	#		})
-	#	else: #falling upside down
-	#		ChangeState("Land", {
-	#			"UpDir": UpDir,
-	#		})
-	#		return
-	
-	if owner.is_on_wall_only():
-		var wallDot = owner.velocity.normalized().dot(owner.get_wall_normal())
-		if wallDot > owner.PARAMETERS.FALL_WALL_DOT_MIN:
-			print("Fall: Wall collision with dot ", wallDot)
-			#owner.FloorNormal = owner.get_wall_normal()
-			ChangeState("Wipeout", {
-				"UpDir": UpDir,
-			})
+		var dot = owner.up_direction.dot(collision.get_normal())
+		print(dot)
+		owner.FloorNormal = collision.get_normal()
+		owner.up_direction = collision.get_normal()
+		if dot > 0.0:
+			ChangeState("Land")
 			return
-	
-	if owner.is_on_floor():
-		ChangeState("Land", {
-			"UpDir": UpDir,
-		})
-		return
+		else:
+			ChangeState("Land")
+			return
 
 	
 	if Input.is_action_just_pressed("Jump"):
