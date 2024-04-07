@@ -1899,16 +1899,16 @@ shape = SubResource("SphereShape3D_d4iho")
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, 0, 3.00681)
-bones/2/position = Vector3(-5.13685, -0.569026, 3.58155)
-bones/2/rotation = Quaternion(2.29495e-08, -0.648822, 0.760941, -3.86732e-08)
-bones/3/position = Vector3(-2.48036, -0.0924273, 1.34025)
-bones/3/rotation = Quaternion(-0.00738199, 0, 0, 0.999973)
-bones/4/position = Vector3(5.13685, 0.766312, 3.58155)
-bones/4/rotation = Quaternion(4.22057e-08, -0.786031, 0.618187, -1.91746e-08)
-bones/5/position = Vector3(2.48036, -2.30788, 1.73478)
-bones/5/rotation = Quaternion(-0.184322, 4.25668e-17, 2.08914e-24, 0.982866)
-bones/6/position = Vector3(0, 0, 5.24577)
+bones/1/position = Vector3(0, 0, 2.99569)
+bones/2/position = Vector3(-5.13685, 0.73682, 3.57043)
+bones/2/rotation = Quaternion(2.63899e-08, -0.783331, 0.621605, -3.50218e-08)
+bones/3/position = Vector3(-2.48036, -2.25894, 1.72606)
+bones/3/rotation = Quaternion(-0.180474, -4.25813e-17, -1.62271e-25, 0.98358)
+bones/4/position = Vector3(5.13685, -0.539535, 3.57043)
+bones/4/rotation = Quaternion(3.39192e-08, -0.652129, 0.758108, -2.77242e-08)
+bones/5/position = Vector3(2.48036, -0.141357, 1.34896)
+bones/5/rotation = Quaternion(-0.0112948, 0, 0, 0.999936)
+bones/6/position = Vector3(0, 0, 5.23464)
 
 [node name="GroundCast" parent="." index="2"]
 hit_from_inside = true

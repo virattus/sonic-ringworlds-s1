@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cpvdi7m5kxwsf"]
 
 [ext_resource type="Script" path="res://entities/Collision/Collision.gd" id="1_u178i"]
+[ext_resource type="Material" uid="uid://7m0sebd87r6n" path="res://entities/Collision/new_standard_material_3d.tres" id="2_bpgb2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_furu5"]
 shading_mode = 0
@@ -11,13 +12,10 @@ material = SubResource("StandardMaterial3D_furu5")
 radius = 0.125
 height = 0.25
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2gkg"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_8f3ig"]
-material = SubResource("StandardMaterial3D_y2gkg")
-radius = 0.125
-height = 0.25
+[sub_resource type="SphereMesh" id="SphereMesh_kw1wk"]
+material = ExtResource("2_bpgb2")
+radius = 0.063
+height = 0.125
 
 [node name="Collision" type="Node3D"]
 script = ExtResource("1_u178i")
@@ -26,7 +24,9 @@ script = ExtResource("1_u178i")
 mesh = SubResource("SphereMesh_7hwfd")
 
 [node name="CollisionNormal" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_8f3ig")
+
+[node name="CollisionNormalCap" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_kw1wk")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 8.0
