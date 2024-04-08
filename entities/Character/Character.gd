@@ -12,7 +12,6 @@ signal HealthEmpty
 var Speed := 0.0
 
 var GroundCollision := false
-var GroundCollisionShape : String
 
 const GROUND_CAST_MIN_DISTANCE = 0.1
 
@@ -29,7 +28,6 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "velocity")
 	DebugMenu.AddMonitor(self, "Speed")
 	DebugMenu.AddMonitor(self, "GroundCollision")
-	DebugMenu.AddMonitor(self, "GroundCollisionShape")
 	DebugMenu.AddMonitor(self, "Health")
 	DebugMenu.AddMonitor(self, "MaxHealth")
 	
@@ -42,10 +40,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	GroundCollision = is_on_floor() #or (global_position.y - GroundCast.get_collision_point().y < GROUND_CAST_MIN_DISTANCE)
-	if GroundCast.is_colliding():
-		GroundCollisionShape = GroundCast.get_collider().name
-	else:
-		GroundCollisionShape = "None"
 
 
 func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:

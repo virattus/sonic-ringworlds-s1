@@ -2,12 +2,21 @@ extends BasicState
 
 
 
+var LastFrameVel := Vector3.ZERO
+var LastFrameSpeed := 0.0
+
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
 	
 	UpdateMoveAnim()
+	
+	if owner.velocity.length() > 0.0:
+		owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
+	
+	LastFrameVel = owner.velocity.normalized()
+	LastFrameSpeed = owner.Speed
 
 
 func Exit() -> void:
@@ -15,36 +24,31 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var vel : Vector3 = owner.velocity
-	
-	var newBasis = owner.Camera.CurrentBasis
-	
-	#var newBasis = owner.CharMesh.global_transform.basis
-	#newBasis.y = owner.FloorNormal
-	#newBasis.x = -newBasis.z.cross(newBasis.y)
-	#newBasis = newBasis.orthonormalized()
-	
-	#vel = newBasis * vel
-	
-	#global_transform.basis.y = newY
-	#global_transform.basis.x = -global_transform.basis.z.cross(global_transform.basis.y)
-	#global_transform.basis = global_transform.basis.orthonormalized()
+	var vel : Vector3 = owner.velocity.normalized()
+	var speed : float = owner.Speed
+	LastFrameVel = vel
+	LastFrameSpeed = speed
 	
 	if owner.Controller.InputVelocity.length() > 0.0:
-		var InputVel = (owner.Controller.InputVelocity * owner.PARAMETERS.RUN_INPUT_MAGNITUDE)
-		InputVel *= 1.0 - clamp(owner.Speed / owner.PARAMETERS.RUN_MAX_SPEED, 0.0, 1.0)
+		if LastFrameSpeed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
+			ChangeState("Skid")
+			return
+		
+		var InputVel = owner.Controller.InputVelocity.normalized()
 	
-		vel += InputVel
+		vel = (vel + InputVel).normalized()
+		
+		if speed < owner.PARAMETERS.RUN_MAX_SPEED:
+			speed += (owner.Controller.InputVelocity.length() * owner.PARAMETERS.RUN_ACCEL_RATE)
+		
+		owner.CharMesh.look_at(owner.global_position + vel)
 	else:
-		vel = lerp(vel, Vector3.ZERO, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
+		speed = lerp(speed, 0.0, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
 	
-	if vel.length() > owner.PARAMETERS.MOVE_MAX_SPEED:
-		vel = vel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED
+	speed = clamp(speed, -owner.PARAMETERS.MOVE_MAX_SPEED, owner.PARAMETERS.MOVE_MAX_SPEED)
 	
-	owner.Move(vel)
-	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
+	owner.Move(vel * speed)
 	owner.CharMesh.AlignToY(owner.up_direction)
-	#owner.CharMesh.LerpMeshOrientation(owner.Controller.InputVelocity.normalized(), _delta)
 	
 	UpdateMoveAnim()
 	
@@ -93,9 +97,6 @@ func Update(_delta: float) -> void:
 		ChangeState("Jump")
 		return
 	
-	if owner.Speed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
-		ChangeState("Skid")
-		return
 	
 	if owner.Speed <= owner.PARAMETERS.MOVE_MIN_SPEED:
 		ChangeState("Idle")
@@ -118,7 +119,7 @@ func UpdateMoveAnim() -> void:
 
 func IsInputSkidding() -> bool:
 	if owner.Controller.InputVelocity.length() > owner.PARAMETERS.SKID_INPUT_MIN:
-		var InputDir = owner.velocity.normalized().dot(owner.Controller.InputVelocity)
+		var InputDir = LastFrameVel.normalized().dot(owner.Controller.InputVelocity.normalized())
 		if InputDir < owner.PARAMETERS.SKID_ANGLE_MIN:
 			print("Move: Skid ratio: %s" % InputDir)
 			return true

@@ -22,13 +22,15 @@ var P2Table = {
 	"Attack": "P2_Attack",
 }
 
-var Deadzone := 0.1
-
 
 func _ready() -> void:
+	DebugMenu.AddMonitor(self, "InputAnalogue")
+	DebugMenu.AddMonitor(self, "InputAnalogueDeadzone")
 	DebugMenu.AddMonitor(self, "InputVelocity")
 	DebugMenu.AddMonitor(self, "InputJump")
 	DebugMenu.AddMonitor(self, "InputAttack")
+	
+	InputAnalogueDeadzone = 0.2
 
 
 func _process(_delta: float) -> void:
@@ -40,8 +42,6 @@ func _process(_delta: float) -> void:
 	var InputMove := Input.get_vector(activeTable["Left"], activeTable["Right"], activeTable["Up"], activeTable["Down"], InputAnalogueDeadzone)
 	if InputMove.length() > 1.0:
 		InputMove = InputMove.normalized()
-	elif InputMove.length() < Deadzone:
-		InputMove = Vector2.ZERO
 	
 	InputAnalogue = InputMove
 	

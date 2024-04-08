@@ -29,19 +29,25 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var vel = owner.velocity
+	var vel : Vector3 = owner.velocity.normalized()
+	var speed : float = owner.Speed
 	
 	if owner.Controller.InputVelocity.length() > 0.0:
-		var InputVel = (owner.Controller.InputVelocity * owner.PARAMETERS.AIR_INPUT_MAGNITUDE)
-		InputVel *= 1.0 - clamp(owner.Speed / owner.PARAMETERS.AIR_MAX_SPEED, 0.0, 1.0)
+		var InputVel = owner.Controller.InputVelocity.normalized()
 	
-		vel += InputVel
+		vel = InputVel
+		
+		if speed < owner.PARAMETERS.RUN_MAX_SPEED:
+			speed += owner.Controller.InputVelocity.length()
 	else:
-		vel = lerp(vel, Vector3.ZERO, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
+		speed = lerp(speed, 0.0, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
 	
+	if speed > owner.PARAMETERS.MOVE_MAX_SPEED:
+		speed = owner.PARAMETERS.MOVE_MAX_SPEED
+	
+	vel *= speed
 	vel += JumpUpDir * JumpPower * _delta
 	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
-	
 	
 	owner.Move(vel)
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
