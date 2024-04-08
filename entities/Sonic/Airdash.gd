@@ -41,12 +41,14 @@ func Update(_delta: float) -> void:
 		coll.SetToCollision(collision)
 		
 		var dot = owner.up_direction.dot(collision.get_normal())
+		print(dot)
 		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
+			print("Airdash: landing")
 			owner.FloorNormal = collision.get_normal()
 			owner.up_direction = collision.get_normal()
 			ChangeState("Land")
 			return
-		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MAX:
+		elif (dot > owner.PARAMETERS.AIRDASH_WALL_BONK_MIN) and (dot < owner.PARAMETERS.AIRDASH_WALL_BONK_MAX):
 			var walldot = collision.get_normal().dot(owner.CharMesh.GetForwardVector().normalized())
 			if walldot < -0.5:
 				print("Airdash: bounce off wall: ", walldot)
@@ -58,7 +60,7 @@ func Update(_delta: float) -> void:
 				})
 				return
 		else:
-			print("Ceiling hit?")
+			print("Airdash: Ceiling hit?")
 	
 	AirDashSpeed -= owner.PARAMETERS.AIRDASH_SPEED_DECREASE_RATE * _delta
 	if AirDashSpeed <= 0.0:

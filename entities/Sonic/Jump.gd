@@ -3,6 +3,7 @@ extends BasicState
 
 
 var JumpUpDir := Vector3.ZERO
+var InitialVel := Vector3.ZERO
 var JumpPower := 0.0
 
 
@@ -22,6 +23,7 @@ func Enter(_msg := {}) -> void:
 	
 	JumpPower = owner.PARAMETERS.JUMP_POWER
 	JumpUpDir = owner.up_direction
+	InitialVel = owner.velocity
 
 
 func Exit() -> void:
@@ -29,23 +31,8 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var vel : Vector3 = owner.velocity.normalized()
-	var speed : float = owner.Speed
+	var vel = owner.velocity
 	
-	if owner.Controller.InputVelocity.length() > 0.0:
-		var InputVel = owner.Controller.InputVelocity.normalized()
-	
-		vel = InputVel
-		
-		if speed < owner.PARAMETERS.RUN_MAX_SPEED:
-			speed += owner.Controller.InputVelocity.length()
-	else:
-		speed = lerp(speed, 0.0, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
-	
-	if speed > owner.PARAMETERS.MOVE_MAX_SPEED:
-		speed = owner.PARAMETERS.MOVE_MAX_SPEED
-	
-	vel *= speed
 	vel += JumpUpDir * JumpPower * _delta
 	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 	
@@ -60,21 +47,20 @@ func Update(_delta: float) -> void:
 		coll.SetToCollision(collision)
 		
 		var dot = owner.up_direction.dot(collision.get_normal())
-		print(dot)
 		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
-			print("Jump: Floor hit")
+			print("Jump: Floor hit: ", dot)
 			owner.FloorNormal = collision.get_normal()
 			owner.up_direction = collision.get_normal()
 			ChangeState("Land")
 			return
-		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MAX:
-			print("Jump: wipeout hit")
+		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MIN:
+			print("Jump: Wipeout hit", dot)
 			owner.FloorNormal = collision.get_normal()
 			owner.up_direction = collision.get_normal()
 			ChangeState("Wipeout")
 			return
-		else:
-			print("Jump: Ceiling hit?")
+		elif dot < owner.PARAMETERS.AIR_CEILING_ANGLE_MAX:
+			print("Jump: Ceiling hit", dot)
 			var groundDot = owner.up_direction.dot(Vector3(0, 1, 0))
 			if groundDot < 0.75:
 				print("upside down")
@@ -85,6 +71,8 @@ func Update(_delta: float) -> void:
 			else:
 				print("should be ceiling hit")
 				JumpPower = 0.0
+		else:
+			print("Jump: Hit something, but we don't care")
 	
 	JumpPower -= owner.PARAMETERS.JUMP_POWER_DECEL * _delta
 	if JumpPower <= 0.0:
