@@ -47,32 +47,26 @@ func Update(_delta: float) -> void:
 		coll.SetToCollision(collision)
 		
 		var dot = owner.up_direction.dot(collision.get_normal())
-		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
-			print("Jump: Floor hit: ", dot)
+		if dot > owner.PARAMETERS.LAND_ANGLE_MIN:
+			print("Jump: Floor hit")
 			owner.FloorNormal = collision.get_normal()
 			owner.up_direction = collision.get_normal()
 			ChangeState("Land")
 			return
-		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MIN:
-			print("Jump: Wipeout hit", dot)
-			owner.FloorNormal = collision.get_normal()
-			owner.up_direction = collision.get_normal()
-			ChangeState("Wipeout")
-			return
-		elif dot < owner.PARAMETERS.AIR_CEILING_ANGLE_MAX:
-			print("Jump: Ceiling hit", dot)
-			var groundDot = owner.up_direction.dot(Vector3(0, 1, 0))
+		elif dot > owner.PARAMETERS.LAND_WIPEOUT_MIN:
+			print("Jump: Side hit")
+			
+		else: #Hit ceiling
+			var groundDot = owner.up_direction.dot(Vector3.UP)
 			if groundDot < 0.75:
-				print("upside down")
+				print("Jump: landed upside down")
 				owner.FloorNormal = collision.get_normal()
 				owner.up_direction = collision.get_normal()
 				ChangeState("Wipeout")
 				return
 			else:
-				print("should be ceiling hit")
+				print("Jump: hit ceiling? GroundDot was ", groundDot)
 				JumpPower = 0.0
-		else:
-			print("Jump: Hit something, but we don't care")
 	
 	JumpPower -= owner.PARAMETERS.JUMP_POWER_DECEL * _delta
 	if JumpPower <= 0.0:

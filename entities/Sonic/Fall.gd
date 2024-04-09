@@ -42,31 +42,32 @@ func Update(_delta: float) -> void:
 		coll.SetToCollision(collision)
 		
 		var dot = owner.up_direction.dot(collision.get_normal())
-		if dot > owner.PARAMETERS.LAND_ANGLE_MAX:
+		if dot > owner.PARAMETERS.LAND_ANGLE_MIN:
 			print("Fall: Floor hit")
 			owner.FloorNormal = collision.get_normal()
 			owner.up_direction = collision.get_normal()
 			ChangeState("Land")
 			return
-		elif dot > owner.PARAMETERS.WIPEOUT_ANGLE_MIN:
-			print("Fall: wipeout hit")
-			owner.FloorNormal = collision.get_normal()
-			owner.up_direction = collision.get_normal()
-			ChangeState("Wipeout")
-			return
-		elif dot < owner.PARAMETERS.AIR_CEILING_ANGLE_MAX:
-			print("Fall: Ceiling hit?")
-			var groundDot = owner.up_direction.dot(Vector3(0, 1, 0))
+		elif dot > owner.PARAMETERS.LAND_WIPEOUT_MIN:
+			var groundDot = owner.up_direction.dot(Vector3.UP)
+			if groundDot > owner.PARAMETERS.LAND_WALL_MIN:
+				print("Fall: Side hit grounddot: ", groundDot)
+			else:
+				print("Fall: wipeout hit")
+				owner.FloorNormal = collision.get_normal()
+				owner.up_direction = collision.get_normal()
+				ChangeState("Wipeout")
+				return
+		else: #Hit ceiling
+			var groundDot = owner.up_direction.dot(Vector3.UP)
 			if groundDot < 0.75:
-				print("upside down")
+				print("Fall: landed upside down")
 				owner.FloorNormal = collision.get_normal()
 				owner.up_direction = collision.get_normal()
 				ChangeState("Wipeout")
 				return
 			else:
-				print("should be ceiling hit")
-		else:
-			print("Jump: Hit something, but we don't care")
+				print("Fall: hit ceiling? GroundDot was ", groundDot)
 	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Airdash")
