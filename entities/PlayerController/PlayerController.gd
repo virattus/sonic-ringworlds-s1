@@ -30,7 +30,7 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "InputJump")
 	DebugMenu.AddMonitor(self, "InputAttack")
 	
-	InputAnalogueDeadzone = 0.2
+	InputAnalogueDeadzone = 0.0
 
 
 func _process(_delta: float) -> void:
@@ -39,19 +39,11 @@ func _process(_delta: float) -> void:
 		activeTable = P2Table
 	
 	#Movement
-	var InputMove := Input.get_vector(activeTable["Left"], activeTable["Right"], activeTable["Up"], activeTable["Down"], InputAnalogueDeadzone)
-	if InputMove.length() > 1.0:
-		InputMove = InputMove.normalized()
+	InputAnalogue = Input.get_vector(activeTable["Left"], activeTable["Right"], activeTable["Up"], activeTable["Down"], InputAnalogueDeadzone)
+	if InputAnalogue.length() > 1.0:
+		InputAnalogue = InputAnalogue.normalized()
 	
-	InputAnalogue = InputMove
-	
-	#var CameraFront = (Camera_Node.basis.z * Vector3(1, 1, 1)).normalized()
-	#var CameraRight = (Camera_Node.basis.x * Vector3(1, 1, 1)).normalized()
-	
-	#var newMovement = (CameraFront * InputMove.y) + (CameraRight * InputMove.x)
-	var newMovement = (Camera_Node.CurrentBasis * Vector3(InputMove.x, 0, InputMove.y))
-	
-	InputVelocity = newMovement
+	InputVelocity = (Camera_Node.CurrentBasis * Vector3(InputAnalogue.x, 0, InputAnalogue.y))
 
 	if Input.is_action_just_pressed(activeTable["Jump"]):
 		JumpJustPressed.emit()

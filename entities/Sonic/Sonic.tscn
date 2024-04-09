@@ -1900,13 +1900,13 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, 0, 0.103542)
-bones/2/position = Vector3(-3.77915, 3.31044, 0.382354)
+bones/2/position = Vector3(-3.75212, 3.37351, 0.382354)
 bones/2/rotation = Quaternion(0.138502, -0.69341, 0.138502, 0.69341)
-bones/3/position = Vector3(-2.18667, -4.7805, 0.896335)
+bones/3/position = Vector3(-2.28579, -4.81654, 0.896335)
 bones/3/rotation = Quaternion(-0.943668, 0.163203, -0.0490536, 0.283636)
-bones/4/position = Vector3(4.19478, 2.65731, 0.382354)
+bones/4/position = Vector3(4.04161, 2.9186, 0.382354)
 bones/4/rotation = Quaternion(-0.138502, -0.69341, 0.138502, -0.69341)
-bones/5/position = Vector3(2.18667, -5.52269, 0.896335)
+bones/5/position = Vector3(2.28579, -5.33348, 0.896335)
 bones/5/rotation = Quaternion(-0.943668, -0.163203, 0.0490536, 0.283636)
 bones/6/position = Vector3(0, 0, 1.11795)
 

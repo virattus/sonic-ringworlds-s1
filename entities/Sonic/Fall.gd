@@ -3,6 +3,8 @@ extends BasicState
 
 var CanStick := true
 var UpDir := Vector3.ZERO
+var InitialVel := Vector3.ZERO
+var InputVel := Vector3.ZERO
 
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
@@ -18,6 +20,16 @@ func Enter(_msg := {}) -> void:
 	else:
 		CanStick = true
 	
+	if _msg.has("InputVel"):
+		InputVel = _msg["InputVel"]
+	else:
+		InputVel = Vector3.ZERO
+	
+	if _msg.has("InitialVel"):
+		InitialVel = _msg["InitialVel"]
+	else:
+		InitialVel = owner.velocity
+	
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", 0.0)
 
@@ -27,11 +39,13 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var vel = owner.velocity
+	InitialVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
+
+	InputVel += owner.Controller.InputVelocity * _delta
+	if InputVel.length() > 1.0:
+		InputVel = InputVel.normalized()
 	
-	vel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
-	
-	owner.Move(vel)
+	owner.Move(InitialVel + InputVel)
 	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	
 	
