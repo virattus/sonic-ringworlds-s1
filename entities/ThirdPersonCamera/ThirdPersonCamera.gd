@@ -10,6 +10,9 @@ var CurrentBasis := Basis.IDENTITY
 var up_axis := Vector3.UP
 
 
+@onready var cam = $SpringArm3D/Camera3D
+
+
 func _process(delta: float) -> void:
 	if !Active:
 		return
@@ -20,6 +23,7 @@ func _process(delta: float) -> void:
 	
 	var alignment = basis_aligned_y(transform.basis, char.up_direction)
 	transform.basis = transform.basis.slerp(alignment, 0.2)
+	CharRotation()
 	if RightAnalogue:
 		cam_input()
 	else:
@@ -41,7 +45,15 @@ func cam_input() -> void:
 	
 	$SpringArm3D.rotation.x -= CAM_INPUT.y * 0.1
 	$SpringArm3D.rotation.x = clamp($SpringArm3D.rotation.x, deg_to_rad(-80), deg_to_rad(60))
+
+
+func CharRotation() -> void:
+	var speed = char.Speed
+	if speed > 0.0:
+		var dotRight = char.velocity.normalized().dot(-cam.global_transform.basis.x)
+		transform.basis = transform.basis.rotated(up_axis, dotRight * 0.05)
 	
+	 
 
 
 func basis_aligned_y(basis_to_align: Basis, vector_to_align_with: Vector3) -> Basis:

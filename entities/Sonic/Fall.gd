@@ -5,9 +5,20 @@ var CanStick := true
 var UpDir := Vector3.ZERO
 var InitialVel := Vector3.ZERO
 var InputVel := Vector3.ZERO
+var InputSpeed := 0.0
 
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+
+
+func _ready() -> void:
+	DebugMenu.AddMonitor(self, "CanStick")
+	DebugMenu.AddMonitor(self, "UpDir")
+	DebugMenu.AddMonitor(self, "InitialVel")
+	DebugMenu.AddMonitor(self, "InputVel")
+	DebugMenu.AddMonitor(self, "InputSpeed")
+	
+
 
 func Enter(_msg := {}) -> void:
 	if _msg.has("UpDir"):
@@ -30,6 +41,8 @@ func Enter(_msg := {}) -> void:
 	else:
 		InitialVel = owner.velocity
 	
+	InputSpeed = InitialVel.length()
+	
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", 0.0)
 
@@ -42,11 +55,15 @@ func Update(_delta: float) -> void:
 	InitialVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 
 	InputVel += owner.Controller.InputVelocity * _delta
-	if InputVel.length() > 1.0:
-		InputVel = InputVel.normalized()
+	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
+		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
 	
-	owner.Move(InitialVel + InputVel)
-	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
+	var vel = InitialVel + (InputVel * InputSpeed)
+	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
+		vel = vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED
+	
+	owner.Move(vel)
+	#owner.CharMesh.look_at(owner.global_position + (owner.velocity * (Vector3.ONE - owner.FloorNormal)))
 	
 	
 	for i in range(owner.get_slide_collision_count()):
@@ -84,5 +101,13 @@ func Update(_delta: float) -> void:
 				print("Fall: hit ceiling? GroundDot was ", groundDot)
 	
 	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Airdash")
+		if Input.is_action_just_pressed("Attack"):
+			ChangeState("Pose")
+			return
+		else:
+			ChangeState("Airdash")
+			return
+		
+	if Input.is_action_just_pressed("Attack"):
+		ChangeState("Ball")
 		return

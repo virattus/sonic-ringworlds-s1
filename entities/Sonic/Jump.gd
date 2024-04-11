@@ -6,6 +6,8 @@ var JumpUpDir := Vector3.ZERO
 var InitialVel := Vector3.ZERO
 var JumpPower := 0.0
 var InputVel := Vector3.ZERO
+var InputSpeed := 0.0
+
 
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
@@ -14,6 +16,8 @@ func _ready():
 	DebugMenu.AddMonitor(self, "JumpUpDir")
 	DebugMenu.AddMonitor(self, "JumpPower")
 	DebugMenu.AddMonitor(self, "LeftGround")
+	DebugMenu.AddMonitor(self, "InputVel")
+	DebugMenu.AddMonitor(self, "InputSpeed")
 
 
 func Enter(_msg := {}) -> void:
@@ -22,10 +26,13 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SndJump.play()
 	
+	owner.CharMesh.AlignToY(owner.FloorNormal)
+	
 	JumpPower = owner.PARAMETERS.JUMP_POWER
 	JumpUpDir = owner.up_direction
 	InitialVel = owner.velocity
 	InputVel = Vector3.ZERO
+	InputSpeed = InitialVel.length()
 
 
 func Exit() -> void:
@@ -37,11 +44,16 @@ func Update(_delta: float) -> void:
 	InitialVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 
 	InputVel += owner.Controller.InputVelocity * _delta
-	if InputVel.length() > 1.0:
-		InputVel = InputVel.normalized()
+	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
+		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
 	
-	owner.Move(InitialVel + InputVel)
-	#owner.CharMesh.look_at(owner.global_position + owner.velocity)
+	var vel = InitialVel + (InputVel * InputSpeed)
+	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
+		vel = vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED
+	
+	owner.Move(vel)
+	#owner.CharMesh.AlignToY(owner.FloorNormal)
+	#owner.CharMesh.look_at(owner.global_position + (owner.velocity * (Vector3.ONE - owner.FloorNormal)))
 	
 	
 	for i in range(owner.get_slide_collision_count()):
@@ -81,6 +93,13 @@ func Update(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Airdash")
-		return
+		if Input.is_action_just_pressed("Attack"):
+			ChangeState("Pose")
+			return
+		else:
+			ChangeState("Airdash")
+			return
 	
+	if Input.is_action_just_pressed("Attack"):
+		ChangeState("Ball")
+		return

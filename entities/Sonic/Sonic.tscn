@@ -1,11 +1,13 @@
-[gd_scene load_steps=90 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=92 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="3_fv7oc"]
 [ext_resource type="PackedScene" uid="uid://dxw1ws66bfvth" path="res://models/Sonic/sonic_model.tscn" id="3_u1arj"]
+[ext_resource type="Texture2D" uid="uid://dnwju36a7f23x" path="res://models/Sonic/Ball.png" id="4_7go32"]
 [ext_resource type="Script" path="res://entities/Sonic/SquatCharge.gd" id="6_imrjj"]
 [ext_resource type="Script" path="res://entities/Sonic/Idle.gd" id="7_wafk6"]
+[ext_resource type="Script" path="res://entities/Sonic/Ball.gd" id="8_l4xov"]
 [ext_resource type="Script" path="res://entities/Sonic/Skid.gd" id="8_yskjs"]
 [ext_resource type="Script" path="res://entities/Sonic/Move.gd" id="9_3et1g"]
 [ext_resource type="Script" path="res://entities/Sonic/Hurt.gd" id="9_pbmsm"]
@@ -1808,7 +1810,6 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_403m5"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_v8mdo"]
-graph_offset = Vector2(-381.177, 227.024)
 nodes/Air/node = SubResource("AnimationNodeBlend3_x3pje")
 nodes/Air/position = Vector2(-520, 940)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_aacsx")
@@ -1900,15 +1901,23 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, 0, 0.103542)
-bones/2/position = Vector3(-3.75212, 3.37351, 0.382354)
+bones/2/position = Vector3(-3.69925, 3.49688, 0.382354)
 bones/2/rotation = Quaternion(0.138502, -0.69341, 0.138502, 0.69341)
-bones/3/position = Vector3(-2.28579, -4.81654, 0.896335)
+bones/3/position = Vector3(-2.47965, -4.88703, 0.896335)
 bones/3/rotation = Quaternion(-0.943668, 0.163203, -0.0490536, 0.283636)
-bones/4/position = Vector3(4.04161, 2.9186, 0.382354)
+bones/4/position = Vector3(3.742, 3.42969, 0.382354)
 bones/4/rotation = Quaternion(-0.138502, -0.69341, 0.138502, -0.69341)
-bones/5/position = Vector3(2.28579, -5.33348, 0.896335)
+bones/5/position = Vector3(2.47965, -4.96338, 0.896335)
 bones/5/rotation = Quaternion(-0.943668, -0.163203, 0.0490536, 0.283636)
 bones/6/position = Vector3(0, 0, 1.11795)
+
+[node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
+visible = false
+pixel_size = 0.03
+billboard = 1
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("4_7go32")
 
 [node name="GroundCast" parent="." index="2"]
 hit_from_inside = true
@@ -1999,34 +2008,37 @@ script = ExtResource("7_wafk6")
 [node name="Move" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("9_3et1g")
 
-[node name="Skid" type="Node" parent="StateMachine" index="2"]
+[node name="Ball" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("8_l4xov")
+
+[node name="Skid" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("8_yskjs")
 
-[node name="SquatCharge" type="Node" parent="StateMachine" index="3"]
+[node name="SquatCharge" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("6_imrjj")
 
-[node name="Jump" type="Node" parent="StateMachine" index="4"]
+[node name="Jump" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("39_jijta")
 
-[node name="Airdash" type="Node" parent="StateMachine" index="5"]
+[node name="Airdash" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("11_2je5t")
 
-[node name="Fall" type="Node" parent="StateMachine" index="6"]
+[node name="Fall" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("41_0dxtr")
 
-[node name="Land" type="Node" parent="StateMachine" index="7"]
+[node name="Land" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("13_70mwn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="8"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("14_flkpp")
 
-[node name="Pose" type="Node" parent="StateMachine" index="9"]
+[node name="Pose" type="Node" parent="StateMachine" index="10"]
 script = ExtResource("13_gkm31")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="10"]
+[node name="Hurt" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("9_pbmsm")
 
-[node name="Death" type="Node" parent="StateMachine" index="11"]
+[node name="Death" type="Node" parent="StateMachine" index="12"]
 script = ExtResource("15_ulagb")
 
 [node name="SndJump" type="AudioStreamPlayer" parent="." index="12"]

@@ -93,8 +93,16 @@ func Update(_delta: float) -> void:
 			})
 			return
 	
+	if Input.is_action_just_pressed("DEBUG_ForceSkid"):
+		ChangeState("Wipeout")
+		return
+	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Jump")
+		return
+	
+	if Input.is_action_just_pressed("Attack"):
+		ChangeState("Ball")
 		return
 	
 	

@@ -13,6 +13,8 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SndAirdash.play()
 	
+	owner.FloorNormal = Vector3.UP
+	
 	HorizVelocity = (owner.velocity * Vector3(1, 0, 1)).normalized()
 	VerticalVelocity = owner.velocity.y
 	AirDashSpeed = owner.PARAMETERS.AIRDASH_INITIAL_SPEED
@@ -32,6 +34,8 @@ func Update(_delta: float) -> void:
 	
 	owner.Move(vel)
 	owner.CharMesh.look_at(owner.global_position + HorizVelocity)
+	
+	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal, owner.UP_VEC_LERP_RATE * _delta)
 	
 	for i in range(owner.get_slide_collision_count()):
 		var collision = owner.get_slide_collision(i)

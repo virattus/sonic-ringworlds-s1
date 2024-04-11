@@ -18,6 +18,9 @@ const UP_VEC_LERP_RATE = 10.0
 
 const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
+@onready var SonicModel = $CharacterMesh/SonicModel
+@onready var SonicBall = $CharacterMesh/SonicBall
+
 @onready var CharGroundCast = $AngledGroundCast
 @onready var AnimTree = $AnimationTree
 @onready var StateM = $StateMachine
