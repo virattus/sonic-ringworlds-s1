@@ -9,6 +9,9 @@ func Enter(_msg := {}) -> void:
 	owner.CharMesh.AlignToY(owner.FloorNormal)
 
 	if owner.Speed > owner.PARAMETERS.MOVE_MIN_SPEED:
+		if owner.Controller.InputVelocity.length() > 0.0:
+			if owner.Controller.InputVelocity.dot(owner.velocity.normalized()) < 0.75:
+				ChangeState("Skid")
 		ChangeState("Move")
 	else:
 		ChangeState("Idle")

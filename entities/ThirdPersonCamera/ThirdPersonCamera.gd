@@ -49,9 +49,9 @@ func cam_input() -> void:
 
 func CharRotation() -> void:
 	var speed = char.Speed
-	if speed > 0.0:
+	if speed > 1.0:
 		var dotRight = char.velocity.normalized().dot(-cam.global_transform.basis.x)
-		transform.basis = transform.basis.rotated(up_axis, dotRight * 0.05)
+		transform.basis = transform.basis.rotated(up_axis, dotRight * speed * 0.001)
 	
 	 
 

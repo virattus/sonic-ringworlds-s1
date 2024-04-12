@@ -60,7 +60,7 @@ func Update(_delta: float) -> void:
 	
 	var vel = InitialVel + (InputVel * InputSpeed)
 	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
-		vel = vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED
+		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
 	
 	owner.Move(vel)
 	#owner.CharMesh.look_at(owner.global_position + (owner.velocity * (Vector3.ONE - owner.FloorNormal)))

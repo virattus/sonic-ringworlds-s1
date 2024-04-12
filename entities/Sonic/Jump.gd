@@ -3,8 +3,6 @@ extends BasicState
 
 
 var JumpUpDir := Vector3.ZERO
-var InitialVel := Vector3.ZERO
-var JumpPower := 0.0
 var InputVel := Vector3.ZERO
 var InputSpeed := 0.0
 
@@ -14,8 +12,6 @@ const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func _ready():
 	DebugMenu.AddMonitor(self, "JumpUpDir")
-	DebugMenu.AddMonitor(self, "JumpPower")
-	DebugMenu.AddMonitor(self, "LeftGround")
 	DebugMenu.AddMonitor(self, "InputVel")
 	DebugMenu.AddMonitor(self, "InputSpeed")
 
@@ -28,11 +24,9 @@ func Enter(_msg := {}) -> void:
 	
 	owner.CharMesh.AlignToY(owner.FloorNormal)
 	
-	JumpPower = owner.PARAMETERS.JUMP_POWER
-	JumpUpDir = owner.up_direction
-	InitialVel = owner.velocity
+	JumpUpDir = owner.velocity + (owner.up_direction.normalized() * owner.PARAMETERS.JUMP_POWER)
 	InputVel = Vector3.ZERO
-	InputSpeed = InitialVel.length()
+	InputSpeed = owner.velocity.length()
 
 
 func Exit() -> void:
@@ -40,16 +34,15 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	InitialVel += JumpUpDir * JumpPower * _delta
-	InitialVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
+	JumpUpDir.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 
 	InputVel += owner.Controller.InputVelocity * _delta
 	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
 		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
 	
-	var vel = InitialVel + (InputVel * InputSpeed)
+	var vel = JumpUpDir + (InputVel * InputSpeed)
 	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
-		vel = vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED
+		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
 	
 	owner.Move(vel)
 	#owner.CharMesh.AlignToY(owner.FloorNormal)
@@ -82,10 +75,15 @@ func Update(_delta: float) -> void:
 				return
 			else:
 				print("Jump: hit ceiling? GroundDot was ", groundDot)
-				JumpPower = 0.0
+				ChangeState("Fall", {
+					"InputVel": InputVel,
+				})
+				return
+				
 	
-	JumpPower -= owner.PARAMETERS.JUMP_POWER_DECEL * _delta
-	if JumpPower <= 0.0:
+	JumpUpDir.y -= owner.PARAMETERS.GRAVITY * _delta
+	
+	if JumpUpDir.y <= 0.0:
 		ChangeState("Fall", {
 			"UpDir": JumpUpDir.normalized(),
 			"InputVel": InputVel,

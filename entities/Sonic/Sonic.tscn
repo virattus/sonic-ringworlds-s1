@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=93 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxw1ws66bfvth" path="res://models/Sonic/sonic_model.tscn" id="3_u1arj"]
 [ext_resource type="Texture2D" uid="uid://dnwju36a7f23x" path="res://models/Sonic/Ball.png" id="4_7go32"]
 [ext_resource type="Script" path="res://entities/Sonic/SquatCharge.gd" id="6_imrjj"]
+[ext_resource type="Script" path="res://entities/Sonic/Initial.gd" id="6_xsr28"]
 [ext_resource type="Script" path="res://entities/Sonic/Idle.gd" id="7_wafk6"]
 [ext_resource type="Script" path="res://entities/Sonic/Ball.gd" id="8_l4xov"]
 [ext_resource type="Script" path="res://entities/Sonic/Skid.gd" id="8_yskjs"]
@@ -55,7 +56,7 @@ albedo_color = Color(0.796078, 0, 0.905882, 0.52549)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc5ap"]
 albedo_color = Color(0, 1, 0, 0.52549)
 
-[sub_resource type="Animation" id="Animation_6byum"]
+[sub_resource type="Animation" id="Animation_3i78c"]
 resource_name = "Pose"
 length = 1.66667
 tracks/0/type = "position_3d"
@@ -157,7 +158,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_nha2a"]
+[sub_resource type="Animation" id="Animation_ddrii"]
 resource_name = "WallBonkInitial"
 length = 1.66667
 tracks/0/type = "position_3d"
@@ -259,7 +260,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_ojhc5"]
+[sub_resource type="Animation" id="Animation_1eevg"]
 resource_name = "Airdash-loop"
 length = 1.66667
 loop_mode = 1
@@ -362,7 +363,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_751pu"]
+[sub_resource type="Animation" id="Animation_vkgaf"]
 resource_name = "Death-loop"
 length = 1.66667
 loop_mode = 1
@@ -465,7 +466,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_x633f"]
+[sub_resource type="Animation" id="Animation_p4uvt"]
 resource_name = "Fall-loop"
 length = 1.66667
 loop_mode = 1
@@ -568,7 +569,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_kyk6u"]
+[sub_resource type="Animation" id="Animation_8hwnb"]
 resource_name = "Hurt-loop"
 length = 1.66667
 loop_mode = 1
@@ -671,7 +672,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_4d7p5"]
+[sub_resource type="Animation" id="Animation_7cyyx"]
 resource_name = "Idle-loop"
 length = 1.66667
 loop_mode = 1
@@ -774,7 +775,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_ec06k"]
+[sub_resource type="Animation" id="Animation_yjniy"]
 resource_name = "Jump-loop"
 length = 1.66667
 loop_mode = 1
@@ -877,7 +878,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_ri1bf"]
+[sub_resource type="Animation" id="Animation_s403b"]
 resource_name = "OlympicsSquat-loop"
 length = 1.66667
 loop_mode = 1
@@ -980,7 +981,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_olhrc"]
+[sub_resource type="Animation" id="Animation_g3i2p"]
 resource_name = "Run-loop"
 length = 1.66667
 loop_mode = 1
@@ -1083,7 +1084,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_5d3xr"]
+[sub_resource type="Animation" id="Animation_14a5o"]
 resource_name = "Skid-loop"
 length = 1.66667
 loop_mode = 1
@@ -1186,7 +1187,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_cgq1k"]
+[sub_resource type="Animation" id="Animation_2jwth"]
 resource_name = "SpinKick-loop"
 length = 1.66667
 loop_mode = 1
@@ -1289,7 +1290,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
-[sub_resource type="Animation" id="Animation_71ops"]
+[sub_resource type="Animation" id="Animation_xpvnu"]
 resource_name = "StrikeDash-loop"
 length = 1.66667
 loop_mode = 1
@@ -1392,7 +1393,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_rfdq3"]
+[sub_resource type="Animation" id="Animation_fyxv4"]
 resource_name = "Walk-loop"
 length = 1.66667
 loop_mode = 1
@@ -1495,7 +1496,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_5nxqu"]
+[sub_resource type="Animation" id="Animation_g043t"]
 resource_name = "WallBonk-loop"
 length = 1.66667
 loop_mode = 1
@@ -1598,7 +1599,7 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="Animation" id="Animation_s1qk0"]
+[sub_resource type="Animation" id="Animation_m1a7r"]
 resource_name = "Wipeout-loop"
 length = 1.66667
 loop_mode = 1
@@ -1701,24 +1702,24 @@ tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = PackedFloat32Array(0, 1, 0, 0.707107, 0.707107, 0)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rluue"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jifbp"]
 _data = {
-"Airdash": SubResource("Animation_ojhc5"),
-"Death": SubResource("Animation_751pu"),
-"Fall": SubResource("Animation_x633f"),
-"Hurt": SubResource("Animation_kyk6u"),
-"Idle": SubResource("Animation_4d7p5"),
-"Jump": SubResource("Animation_ec06k"),
-"OlympicsSquat": SubResource("Animation_ri1bf"),
-"Pose": SubResource("Animation_6byum"),
-"Run": SubResource("Animation_olhrc"),
-"Skid": SubResource("Animation_5d3xr"),
-"SpinKick": SubResource("Animation_cgq1k"),
-"StrikeDash": SubResource("Animation_71ops"),
-"Walk": SubResource("Animation_rfdq3"),
-"WallBonk": SubResource("Animation_5nxqu"),
-"WallBonkInitial": SubResource("Animation_nha2a"),
-"Wipeout": SubResource("Animation_s1qk0")
+"Airdash": SubResource("Animation_1eevg"),
+"Death": SubResource("Animation_vkgaf"),
+"Fall": SubResource("Animation_p4uvt"),
+"Hurt": SubResource("Animation_8hwnb"),
+"Idle": SubResource("Animation_7cyyx"),
+"Jump": SubResource("Animation_yjniy"),
+"OlympicsSquat": SubResource("Animation_s403b"),
+"Pose": SubResource("Animation_3i78c"),
+"Run": SubResource("Animation_g3i2p"),
+"Skid": SubResource("Animation_14a5o"),
+"SpinKick": SubResource("Animation_2jwth"),
+"StrikeDash": SubResource("Animation_xpvnu"),
+"Walk": SubResource("Animation_fyxv4"),
+"WallBonk": SubResource("Animation_g043t"),
+"WallBonkInitial": SubResource("Animation_ddrii"),
+"Wipeout": SubResource("Animation_m1a7r")
 }
 
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_x3pje"]
@@ -1901,13 +1902,13 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, 0, 0.103542)
-bones/2/position = Vector3(-3.69925, 3.49688, 0.382354)
+bones/2/position = Vector3(-3.78181, 3.30423, 0.382354)
 bones/2/rotation = Quaternion(0.138502, -0.69341, 0.138502, 0.69341)
-bones/3/position = Vector3(-2.47965, -4.88703, 0.896335)
+bones/3/position = Vector3(-2.17692, -4.77695, 0.896335)
 bones/3/rotation = Quaternion(-0.943668, 0.163203, -0.0490536, 0.283636)
-bones/4/position = Vector3(3.742, 3.42969, 0.382354)
+bones/4/position = Vector3(4.20985, 2.6316, 0.382354)
 bones/4/rotation = Quaternion(-0.138502, -0.69341, 0.138502, -0.69341)
-bones/5/position = Vector3(2.47965, -4.96338, 0.896335)
+bones/5/position = Vector3(2.17692, -5.54131, 0.896335)
 bones/5/rotation = Quaternion(-0.943668, -0.163203, 0.0490536, 0.283636)
 bones/6/position = Vector3(0, 0, 1.11795)
 
@@ -1961,9 +1962,10 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="9"]
+active = false
 root_node = NodePath("../CharacterMesh/SonicModel")
 libraries = {
-"": SubResource("AnimationLibrary_rluue")
+"": SubResource("AnimationLibrary_jifbp")
 }
 tree_root = SubResource("AnimationNodeBlendTree_v8mdo")
 anim_player = NodePath("../CharacterMesh/SonicModel/AnimationPlayer")
@@ -2000,45 +2002,48 @@ one_shot = true
 
 [node name="StateMachine" type="Node" parent="." index="11" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
-ActiveState = NodePath("Idle")
+ActiveState = NodePath("Initial")
 
-[node name="Idle" type="Node" parent="StateMachine" index="0"]
+[node name="Initial" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("6_xsr28")
+
+[node name="Idle" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("7_wafk6")
 
-[node name="Move" type="Node" parent="StateMachine" index="1"]
+[node name="Move" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("9_3et1g")
 
-[node name="Ball" type="Node" parent="StateMachine" index="2"]
+[node name="Ball" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("8_l4xov")
 
-[node name="Skid" type="Node" parent="StateMachine" index="3"]
+[node name="Skid" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("8_yskjs")
 
-[node name="SquatCharge" type="Node" parent="StateMachine" index="4"]
+[node name="SquatCharge" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("6_imrjj")
 
-[node name="Jump" type="Node" parent="StateMachine" index="5"]
+[node name="Jump" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("39_jijta")
 
-[node name="Airdash" type="Node" parent="StateMachine" index="6"]
+[node name="Airdash" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("11_2je5t")
 
-[node name="Fall" type="Node" parent="StateMachine" index="7"]
+[node name="Fall" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("41_0dxtr")
 
-[node name="Land" type="Node" parent="StateMachine" index="8"]
+[node name="Land" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("13_70mwn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="9"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="10"]
 script = ExtResource("14_flkpp")
 
-[node name="Pose" type="Node" parent="StateMachine" index="10"]
+[node name="Pose" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("13_gkm31")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="11"]
+[node name="Hurt" type="Node" parent="StateMachine" index="12"]
 script = ExtResource("9_pbmsm")
 
-[node name="Death" type="Node" parent="StateMachine" index="12"]
+[node name="Death" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("15_ulagb")
 
 [node name="SndJump" type="AudioStreamPlayer" parent="." index="12"]

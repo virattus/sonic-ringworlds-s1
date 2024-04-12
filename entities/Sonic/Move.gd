@@ -79,9 +79,7 @@ func Update(_delta: float) -> void:
 	if !groundCollision:
 		ChangeState("Fall")
 		return
-	#else:
-		#owner.up_direction = owner.FloorNormal
-		#owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+		
 		
 	var DotToGround = owner.up_direction.dot(Vector3.UP)
 	if DotToGround < owner.PARAMETERS.MOVE_GROUND_STICK_MIN_ANGLE:
