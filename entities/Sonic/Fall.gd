@@ -3,7 +3,7 @@ extends BasicState
 
 var CanStick := true
 var UpDir := Vector3.ZERO
-var InitialVel := Vector3.ZERO
+var JumpVel := Vector3.ZERO
 var InputVel := Vector3.ZERO
 var InputSpeed := 0.0
 
@@ -14,7 +14,7 @@ const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 func _ready() -> void:
 	DebugMenu.AddMonitor(self, "CanStick")
 	DebugMenu.AddMonitor(self, "UpDir")
-	DebugMenu.AddMonitor(self, "InitialVel")
+	DebugMenu.AddMonitor(self, "JumpVel")
 	DebugMenu.AddMonitor(self, "InputVel")
 	DebugMenu.AddMonitor(self, "InputSpeed")
 	
@@ -31,17 +31,21 @@ func Enter(_msg := {}) -> void:
 	else:
 		CanStick = true
 	
+	if _msg.has("JumpVel"):
+		JumpVel = _msg["JumpVel"]
+	else:
+		print("Fall: using current velocity")
+		JumpVel = owner.velocity
+
 	if _msg.has("InputVel"):
 		InputVel = _msg["InputVel"]
 	else:
 		InputVel = Vector3.ZERO
 	
-	if _msg.has("InitialVel"):
-		InitialVel = _msg["InitialVel"]
+	if _msg.has("InputSpeed"):
+		InputSpeed = _msg["InputSpeed"]
 	else:
-		InitialVel = owner.velocity
-	
-	InputSpeed = InitialVel.length()
+		InputSpeed = JumpVel.length()
 	
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", 0.0)
@@ -52,13 +56,13 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	InitialVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
+	JumpVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 
 	InputVel += owner.Controller.InputVelocity * _delta
 	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
 		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
 	
-	var vel = InitialVel + (InputVel * InputSpeed)
+	var vel = JumpVel + (InputVel * InputSpeed)
 	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
 		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
 	

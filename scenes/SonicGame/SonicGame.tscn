@@ -32,7 +32,8 @@ Controller = NodePath("../PlayerController")
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("char") instance=ExtResource("3_t4fox")]
 char = NodePath("../Sonic")
 
-[node name="PlayerController" parent="." node_paths=PackedStringArray("Camera_Node") instance=ExtResource("4_31dce")]
+[node name="PlayerController" parent="." node_paths=PackedStringArray("Player", "Camera_Node") instance=ExtResource("4_31dce")]
+Player = NodePath("../Sonic")
 Camera_Node = NodePath("../ThirdPersonCamera")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

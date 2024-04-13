@@ -1,6 +1,7 @@
 extends "res://entities/CharController/CharController.gd"
 
 
+@export var Player: Character
 @export var Camera_Node: ThirdPersonCamera
 @export_enum("1", "2") var PlayerID: int
 
@@ -43,6 +44,7 @@ func _process(_delta: float) -> void:
 	if InputAnalogue.length() > 1.0:
 		InputAnalogue = InputAnalogue.normalized()
 	
+	#InputVelocity = (Player.CharMesh.global_transform.basis * Vector3(InputAnalogue.x, 0, InputAnalogue.y))
 	InputVelocity = (Camera_Node.CurrentBasis * Vector3(InputAnalogue.x, 0, InputAnalogue.y))
 
 	if Input.is_action_just_pressed(activeTable["Jump"]):
@@ -69,3 +71,11 @@ func _process(_delta: float) -> void:
 		InputAttack = BUTTON_JUST_RELEASED
 	else:
 		InputAttack = BUTTON_RELEASED
+
+
+
+func basis_aligned_y(basis_to_align: Basis, vector_to_align_with: Vector3) -> Basis:
+	basis_to_align.y = vector_to_align_with
+	basis_to_align.x = -basis_to_align.z.cross(basis_to_align.y)
+	basis_to_align = basis_to_align.orthonormalized()
+	return basis_to_align

@@ -15,10 +15,11 @@ func Enter(_msg := {}) -> void:
 		owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
 	
 	LastFrameVelocity = owner.velocity
+	
 
 
 func Exit() -> void:
-	pass
+	owner.GroundCast.target_position = Vector3.DOWN * owner.GroundCastLength
 
 
 func Update(_delta: float) -> void:
@@ -53,7 +54,8 @@ func Update(_delta: float) -> void:
 	LastFrameVelocity = owner.velocity
 	
 	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
-	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized()) * owner.CharGroundCastLength
+	owner.CharGroundCast.target_position = -owner.FloorNormal.normalized() * owner.CharGroundCastLength
+	owner.GroundCast.target_position = -owner.FloorNormal.normalized() * owner.GroundCastLength
 	
 	var groundCollision := false
 	var groundDot = owner.FloorNormal.dot(Vector3.UP)

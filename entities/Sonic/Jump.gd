@@ -2,7 +2,7 @@ extends BasicState
 
 
 
-var JumpUpDir := Vector3.ZERO
+var JumpVel := Vector3.ZERO
 var InputVel := Vector3.ZERO
 var InputSpeed := 0.0
 
@@ -11,7 +11,7 @@ var InputSpeed := 0.0
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func _ready():
-	DebugMenu.AddMonitor(self, "JumpUpDir")
+	DebugMenu.AddMonitor(self, "JumpVel")
 	DebugMenu.AddMonitor(self, "InputVel")
 	DebugMenu.AddMonitor(self, "InputSpeed")
 
@@ -24,7 +24,7 @@ func Enter(_msg := {}) -> void:
 	
 	owner.CharMesh.AlignToY(owner.FloorNormal)
 	
-	JumpUpDir = owner.velocity + (owner.up_direction.normalized() * owner.PARAMETERS.JUMP_POWER)
+	JumpVel = owner.velocity + (owner.up_direction.normalized() * owner.PARAMETERS.JUMP_POWER)
 	InputVel = Vector3.ZERO
 	InputSpeed = owner.velocity.length()
 
@@ -34,13 +34,13 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	JumpUpDir.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
+	JumpVel.y -= owner.PARAMETERS.GRAVITY * _delta * (0.5 if Input.is_action_pressed("Jump") else 1.0)
 
 	InputVel += owner.Controller.InputVelocity * _delta
 	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
 		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
 	
-	var vel = JumpUpDir + (InputVel * InputSpeed)
+	var vel = JumpVel + (InputVel * InputSpeed)
 	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
 		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
 	
@@ -76,19 +76,11 @@ func Update(_delta: float) -> void:
 			else:
 				print("Jump: hit ceiling? GroundDot was ", groundDot)
 				ChangeState("Fall", {
+					"JumpVel": JumpVel,
 					"InputVel": InputVel,
+					"InputSpeed": InputSpeed,
 				})
 				return
-				
-	
-	JumpUpDir.y -= owner.PARAMETERS.GRAVITY * _delta
-	
-	if JumpUpDir.y <= 0.0:
-		ChangeState("Fall", {
-			"UpDir": JumpUpDir.normalized(),
-			"InputVel": InputVel,
-		})
-		return
 	
 	if Input.is_action_just_pressed("Jump"):
 		if Input.is_action_just_pressed("Attack"):
@@ -100,4 +92,12 @@ func Update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Attack"):
 		ChangeState("Ball")
+		return
+
+	if JumpVel.y <= 0.0:
+		ChangeState("Fall", {
+			"JumpVel": JumpVel,
+			"InputVel": InputVel,
+			"InputSpeed": InputSpeed,
+		})
 		return

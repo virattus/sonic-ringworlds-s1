@@ -31,6 +31,10 @@ func _process(delta: float) -> void:
 	CurrentBasis = transform.basis
 
 
+func GetCameraBasis() -> Basis:
+	return cam.global_transform.basis
+
+
 func shoulder_cam_input() -> void:
 	var cam_input = Input.get_axis("Shoulder_Cam_Left", "Shoulder_Cam_Right")
 	

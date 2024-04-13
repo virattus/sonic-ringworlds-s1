@@ -46,7 +46,8 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
 @onready var StartingPosition := global_position
 @onready var CollisionSize: float = $WorldCollision.shape.radius #lol redo this
-@onready var CharGroundCastLength: float = CharGroundCast.target_position.length()
+@onready var CharGroundCastLength := 2.0
+@onready var GroundCastLength := 25.0
 
 
 func _ready() -> void:
