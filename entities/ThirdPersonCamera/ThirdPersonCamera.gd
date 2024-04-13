@@ -21,9 +21,9 @@ func _process(delta: float) -> void:
 	
 	position = char.position
 	
-	var alignment = basis_aligned_y(transform.basis, char.up_direction)
-	transform.basis = transform.basis.slerp(alignment, 0.2)
-	CharRotation()
+	#var alignment = basis_aligned_y(transform.basis, char.up_direction)
+	#transform.basis = transform.basis.slerp(alignment, 0.2)
+	#CharRotation()
 	if RightAnalogue:
 		cam_input()
 	else:

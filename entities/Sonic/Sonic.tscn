@@ -46,6 +46,8 @@ bottom_radius = 0.1
 height = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvci8"]
+transparency = 1
+no_depth_test = true
 albedo_color = Color(1, 0, 0, 0.52549)
 
 [sub_resource type="SphereMesh" id="SphereMesh_02mkd"]
@@ -54,6 +56,8 @@ albedo_color = Color(1, 0, 0, 0.52549)
 albedo_color = Color(0.796078, 0, 0.905882, 0.52549)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc5ap"]
+transparency = 1
+no_depth_test = true
 albedo_color = Color(0, 1, 0, 0.52549)
 
 [sub_resource type="Animation" id="Animation_3i78c"]

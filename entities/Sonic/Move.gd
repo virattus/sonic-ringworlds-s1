@@ -31,7 +31,14 @@ func Update(_delta: float) -> void:
 			ChangeState("Skid")
 			return
 		
-		var InputVel = owner.Controller.InputVelocity.normalized()
+		var InputVel = owner.Controller.InputVelocity
+		
+		var floorBasis = owner.Camera.get_node("SpringArm3D/Camera3D").transform.basis
+		floorBasis = basis_aligned_y(floorBasis, owner.up_direction)
+		
+		InputVel = floorBasis * InputVel
+		
+		
 	
 		vel = (vel + InputVel).normalized()
 		
@@ -133,3 +140,19 @@ func IsInputSkidding() -> bool:
 			return true
 		
 	return false
+
+
+func basis_aligned_x(basis_to_align: Basis, vector_to_align_with: Vector3) -> Basis:
+	basis_to_align.x = vector_to_align_with
+	basis_to_align.y = basis_to_align.z.cross(basis_to_align.y)
+	basis_to_align = basis_to_align.orthonormalized()
+	return basis_to_align
+
+
+func basis_aligned_y(basis_to_align: Basis, vector_to_align_with: Vector3) -> Basis:
+	basis_to_align.y = vector_to_align_with
+	basis_to_align.x = -basis_to_align.z.cross(basis_to_align.y)
+	basis_to_align = basis_to_align.orthonormalized()
+	return basis_to_align
+
+

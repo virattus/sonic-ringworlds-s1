@@ -63,7 +63,6 @@ offset_right = 466.0
 offset_bottom = 341.0
 
 [node name="Options" type="Control" parent="DebugMaster/TabContainer"]
-visible = false
 layout_mode = 2
 script = ExtResource("3_nwbvd")
 
@@ -79,6 +78,14 @@ offset_top = 30.0
 offset_right = 143.0
 offset_bottom = 61.0
 text = "Camera Debug"
+
+[node name="ChkDrawVectors" type="CheckBox" parent="DebugMaster/TabContainer/Options"]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 32.0
+offset_right = 297.0
+offset_bottom = 63.0
+text = "Draw Vectors"
 
 [node name="BtnFPS" type="Button" parent="DebugMaster/TabContainer/Options"]
 layout_mode = 0
@@ -117,5 +124,6 @@ visible = false
 [connection signal="AddToMonitorOverlay" from="DebugMaster/TabContainer/Monitors/MonitorTree" to="MonitorOverlay" method="ToggleProperty"]
 [connection signal="toggled" from="DebugMaster/TabContainer/Options/ChkFullscreen" to="DebugMaster/TabContainer/Options" method="_on_chk_fullscreen_toggled"]
 [connection signal="toggled" from="DebugMaster/TabContainer/Options/ChkCameraDebug" to="." method="ToggleDebug" binds= ["CameraDebug"]]
+[connection signal="toggled" from="DebugMaster/TabContainer/Options/ChkDrawVectors" to="." method="ToggleDebug" binds= ["CameraDebug"]]
 [connection signal="pressed" from="DebugMaster/TabContainer/Options/BtnFPS" to="DebugMaster/TabContainer/Options" method="_on_btn_fps_pressed"]
 [connection signal="item_selected" from="DebugMaster/TabContainer/Options/LblVsync/OBVsync" to="DebugMaster/TabContainer/Options" method="_on_ob_vsync_item_selected"]
