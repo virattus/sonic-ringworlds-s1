@@ -7,6 +7,8 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", 0.0)
 	
+	owner.CameraFocus.position = Vector3(0, 0.5, 0)
+	
 	owner.SndSkid.play()
 	
 	owner.up_direction = owner.FloorNormal

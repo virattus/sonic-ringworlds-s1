@@ -40,7 +40,10 @@ func _process(delta: float) -> void:
 		cam_input()
 	else:
 		shoulder_cam_input(delta)
-		
+	
+	
+	$SpringArm3D.spring_length = 3.0 + ((clamp(char.Speed, 8.0, 14.0) - 10.0) * 0.25)
+	
 	$SpringArm3D/Camera3D.look_at(Focus.global_position)
 	CurrentBasis = transform.basis
 
