@@ -32,9 +32,10 @@ Sonic = NodePath("../Sonic")
 Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
-[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("char") instance=ExtResource("3_t4fox")]
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("char", "Focus") instance=ExtResource("3_t4fox")]
 RightAnalogue = false
 char = NodePath("../Sonic")
+Focus = NodePath("../Sonic/CameraFocus")
 
 [node name="PlayerController" parent="." node_paths=PackedStringArray("Player", "Camera_Node") instance=ExtResource("4_31dce")]
 Player = NodePath("../Sonic")
@@ -53,3 +54,6 @@ one_shot = true
 
 [connection signal="HealthEmpty" from="Sonic" to="." method="_on_sonic_health_empty"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+
+[editable path="Sonic"]
+[editable path="Sonic/CharacterMesh/SonicModel"]

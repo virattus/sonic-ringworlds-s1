@@ -1,10 +1,11 @@
-[gd_scene load_steps=93 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=94 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="3_fv7oc"]
 [ext_resource type="PackedScene" uid="uid://dxw1ws66bfvth" path="res://models/Sonic/sonic_model.tscn" id="3_u1arj"]
 [ext_resource type="Texture2D" uid="uid://dnwju36a7f23x" path="res://models/Sonic/Ball.png" id="4_7go32"]
+[ext_resource type="Texture2D" uid="uid://b3jasmhu3jyr6" path="res://icons/CameraTarget.png" id="5_wnnh5"]
 [ext_resource type="Script" path="res://entities/Sonic/SquatCharge.gd" id="6_imrjj"]
 [ext_resource type="Script" path="res://entities/Sonic/Initial.gd" id="6_xsr28"]
 [ext_resource type="Script" path="res://entities/Sonic/Idle.gd" id="7_wafk6"]
@@ -1965,7 +1966,16 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
+[node name="CameraFocus" type="Node3D" parent="." index="9"]
+
+[node name="Sprite3D" type="Sprite3D" parent="CameraFocus" index="0"]
+visible = false
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+texture = ExtResource("5_wnnh5")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
 active = false
 root_node = NodePath("../CharacterMesh/SonicModel")
 libraries = {
@@ -2001,10 +2011,10 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 8/scale" = 1.0
 "parameters/TimeScale 9/scale" = 4.0
 
-[node name="TimerInvincibility" type="Timer" parent="." index="10"]
+[node name="TimerInvincibility" type="Timer" parent="." index="11"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="11" node_paths=PackedStringArray("ActiveState")]
+[node name="StateMachine" type="Node" parent="." index="12" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
 ActiveState = NodePath("Initial")
 
@@ -2050,43 +2060,43 @@ script = ExtResource("9_pbmsm")
 [node name="Death" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("15_ulagb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="12"]
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="13"]
 stream = ExtResource("11_sc7a7")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="13"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource("15_ce3xb")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="14"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="15"]
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="15"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="16"]
 stream = ExtResource("20_yjean")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="16"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="17"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="17"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="18"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 

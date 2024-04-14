@@ -15,7 +15,11 @@ func Enter(_msg := {}) -> void:
 	
 	owner.FloorNormal = Vector3.UP
 	
-	HorizVelocity = (owner.velocity * Vector3(1, 0, 1)).normalized()
+	
+	var ControlAxis = owner.Controller.InputAnalogue
+	var ControlVel = (owner.Camera.CurrentBasis * Vector3(ControlAxis.x, 0.0, ControlAxis.y))
+	
+	HorizVelocity = ((owner.velocity * Vector3(1, 0, 1) * owner.Speed) + ControlVel).normalized()
 	VerticalVelocity = owner.velocity.y
 	AirDashSpeed = owner.PARAMETERS.AIRDASH_INITIAL_SPEED
 

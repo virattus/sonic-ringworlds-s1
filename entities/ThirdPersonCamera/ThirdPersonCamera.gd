@@ -4,13 +4,25 @@ extends Node3D
 @export var Active := true
 @export var RightAnalogue := true
 @export var char : CharacterBody3D
+@export var Focus: Node3D
 
 var CurrentBasis := Basis.IDENTITY
 
 var up_axis := Vector3.UP
 
+var CamRotation := 0.0
+
 
 @onready var cam = $SpringArm3D/Camera3D
+
+const CAM_ROT_ACCEL_SPEED = 1.0
+const CAM_MAX_ROT_SPEED = 1.0
+const CAM_REDUCTION_SPEED = 15.0
+
+
+func _ready() -> void:
+	DebugMenu.AddMonitor(self, "global_position")
+	DebugMenu.AddMonitor(self, "CamRotation")
 
 
 func _process(delta: float) -> void:
@@ -27,7 +39,9 @@ func _process(delta: float) -> void:
 	if RightAnalogue:
 		cam_input()
 	else:
-		shoulder_cam_input()
+		shoulder_cam_input(delta)
+		
+	$SpringArm3D/Camera3D.look_at(Focus.global_position)
 	CurrentBasis = transform.basis
 
 
@@ -35,10 +49,15 @@ func GetCameraBasis() -> Basis:
 	return cam.global_transform.basis
 
 
-func shoulder_cam_input() -> void:
+func shoulder_cam_input(_delta: float) -> void:
 	var cam_input = Input.get_axis("Shoulder_Cam_Left", "Shoulder_Cam_Right") * (1.0 if Globals.InvertCamera else -1.0)
 	
-	transform.basis = transform.basis.rotated(up_axis, cam_input * 0.1)
+	if cam_input > 0.0 or cam_input < -0.0:
+		CamRotation = clamp(CamRotation + (cam_input * CAM_ROT_ACCEL_SPEED * _delta), -CAM_MAX_ROT_SPEED, CAM_MAX_ROT_SPEED)
+	else:
+		CamRotation = lerp(CamRotation, 0.0, CAM_REDUCTION_SPEED * _delta)
+	
+	transform.basis = transform.basis.rotated(up_axis, CamRotation * 0.1)
 	
 
 

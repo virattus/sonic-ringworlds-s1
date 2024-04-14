@@ -30,6 +30,7 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var FloorNormalIndicator = $FloorNormalIndicator
 @onready var InputIndicator = $InputIndicator
 @onready var VelocityIndicator = $VelocityIndicator
+@onready var CameraFocus = $CameraFocus
 
 
 @onready var SndJump = $SndJump
