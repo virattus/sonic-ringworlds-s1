@@ -63,6 +63,7 @@ offset_right = 466.0
 offset_bottom = 341.0
 
 [node name="Options" type="Control" parent="DebugMaster/TabContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("3_nwbvd")
 

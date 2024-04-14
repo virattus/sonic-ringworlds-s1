@@ -36,16 +36,16 @@ func GetCameraBasis() -> Basis:
 
 
 func shoulder_cam_input() -> void:
-	var cam_input = Input.get_axis("Shoulder_Cam_Left", "Shoulder_Cam_Right")
+	var cam_input = Input.get_axis("Shoulder_Cam_Left", "Shoulder_Cam_Right") * (1.0 if Globals.InvertCamera else -1.0)
 	
-	transform.basis = transform.basis.rotated(up_axis, -cam_input * 0.1)
+	transform.basis = transform.basis.rotated(up_axis, cam_input * 0.1)
 	
 
 
 func cam_input() -> void:
 	var CAM_INPUT = Input.get_vector("Camera_Right", "Camera_Left", "Camera_Down", "Camera_Up")
 	
-	transform.basis = transform.basis.rotated(up_axis, -CAM_INPUT.x * 0.1)
+	transform.basis = transform.basis.rotated(up_axis, CAM_INPUT.x * (0.1 if Globals.InvertCamera else -0.1))
 	
 	$SpringArm3D.rotation.x -= CAM_INPUT.y * 0.1
 	$SpringArm3D.rotation.x = clamp($SpringArm3D.rotation.x, deg_to_rad(-80), deg_to_rad(60))

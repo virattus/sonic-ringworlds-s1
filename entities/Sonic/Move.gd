@@ -32,13 +32,6 @@ func Update(_delta: float) -> void:
 			return
 		
 		var InputVel = owner.Controller.InputVelocity
-		
-		var floorBasis = owner.Camera.get_node("SpringArm3D/Camera3D").transform.basis
-		floorBasis = basis_aligned_y(floorBasis, owner.up_direction)
-		
-		InputVel = floorBasis * InputVel
-		
-		
 	
 		vel = (vel + InputVel).normalized()
 		

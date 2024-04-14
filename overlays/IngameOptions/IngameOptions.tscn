@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cspov7b53hufw"]
+
+[ext_resource type="Script" path="res://overlays/IngameOptions/IngameOptions.gd" id="1_1uvum"]
+
+[node name="IngameOptions" type="CanvasLayer"]
+process_mode = 3
+layer = 98
+visible = false
+script = ExtResource("1_1uvum")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 1122.0
+offset_bottom = 618.0
+color = Color(0.231373, 0.231373, 0.231373, 0.545098)
+
+[node name="ChkInvertCamera" type="CheckBox" parent="."]
+offset_left = 65.0
+offset_top = 60.0
+offset_right = 204.0
+offset_bottom = 91.0
+text = "Invert Camera"
+
+[connection signal="toggled" from="ChkInvertCamera" to="." method="_on_chk_invert_camera_toggled"]
