@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://djw6u0r4juvi1"]
+
+[ext_resource type="Script" path="res://effects/Trail3D/Trail3D.gd" id="1_pxvbw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8ll1"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ahjhc"]
+
+[node name="Trail3D" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_k8ll1")
+mesh = SubResource("ImmediateMesh_ahjhc")
+script = ExtResource("1_pxvbw")

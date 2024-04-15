@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb1pkubp6xxtj"]
+
+[ext_resource type="Script" path="res://effects/CylinderTrail2/CylinderTrail2.gd" id="1_o2oda"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gn8lj"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_ialvf"]
+
+[node name="CylinderTrail2" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_gn8lj")
+mesh = SubResource("ImmediateMesh_ialvf")
+script = ExtResource("1_o2oda")
+shape = 1e-05

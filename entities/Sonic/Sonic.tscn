@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=95 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxw1ws66bfvth" path="res://models/Sonic/sonic_model.tscn" id="3_u1arj"]
 [ext_resource type="Texture2D" uid="uid://dnwju36a7f23x" path="res://models/Sonic/Ball.png" id="4_7go32"]
 [ext_resource type="Texture2D" uid="uid://b3jasmhu3jyr6" path="res://icons/CameraTarget.png" id="5_wnnh5"]
+[ext_resource type="PackedScene" uid="uid://cb1pkubp6xxtj" path="res://effects/CylinderTrail2/CylinderTrail2.tscn" id="6_ev1dy"]
 [ext_resource type="Script" path="res://entities/Sonic/SquatCharge.gd" id="6_imrjj"]
 [ext_resource type="Script" path="res://entities/Sonic/Initial.gd" id="6_xsr28"]
 [ext_resource type="Script" path="res://entities/Sonic/Idle.gd" id="7_wafk6"]
@@ -1902,6 +1903,15 @@ script = ExtResource("2_p6xw2")
 [node name="WorldCollision" parent="." index="0"]
 shape = SubResource("SphereShape3D_d4iho")
 
+[node name="CylinderTrail2" parent="." index="1" instance=ExtResource("6_ev1dy")]
+skeleton = NodePath("../CharacterMesh")
+Active = false
+Lifetime = 0.5
+UpdateRate = 0.25
+density_lengthwise = 10
+ColourStart = Color(0.278431, 0.631373, 1, 1)
+ColourEnd = Color(0.278431, 0.631373, 1, 0)
+
 [node name="SonicModel" parent="CharacterMesh" index="0" instance=ExtResource("3_u1arj")]
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
@@ -1925,24 +1935,24 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("4_7go32")
 
-[node name="GroundCast" parent="." index="2"]
+[node name="GroundCast" parent="." index="3"]
 hit_from_inside = true
 
-[node name="SpotShadow" parent="." index="3"]
+[node name="SpotShadow" parent="." index="4"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
-[node name="AngledGroundCast" type="RayCast3D" parent="." index="4"]
+[node name="AngledGroundCast" type="RayCast3D" parent="." index="5"]
 target_position = Vector3(0, -2, 0)
 hit_from_inside = true
 
-[node name="UpVectorIndicator" type="Node3D" parent="." index="5"]
+[node name="UpVectorIndicator" type="Node3D" parent="." index="6"]
 
 [node name="UpVectorOrb" type="MeshInstance3D" parent="UpVectorIndicator" index="0"]
 mesh = SubResource("SphereMesh_kteou")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hoqmv")
 
-[node name="InputIndicator" type="Node3D" parent="." index="6"]
+[node name="InputIndicator" type="Node3D" parent="." index="7"]
 
 [node name="InputIndicatorMesh" type="MeshInstance3D" parent="InputIndicator" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.7)
@@ -1950,7 +1960,7 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hvci8")
 
-[node name="FloorNormalIndicator" type="Node3D" parent="." index="7"]
+[node name="FloorNormalIndicator" type="Node3D" parent="." index="8"]
 
 [node name="FloorIndicatorMesh" type="MeshInstance3D" parent="FloorNormalIndicator" index="0"]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
@@ -1958,7 +1968,7 @@ mesh = SubResource("SphereMesh_02mkd")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_0akw7")
 
-[node name="VelocityIndicator" type="Node3D" parent="." index="8"]
+[node name="VelocityIndicator" type="Node3D" parent="." index="9"]
 
 [node name="InputIndicatorMesh" type="MeshInstance3D" parent="VelocityIndicator" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.8)
@@ -1966,7 +1976,7 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
 
-[node name="CameraFocus" type="Node3D" parent="." index="9"]
+[node name="CameraFocus" type="Node3D" parent="." index="10"]
 
 [node name="Sprite3D" type="Sprite3D" parent="CameraFocus" index="0"]
 visible = false
@@ -1975,7 +1985,7 @@ no_depth_test = true
 texture_filter = 0
 texture = ExtResource("5_wnnh5")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="10"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
 active = false
 root_node = NodePath("../CharacterMesh/SonicModel")
 libraries = {
@@ -2011,10 +2021,10 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 8/scale" = 1.0
 "parameters/TimeScale 9/scale" = 4.0
 
-[node name="TimerInvincibility" type="Timer" parent="." index="11"]
+[node name="TimerInvincibility" type="Timer" parent="." index="12"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="12" node_paths=PackedStringArray("ActiveState")]
+[node name="StateMachine" type="Node" parent="." index="13" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
 ActiveState = NodePath("Initial")
 
@@ -2060,43 +2070,43 @@ script = ExtResource("9_pbmsm")
 [node name="Death" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("15_ulagb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="13"]
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="14"]
 stream = ExtResource("11_sc7a7")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="14"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="15"]
 stream = ExtResource("15_ce3xb")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="15"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="16"]
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="16"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="17"]
 stream = ExtResource("20_yjean")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="17"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="18"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="22"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="23"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 

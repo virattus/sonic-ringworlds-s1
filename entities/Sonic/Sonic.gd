@@ -25,6 +25,7 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var AnimTree = $AnimationTree
 @onready var StateM = $StateMachine
 @onready var TimerInvincibility = $TimerInvincibility
+@onready var AirdashTrail = $CylinderTrail2
 
 @onready var UpVectorIndicator = $UpVectorIndicator/UpVectorOrb
 @onready var FloorNormalIndicator = $FloorNormalIndicator
