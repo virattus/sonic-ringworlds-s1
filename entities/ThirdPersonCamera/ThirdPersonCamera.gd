@@ -19,6 +19,11 @@ const CAM_ROT_ACCEL_SPEED = 1.0
 const CAM_MAX_ROT_SPEED = 1.0
 const CAM_REDUCTION_SPEED = 15.0
 
+const CAM_ARM_MIN_LENGTH = 3.0
+const CAM_ARM_SPEED_MIN = 6.0
+const CAM_ARM_SPEED_MAX = 28.0
+const CAM_ARM_SPEED_SCALE = 0.05
+
 
 func _ready() -> void:
 	DebugMenu.AddMonitor(self, "global_position")
@@ -42,7 +47,7 @@ func _process(delta: float) -> void:
 		shoulder_cam_input(delta)
 	
 	
-	$SpringArm3D.spring_length = 3.0 + ((clamp(char.Speed, 8.0, 14.0) - 10.0) * 0.25)
+	$SpringArm3D.spring_length = CAM_ARM_MIN_LENGTH + ((clamp(char.Speed, CAM_ARM_SPEED_MIN, CAM_ARM_SPEED_MAX) - CAM_ARM_SPEED_MIN) * CAM_ARM_SPEED_SCALE)
 	
 	$SpringArm3D/Camera3D.look_at(Focus.global_position)
 	CurrentBasis = transform.basis

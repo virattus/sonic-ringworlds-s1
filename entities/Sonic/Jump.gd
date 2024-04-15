@@ -48,7 +48,8 @@ func Update(_delta: float) -> void:
 	#owner.CharMesh.AlignToY(owner.FloorNormal)
 	#owner.CharMesh.look_at(owner.global_position + (owner.velocity * (Vector3.ONE - owner.FloorNormal)))
 	
-	owner.CameraFocus.position.y += owner.velocity.y * 0.08 * _delta
+	owner.CameraFocus.position.y = clamp(owner.CameraFocus.position.y + (owner.velocity.y * 0.08 * _delta), owner.PARAMETERS.AIR_CAM_FOCUS_MIN_HEIGHT, owner.PARAMETERS.AIR_CAM_FOCUS_MAX_HEIGHT)
+	
 	
 	for i in range(owner.get_slide_collision_count()):
 		var collision = owner.get_slide_collision(i)
