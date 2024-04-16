@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://7fkl8tuotjfx"]
+
+[ext_resource type="Texture2D" uid="uid://bafguauox5mqx" path="res://maps/SonicRReactiveFactory/FACT02.png" id="1_gicix"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_gicix")
+texture_filter = 0
