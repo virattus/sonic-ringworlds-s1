@@ -30,6 +30,44 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
+"materials": {
+"1": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_1.tres"
+},
+"10": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_10.tres"
+},
+"2": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_2.tres"
+},
+"3": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_3.tres"
+},
+"4": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_4.tres"
+},
+"6": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_6.tres"
+},
+"7": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_7.tres"
+},
+"8": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_8.tres"
+},
+"9": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRRadicalCity/mat_city_9.tres"
+}
+},
 "meshes": {
 "RadicalCity_Dec238": {
 "generate/lightmap_uv": 0,
