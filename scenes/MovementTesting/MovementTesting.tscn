@@ -1688,7 +1688,7 @@ albedo_color = Color(1, 0, 0, 0.6)
 [node name="Sonic" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
-[node name="AnimationTree" parent="Sonic" index="10"]
+[node name="AnimationTree" parent="Sonic" index="11"]
 libraries = {
 "": SubResource("AnimationLibrary_jifbp")
 }

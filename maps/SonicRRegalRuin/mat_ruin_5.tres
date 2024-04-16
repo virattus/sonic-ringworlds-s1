@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bbsr02w122888"]
+
+[ext_resource type="Texture2D" uid="uid://bq807le6kdsxu" path="res://maps/SonicRRegalRuin/player00.png" id="1_k7l4s"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_k7l4s")
+texture_filter = 0

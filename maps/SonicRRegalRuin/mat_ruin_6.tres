@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d223u3e5blhlx"]
+
+[ext_resource type="Texture2D" uid="uid://1616tkfy0q65" path="res://maps/SonicRRegalRuin/ISLAND05.png" id="1_0jwj2"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_0jwj2")
+texture_filter = 0

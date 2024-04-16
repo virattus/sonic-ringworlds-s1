@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b7u16i1c1233c"]
+
+[ext_resource type="Texture2D" uid="uid://bj1auank3r3wf" path="res://maps/SonicRRegalRuin/RUIN01.png" id="1_fb1hk"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_fb1hk")
+texture_filter = 0
