@@ -53,6 +53,10 @@ func _process(delta: float) -> void:
 	CurrentBasis = transform.basis
 
 
+func GetCamera() -> Camera3D:
+	return cam
+
+
 func GetCameraBasis() -> Basis:
 	return cam.global_transform.basis
 

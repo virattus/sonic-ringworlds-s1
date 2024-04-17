@@ -69,6 +69,8 @@ func _process(delta: float) -> void:
 		global_position = StartingPosition
 		Speed = 0.0
 		velocity = Vector3.ZERO
+		up_direction = Vector3.UP
+		FloorNormal = Vector3.UP
 		StateM.ChangeState("Idle")
 
 	if Flicker:
