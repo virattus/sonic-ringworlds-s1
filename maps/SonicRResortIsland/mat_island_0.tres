@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bdi744j6rvoif"]
+
+[ext_resource type="Texture2D" uid="uid://kpxpy7j248d" path="res://maps/SonicRResortIsland/ISLAND00.png" id="1_0cmxr"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_0cmxr")
+texture_filter = 0

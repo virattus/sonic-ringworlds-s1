@@ -29,6 +29,41 @@ animation/fps=15
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"0": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_0.tres"
+},
+"1": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_1.tres"
+},
+"2": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_2.tres"
+},
+"3": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_3.tres"
+},
+"4": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_4.tres"
+},
+"5": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_5.tres"
+},
+"6": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_6.tres"
+},
+"7": {
+"use_external/enabled": true,
+"use_external/path": "res://maps/SonicRResortIsland/mat_island_7.tres"
+}
+}
+}
 gltf/naming_version=1
-gltf/embedded_image_handling=1
+gltf/embedded_image_handling=0
