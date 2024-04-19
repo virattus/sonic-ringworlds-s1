@@ -25,7 +25,7 @@ const RUN_INPUT_MAGNITUDE = 0.5
 const RUN_ACCEL_RATE = 0.125
 const RUN_DECEL_RATE = 2.0
 
-const JUMP_POWER = 10.0
+const JUMP_POWER = 9.0
 const JUMP_INPUT_VEL_MAX = 1.0
 
 

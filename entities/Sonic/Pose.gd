@@ -17,7 +17,9 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	
 	
-	owner.CharMesh.look_at_from_position(owner.global_position, -owner.Camera.GetCamera().global_position, owner.FloorNormal)
+	var cam = get_viewport().get_camera_3d()
+	owner.CharMesh.look_at(-cam.global_transform.origin)
+	
 	owner.CharMesh.AlignToY(owner.up_direction)
 	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
 	

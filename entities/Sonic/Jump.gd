@@ -24,7 +24,9 @@ func Enter(_msg := {}) -> void:
 	
 	owner.CharMesh.AlignToY(owner.FloorNormal)
 	
-	JumpVel = owner.velocity + (owner.up_direction.normalized() * owner.PARAMETERS.JUMP_POWER)
+	var JumpVelMod = 1.0 #owner.up_direction.dot(Vector3.UP)
+	
+	JumpVel = (owner.up_direction.normalized() * owner.PARAMETERS.JUMP_POWER) + (owner.velocity * JumpVelMod)
 	InputVel = Vector3.ZERO
 	InputSpeed = owner.velocity.length()
 
