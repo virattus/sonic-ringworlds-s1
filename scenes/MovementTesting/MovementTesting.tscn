@@ -1694,19 +1694,601 @@ libraries = {
 "": SubResource("AnimationLibrary_jifbp")
 }
 
-[node name="ThirdPersonCamera" parent="." index="3"]
+[node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 3
+
+[node name="SonicAfterimage2" parent="." index="4" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 6
+
+[node name="SonicAfterimage3" parent="." index="5" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 9
+
+[node name="ThirdPersonCamera" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
-[node name="MovementTesting" parent="." index="7" instance=ExtResource("1_aqers")]
+[node name="MovementTesting" parent="." index="10" instance=ExtResource("1_aqers")]
 
-[node name="Coin" parent="." index="8" instance=ExtResource("6_fynam")]
+[node name="Rings" type="Node3D" parent="MovementTesting" index="2"]
+
+[node name="Coin" parent="MovementTesting/Rings" index="0" instance=ExtResource("6_fynam")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -8.34181)
 
-[node name="Coin2" parent="." index="9" instance=ExtResource("6_fynam")]
+[node name="Coin2" parent="MovementTesting/Rings" index="1" instance=ExtResource("6_fynam")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -10.3207)
 
-[node name="Coin3" parent="." index="10" instance=ExtResource("6_fynam")]
+[node name="Coin3" parent="MovementTesting/Rings" index="2" instance=ExtResource("6_fynam")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -12.1216)
+
+[node name="Coin4" parent="MovementTesting/Rings" index="3" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -8.34181)
+
+[node name="Coin5" parent="MovementTesting/Rings" index="4" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -10.3207)
+
+[node name="Coin6" parent="MovementTesting/Rings" index="5" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -12.1216)
+
+[node name="Coin7" parent="MovementTesting/Rings" index="6" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -8.34181)
+
+[node name="Coin8" parent="MovementTesting/Rings" index="7" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -10.3207)
+
+[node name="Coin9" parent="MovementTesting/Rings" index="8" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -12.1216)
+
+[node name="Coin10" parent="MovementTesting/Rings" index="9" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -8.34181)
+
+[node name="Coin11" parent="MovementTesting/Rings" index="10" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -10.3207)
+
+[node name="Coin12" parent="MovementTesting/Rings" index="11" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -12.1216)
+
+[node name="Coin13" parent="MovementTesting/Rings" index="12" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -8.34181)
+
+[node name="Coin14" parent="MovementTesting/Rings" index="13" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -10.3207)
+
+[node name="Coin15" parent="MovementTesting/Rings" index="14" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -12.1216)
+
+[node name="Coin16" parent="MovementTesting/Rings" index="15" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -8.34181)
+
+[node name="Coin17" parent="MovementTesting/Rings" index="16" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -10.3207)
+
+[node name="Coin18" parent="MovementTesting/Rings" index="17" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -12.1216)
+
+[node name="Coin19" parent="MovementTesting/Rings" index="18" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -2.75482)
+
+[node name="Coin20" parent="MovementTesting/Rings" index="19" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -4.73371)
+
+[node name="Coin21" parent="MovementTesting/Rings" index="20" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -6.53461)
+
+[node name="Coin22" parent="MovementTesting/Rings" index="21" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -2.75482)
+
+[node name="Coin23" parent="MovementTesting/Rings" index="22" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -4.73371)
+
+[node name="Coin24" parent="MovementTesting/Rings" index="23" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -6.53461)
+
+[node name="Coin25" parent="MovementTesting/Rings" index="24" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -2.75482)
+
+[node name="Coin26" parent="MovementTesting/Rings" index="25" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -4.73371)
+
+[node name="Coin27" parent="MovementTesting/Rings" index="26" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -6.53461)
+
+[node name="Coin28" parent="MovementTesting/Rings" index="27" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -2.75482)
+
+[node name="Coin29" parent="MovementTesting/Rings" index="28" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -4.73371)
+
+[node name="Coin30" parent="MovementTesting/Rings" index="29" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -6.53461)
+
+[node name="Coin31" parent="MovementTesting/Rings" index="30" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -2.75482)
+
+[node name="Coin32" parent="MovementTesting/Rings" index="31" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -4.73371)
+
+[node name="Coin33" parent="MovementTesting/Rings" index="32" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -6.53461)
+
+[node name="Coin34" parent="MovementTesting/Rings" index="33" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -2.75482)
+
+[node name="Coin35" parent="MovementTesting/Rings" index="34" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -4.73371)
+
+[node name="Coin36" parent="MovementTesting/Rings" index="35" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -6.53461)
+
+[node name="Coin37" parent="MovementTesting/Rings" index="36" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, 2.95544)
+
+[node name="Coin38" parent="MovementTesting/Rings" index="37" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, 0.976553)
+
+[node name="Coin39" parent="MovementTesting/Rings" index="38" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378235, 0.6, -0.824347)
+
+[node name="Coin40" parent="MovementTesting/Rings" index="39" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, 2.95544)
+
+[node name="Coin41" parent="MovementTesting/Rings" index="40" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, 0.976553)
+
+[node name="Coin42" parent="MovementTesting/Rings" index="41" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.5299, 0.6, -0.824347)
+
+[node name="Coin43" parent="MovementTesting/Rings" index="42" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, 2.95544)
+
+[node name="Coin44" parent="MovementTesting/Rings" index="43" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, 0.976553)
+
+[node name="Coin45" parent="MovementTesting/Rings" index="44" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.618, 0.6, -0.824347)
+
+[node name="Coin46" parent="MovementTesting/Rings" index="45" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, 2.95544)
+
+[node name="Coin47" parent="MovementTesting/Rings" index="46" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, 0.976553)
+
+[node name="Coin48" parent="MovementTesting/Rings" index="47" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.6872, 0.6, -0.824347)
+
+[node name="Coin49" parent="MovementTesting/Rings" index="48" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, 2.95544)
+
+[node name="Coin50" parent="MovementTesting/Rings" index="49" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, 0.976553)
+
+[node name="Coin51" parent="MovementTesting/Rings" index="50" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.6248, 0.6, -0.824347)
+
+[node name="Coin52" parent="MovementTesting/Rings" index="51" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, 2.95544)
+
+[node name="Coin53" parent="MovementTesting/Rings" index="52" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, 0.976553)
+
+[node name="Coin54" parent="MovementTesting/Rings" index="53" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5812, 0.6, -0.824347)
+
+[node name="Coin55" parent="MovementTesting/Rings" index="54" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -8.34181)
+
+[node name="Coin56" parent="MovementTesting/Rings" index="55" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -10.3207)
+
+[node name="Coin57" parent="MovementTesting/Rings" index="56" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -12.1216)
+
+[node name="Coin58" parent="MovementTesting/Rings" index="57" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -8.34181)
+
+[node name="Coin59" parent="MovementTesting/Rings" index="58" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -10.3207)
+
+[node name="Coin60" parent="MovementTesting/Rings" index="59" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -12.1216)
+
+[node name="Coin61" parent="MovementTesting/Rings" index="60" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -8.34181)
+
+[node name="Coin62" parent="MovementTesting/Rings" index="61" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -10.3207)
+
+[node name="Coin63" parent="MovementTesting/Rings" index="62" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -12.1216)
+
+[node name="Coin64" parent="MovementTesting/Rings" index="63" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -8.34181)
+
+[node name="Coin65" parent="MovementTesting/Rings" index="64" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -10.3207)
+
+[node name="Coin66" parent="MovementTesting/Rings" index="65" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -12.1216)
+
+[node name="Coin67" parent="MovementTesting/Rings" index="66" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -8.34181)
+
+[node name="Coin68" parent="MovementTesting/Rings" index="67" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -10.3207)
+
+[node name="Coin69" parent="MovementTesting/Rings" index="68" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -12.1216)
+
+[node name="Coin70" parent="MovementTesting/Rings" index="69" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -2.75482)
+
+[node name="Coin71" parent="MovementTesting/Rings" index="70" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -4.73371)
+
+[node name="Coin72" parent="MovementTesting/Rings" index="71" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -6.53461)
+
+[node name="Coin73" parent="MovementTesting/Rings" index="72" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -2.75482)
+
+[node name="Coin74" parent="MovementTesting/Rings" index="73" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -4.73371)
+
+[node name="Coin75" parent="MovementTesting/Rings" index="74" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -6.53461)
+
+[node name="Coin76" parent="MovementTesting/Rings" index="75" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -2.75482)
+
+[node name="Coin77" parent="MovementTesting/Rings" index="76" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -4.73371)
+
+[node name="Coin78" parent="MovementTesting/Rings" index="77" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -6.53461)
+
+[node name="Coin79" parent="MovementTesting/Rings" index="78" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -2.75482)
+
+[node name="Coin80" parent="MovementTesting/Rings" index="79" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -4.73371)
+
+[node name="Coin81" parent="MovementTesting/Rings" index="80" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -6.53461)
+
+[node name="Coin82" parent="MovementTesting/Rings" index="81" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -2.75482)
+
+[node name="Coin83" parent="MovementTesting/Rings" index="82" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -4.73371)
+
+[node name="Coin84" parent="MovementTesting/Rings" index="83" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -6.53461)
+
+[node name="Coin85" parent="MovementTesting/Rings" index="84" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 2.95544)
+
+[node name="Coin86" parent="MovementTesting/Rings" index="85" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 0.976553)
+
+[node name="Coin87" parent="MovementTesting/Rings" index="86" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, -0.824347)
+
+[node name="Coin88" parent="MovementTesting/Rings" index="87" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 2.95544)
+
+[node name="Coin89" parent="MovementTesting/Rings" index="88" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 0.976553)
+
+[node name="Coin90" parent="MovementTesting/Rings" index="89" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, -0.824347)
+
+[node name="Coin91" parent="MovementTesting/Rings" index="90" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 2.95544)
+
+[node name="Coin92" parent="MovementTesting/Rings" index="91" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 0.976553)
+
+[node name="Coin93" parent="MovementTesting/Rings" index="92" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, -0.824347)
+
+[node name="Coin94" parent="MovementTesting/Rings" index="93" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 2.95544)
+
+[node name="Coin95" parent="MovementTesting/Rings" index="94" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 0.976553)
+
+[node name="Coin96" parent="MovementTesting/Rings" index="95" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, -0.824347)
+
+[node name="Coin97" parent="MovementTesting/Rings" index="96" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 2.95544)
+
+[node name="Coin98" parent="MovementTesting/Rings" index="97" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 0.976553)
+
+[node name="Coin99" parent="MovementTesting/Rings" index="98" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, -0.824347)
+
+[node name="Coin100" parent="MovementTesting/Rings" index="99" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 8.58032)
+
+[node name="Coin101" parent="MovementTesting/Rings" index="100" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 6.60143)
+
+[node name="Coin102" parent="MovementTesting/Rings" index="101" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 4.80053)
+
+[node name="Coin103" parent="MovementTesting/Rings" index="102" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 8.58032)
+
+[node name="Coin104" parent="MovementTesting/Rings" index="103" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 6.60143)
+
+[node name="Coin105" parent="MovementTesting/Rings" index="104" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 4.80053)
+
+[node name="Coin106" parent="MovementTesting/Rings" index="105" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 8.58032)
+
+[node name="Coin107" parent="MovementTesting/Rings" index="106" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 6.60143)
+
+[node name="Coin108" parent="MovementTesting/Rings" index="107" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 4.80053)
+
+[node name="Coin109" parent="MovementTesting/Rings" index="108" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 8.58032)
+
+[node name="Coin110" parent="MovementTesting/Rings" index="109" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 6.60143)
+
+[node name="Coin111" parent="MovementTesting/Rings" index="110" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 4.80053)
+
+[node name="Coin112" parent="MovementTesting/Rings" index="111" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 8.58032)
+
+[node name="Coin113" parent="MovementTesting/Rings" index="112" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 6.60143)
+
+[node name="Coin114" parent="MovementTesting/Rings" index="113" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 4.80053)
+
+[node name="Coin115" parent="MovementTesting/Rings" index="114" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 14.1673)
+
+[node name="Coin116" parent="MovementTesting/Rings" index="115" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 12.1884)
+
+[node name="Coin117" parent="MovementTesting/Rings" index="116" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 10.3875)
+
+[node name="Coin118" parent="MovementTesting/Rings" index="117" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 14.1673)
+
+[node name="Coin119" parent="MovementTesting/Rings" index="118" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 12.1884)
+
+[node name="Coin120" parent="MovementTesting/Rings" index="119" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 10.3875)
+
+[node name="Coin121" parent="MovementTesting/Rings" index="120" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 14.1673)
+
+[node name="Coin122" parent="MovementTesting/Rings" index="121" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 12.1884)
+
+[node name="Coin123" parent="MovementTesting/Rings" index="122" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 10.3875)
+
+[node name="Coin124" parent="MovementTesting/Rings" index="123" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 14.1673)
+
+[node name="Coin125" parent="MovementTesting/Rings" index="124" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 12.1884)
+
+[node name="Coin126" parent="MovementTesting/Rings" index="125" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 10.3875)
+
+[node name="Coin127" parent="MovementTesting/Rings" index="126" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 14.1673)
+
+[node name="Coin128" parent="MovementTesting/Rings" index="127" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 12.1884)
+
+[node name="Coin129" parent="MovementTesting/Rings" index="128" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 10.3875)
+
+[node name="Coin130" parent="MovementTesting/Rings" index="129" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 19.8776)
+
+[node name="Coin131" parent="MovementTesting/Rings" index="130" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 17.8987)
+
+[node name="Coin132" parent="MovementTesting/Rings" index="131" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4468, 0.6, 16.0978)
+
+[node name="Coin133" parent="MovementTesting/Rings" index="132" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 19.8776)
+
+[node name="Coin134" parent="MovementTesting/Rings" index="133" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 17.8987)
+
+[node name="Coin135" parent="MovementTesting/Rings" index="134" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5349, 0.6, 16.0978)
+
+[node name="Coin136" parent="MovementTesting/Rings" index="135" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 19.8776)
+
+[node name="Coin137" parent="MovementTesting/Rings" index="136" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 17.8987)
+
+[node name="Coin138" parent="MovementTesting/Rings" index="137" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.6041, 0.6, 16.0978)
+
+[node name="Coin139" parent="MovementTesting/Rings" index="138" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 19.8776)
+
+[node name="Coin140" parent="MovementTesting/Rings" index="139" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 17.8987)
+
+[node name="Coin141" parent="MovementTesting/Rings" index="140" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5417, 0.6, 16.0978)
+
+[node name="Coin142" parent="MovementTesting/Rings" index="141" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 19.8776)
+
+[node name="Coin143" parent="MovementTesting/Rings" index="142" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 17.8987)
+
+[node name="Coin144" parent="MovementTesting/Rings" index="143" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4981, 0.6, 16.0978)
+
+[node name="Coin145" parent="MovementTesting/Rings" index="144" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 8.58032)
+
+[node name="Coin146" parent="MovementTesting/Rings" index="145" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 6.60143)
+
+[node name="Coin147" parent="MovementTesting/Rings" index="146" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 4.80053)
+
+[node name="Coin148" parent="MovementTesting/Rings" index="147" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 8.58032)
+
+[node name="Coin149" parent="MovementTesting/Rings" index="148" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 6.60143)
+
+[node name="Coin150" parent="MovementTesting/Rings" index="149" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 4.80053)
+
+[node name="Coin151" parent="MovementTesting/Rings" index="150" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 8.58032)
+
+[node name="Coin152" parent="MovementTesting/Rings" index="151" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 6.60143)
+
+[node name="Coin153" parent="MovementTesting/Rings" index="152" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 4.80053)
+
+[node name="Coin154" parent="MovementTesting/Rings" index="153" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 8.58032)
+
+[node name="Coin155" parent="MovementTesting/Rings" index="154" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 6.60143)
+
+[node name="Coin156" parent="MovementTesting/Rings" index="155" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 4.80053)
+
+[node name="Coin157" parent="MovementTesting/Rings" index="156" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 8.58032)
+
+[node name="Coin158" parent="MovementTesting/Rings" index="157" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 6.60143)
+
+[node name="Coin159" parent="MovementTesting/Rings" index="158" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 4.80053)
+
+[node name="Coin160" parent="MovementTesting/Rings" index="159" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 14.1673)
+
+[node name="Coin161" parent="MovementTesting/Rings" index="160" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 12.1884)
+
+[node name="Coin162" parent="MovementTesting/Rings" index="161" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 10.3875)
+
+[node name="Coin163" parent="MovementTesting/Rings" index="162" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 14.1673)
+
+[node name="Coin164" parent="MovementTesting/Rings" index="163" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 12.1884)
+
+[node name="Coin165" parent="MovementTesting/Rings" index="164" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 10.3875)
+
+[node name="Coin166" parent="MovementTesting/Rings" index="165" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 14.1673)
+
+[node name="Coin167" parent="MovementTesting/Rings" index="166" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 12.1884)
+
+[node name="Coin168" parent="MovementTesting/Rings" index="167" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 10.3875)
+
+[node name="Coin169" parent="MovementTesting/Rings" index="168" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 14.1673)
+
+[node name="Coin170" parent="MovementTesting/Rings" index="169" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 12.1884)
+
+[node name="Coin171" parent="MovementTesting/Rings" index="170" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 10.3875)
+
+[node name="Coin172" parent="MovementTesting/Rings" index="171" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 14.1673)
+
+[node name="Coin173" parent="MovementTesting/Rings" index="172" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 12.1884)
+
+[node name="Coin174" parent="MovementTesting/Rings" index="173" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 10.3875)
+
+[node name="Coin175" parent="MovementTesting/Rings" index="174" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 19.8776)
+
+[node name="Coin176" parent="MovementTesting/Rings" index="175" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 17.8987)
+
+[node name="Coin177" parent="MovementTesting/Rings" index="176" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.4422, 0.6, 16.0978)
+
+[node name="Coin178" parent="MovementTesting/Rings" index="177" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 19.8776)
+
+[node name="Coin179" parent="MovementTesting/Rings" index="178" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 17.8987)
+
+[node name="Coin180" parent="MovementTesting/Rings" index="179" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5303, 0.6, 16.0978)
+
+[node name="Coin181" parent="MovementTesting/Rings" index="180" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 19.8776)
+
+[node name="Coin182" parent="MovementTesting/Rings" index="181" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 17.8987)
+
+[node name="Coin183" parent="MovementTesting/Rings" index="182" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5996, 0.6, 16.0978)
+
+[node name="Coin184" parent="MovementTesting/Rings" index="183" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 19.8776)
+
+[node name="Coin185" parent="MovementTesting/Rings" index="184" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 17.8987)
+
+[node name="Coin186" parent="MovementTesting/Rings" index="185" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5371, 0.6, 16.0978)
+
+[node name="Coin187" parent="MovementTesting/Rings" index="186" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 19.8776)
+
+[node name="Coin188" parent="MovementTesting/Rings" index="187" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 17.8987)
+
+[node name="Coin189" parent="MovementTesting/Rings" index="188" instance=ExtResource("6_fynam")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.4935, 0.6, 16.0978)
+
+[node name="Elevator" parent="MovementTesting" index="3" instance=ExtResource("10_0e4rn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83589, 3.1834, -7.76926)
+
+[node name="Elevator2" parent="MovementTesting" index="4" instance=ExtResource("10_0e4rn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2832, 3.1834, -7.76926)
+Direction = Vector3(0, 0, 1)
+
+[node name="EnemyCrabmeat" parent="MovementTesting" index="5" instance=ExtResource("11_yd8q3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.616)
 
 [node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)
@@ -1720,28 +2302,6 @@ shape = SubResource("SphereShape3D_xi2am")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HurtBox" index="1"]
 mesh = SubResource("SphereMesh_u3ak1")
 surface_material_override/0 = SubResource("StandardMaterial3D_g0cpv")
-
-[node name="Elevator" parent="." index="13" instance=ExtResource("10_0e4rn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83589, 3.1834, -7.76926)
-
-[node name="Elevator2" parent="." index="14" instance=ExtResource("10_0e4rn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2832, 3.1834, -7.76926)
-Direction = Vector3(0, 0, 1)
-
-[node name="EnemyCrabmeat" parent="." index="15" instance=ExtResource("11_yd8q3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.616)
-
-[node name="SonicAfterimage" parent="." index="17" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
-SonicNode = NodePath("../Sonic")
-FrameCount = 3
-
-[node name="SonicAfterimage2" parent="." index="18" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
-SonicNode = NodePath("../Sonic")
-FrameCount = 6
-
-[node name="SonicAfterimage3" parent="." index="19" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
-SonicNode = NodePath("../Sonic")
-FrameCount = 9
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]
