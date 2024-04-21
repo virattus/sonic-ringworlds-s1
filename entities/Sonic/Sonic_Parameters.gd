@@ -4,6 +4,9 @@ extends Node
 
 const IDLE_MIN_GROUND_ANGLE = 0.5
 
+const DASHMODE_DISCHARGE_RATE = 0.05
+const DASHMODE_RING_INCREMENT = 0.03
+
 const RUN_MAX_SPEED = 14.0
 const MOVE_MAX_SPEED = 25.0
 

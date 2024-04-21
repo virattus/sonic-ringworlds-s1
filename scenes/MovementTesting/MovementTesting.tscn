@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=29 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
 [ext_resource type="PackedScene" uid="uid://y5djm215ls8v" path="res://entities/Coin/Coin.tscn" id="6_fynam"]
+[ext_resource type="PackedScene" uid="uid://dm7ykl3qt5js" path="res://entities/SonicAfterimage/SonicAfterimage.tscn" id="8_cy2yj"]
 [ext_resource type="PackedScene" uid="uid://cyk3iwoyy776q" path="res://entities/RingBounce/RingBounce.tscn" id="8_dur5e"]
 [ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/HurtBox/HurtBox.tscn" id="9_cvnib"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
@@ -1688,14 +1689,13 @@ albedo_color = Color(1, 0, 0, 0.6)
 [node name="Sonic" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
-[node name="AnimationTree" parent="Sonic" index="11"]
+[node name="AnimationTree" parent="Sonic" index="12"]
 libraries = {
 "": SubResource("AnimationLibrary_jifbp")
 }
 
 [node name="ThirdPersonCamera" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
-RightAnalogue = true
 
 [node name="MovementTesting" parent="." index="7" instance=ExtResource("1_aqers")]
 
@@ -1730,6 +1730,18 @@ Direction = Vector3(0, 0, 1)
 
 [node name="EnemyCrabmeat" parent="." index="15" instance=ExtResource("11_yd8q3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.616)
+
+[node name="SonicAfterimage" parent="." index="17" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 3
+
+[node name="SonicAfterimage2" parent="." index="18" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 6
+
+[node name="SonicAfterimage3" parent="." index="19" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 9
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]

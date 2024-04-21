@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bslbkvijj0huy"]
+
+[ext_resource type="PackedScene" uid="uid://ob87vb5trxql" path="res://models/Sonic/Sonic_Afterimage.glb" id="1_kvs76"]
+
+[node name="Sonic_Afterimage" instance=ExtResource("1_kvs76")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(7.10543e-15, 0.851449, 4.16503)
+bones/1/rotation = Quaternion(1.5299e-08, 0.936749, 0.350001, 4.09466e-08)
+bones/2/position = Vector3(-5.13685, 0.732056, 3.45214)
+bones/2/rotation = Quaternion(5.00031e-09, -0.692812, 0.721119, -5.68046e-08)
+bones/3/position = Vector3(-2.48036, -1.85884, 1.90794)
+bones/3/rotation = Quaternion(-0.36064, -2.31368e-16, 1.07245e-23, 0.932705)
+bones/4/position = Vector3(5.13685, 0.964597, 3.41526)
+bones/4/rotation = Quaternion(5.70399e-08, -0.716529, 0.697558, -4.77176e-09)
+bones/5/position = Vector3(2.48036, 0.314551, 1.23448)
+bones/5/rotation = Quaternion(-0.00446728, 1.35895e-16, 5.01447e-17, 0.99999)
+bones/6/position = Vector3(1.42109e-14, 2.54186, 5.63317)
+bones/6/rotation = Quaternion(1.5299e-08, 0.936749, 0.350001, 4.09466e-08)
+
+[node name="AnimationPlayer" parent="." index="1"]
+movie_quit_on_finish = true

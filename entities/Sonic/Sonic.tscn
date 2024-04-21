@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=97 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://entities/Sonic/Death.gd" id="15_ulagb"]
 [ext_resource type="AudioStream" uid="uid://ci4mwgnbes8o2" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BC.wav" id="16_4apbf"]
 [ext_resource type="AudioStream" uid="uid://y2ekxqu62ugy" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BE.wav" id="16_805h7"]
+[ext_resource type="Script" path="res://entities/Sonic/SpinKick.gd" id="16_mukcc"]
 [ext_resource type="AudioStream" uid="uid://dbfgnbue70wig" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A2.wav" id="20_yjean"]
 [ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="39_jijta"]
 [ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="41_0dxtr"]
@@ -61,6 +62,9 @@ albedo_color = Color(0.796078, 0, 0.905882, 0.52549)
 transparency = 1
 no_depth_test = true
 albedo_color = Color(0, 1, 0, 0.52549)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_byb1a"]
+radius = 10.0
 
 [sub_resource type="Animation" id="Animation_3i78c"]
 resource_name = "Pose"
@@ -1899,6 +1903,8 @@ collision_layer = 18
 collision_mask = 1
 floor_stop_on_slope = false
 script = ExtResource("2_p6xw2")
+Health = null
+MaxHealth = null
 
 [node name="WorldCollision" parent="." index="0"]
 shape = SubResource("SphereShape3D_d4iho")
@@ -1985,7 +1991,14 @@ no_depth_test = true
 texture_filter = 0
 texture = ExtResource("5_wnnh5")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="11"]
+[node name="SpinKickArea" type="Area3D" parent="." index="11"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpinKickArea" index="0"]
+shape = SubResource("SphereShape3D_byb1a")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="12"]
 active = false
 root_node = NodePath("../CharacterMesh/SonicModel")
 libraries = {
@@ -2021,10 +2034,10 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 8/scale" = 1.0
 "parameters/TimeScale 9/scale" = 4.0
 
-[node name="TimerInvincibility" type="Timer" parent="." index="12"]
+[node name="TimerInvincibility" type="Timer" parent="." index="13"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="13" node_paths=PackedStringArray("ActiveState")]
+[node name="StateMachine" type="Node" parent="." index="14" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
 ActiveState = NodePath("Initial")
 
@@ -2052,61 +2065,64 @@ script = ExtResource("39_jijta")
 [node name="Airdash" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("11_2je5t")
 
-[node name="Fall" type="Node" parent="StateMachine" index="8"]
+[node name="SpinKick" type="Node" parent="StateMachine" index="8"]
+script = ExtResource("16_mukcc")
+
+[node name="Fall" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("41_0dxtr")
 
-[node name="Land" type="Node" parent="StateMachine" index="9"]
+[node name="Land" type="Node" parent="StateMachine" index="10"]
 script = ExtResource("13_70mwn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="10"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("14_flkpp")
 
-[node name="Pose" type="Node" parent="StateMachine" index="11"]
+[node name="Pose" type="Node" parent="StateMachine" index="12"]
 script = ExtResource("13_gkm31")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="12"]
+[node name="Hurt" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("9_pbmsm")
 
-[node name="Death" type="Node" parent="StateMachine" index="13"]
+[node name="Death" type="Node" parent="StateMachine" index="14"]
 script = ExtResource("15_ulagb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="14"]
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="15"]
 stream = ExtResource("11_sc7a7")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="15"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="16"]
 stream = ExtResource("15_ce3xb")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="16"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="17"]
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="17"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="18"]
 stream = ExtResource("20_yjean")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="22"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="23"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="23"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="24"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 

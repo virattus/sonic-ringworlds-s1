@@ -5,6 +5,7 @@ extends CanvasLayer
 
 
 func _process(delta: float) -> void:
-	#$StrikeDashMeterBG/StrikeDashMeter.scale.x = Sonic.StrikeDashMeter
+	$StrikeDashMeterBG/StrikeDashMeter.scale.x = clamp(Sonic.DashModeCharge, 0.0, 1.0)
+	$StrikeDashMeterBG/LblStrikeDashPercentage.text = str(int(Sonic.DashModeCharge * 100.0)) + "%"
 	$LblSpeed.text = "Speed: " + str(roundf(Sonic.Speed)) 
 	$LblRings.text = "Rings\n" + str(Globals.RingCount)

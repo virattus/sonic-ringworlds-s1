@@ -112,7 +112,7 @@ func Update(_delta: float) -> void:
 
 
 func UpdateMoveAnim() -> void:
-	if owner.StrikeDash:
+	if owner.DashMode:
 		owner.AnimTree.set("parameters/Run/blend_amount", 1.0)
 		owner.AnimTree.set("parameters/TSStrikeDash/scale", owner.Speed * owner.PARAMETERS.MOVE_STRIKEDASH_ANIM_SPEED_MODIFIER)
 		return

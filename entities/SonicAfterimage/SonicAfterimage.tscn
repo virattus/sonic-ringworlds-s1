@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm7ykl3qt5js"]
+
+[ext_resource type="Script" path="res://entities/SonicAfterimage/SonicAfterimage.gd" id="1_886kd"]
+[ext_resource type="PackedScene" uid="uid://bslbkvijj0huy" path="res://models/Sonic/sonic_afterimage_model.tscn" id="2_727xr"]
+
+[node name="SonicAfterimage" type="Node3D"]
+script = ExtResource("1_886kd")
+
+[node name="AfterImage" type="Node3D" parent="."]
+
+[node name="Sonic_Afterimage" parent="AfterImage" instance=ExtResource("2_727xr")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
+
+[node name="Skeleton3D" parent="AfterImage/Sonic_Afterimage/Armature" index="0"]
+bones/1/position = Vector3(0, 0, 3.02994)
+bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+bones/2/position = Vector3(-5.13685, -1.06558, 2.36099)
+bones/2/rotation = Quaternion(0.192434, -0.453324, 0.864455, 0.100914)
+bones/3/position = Vector3(-2.48036, -3.58949, 1.51559)
+bones/3/rotation = Quaternion(-0.927768, 0.0484538, 0.129734, 0.346509)
+bones/4/position = Vector3(5.13685, -1.06558, 2.36099)
+bones/4/rotation = Quaternion(-0.145089, -0.458146, 0.873649, -0.0760853)
+bones/5/position = Vector3(2.48036, -3.58949, 1.51559)
+bones/5/rotation = Quaternion(-0.929363, -0.0439835, -0.117764, 0.347105)
+bones/6/position = Vector3(0, 0, 5.26889)
+bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+
+[node name="AnimationPlayer" parent="AfterImage/Sonic_Afterimage" index="1"]
+speed_scale = 7.5
+
+[editable path="AfterImage/Sonic_Afterimage"]

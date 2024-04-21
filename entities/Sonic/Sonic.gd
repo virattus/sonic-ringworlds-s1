@@ -7,7 +7,8 @@ extends Character
 var FloorNormal := Vector3.UP
 var GroundPoint := Vector3.ZERO
 
-var StrikeDash := false
+var DashMode := false
+var DashModeCharge := 0.0
 var Invincible := false
 var Flicker := false
 
@@ -64,6 +65,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	#super(delta)
+	
+	DashModeCharge = clamp(DashModeCharge - (PARAMETERS.DASHMODE_DISCHARGE_RATE * delta), 0.0, 1.0)
 	
 	if Input.is_action_just_pressed("DEBUG_ResetPosition"):
 		global_position = StartingPosition
@@ -157,6 +160,7 @@ func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:
 
 
 func CollectRing() -> void:
+	DashModeCharge += PARAMETERS.DASHMODE_RING_INCREMENT
 	$SndRingCollect.play()
 
 
