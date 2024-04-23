@@ -5,11 +5,11 @@ var VerticalVelocity := 0.0
 
 
 func Enter(_msg := {}) -> void:
-	pass
+	owner.AttackArea.monitoring = true
 
 
 func Exit() -> void:
-	pass
+	owner.AttackArea.monitoring = false
 
 
 func Update(_delta: float) -> void:

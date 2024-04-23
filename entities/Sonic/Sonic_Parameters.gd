@@ -4,7 +4,16 @@ extends Node
 
 const IDLE_MIN_GROUND_ANGLE = 0.5
 
-const DASHMODE_DISCHARGE_RATE = 0.05
+#We have separate values for the dashmode charge gauge and for when you actually enter 
+#Dash mode. This is so that the gauge doesn't jump from 100 to 99% every frame on the HUD, 
+#it's purely visual.
+const DASHMODE_MIN_CHARGE = 0.0
+const DASHMODE_MAX_CHARGE = 1.1
+const DASHMODE_ABS_MIN_CHARGE = 0.0
+const DASHMODE_ABS_MAX_CHARGE = 1.0
+
+const DASHMODE_NORMAL_DISCHARGE_RATE = 0.01
+const DASHMODE_ACTIVE_DISCHARGE_RATE = 0.08
 const DASHMODE_RING_INCREMENT = 0.03
 
 const RUN_MAX_SPEED = 14.0

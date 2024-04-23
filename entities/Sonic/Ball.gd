@@ -22,6 +22,7 @@ func _ready() -> void:
 func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
 	owner.SonicBall.visible = true
+	owner.AttackArea.monitoring = true
 	
 	owner.SndSpinCharge.play()
 	
@@ -36,6 +37,7 @@ func Enter(_msg := {}) -> void:
 func Exit() -> void:
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
+	owner.AttackArea.monitoring = false
 	
 	owner.SndSpinCharge.stop()
 
@@ -88,3 +90,7 @@ func Update(_delta: float) -> void:
 	if LastFramePositionCount > LASTFRAMEPOSCOUNT_MAX:
 		ChangeState("Idle")
 	
+
+
+func AttackHit(body: Node3D):
+	body.ReceiveDamage(owner.AttackArea, 1)

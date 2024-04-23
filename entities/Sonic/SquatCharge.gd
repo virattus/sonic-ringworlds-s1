@@ -10,10 +10,12 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Idle/blend_amount", 1.0)
 	
 	AccumulatedSpeed = 0.0
+	owner.DashModeDrain = false
 
 
 func Exit() -> void:
 	pass
+
 
 
 func Update(_delta: float) -> void:
@@ -23,9 +25,12 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	#Enter DashMode
 	if Input.is_action_just_released("Attack"):
 		owner.DashMode = true
 		owner.SndSpinLaunch.play()
+		owner.DashModeDrain = true
+		owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
 		owner.SetVelocity(owner.CharMesh.GetForwardVector() * AccumulatedSpeed)
 		ChangeState("Move", {
 		})

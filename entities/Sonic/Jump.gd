@@ -95,8 +95,12 @@ func Update(_delta: float) -> void:
 			return
 	
 	if Input.is_action_just_pressed("Attack"):
-		ChangeState("Ball")
-		return
+		if owner.DashMode:
+			ChangeState("SpinKick")
+			return
+		else:
+			ChangeState("Ball")
+			return
 
 	if JumpVel.y <= 0.0:
 		ChangeState("Fall", {

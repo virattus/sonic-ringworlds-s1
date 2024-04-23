@@ -9,6 +9,7 @@ var GroundPoint := Vector3.ZERO
 
 var DashMode := false
 var DashModeCharge := 0.0
+var DashModeDrain := true
 var Invincible := false
 var Flicker := false
 
@@ -33,6 +34,7 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var InputIndicator = $InputIndicator
 @onready var VelocityIndicator = $VelocityIndicator
 @onready var CameraFocus = $CameraFocus
+@onready var AttackArea = $AttackArea
 
 
 @onready var SndJump = $SndJump
@@ -66,7 +68,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#super(delta)
 	
-	DashModeCharge = clamp(DashModeCharge - (PARAMETERS.DASHMODE_DISCHARGE_RATE * delta), 0.0, 1.0)
+	if DashModeDrain:
+		if DashMode:
+			DashModeCharge -= (PARAMETERS.DASHMODE_ACTIVE_DISCHARGE_RATE * delta)
+			if DashModeCharge <= 0.0:
+				DashMode = false
+		else:
+			DashModeCharge -= (PARAMETERS.DASHMODE_NORMAL_DISCHARGE_RATE * delta)
+	
+	DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
 	
 	if Input.is_action_just_pressed("DEBUG_ResetPosition"):
 		global_position = StartingPosition
@@ -168,3 +178,8 @@ func _on_timer_invincibility_timeout() -> void:
 	Invincible = false
 	Flicker = false
 	CharMesh.visible = true
+
+
+func _on_attack_area_body_entered(body: Node3D) -> void:
+	if StateM.ActiveState.has_method("AttackHit"):
+		StateM.ActiveState.AttackHit(body)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://h4kvfn8eais1"]
+
+[ext_resource type="PackedScene" uid="uid://ckx7so2j270xl" path="res://entities/Balloon/Balloon.glb" id="1_gdymi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vvkb"]
+albedo_color = Color(0.960784, 0.0117647, 0.764706, 1)
+
+[node name="BalloonModel" instance=ExtResource("1_gdymi")]
+
+[node name="Icosphere" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7vvkb")
