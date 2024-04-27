@@ -20,6 +20,7 @@ const GROUND_CAST_MIN_DISTANCE = 0.1
 @onready var CharMesh = $CharacterMesh
 @onready var WorldCollision: CollisionShape3D = $WorldCollision
 @onready var GroundCast: RayCast3D = $GroundCast
+@onready var SpotShadow: MeshInstance3D = $SpotShadow
 
 
 

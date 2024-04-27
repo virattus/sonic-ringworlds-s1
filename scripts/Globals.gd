@@ -12,6 +12,8 @@ var DEBUG_SCENES = {
 }
 var CurrentScene = null
 
+const DEBUG_FORCE_DASHMODE = true
+
 
 var WindowedModeScreenSize := Vector2i.ZERO
 

@@ -45,7 +45,7 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("InputSpeed"):
 		InputSpeed = _msg["InputSpeed"]
 	else:
-		InputSpeed = JumpVel.length()
+		InputSpeed = 0.0
 	
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", 0.0)
@@ -114,5 +114,13 @@ func Update(_delta: float) -> void:
 			return
 		
 	if Input.is_action_just_pressed("Attack"):
-		ChangeState("Ball")
-		return
+		if owner.DashMode:
+			ChangeState("SpinKick", {
+				"JumpVel": JumpVel,
+				"InputVel": InputVel,
+				"InputSpeed": InputSpeed,
+			})
+			return
+		else:
+			ChangeState("Ball")
+			return

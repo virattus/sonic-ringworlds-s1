@@ -93,4 +93,5 @@ func Update(_delta: float) -> void:
 
 
 func AttackHit(body: Node3D):
+	VerticalVelocity = 1.0
 	body.ReceiveDamage(owner.AttackArea, 1)

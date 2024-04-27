@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://trqot0h0khi"]
+
+[ext_resource type="Script" path="res://entities/StateMachine/ComplexState.gd" id="1_r1ijm"]
+
+[node name="ComplexState" type="Node"]
+script = ExtResource("1_r1ijm")

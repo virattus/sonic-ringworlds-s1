@@ -43,8 +43,6 @@ func _process(_delta: float) -> void:
 	InputAnalogue = Input.get_vector(activeTable["Left"], activeTable["Right"], activeTable["Up"], activeTable["Down"], InputAnalogueDeadzone)
 	if InputAnalogue.length() > 1.0:
 		InputAnalogue = InputAnalogue.normalized()
-	
-	#InputVelocity = (Player.CharMesh.global_transform.basis * Vector3(InputAnalogue.x, 0, InputAnalogue.y))
 
 	var floorBasis = Camera_Node.get_node("SpringArm3D/Camera3D").transform.basis
 	floorBasis = basis_aligned_y(floorBasis, Player.up_direction)

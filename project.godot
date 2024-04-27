@@ -1243,6 +1243,7 @@ DEBUG_ForceSkid={
 3d_physics/layer_6="PlayerHurtBox"
 3d_physics/layer_7="EnemyHitbox"
 3d_physics/layer_8="EnemyHurtbox"
+3d_physics/layer_9="WorldHitbox"
 3d_physics/layer_10="CameraCollision"
 
 [physics]

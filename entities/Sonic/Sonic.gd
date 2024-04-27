@@ -24,8 +24,8 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var SonicBall = $CharacterMesh/SonicBall
 
 @onready var CharGroundCast = $AngledGroundCast
-@onready var AnimTree = $AnimationTree
-@onready var StateM = $StateMachine
+@onready var AnimTree: AnimationTree = $AnimationTree
+@onready var StateM: StateMachine = $StateMachine
 @onready var TimerInvincibility = $TimerInvincibility
 @onready var AirdashTrail = $CylinderTrail2
 
@@ -68,15 +68,18 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#super(delta)
 	
-	if DashModeDrain:
-		if DashMode:
-			DashModeCharge -= (PARAMETERS.DASHMODE_ACTIVE_DISCHARGE_RATE * delta)
-			if DashModeCharge <= 0.0:
-				DashMode = false
-		else:
-			DashModeCharge -= (PARAMETERS.DASHMODE_NORMAL_DISCHARGE_RATE * delta)
-	
-	DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
+	if Globals.DEBUG_FORCE_DASHMODE:
+		DashMode = true
+	else:
+		if DashModeDrain:
+			if DashMode:
+				DashModeCharge -= (PARAMETERS.DASHMODE_ACTIVE_DISCHARGE_RATE * delta)
+				if DashModeCharge <= 0.0:
+					DashMode = false
+			else:
+				DashModeCharge -= (PARAMETERS.DASHMODE_NORMAL_DISCHARGE_RATE * delta)
+		
+		DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
 	
 	if Input.is_action_just_pressed("DEBUG_ResetPosition"):
 		global_position = StartingPosition

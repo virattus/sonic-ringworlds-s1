@@ -1691,10 +1691,10 @@ albedo_color = Color(1, 0, 0, 0.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-3.69096, 3.51624, 0.382354)
-bones/3/position = Vector3(-2.51007, -4.8981, 0.896335)
-bones/4/position = Vector3(3.69499, 3.5099, 0.382354)
-bones/5/position = Vector3(2.51007, -4.9053, 0.896335)
+bones/2/position = Vector3(-3.70255, 3.48918, 0.382354)
+bones/3/position = Vector3(-2.46755, -4.88264, 0.896335)
+bones/4/position = Vector3(3.7607, 3.3978, 0.382354)
+bones/5/position = Vector3(2.46755, -4.98647, 0.896335)
 
 [node name="AnimationTree" parent="Sonic" index="13"]
 libraries = {
@@ -2299,6 +2299,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.616)
 
 [node name="Balloon" parent="MovementTesting" index="6" instance=ExtResource("7_b7r6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.95667, 1.97186, 0)
+
+[node name="Balloon2" parent="MovementTesting" index="7" instance=ExtResource("7_b7r6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0129, 3.53607, 4.65188)
+
+[node name="Balloon3" parent="MovementTesting" index="8" instance=ExtResource("7_b7r6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6554, 4.38105, 9.25305)
+
+[node name="Balloon4" parent="MovementTesting" index="9" instance=ExtResource("7_b7r6t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0887, 7.10198, 14.4688)
 
 [node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)

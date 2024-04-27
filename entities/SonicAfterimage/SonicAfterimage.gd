@@ -7,13 +7,18 @@ extends Node3D
 
 var RecordedData = []
 
-
-func _ready() -> void:
-	$AfterImage/Sonic_Afterimage/AnimationPlayer.play("StrikeDash")
+@onready var anim_player = $AfterImage/Sonic_Afterimage/AnimationPlayer
 
 
 func _physics_process(delta: float) -> void:
 	visible = SonicNode.DashMode
+	
+	if visible:
+		var player = SonicNode.get_node(SonicNode.AnimTree.anim_player)
+		if player != null:
+			var anim = player.current_animation
+			if anim != null and anim != anim_player.current_animation:
+				anim_player.play(anim)
 	
 	RecordedData.push_front(SonicNode.CharMesh.global_transform)
 	
