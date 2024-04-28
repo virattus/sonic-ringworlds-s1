@@ -10,7 +10,11 @@ var RecordedData = []
 @onready var anim_player = $AfterImage/Sonic_Afterimage/AnimationPlayer
 
 
+
+
+
 func _physics_process(delta: float) -> void:
+	return
 	visible = SonicNode.DashMode
 	
 	if visible:

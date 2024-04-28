@@ -35,6 +35,7 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var VelocityIndicator = $VelocityIndicator
 @onready var CameraFocus = $CameraFocus
 @onready var AttackArea = $AttackArea
+@onready var TargetArea = $TargetArea
 
 
 @onready var SndJump = $SndJump
