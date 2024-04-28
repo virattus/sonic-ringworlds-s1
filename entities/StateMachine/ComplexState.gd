@@ -1,3 +1,4 @@
+class_name ComplexState
 extends BasicState
 
 
@@ -12,6 +13,10 @@ func _ready() -> void:
 	StateM.ActiveState = ActiveState
 	add_child(StateM)
 
-
 func ChangeSubState(newState : String, msg := {}) -> void:
 	StateM.ChangeState(newState, msg)
+
+
+func Enter(_msg := {}) -> void:
+	if _msg.has("SubState"):
+		ChangeSubState(_msg["SubState"], _msg)
