@@ -58,15 +58,12 @@ func Update(_delta: float) -> void:
 		if Target == null:
 			if FindTarget():
 				ActiveTarget = true
-				var direction = owner.global_position.direction_to(Target.global_position).normalized()
-				owner.SetVelocity(direction)
 		else:
 			ActiveTarget = true
-			var direction = owner.global_position.direction_to(Target.global_position).normalized()
-			owner.SetVelocity(direction)
 	
 	if ActiveTarget:
-		TargetMovement(_delta)
+		if !TargetMovement(_delta):
+			NoTargetMovement(_delta) #Annoying failsafe that shouldn't be triggered but will
 	else:
 		NoTargetMovement(_delta)
 	
@@ -100,9 +97,13 @@ func FindTarget() -> bool:
 	
 
 
-func TargetMovement(_delta) -> void:
-	var direction = owner.global_position.direction_to(Target.global_position).normalized()
-	owner.SetVelocity(direction)
+func TargetMovement(_delta) -> bool:
+	if !is_instance_valid(Target):
+		return false
+	else:
+		var direction = owner.global_position.direction_to(Target.global_position).normalized()
+		owner.SetVelocity(direction)
+		return true
 
 
 func NoTargetMovement(_delta) -> void:
