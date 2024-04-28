@@ -15,4 +15,6 @@ func Update(_delta: float) -> void:
 	if owner.is_on_floor():
 		ChangeState("Idle")
 	else:
-		ChangeState("Fall")
+		ChangeState("Air", {
+			"SubState": "Fall",
+		})

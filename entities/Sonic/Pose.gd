@@ -29,5 +29,5 @@ func Update(_delta: float) -> void:
 	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
 	
 	if !owner.AnimTree.get("parameters/OSPose/active"):
-		ChangeState("Fall")
+		ChangeSubState("Fall")
 		return

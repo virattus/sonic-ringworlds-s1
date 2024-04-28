@@ -74,5 +74,5 @@ func Update(_delta: float) -> void:
 	
 	AirDashSpeed -= owner.PARAMETERS.AIRDASH_SPEED_DECREASE_RATE * _delta
 	if AirDashSpeed <= 0.0:
-		ChangeState("Fall")
+		ChangeSubState("Fall")
 		return

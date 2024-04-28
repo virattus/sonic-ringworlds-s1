@@ -7,8 +7,8 @@ var InputVel := Vector3.ZERO
 var InputSpeed := 0.0
 
 
-
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+
 
 func _ready():
 	DebugMenu.AddMonitor(self, "JumpVel")
@@ -88,15 +88,15 @@ func Update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Jump"):
 		if Input.is_action_just_pressed("Attack"):
-			ChangeState("Pose")
+			ChangeSubState("Pose")
 			return
 		else:
-			ChangeState("Airdash")
+			ChangeSubState("Airdash")
 			return
 	
 	if Input.is_action_just_pressed("Attack"):
 		if owner.DashMode:
-			ChangeState("SpinKick", {
+			ChangeSubState("SpinKick", {
 				"JumpVel": JumpVel,
 				"InputVel": InputVel,
 				"InputSpeed": InputSpeed,
@@ -107,7 +107,7 @@ func Update(_delta: float) -> void:
 			return
 
 	if JumpVel.y <= 0.0:
-		ChangeState("Fall", {
+		ChangeSubState("Fall", {
 			"JumpVel": JumpVel,
 			"InputVel": InputVel,
 			"InputSpeed": InputSpeed,

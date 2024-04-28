@@ -34,11 +34,15 @@ func Update(_delta: float) -> void:
 	owner.up_direction = owner.FloorNormal
 	
 	if !groundCollision:
-		ChangeState("Fall")
+		ChangeState("Air", {
+			"SubState": "Fall",
+		})
 		return
 	
 	if owner.up_direction.dot(Vector3.UP) < owner.PARAMETERS.IDLE_MIN_GROUND_ANGLE:
-		ChangeState("Fall")
+		ChangeState("Air", {
+			"SubState": "Fall",
+		})
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
@@ -50,5 +54,7 @@ func Update(_delta: float) -> void:
 		return
 	
 	if owner.Controller.InputVelocity.length() > 0.0:
-		ChangeState("Move")
+		ChangeState("Move", {
+			"SubState": "Walk",
+		})
 		return

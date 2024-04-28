@@ -107,15 +107,15 @@ func Update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Jump"):
 		if Input.is_action_just_pressed("Attack"):
-			ChangeState("Pose")
+			ChangeSubState("Pose")
 			return
 		else:
-			ChangeState("Airdash")
+			ChangeSubState("Airdash")
 			return
 		
 	if Input.is_action_just_pressed("Attack"):
 		if owner.DashMode:
-			ChangeState("SpinKick", {
+			ChangeSubState("SpinKick", {
 				"JumpVel": JumpVel,
 				"InputVel": InputVel,
 				"InputSpeed": InputSpeed,

@@ -6,7 +6,6 @@ signal StateChange(state_name)
 
 
 @export var ActiveState : BasicState
-
 var CurrentState : String
 
 
@@ -36,6 +35,6 @@ func ChangeState(newState : String, msg := {}) -> void:
 	ActiveState.Exit()
 	ActiveState = get_node(newState)
 	ActiveState.Enter(msg)
-	CurrentState = ActiveState.name
+	CurrentState = ActiveState.GetFullName()
 	emit_signal("StateChange", CurrentState)
 	

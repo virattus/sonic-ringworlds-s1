@@ -1691,10 +1691,10 @@ albedo_color = Color(1, 0, 0, 0.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-3.70255, 3.48918, 0.382354)
-bones/3/position = Vector3(-2.46755, -4.88264, 0.896335)
-bones/4/position = Vector3(3.7607, 3.3978, 0.382354)
-bones/5/position = Vector3(2.46755, -4.98647, 0.896335)
+bones/2/position = Vector3(-4.72975, 2.44943e-07, 4.65063)
+bones/3/position = Vector3(-2.51011, -0.75626, 0.847822)
+bones/4/position = Vector3(4.98811, -0.822021, 4.40167)
+bones/5/position = Vector3(2.5696, 0.420875, 0.615452)
 
 [node name="AnimationTree" parent="Sonic" index="13"]
 libraries = {

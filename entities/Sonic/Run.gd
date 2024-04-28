@@ -1,56 +1,36 @@
 extends BasicState
 
 
-var Speed := 0.0
 
 
 func Enter(_msg := {}) -> void:
-	if _msg.has("CurrentSpeed"):
-		Speed = _msg["CurrentSpeed"]
-	else:
-		Speed = owner.RUN_MAX_SPEED
-	
-	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
-	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
+	owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
+	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
 
 
 func Exit() -> void:
-	owner.AnimTree.set("parameters/Run-Time/scale", 1.0)
-	
+	pass
 
 
 func Update(_delta: float) -> void:
-	if !owner.GroundCollision:
-		ChangeState("Fall")
-		return
+	var vel : Vector3 = owner.velocity.normalized()
+	var speed : float = owner.Speed
 	
-	if owner.Controller.InputJump:
-		ChangeState("Jump")
-		return
+	if owner.Controller.InputVelocity.length() > 0.0:
+		var InputVel = owner.Controller.InputVelocity
 	
-	var vel = owner.velocity.normalized()
-	Speed = owner.Speed
-	
-	
-	#As the character speeds up, we want the controller input's "weight" to reduce
-	vel = ((vel * Speed) + owner.Controller.InputVelocity).normalized() 
-	if owner.Controller.InputVelocity.length() >= 0.8:
-		Speed += owner.MOVE_SPEED_ADD_MODIFIER * _delta
-		if Speed > owner.RUN_MAX_SPEED:
-			ChangeState("Sprint", {
-				"CurrentSpeed": Speed,
-				})
-			return
+		vel = (vel + InputVel).normalized()
+		
+		if speed < owner.PARAMETERS.RUN_MAX_SPEED:
+			speed += (owner.Controller.InputVelocity.length() * owner.PARAMETERS.RUN_ACCEL_RATE)
+		
+		owner.CharMesh.look_at(owner.global_position + vel)
 	else:
-		Speed -= owner.MOVE_SPEED_ADD_MODIFIER * _delta
-		if Speed <= owner.WALK_MAX_SPEED:
-			ChangeState("Walk")
-			return
-		elif Speed <= 0.0:
-			ChangeState("Idle")
-			return
+		var groundAngle = owner.up_direction.dot(Vector3.UP)
+		
+		speed = lerp(speed, 0.0, owner.PARAMETERS.RUN_DECEL_RATE * _delta)
 	
-	owner.AnimTree.set("parameters/Run-Time/scale", Speed * 0.5)
+	speed = clamp(speed, -owner.PARAMETERS.MOVE_MAX_SPEED, owner.PARAMETERS.MOVE_MAX_SPEED)
 	
-	owner.Move(vel * Speed)
-	owner.CharMesh.LerpMeshOrientation(owner.velocity, _delta)
+	owner.Move(vel * speed)
+	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
