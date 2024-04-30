@@ -1,10 +1,8 @@
 extends BasicState
 
 
-var JumpVel := Vector3.ZERO
-var InputVel := Vector3.ZERO
-var InputSpeed := 0.0
-var VerticalVelocity := 0.0
+
+var AttackReleased := false
 
 var Target : Node3D = null
 var TargetPos := Vector3.ZERO
@@ -15,76 +13,37 @@ var TargetSeek := true
 var InvalidTargets = [] 
 
 
-func _ready() -> void:
-	DebugMenu.AddMonitor(self, "Target")
-
-
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 1.0)
 	owner.ToggleAttackArea(true)
 	
-	if _msg.has("JumpVel"):
-		JumpVel = _msg["JumpVel"]
-	else:
-		print("Fall: using current velocity")
-		JumpVel = owner.velocity
-
-	if _msg.has("InputVel"):
-		InputVel = _msg["InputVel"]
-	else:
-		InputVel = Vector3.ZERO
-	
-	if _msg.has("InputSpeed"):
-		InputSpeed = _msg["InputSpeed"]
-	else:
-		InputSpeed = 0.0
-	
-	
-	TargetSeek = true
-
-
-func Exit() -> void:
-	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 0.0)
-	owner.ToggleAttackArea(false)
+	AttackReleased = false
 	
 	owner.FloorNormal = Vector3.UP
 	owner.up_direction = Vector3.UP
 
 
-func Update(_delta: float) -> void:
-	var ActiveTarget := false
-	
-	if TargetSeek:
-		if Target == null:
-			if FindTarget():
-				ActiveTarget = true
-		else:
-			ActiveTarget = true
-	
-	if ActiveTarget:
-		if !TargetMovement(_delta):
-			NoTargetMovement(_delta) #Annoying failsafe that shouldn't be triggered but will
-	else:
-		NoTargetMovement(_delta)
-	
-	owner.Move(owner.velocity)
+func Exit() -> void:
+	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 0.0)
+	owner.ToggleAttackArea(false)
 
+
+func Update(_delta: float) -> void:
+	if Input.is_action_pressed("Attack"):
+		if !AttackReleased and get_parent().AirVel.y <= 0.0:
+			pass
+	else:
+		AttackReleased = true
 	
 	if owner.is_on_floor():
 		ChangeState("Land")
 		return
-
-	#if Input.is_action_just_released("Attack"):
-	#	TargetSeek = false
 
 
 func FindTarget() -> bool:
 	if owner.TargetArea.has_overlapping_bodies():
 		var targets = owner.TargetArea.get_overlapping_bodies()
 		for i in targets:
-			if InvalidTargets.has(i):
-				InvalidTargets.erase(i)
-				continue
 			if Target == null:
 				Target = i
 			else:
@@ -106,22 +65,7 @@ func TargetMovement(_delta) -> bool:
 		return true
 
 
-func NoTargetMovement(_delta) -> void:
-	InputVel += owner.Controller.InputVelocity * _delta
-	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
-		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
-	
-	var vel = JumpVel + (InputVel * InputSpeed)
-	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
-		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
-	
-	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta
-
-	owner.SetVelocity((Vector3.UP * VerticalVelocity))
-
-
 func AttackHit(body: Node3D) -> void:
-	InvalidTargets.push_back(Target)
 	Target = null
-	VerticalVelocity = 1.0
+	get_parent().AirVel.y = owner.PARAMETERS.ATTACK_BOUNCE_POW
 	body.ReceiveDamage(owner.AttackArea, 1)

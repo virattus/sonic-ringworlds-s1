@@ -7,7 +7,6 @@ const METER_MAX = 0.30
 
 
 func Enter(_msg := {}) -> void:
-	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/OSPose/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
 	owner.FloorNormal = Vector3.UP
