@@ -187,3 +187,8 @@ func _on_timer_invincibility_timeout() -> void:
 func _on_attack_area_body_entered(body: Node3D) -> void:
 	if StateM.ActiveState.has_method("AttackHit"):
 		StateM.ActiveState.AttackHit(body)
+
+
+func ToggleAttackArea(enabled: bool) -> void:
+	AttackArea.monitoring = enabled
+	$AttackArea/AttackAreaDebug.visible = enabled

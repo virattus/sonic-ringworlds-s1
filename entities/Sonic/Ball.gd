@@ -22,7 +22,7 @@ func _ready() -> void:
 func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
 	owner.SonicBall.visible = true
-	owner.AttackArea.monitoring = true
+	owner.ToggleAttackArea(true)
 	
 	owner.SndSpinCharge.play()
 	
@@ -37,7 +37,7 @@ func Enter(_msg := {}) -> void:
 func Exit() -> void:
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
-	owner.AttackArea.monitoring = false
+	owner.ToggleAttackArea(false)
 	
 	owner.SndSpinCharge.stop()
 

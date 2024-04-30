@@ -44,11 +44,9 @@ func Update(_delta: float) -> void:
 				print("Move: Found floor with raycast, but dot product is ", dot)
 	
 	if !groundCollision:
-		ChangeState("Fall")
-		return
-	
-	if !owner.is_on_floor():
-		ChangeState("Fall")
+		ChangeState("Air", {
+			"SubState": "Fall",
+		})
 		return
 	
 	if owner.Speed <= owner.PARAMETERS.SKID_END_MIN_SPEED:

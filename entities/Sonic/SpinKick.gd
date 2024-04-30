@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 1.0)
-	owner.AttackArea.monitoring = true
+	owner.ToggleAttackArea(true)
 	
 	if _msg.has("JumpVel"):
 		JumpVel = _msg["JumpVel"]
@@ -45,7 +45,7 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 0.0)
-	owner.AttackArea.monitoring = false
+	owner.ToggleAttackArea(false)
 	
 	owner.FloorNormal = Vector3.UP
 	owner.up_direction = Vector3.UP

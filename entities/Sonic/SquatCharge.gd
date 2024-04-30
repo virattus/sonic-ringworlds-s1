@@ -33,6 +33,7 @@ func Update(_delta: float) -> void:
 		owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
 		owner.SetVelocity(owner.CharMesh.GetForwardVector() * AccumulatedSpeed)
 		ChangeState("Move", {
+			"SubState": "StrikeDash",
 		})
 		return
 	
