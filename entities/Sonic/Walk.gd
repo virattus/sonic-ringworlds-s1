@@ -22,6 +22,9 @@ func Update(_delta: float) -> void:
 	if owner.Controller.InputVelocity.length() > 0.0:
 		var InputVel = owner.Controller.InputVelocity
 	
+		if owner.up_direction.y < 0.0:
+			InputVel = InputVel.rotated(owner.Camera.CurrentBasis.x, deg_to_rad(180.0))
+	
 		vel = (vel + InputVel).normalized()
 		
 		if speed < owner.PARAMETERS.RUN_MAX_SPEED:

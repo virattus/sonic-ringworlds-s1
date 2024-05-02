@@ -49,6 +49,9 @@ func Update(_delta: float) -> void:
 			print("Fall: Hit floor")
 			ChangeState("Land")
 			return
+		elif collision.CollisionType == SonicCollision.COLL_TYPE.SIDE:
+			ChangeState("Wipeout")
+			return
 	
 	if Input.is_action_just_pressed("Jump"):
 		if Input.is_action_just_pressed("Attack"):
