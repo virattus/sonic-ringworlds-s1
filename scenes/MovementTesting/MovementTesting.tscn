@@ -25,10 +25,10 @@ albedo_color = Color(1, 0, 0, 0.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.72975, 2.44943e-07, 4.65063)
-bones/3/position = Vector3(-2.51011, -0.75626, 0.847822)
-bones/4/position = Vector3(4.98811, -0.822021, 4.40167)
-bones/5/position = Vector3(2.5696, 0.420875, 0.615452)
+bones/2/position = Vector3(-4.69136, 2.91766e-07, 4.83295)
+bones/3/position = Vector3(-2.50051, -0.75626, 1.00135)
+bones/4/position = Vector3(5.03609, -0.822021, 4.52641)
+bones/5/position = Vector3(2.54081, 0.420875, 0.701813)
 
 [node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
@@ -42,8 +42,9 @@ FrameCount = 6
 SonicNode = NodePath("../Sonic")
 FrameCount = 9
 
-[node name="ThirdPersonCamera" parent="." index="6"]
+[node name="ThirdPersonCamera" parent="." index="6" node_paths=PackedStringArray("Char")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
+Char = NodePath("../Sonic")
 
 [node name="MovementTesting" parent="." index="10" instance=ExtResource("1_aqers")]
 

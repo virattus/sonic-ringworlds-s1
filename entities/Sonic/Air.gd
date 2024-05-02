@@ -86,10 +86,8 @@ func CollisionDetection() -> SonicCollision:
 			var groundDot = owner.up_direction.dot(Vector3.UP)
 			if groundDot < 0.75:
 				print("Air: landed upside down")
-				owner.FloorNormal = collision.get_normal()
-				owner.up_direction = collision.get_normal()
-				return null
+				return SonicCollision.new(SonicCollision.COLL_TYPE.BOTTOM, collision.get_position(), collision.get_normal())
 			else:
 				print("Air: hit ceiling? GroundDot was ", groundDot)
-				return null
+				return SonicCollision.new(SonicCollision.COLL_TYPE.TOP, collision.get_position(), collision.get_normal())
 	return null

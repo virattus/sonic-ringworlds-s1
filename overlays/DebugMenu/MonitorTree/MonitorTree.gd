@@ -86,7 +86,7 @@ func RemoveMonitorProperty(_property: MonitorProperty, _name: String, _parent: T
 	else:
 		#move down the tree, but also call RemoveMonitorProperty recursively, check if there's any
 		#children left, and remove this level from the tree if it's empty
-		var pat_h = _property.fullPath
+		var path = _property.fullPath
 		var array = _name.split("/", false, 1)
 		if array.size() > 0:
 			array.push_back("")

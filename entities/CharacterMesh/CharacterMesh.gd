@@ -39,7 +39,7 @@ func GetOrientation() -> Vector3:
 
 
 func SetOrientation(newOrientation: Vector3) -> void:
-	global_transform.basis.from_euler(newOrientation)
+	global_transform.basis = Basis.from_euler(newOrientation)
 
 
 func GetForwardVector() -> Vector3:

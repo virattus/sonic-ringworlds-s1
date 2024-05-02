@@ -3,7 +3,7 @@ extends Node3D
 
 @export var Active := true
 @export var RightAnalogue := true
-@export var char : CharacterBody3D
+@export var Char : CharacterBody3D
 @export var Focus: Node3D
 
 var CurrentBasis := Basis.IDENTITY
@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	
 	up_axis = self.transform.basis.y
 	
-	position = char.position
+	position = Char.position
 	
 	#var alignment = basis_aligned_y(transform.basis, char.up_direction)
 	#transform.basis = transform.basis.slerp(alignment, 0.2)
@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 		shoulder_cam_input(delta)
 	
 	
-	$SpringArm3D.spring_length = CAM_ARM_MIN_LENGTH + ((clamp(char.Speed, CAM_ARM_SPEED_MIN, CAM_ARM_SPEED_MAX) - CAM_ARM_SPEED_MIN) * CAM_ARM_SPEED_SCALE)
+	$SpringArm3D.spring_length = CAM_ARM_MIN_LENGTH + ((clamp(Char.Speed, CAM_ARM_SPEED_MIN, CAM_ARM_SPEED_MAX) - CAM_ARM_SPEED_MIN) * CAM_ARM_SPEED_SCALE)
 	
 	$SpringArm3D/Camera3D.look_at(Focus.global_position)
 	CurrentBasis = transform.basis
@@ -83,9 +83,9 @@ func cam_input() -> void:
 
 
 func CharRotation() -> void:
-	var speed = char.Speed
+	var speed = Char.Speed
 	if speed > 1.0:
-		var dotRight = char.velocity.normalized().dot(-cam.global_transform.basis.x)
+		var dotRight = Char.velocity.normalized().dot(-cam.global_transform.basis.x)
 		transform.basis = transform.basis.rotated(up_axis, dotRight * speed * 0.001)
 	
 	 

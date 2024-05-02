@@ -33,7 +33,8 @@ func Update(_delta: float) -> void:
 	owner.SetVelocity(lerp(owner.velocity, Vector3.ZERO, owner.PARAMETERS.WIPEOUT_SPEED_REDUCTION_RATE * _delta))
 	
 	owner.Move(owner.velocity)
-	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized()) 
+	if owner.velocity.length() > 0.0:
+		owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized()) 
 	
 	if owner.is_on_floor():
 		owner.FloorNormal = owner.get_floor_normal()
