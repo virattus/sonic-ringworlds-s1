@@ -31,7 +31,7 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var collision : SonicCollision = get_parent().CollisionDetection()
+	var collision : SonicCollision = get_parent().CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN)
 	if collision != null:
 		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:
 			print("AirDash: Hit floor")

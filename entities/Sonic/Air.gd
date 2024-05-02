@@ -20,6 +20,7 @@ func _ready() -> void:
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
+	owner.GroundCast.target_position = Vector3.DOWN * owner.GroundCastLength
 	
 	if _msg.has("AirVel"):
 		AirVel = _msg["AirVel"]
@@ -68,7 +69,7 @@ func AirMove(_delta: float, additionalInput:= Vector3.ZERO) -> void:
 	owner.Move(vel)
 
 
-func CollisionDetection() -> SonicCollision:
+func CollisionDetection(groundMin: float, wallMin: float) -> SonicCollision:
 	for i in range(owner.get_slide_collision_count()):
 		var collision = owner.get_slide_collision(i)
 		var coll = COLLISION_INDICATOR.instantiate()
@@ -76,10 +77,10 @@ func CollisionDetection() -> SonicCollision:
 		coll.SetToCollision(collision)
 		
 		var dot = owner.up_direction.dot(collision.get_normal())
-		if dot > owner.PARAMETERS.LAND_FLOOR_DOT_MIN:
+		if dot > groundMin:
 			print("Air: Floor hit")
 			return SonicCollision.new(SonicCollision.COLL_TYPE.BOTTOM, collision.get_position(), collision.get_normal())
-		elif dot > owner.PARAMETERS.LAND_WALL_DOT_MIN:
+		elif dot > wallMin:
 			print("Air: Side hit")
 			return SonicCollision.new(SonicCollision.COLL_TYPE.SIDE, collision.get_position(), collision.get_normal())
 		else: #Hit ceiling

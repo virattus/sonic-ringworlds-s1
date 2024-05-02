@@ -20,10 +20,10 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	#if owner.Controller.InputVelocity.length() > 0.0:
-		#if owner.Speed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
-		#	ChangeState("Skid")
-		#	return
+	if owner.Controller.InputVelocity.length() > 0.0:
+		if owner.Speed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
+			ChangeState("Skid")
+			return
 	
 	super(_delta)
 
@@ -57,6 +57,7 @@ func Update(_delta: float) -> void:
 	if !groundCollision:
 		ChangeState("Air", {
 			"SubState": "Fall",
+			"AirVel": owner.velocity + (owner.FloorNormal * 1.0),
 		})
 		return
 		
@@ -68,7 +69,7 @@ func Update(_delta: float) -> void:
 			owner.velocity += owner.up_direction * owner.PARAMETERS.MOVE_GRIP_LOST_EJECTION_MAGNITUDE
 			ChangeState("Air", {
 				"SubState": "Fall",
-				"CanStick": false,
+				"AirVel": owner.velocity + (owner.FloorNormal * 1.0),
 			})
 			return
 	
