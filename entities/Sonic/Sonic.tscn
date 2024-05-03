@@ -69,6 +69,9 @@ transparency = 1
 no_depth_test = true
 albedo_color = Color(0, 1, 0, 0.52549)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_yv103"]
+radius = 0.4
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_8sh6a"]
 radius = 0.75
 
@@ -79,9 +82,6 @@ height = 1.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3sgk"]
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.415686)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_yv103"]
-radius = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_byb1a"]
 radius = 10.0
@@ -109,13 +109,13 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, -0.334433, 3.08106)
 bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.72188, 2.54546e-07, 4.68802)
+bones/2/position = Vector3(-4.6111, 3.13168e-07, 5.21418)
 bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.50814, -0.75626, 0.879306)
+bones/3/position = Vector3(-2.48045, -0.75626, 1.32239)
 bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(4.99795, -0.822021, 4.42725)
+bones/4/position = Vector3(5.13641, -0.822021, 4.78726)
 bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.5637, 0.420875, 0.633163)
+bones/5/position = Vector3(2.48062, 0.420875, 0.882397)
 bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
 bones/6/position = Vector3(0, 0.334433, 5.21777)
 bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
@@ -178,7 +178,14 @@ no_depth_test = true
 texture_filter = 0
 texture = ExtResource("5_wnnh5")
 
-[node name="Hitbox" parent="." index="11" instance=ExtResource("7_xr2va")]
+[node name="Hurtbox" parent="." index="11"]
+collision_layer = 32
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("SphereShape3D_yv103")
+
+[node name="Hitbox" parent="." index="12" instance=ExtResource("7_xr2va")]
 collision_layer = 16
 collision_mask = 128
 monitoring = false
@@ -192,13 +199,6 @@ visible = false
 mesh = SubResource("SphereMesh_kigcn")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_r3sgk")
-
-[node name="Hurtbox" parent="." index="12"]
-collision_layer = 32
-collision_mask = 64
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
-shape = SubResource("SphereShape3D_yv103")
 
 [node name="LockOnArea" type="Area3D" parent="." index="13"]
 collision_layer = 0

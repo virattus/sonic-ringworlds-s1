@@ -5,10 +5,20 @@
 
 [node name="RegalRuin" instance=ExtResource("1_j7jm6")]
 
-[node name="Sonic" parent="." index="1"]
+[node name="Sonic" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
 
-[node name="ThirdPersonCamera" parent="." index="2"]
+[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
+bones/2/position = Vector3(-4.61407, 3.86059e-07, 5.2001)
+bones/3/position = Vector3(-2.48119, -0.75626, 1.31053)
+bones/4/position = Vector3(5.13271, -0.822021, 4.77762)
+bones/5/position = Vector3(2.48284, 0.420875, 0.875726)
+
+[node name="ThirdPersonCamera" parent="." index="3" node_paths=PackedStringArray("Char")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
+Char = NodePath("../Sonic")
 
 [node name="RegalRuin" parent="." index="7" instance=ExtResource("5_px6x5")]
+
+[editable path="Sonic"]
+[editable path="Sonic/CharacterMesh/SonicModel"]

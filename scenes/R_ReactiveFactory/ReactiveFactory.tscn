@@ -5,10 +5,20 @@
 
 [node name="ReactiveFactory" instance=ExtResource("1_a3iih")]
 
-[node name="Sonic" parent="." index="1"]
+[node name="Sonic" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.70022, 48.7991)
 
-[node name="ThirdPersonCamera" parent="." index="2"]
+[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
+bones/2/position = Vector3(-4.67484, 2.35422e-07, 4.91146)
+bones/3/position = Vector3(-2.49638, -0.75626, 1.06747)
+bones/4/position = Vector3(5.05675, -0.822021, 4.58013)
+bones/5/position = Vector3(2.52842, 0.420875, 0.739002)
+
+[node name="ThirdPersonCamera" parent="." index="3" node_paths=PackedStringArray("Char")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.70022, 48.7991)
+Char = NodePath("../Sonic")
 
 [node name="ReactiveFactory" parent="." index="7" instance=ExtResource("5_ads68")]
+
+[editable path="Sonic"]
+[editable path="Sonic/CharacterMesh/SonicModel"]

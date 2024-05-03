@@ -26,10 +26,10 @@ albedo_color = Color(1, 0, 0, 0.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.73278, 2.41239e-07, 4.63621)
-bones/3/position = Vector3(-2.51087, -0.75626, 0.835675)
-bones/4/position = Vector3(4.98431, -0.822021, 4.3918)
-bones/5/position = Vector3(2.57188, 0.420875, 0.60862)
+bones/2/position = Vector3(-4.64517, 3.48118e-07, 5.05237)
+bones/3/position = Vector3(-2.48896, -0.75626, 1.18612)
+bones/4/position = Vector3(5.09383, -0.822021, 4.67654)
+bones/5/position = Vector3(2.50617, 0.420875, 0.805748)
 
 [node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
