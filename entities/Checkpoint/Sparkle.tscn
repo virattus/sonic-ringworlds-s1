@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4pegrmc2qufa"]
+
+[ext_resource type="Texture2D" uid="uid://cur4ylrc2h4fy" path="res://entities/Checkpoint/StarPoleSparkle.png" id="1_rauvw"]
+[ext_resource type="Script" path="res://entities/Checkpoint/Sparkle.gd" id="2_t2nna"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsk5u"]
+atlas = ExtResource("1_rauvw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ne5ao"]
+atlas = ExtResource("1_rauvw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw552"]
+atlas = ExtResource("1_rauvw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmfrx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsk5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ne5ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nw552")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Sparkle" type="AnimatedSprite3D"]
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_xmfrx")
+autoplay = "default"
+frame_progress = 0.134165
+script = ExtResource("2_t2nna")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

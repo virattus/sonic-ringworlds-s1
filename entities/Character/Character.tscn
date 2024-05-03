@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c38nbc66jwdhn"]
+[gd_scene load_steps=5 format=3 uid="uid://c38nbc66jwdhn"]
 
 [ext_resource type="Script" path="res://entities/Character/Character.gd" id="1_vr0xf"]
 [ext_resource type="PackedScene" uid="uid://ben70shfg7cdp" path="res://entities/CharacterMesh/CharacterMesh.tscn" id="2_miyi0"]
 [ext_resource type="PackedScene" uid="uid://cw4gtu5hyf53i" path="res://effects/SpotShadow/SpotShadow.tscn" id="3_a22of"]
+[ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/Hurtbox/Hurtbox.tscn" id="4_0f8fb"]
 
 [node name="Character" type="CharacterBody3D" groups=["Character"]]
 collision_layer = 2
@@ -18,3 +19,7 @@ target_position = Vector3(0, -25, 0)
 
 [node name="SpotShadow" parent="." node_paths=PackedStringArray("TargetRay") instance=ExtResource("3_a22of")]
 TargetRay = NodePath("../GroundCast")
+
+[node name="Hurtbox" parent="." instance=ExtResource("4_0f8fb")]
+
+[connection signal="HurtboxActivated" from="Hurtbox" to="." method="_on_hurtbox_hurtbox_activated"]

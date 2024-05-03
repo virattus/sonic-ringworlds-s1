@@ -24,6 +24,7 @@ func Update(_delta: float) -> void:
 	
 		if owner.up_direction.y < 0.0:
 			InputVel = InputVel.rotated(owner.Camera.CurrentBasis.x, deg_to_rad(180.0))
+			#InputVel.y = -InputVel.y
 	
 		vel = (vel + InputVel).normalized()
 		

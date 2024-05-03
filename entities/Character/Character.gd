@@ -21,6 +21,7 @@ const GROUND_CAST_MIN_DISTANCE = 0.1
 @onready var WorldCollision: CollisionShape3D = $WorldCollision
 @onready var GroundCast: RayCast3D = $GroundCast
 @onready var SpotShadow: MeshInstance3D = $SpotShadow
+@onready var HurtBox: Hurtbox = $Hurtbox
 
 
 
@@ -43,17 +44,6 @@ func _process(_delta: float) -> void:
 	GroundCollision = is_on_floor() #or (global_position.y - GroundCast.get_collision_point().y < GROUND_CAST_MIN_DISTANCE)
 
 
-func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:
-	if Health <= 0:
-		return
-	
-	Health = clamp(Health - damage, 0, MaxHealth)
-	
-	HealthChanged.emit(float(damage) / float(MaxHealth))
-	if Health <= 0:
-		HealthEmpty.emit()
-
-
 func Move(newVelocity: Vector3) -> void:
 	velocity = newVelocity
 	move_and_slide()
@@ -67,3 +57,14 @@ func SetVelocity(newVelocity: Vector3) -> void:
 
 func LookAt(target: Vector3) -> void:
 	CharMesh.look_at(target)
+
+
+func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+	if Health <= 0:
+		return
+	
+	Health = clamp(Health - Damage, 0, MaxHealth)
+	
+	HealthChanged.emit(float(Damage) / float(MaxHealth))
+	if Health <= 0:
+		HealthEmpty.emit()

@@ -15,7 +15,7 @@ var InvalidTargets = []
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 1.0)
-	owner.ToggleAttackArea(true)
+	owner.ToggleHitbox(true)
 	
 	AttackReleased = false
 	
@@ -25,7 +25,7 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 0.0)
-	owner.ToggleAttackArea(false)
+	owner.ToggleHitbox(false)
 
 
 func Update(_delta: float) -> void:
@@ -65,7 +65,7 @@ func TargetMovement(_delta) -> bool:
 		return true
 
 
-func AttackHit(body: Node3D) -> void:
+func AttackHit(_Target: Hurtbox) -> void:
 	Target = null
 	get_parent().AirVel.y = owner.PARAMETERS.ATTACK_BOUNCE_POW
-	body.ReceiveDamage(owner.AttackArea, 1)
+	_Target.ReceiveDamage(owner.HitBox, 1)

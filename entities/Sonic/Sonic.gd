@@ -34,8 +34,8 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var InputIndicator = $InputIndicator
 @onready var VelocityIndicator = $VelocityIndicator
 @onready var CameraFocus = $CameraFocus
-@onready var AttackArea = $AttackArea
-@onready var TargetArea = $TargetArea
+@onready var HitBox = $Hitbox
+@onready var LockOnArea = $LockOnArea
 
 
 @onready var SndJump = $SndJump
@@ -161,18 +161,6 @@ func CheckGroundCollision() -> bool:
 	return GroundCollision
 
 
-func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:
-	if !Invincible:
-		if Globals.RingCount > 0:
-			StateM.ChangeState("Hurt", {
-				"BounceDirection": hurtbox.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
-				"DropRings": true,
-			})
-		else:
-			HealthEmpty.emit()
-			StateM.ChangeState("Death")
-
-
 func CollectRing() -> void:
 	DashModeCharge += PARAMETERS.DASHMODE_RING_INCREMENT
 	$SndRingCollect.play()
@@ -184,11 +172,23 @@ func _on_timer_invincibility_timeout() -> void:
 	CharMesh.visible = true
 
 
-func _on_attack_area_body_entered(body: Node3D) -> void:
+func ToggleHitbox(enabled: bool) -> void:
+	HitBox.monitoring = enabled
+	$Hitbox/AttackAreaDebug.visible = enabled
+
+
+func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 	if StateM.ActiveState.has_method("AttackHit"):
-		StateM.ActiveState.AttackHit(body)
+		StateM.ActiveState.AttackHit(Target)
 
 
-func ToggleAttackArea(enabled: bool) -> void:
-	AttackArea.monitoring = enabled
-	$AttackArea/AttackAreaDebug.visible = enabled
+func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+	if !Invincible:
+		if Globals.RingCount > 0:
+			StateM.ChangeState("Hurt", {
+				"BounceDirection": Source.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+				"DropRings": true,
+			})
+		else:
+			HealthEmpty.emit()
+			StateM.ChangeState("Death")

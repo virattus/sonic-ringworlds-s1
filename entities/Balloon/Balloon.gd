@@ -8,8 +8,8 @@ func _process(delta: float) -> void:
 	pass
 
 
-func ReceiveDamage(hurtbox: Area3D, damage: int) -> void:
-	super(hurtbox, damage)
+func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+	super(Source, Damage)
 	if Health <= 0:
 		SndPop.play()
 		$StateMachine.ChangeState("Pop")

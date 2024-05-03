@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtd6sg2crg1n8"]
+
+[ext_resource type="Script" path="res://entities/Checkpoint/CheckPoint.gd" id="1_y5jyj"]
+[ext_resource type="Texture2D" uid="uid://8eqy44rx5dpd" path="res://entities/Checkpoint/StarPoleBase.png" id="2_4pcfd"]
+[ext_resource type="Texture2D" uid="uid://b4y6jdmxw134t" path="res://entities/Checkpoint/StarPoleSpinner.png" id="3_gru4x"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jelig"]
+
+[node name="CheckPoint" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_y5jyj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_jelig")
+
+[node name="SpriteBase" type="Sprite3D" parent="."]
+offset = Vector2(0, 24)
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_4pcfd")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81241, 0)
+
+[node name="SpriteSpinner" type="Sprite3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.386, 0)
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_gru4x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

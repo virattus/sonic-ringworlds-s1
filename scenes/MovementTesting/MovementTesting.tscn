@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=14 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
 [ext_resource type="PackedScene" uid="uid://y5djm215ls8v" path="res://entities/Coin/Coin.tscn" id="6_fynam"]
 [ext_resource type="PackedScene" uid="uid://dwv57vyogn2kk" path="res://entities/Balloon/Balloon.tscn" id="7_b7r6t"]
+[ext_resource type="PackedScene" uid="uid://dtd6sg2crg1n8" path="res://entities/Checkpoint/CheckPoint.tscn" id="8_axbsj"]
 [ext_resource type="PackedScene" uid="uid://dm7ykl3qt5js" path="res://entities/SonicAfterimage/SonicAfterimage.tscn" id="8_cy2yj"]
 [ext_resource type="PackedScene" uid="uid://cyk3iwoyy776q" path="res://entities/RingBounce/RingBounce.tscn" id="8_dur5e"]
-[ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/HurtBox/HurtBox.tscn" id="9_cvnib"]
+[ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/Hurtbox/Hurtbox.tscn" id="9_cvnib"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
 [ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="11_yd8q3"]
 
@@ -25,10 +26,10 @@ albedo_color = Color(1, 0, 0, 0.6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.69136, 2.91766e-07, 4.83295)
-bones/3/position = Vector3(-2.50051, -0.75626, 1.00135)
-bones/4/position = Vector3(5.03609, -0.822021, 4.52641)
-bones/5/position = Vector3(2.54081, 0.420875, 0.701813)
+bones/2/position = Vector3(-4.73278, 2.41239e-07, 4.63621)
+bones/3/position = Vector3(-2.51087, -0.75626, 0.835675)
+bones/4/position = Vector3(4.98431, -0.822021, 4.3918)
+bones/5/position = Vector3(2.57188, 0.420875, 0.60862)
 
 [node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
@@ -638,6 +639,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6554, 4.38105, 9.25305)
 
 [node name="Balloon4" parent="MovementTesting" index="9" instance=ExtResource("7_b7r6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0887, 7.10198, 14.4688)
+
+[node name="CheckPoint" parent="MovementTesting" index="10" instance=ExtResource("8_axbsj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.7292, 0, -14.2188)
 
 [node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)

@@ -22,7 +22,7 @@ func _ready() -> void:
 func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
 	owner.SonicBall.visible = true
-	owner.ToggleAttackArea(true)
+	owner.ToggleHitbox(true)
 	
 	owner.SndSpinCharge.play()
 	
@@ -37,7 +37,7 @@ func Enter(_msg := {}) -> void:
 func Exit() -> void:
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
-	owner.ToggleAttackArea(false)
+	owner.ToggleHitbox(false)
 	
 	owner.SndSpinCharge.stop()
 
@@ -92,6 +92,6 @@ func Update(_delta: float) -> void:
 	
 
 
-func AttackHit(body: Node3D):
+func AttackHit(Target: Hurtbox):
 	VerticalVelocity = 1.0
-	body.ReceiveDamage(owner.AttackArea, 1)
+	Target.ReceiveDamage(owner.HitBox, 1)
