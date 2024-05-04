@@ -31,7 +31,7 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "InputJump")
 	DebugMenu.AddMonitor(self, "InputAttack")
 	
-	InputAnalogueDeadzone = 0.0
+	InputAnalogueDeadzone = 0.1
 
 
 func _process(_delta: float) -> void:

@@ -5,11 +5,6 @@ var AirVel := Vector3.ZERO
 var InputVel := Vector3.ZERO
 var InputSpeed := 0.0
 
-var AddPlayerInput := false
-
-
-const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
-
 
 func _ready() -> void:
 	super()
@@ -47,9 +42,9 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	UpdateInput(_delta)
-	var inputVel = (InputVel * InputSpeed) if AddPlayerInput else Vector3.ZERO
-	AirMove(_delta, inputVel)
+	#UpdateInput(_delta)
+	#var inputVel = (InputVel * InputSpeed) if AddPlayerInput else Vector3.ZERO
+	#AirMove(_delta, inputVel)
 	super(_delta)
 
 
@@ -67,28 +62,3 @@ func AirMove(_delta: float, additionalInput:= Vector3.ZERO) -> void:
 		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
 	
 	owner.Move(vel)
-
-
-func CollisionDetection(groundMin: float, wallMin: float) -> SonicCollision:
-	for i in range(owner.get_slide_collision_count()):
-		var collision = owner.get_slide_collision(i)
-		var coll = COLLISION_INDICATOR.instantiate()
-		owner.get_parent().add_child(coll)
-		coll.SetToCollision(collision)
-		
-		var dot = owner.up_direction.dot(collision.get_normal())
-		if dot > groundMin:
-			print("Air: Floor hit")
-			return SonicCollision.new(SonicCollision.COLL_TYPE.BOTTOM, collision.get_position(), collision.get_normal())
-		elif dot > wallMin:
-			print("Air: Side hit")
-			return SonicCollision.new(SonicCollision.COLL_TYPE.SIDE, collision.get_position(), collision.get_normal())
-		else: #Hit ceiling
-			var groundDot = owner.up_direction.dot(Vector3.UP)
-			if groundDot < 0.75:
-				print("Air: landed upside down")
-				return SonicCollision.new(SonicCollision.COLL_TYPE.BOTTOM, collision.get_position(), collision.get_normal())
-			else:
-				print("Air: hit ceiling? GroundDot was ", groundDot)
-				return SonicCollision.new(SonicCollision.COLL_TYPE.TOP, collision.get_position(), collision.get_normal())
-	return null

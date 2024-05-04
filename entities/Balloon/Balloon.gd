@@ -13,3 +13,4 @@ func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 	if Health <= 0:
 		SndPop.play()
 		$StateMachine.ChangeState("Pop")
+		

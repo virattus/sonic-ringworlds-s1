@@ -29,7 +29,7 @@ func Update(_delta: float) -> void:
 
 	owner.CharMesh.AlignToY(owner.up_direction)
 
-	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
+	owner.up_direction = owner.up_direction.normalized().slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE)
 	owner.CharGroundCast.target_position = -owner.FloorNormal.normalized() * owner.CharGroundCastLength
 	owner.GroundCast.target_position = -owner.FloorNormal.normalized() * owner.GroundCastLength
 	

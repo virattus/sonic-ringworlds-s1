@@ -56,6 +56,9 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var GroundCastLength := 25.0
 
 
+const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+
+
 func _ready() -> void:
 	super()
 	
@@ -104,7 +107,7 @@ func _process(delta: float) -> void:
 		InputIndicator.look_at(global_position - Controller.InputVelocity.normalized())
 		
 	if velocity.length() > 0.0:
-		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()))
+		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()) + Vector3(0.0001, 0.0001, 0.0001))
 	
 
 
@@ -112,53 +115,28 @@ func Move(newVelocity: Vector3) -> void:
 	super(newVelocity)
 
 
-func UpdateUpDir() -> void:
-	if is_on_floor():
-		FloorNormal = get_floor_normal()
-	#else:
-	#	FloorNormal = Vector3.UP
-
-
-func CheckCharGroundCast() -> bool:
-	#CharGroundCast.target_position = -(FloorNormal.normalized())
-	CharGroundCast.force_raycast_update()
-	if CharGroundCast.is_colliding():
-		GroundPoint = CharGroundCast.get_collision_point()
-		if global_position.distance_to(GroundPoint) <= CollisionSize + GROUND_CAST_DIST:
-			return true
-		else:
-			return false
-	else:
-		return false
-
-
-func CheckFixedGroundCast() -> bool:
-	GroundCast.force_raycast_update()
-	if GroundCast.is_colliding():
-		var Point = GroundCast.get_collision_point()
-		if global_position.distance_to(Point) <= CollisionSize + GROUND_CAST_DIST:
-			GroundPoint = Point
-			FloorNormal = GroundCast.get_collision_normal()
-			#print("%s to %s" % [global_position, GroundPoint])
-			return true
-		else:
-			return false
-	else:
-		return false
-
-
-func CheckGroundCollision() -> bool:
-	if is_on_floor():
-		GroundCollision = true
-	#elif global_position.distance_to(GroundPoint) <= CollisionSize + GROUND_CAST_DIST:
-	#	return true
-	else:
-		if CheckCharGroundCast():
-			GroundCollision = true
-		else:
-			GroundCollision = false
-	
-	return GroundCollision
+func CollisionDetection(groundMin: float, wallMin: float, debugInfo := false) -> SonicCollision:
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if debugInfo:
+			var coll = COLLISION_INDICATOR.instantiate()
+			get_parent().add_child(coll)
+			coll.SetToCollision(collision)
+		
+		var dot = up_direction.dot(collision.get_normal())
+		if dot > groundMin:
+			if debugInfo:
+				print("Collision: Floor hit")
+			return SonicCollision.new(SonicCollision.COLL_TYPE.BOTTOM, collision.get_position(), collision.get_normal())
+		elif dot > wallMin:
+			if debugInfo:
+				print("Collision: Side hit")
+			return SonicCollision.new(SonicCollision.COLL_TYPE.SIDE, collision.get_position(), collision.get_normal())
+		else: #Hit ceiling
+			if debugInfo:
+				print("Collision: Ceiling Hit")
+			return SonicCollision.new(SonicCollision.COLL_TYPE.TOP, collision.get_position(), collision.get_normal())
+	return null
 
 
 func CollectRing() -> void:

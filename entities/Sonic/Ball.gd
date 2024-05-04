@@ -43,12 +43,15 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.SetVelocity(lerp(owner.velocity, Vector3.ZERO, _delta))
+	var horizVel = owner.velocity * Vector3(1, 0, 1)
+	horizVel = lerp(horizVel, Vector3.ZERO, _delta)
+	
+	owner.SetVelocity(horizVel)
 	
 	if owner.Speed > owner.PARAMETERS.MOVE_MAX_SPEED:
-		owner.SetVelocity(owner.velocity.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED)
+		owner.SetVelocity(horizVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED)
 	
-	owner.Move(owner.velocity + (Vector3.UP * VerticalVelocity))
+	owner.Move(horizVel + (Vector3.UP * VerticalVelocity))
 	
 	if owner.global_position.distance_to(LastFramePosition) < LASTFRAMEPOS_DIST_MAX:
 		LastFramePositionCount += _delta
@@ -57,32 +60,39 @@ func Update(_delta: float) -> void:
 	
 	LastFramePosition = owner.global_position
 	
-	var VerticalModifier := 0.5
 	
-	if owner.is_on_floor():
-		if !IsOnFloor:
-			print("Ball: Hit Ground")
-			IsOnFloor = !IsOnFloor
-		
-		owner.FloorNormal = owner.get_floor_normal()
-		owner.up_direction = owner.FloorNormal #owner.up_direction.slerp(owner.FloorNormal, 2.0 * _delta)
-		
-		var Dot = owner.FloorNormal.dot(Vector3.DOWN)
-		#print(Dot)
-		
-		if Dot < -0.99:
-			if owner.Speed < 1.0:
-				ChangeState("Idle")
-				return
-			else:
-				VerticalVelocity = 0.0
-				VerticalModifier = 0.0
-		else:
-			VerticalModifier = (Dot + 1.0) * 0.5
+	var VerticalModifier := 0.5
+	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN)
+	if collision != null:
+		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:
+			if !IsOnFloor:
+				print("Ball: Hit Ground")
+				IsOnFloor = true
+				
+				owner.FloorNormal = collision.CollisionNormal #owner.get_floor_normal()
+				owner.up_direction = owner.FloorNormal
+				
+				var Dot = owner.FloorNormal.dot(Vector3.DOWN)
+				if Dot < -0.99:
+					if owner.Speed < 1.0:
+						ChangeState("Idle")
+						return
+					else:
+						VerticalVelocity = 0.01
+						VerticalModifier = 0.0
+				else:
+					VerticalModifier = (Dot + 1.0) * 0.5
+		elif collision.CollisionType == SonicCollision.COLL_TYPE.SIDE:
+			var wallDot = owner.velocity.normalized().dot(collision.CollisionNormal)
+			print("Ball: Slammed into wall, dot: " + str(wallDot))
+			ChangeState("Idle")
+			return
+		else: #Handle ceiling hits
+			pass
 	else:
 		if IsOnFloor:
-			print("Ball: Left ground")
-			IsOnFloor = !IsOnFloor
+			print("Ball: Left Ground")
+			IsOnFloor = false
 	
 	#print(VerticalModifier)
 	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * VerticalModifier
@@ -93,5 +103,7 @@ func Update(_delta: float) -> void:
 
 
 func AttackHit(Target: Hurtbox):
-	VerticalVelocity = 1.0
+	if !owner.is_on_floor():
+		VerticalVelocity = 1.0
+	owner.DashModeCharge += 0.2
 	Target.ReceiveDamage(owner.HitBox, 1)

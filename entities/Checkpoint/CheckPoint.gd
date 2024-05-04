@@ -29,6 +29,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if !Triggered:
 		Triggered = true
 		Speed = clamp(body.velocity.length(), 0.0, 1.0)
+		$AudioStreamPlayer3D.play()
 
 
 

@@ -20,5 +20,7 @@ func Update(_delta: float) -> void:
 	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
 
 	if !owner.is_on_floor():
-		ChangeState("Fall")
+		ChangeState("Air", {
+			"SubState": "Fall",
+		})
 		return
