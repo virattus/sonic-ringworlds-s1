@@ -26,8 +26,7 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	get_parent().UpdateInput(_delta)
-	var inputVel = (get_parent().InputVel * get_parent().InputSpeed)
-	get_parent().AirMove(_delta, inputVel)
+	get_parent().AirMove(_delta, get_parent().InputVel)
 	
 	#owner.CharMesh.AlignToY(owner.FloorNormal)
 	#owner.CharMesh.look_at(owner.global_position + (owner.velocity * (Vector3.ONE - owner.FloorNormal)))

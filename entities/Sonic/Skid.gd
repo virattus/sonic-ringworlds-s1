@@ -8,6 +8,8 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", 1.0)
 	
 	owner.SndSkid.play()
+	
+	owner.SetVelocity(owner.velocity.normalized() * owner.PARAMETERS.SKID_START_SPEED)
 
 
 func Exit() -> void:

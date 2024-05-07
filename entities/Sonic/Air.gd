@@ -3,14 +3,12 @@ extends ComplexState
 
 var AirVel := Vector3.ZERO
 var InputVel := Vector3.ZERO
-var InputSpeed := 0.0
 
 
 func _ready() -> void:
 	super()
 	DebugMenu.AddMonitor(self, "AirVel")
 	DebugMenu.AddMonitor(self, "InputVel")
-	DebugMenu.AddMonitor(self, "InputSpeed")
 
 
 func Enter(_msg := {}) -> void:
@@ -27,14 +25,7 @@ func Enter(_msg := {}) -> void:
 	else:
 		InputVel = Vector3.ZERO
 	
-	if _msg.has("InputSpeed"):
-		InputSpeed = _msg["InputSpeed"]
-	else:
-		InputSpeed = 0.0
-	
 	super(_msg)
-	
-	
 
 
 func Exit() -> void:

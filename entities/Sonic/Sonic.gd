@@ -1,6 +1,8 @@
 extends Character
 
 
+signal Death
+
 
 @export var Camera: ThirdPersonCamera
 
@@ -168,5 +170,4 @@ func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 				"DropRings": true,
 			})
 		else:
-			HealthEmpty.emit()
 			StateM.ChangeState("Death")

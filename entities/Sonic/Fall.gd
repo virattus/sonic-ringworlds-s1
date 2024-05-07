@@ -27,8 +27,7 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	get_parent().UpdateInput(_delta)
-	var inputVel = (get_parent().InputVel * get_parent().InputSpeed)
-	get_parent().AirMove(_delta, inputVel)
+	get_parent().AirMove(_delta, get_parent().InputVel)
 	
 	owner.CameraFocus.position.y = clamp(owner.CameraFocus.position.y + (owner.velocity.y * 0.18 * _delta), owner.PARAMETERS.AIR_CAM_FOCUS_MIN_HEIGHT, owner.PARAMETERS.AIR_CAM_FOCUS_MAX_HEIGHT)
 	

@@ -31,6 +31,9 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
+	get_parent().UpdateInput(_delta)
+	get_parent().AirMove(_delta, get_parent().InputVel)
+	
 	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN, true)
 	if collision != null:
 		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:

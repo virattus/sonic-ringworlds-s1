@@ -14,11 +14,7 @@ func Enter(_msg := {}) -> void:
 	owner.up_direction = owner.FloorNormal
 	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized()) 
 	
-	var curSpeed = owner.Speed
-	owner.SetVelocity(owner.CharMesh.GetForwardVector() * curSpeed)
-	
-	if curSpeed <= owner.PARAMETERS.WIPEOUT_MIN_SLIDE_SPEED:
-		owner.SetVelocity(owner.CharMesh.GetForwardVector() * owner.PARAMETERS.WIPEOUT_MIN_SLIDE_SPEED)
+	owner.SetVelocity(owner.CharMesh.GetForwardVector() * owner.PARAMETERS.WIPEOUT_START_SPEED)
 	
 	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
 	owner.CharMesh.AlignToY(owner.FloorNormal)

@@ -9,7 +9,10 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SndDeath.play()
 	VerticalVelocity = owner.PARAMETERS.DEATH_INITIAL_VERTICAL_VELOCITY
-
+	owner.DashModeDrain = false
+	
+	owner.HealthEmpty.emit()
+	
 
 func Exit() -> void:
 	pass

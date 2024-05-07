@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3omr25ilj113"]
+
+[ext_resource type="Script" path="res://entities/KillBox/KillBox.gd" id="1_li1q5"]
+
+[node name="KillBox" type="Area3D" groups=["KillBox"]]
+collision_mask = 2
+script = ExtResource("1_li1q5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

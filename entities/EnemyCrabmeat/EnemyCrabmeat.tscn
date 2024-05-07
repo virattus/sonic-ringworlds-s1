@@ -1,21 +1,25 @@
-[gd_scene load_steps=13 format=3 uid="uid://b54file0qwj7e"]
+[gd_scene load_steps=14 format=3 uid="uid://b54file0qwj7e"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_eflwk"]
 [ext_resource type="PackedScene" uid="uid://dd14kspiykhby" path="res://models/Crabmeat/ModelCrabmeat.tscn" id="2_6d2dm"]
+[ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="3_yv2jd"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_ojqh3"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Idle.gd" id="5_gb616"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Chase.gd" id="6_8trow"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Wander.gd" id="7_lpetq"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Victory.gd" id="8_k2k6m"]
-[ext_resource type="Script" path="res://entities/Hitbox/Hitbox.gd" id="8_wmpfh"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7v2y6"]
 radius = 0.3
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k83w5"]
+radius = 0.685435
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s8aw0"]
+radius = 0.414116
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_50ks0"]
-radius = 0.308944
+radius = 0.222614
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_e8igs"]
 radius = 5.0
@@ -35,16 +39,11 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438099, 0)
 shape = SubResource("SphereShape3D_k83w5")
 
-[node name="Hitbox" type="Area3D" parent="." index="5"]
-collision_layer = 64
-collision_mask = 32
-monitoring = false
-monitorable = false
-script = ExtResource("8_wmpfh")
+[node name="Hitbox" parent="." index="5" instance=ExtResource("3_yv2jd")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.269524, 0)
-shape = SubResource("SphereShape3D_50ks0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332627, 0)
+shape = SubResource("SphereShape3D_s8aw0")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666749, 0.557141, -0.38463)
