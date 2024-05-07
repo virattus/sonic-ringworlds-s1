@@ -63,7 +63,7 @@ func Update(_delta: float) -> void:
 	
 	
 	var VerticalModifier := 0.5
-	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN)
+	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN, !IsOnFloor)
 	if collision != null:
 		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:
 			if !IsOnFloor:
@@ -80,7 +80,7 @@ func Update(_delta: float) -> void:
 					ChangeState("Idle")
 					return
 				else:
-					VerticalVelocity = 0.01
+					VerticalVelocity = 0.0
 					VerticalModifier = 0.0
 			else:
 				VerticalModifier = (Dot + 1.0) * 0.5
@@ -96,6 +96,7 @@ func Update(_delta: float) -> void:
 		if IsOnFloor:
 			print("Ball: Left Ground")
 			IsOnFloor = false
+			VerticalVelocity = 0.01
 	
 	#print(VerticalModifier)
 	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * (VerticalModifier if IsOnFloor else 1.0)

@@ -35,7 +35,18 @@ func Update(_delta: float) -> void:
 	
 	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN, true)
 	if collision != null:
-		pass
+		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:
+			owner.FloorNormal = collision.CollisionNormal
+			owner.up_direction = collision.CollisionNormal
+			ChangeState("Land")
+			return
+		elif collision.CollisionType == SonicCollision.COLL_TYPE.SIDE:
+			if owner.FloorNormal.dot(Vector3.UP) > 0.5:
+				ChangeState("Land")
+				return
+			else:
+				ChangeState("Wipeout")
+				return
 	
 	
 	if Input.is_action_just_pressed("Jump"):
