@@ -35,6 +35,7 @@ func Enter(_msg := {}) -> void:
 
 
 func Exit() -> void:
+	#owner.CharMesh.LookAt(owner.velocity.normalized())
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
 	owner.ToggleHitbox(false)
@@ -108,4 +109,3 @@ func AttackHit(Target: Hurtbox):
 	if !owner.is_on_floor():
 		VerticalVelocity = 1.0
 	owner.DashModeCharge += 0.2
-	Target.ReceiveDamage(owner.HitBox, 1)

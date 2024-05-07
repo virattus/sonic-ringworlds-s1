@@ -1,10 +1,10 @@
 extends "res://effects/Decal/Decal.gd"
 
 
-
-@export var TargetRay = RayCast3D.new()
+@export var TargetRay : RayCast3D
 
 
 func _process(_delta: float) -> void:
-	TargetRay.force_raycast_update()
-	UpdateWithRaycast(TargetRay)
+	if TargetRay:
+		TargetRay.force_raycast_update()
+		UpdateWithRaycast(TargetRay)

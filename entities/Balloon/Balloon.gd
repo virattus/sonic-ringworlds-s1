@@ -4,7 +4,7 @@ extends Character
 @onready var SndPop = $SndPop
 
 
-func _process(delta: float) -> void:
+func _ready() -> void:
 	pass
 
 

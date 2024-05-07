@@ -9,10 +9,7 @@ var CollisionNormal := Vector3.ZERO
 
 func UpdateWithRaycast(raycast: RayCast3D) -> void:
 	#raycast.force_raycast_update()
-	if !raycast.is_colliding():
-		visible = false
-	else:
-		visible = true
+	if raycast.is_colliding():
 		CollisionPoint = raycast.get_collision_point()
 		CollisionNormal = raycast.get_collision_normal()
 		
