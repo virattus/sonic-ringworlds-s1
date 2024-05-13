@@ -23,6 +23,7 @@ func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
 	owner.SonicBall.visible = true
 	owner.ToggleHitbox(true)
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_BALL
 	
 	owner.SndSpinCharge.play()
 	
@@ -32,6 +33,7 @@ func Enter(_msg := {}) -> void:
 	LastFramePositionCount = 0
 	
 	IsOnFloor = owner.is_on_floor()
+	
 
 
 func Exit() -> void:
@@ -39,6 +41,7 @@ func Exit() -> void:
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
 	owner.ToggleHitbox(false)
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
 	
 	owner.SndSpinCharge.stop()
 
@@ -85,10 +88,13 @@ func Update(_delta: float) -> void:
 			else:
 				VerticalModifier = (Dot + 1.0) * 0.5
 		elif collision.CollisionType == SonicCollision.COLL_TYPE.SIDE:
-			var wallDot = owner.velocity.normalized().dot(collision.CollisionNormal)
-			print("Ball: Slammed into wall, dot: " + str(wallDot))
-			ChangeState("Idle")
-			return
+			var AirDot = collision.CollisionNormal.dot(Vector3.UP)
+			if AirDot > 0.5: 
+				#
+				var wallDot = owner.velocity.normalized().dot(collision.CollisionNormal)
+				print("Ball: Slammed into wall, dot: " + str(wallDot))
+				ChangeState("Idle")
+				return
 		else: #Handle ceiling hits
 			pass
 	else:
@@ -99,7 +105,7 @@ func Update(_delta: float) -> void:
 			VerticalVelocity = 0.01
 	
 	#print(VerticalModifier)
-	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * (VerticalModifier if IsOnFloor else 1.0)
+	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta# * (VerticalModifier if IsOnFloor else 1.0)
 
 	if LastFramePositionCount > LASTFRAMEPOSCOUNT_MAX:
 		ChangeState("Idle")
@@ -107,6 +113,7 @@ func Update(_delta: float) -> void:
 
 
 func AttackHit(Target: Hurtbox):
+	print("Ball: Hit enemy")
 	if !owner.is_on_floor():
-		VerticalVelocity = 1.0
+		VerticalVelocity = owner.PARAMETERS.ATTACK_BOUNCE_POW
 	owner.DashModeCharge += 0.2

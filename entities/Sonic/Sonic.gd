@@ -12,8 +12,10 @@ var GroundPoint := Vector3.ZERO
 var DashMode := false
 var DashModeCharge := 0.0
 var DashModeDrain := true
+
 var Invincible := false
 var Flicker := false
+var DamageThreshold := 0
 
 const GROUND_CAST_DIST = 0.1
 
@@ -164,10 +166,11 @@ func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 	if !Invincible:
-		if Globals.RingCount > 0:
-			StateM.ChangeState("Hurt", {
-				"BounceDirection": Source.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
-				"DropRings": true,
-			})
-		else:
-			StateM.ChangeState("Death")
+		if Damage > DamageThreshold:
+			if Globals.RingCount > 0:
+				StateM.ChangeState("Hurt", {
+					"BounceDirection": Source.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+					"DropRings": true,
+				})
+			else:
+				StateM.ChangeState("Death")

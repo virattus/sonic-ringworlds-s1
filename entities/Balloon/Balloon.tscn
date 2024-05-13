@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwv57vyogn2kk"]
+[gd_scene load_steps=11 format=3 uid="uid://dwv57vyogn2kk"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_pspdp"]
 [ext_resource type="PackedScene" uid="uid://h4kvfn8eais1" path="res://entities/Balloon/balloon_model.tscn" id="2_5xh2y"]
 [ext_resource type="Script" path="res://entities/Balloon/Balloon.gd" id="2_dxsl7"]
+[ext_resource type="Texture2D" uid="uid://ce86k7g83srx7" path="res://entities/Balloon/Pop.png" id="4_cqi2n"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_qdvqs"]
 [ext_resource type="Script" path="res://entities/Balloon/Idle.gd" id="5_w0551"]
 [ext_resource type="Script" path="res://entities/Balloon/Pop.gd" id="6_2tctk"]
@@ -23,16 +24,23 @@ script = ExtResource("2_dxsl7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276508, 0)
 shape = SubResource("SphereShape3D_hgypv")
 
+[node name="SpritePop" type="Sprite3D" parent="." index="1"]
+visible = false
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_cqi2n")
+
 [node name="BalloonModel" parent="CharacterMesh" index="0" instance=ExtResource("2_5xh2y")]
 
-[node name="Hurtbox" parent="." index="4"]
+[node name="Hurtbox" parent="." index="5"]
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.252161, 0)
 shape = SubResource("SphereShape3D_nlaba")
 
-[node name="StateMachine" type="Node" parent="." index="5" node_paths=PackedStringArray("ActiveState")]
+[node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("4_qdvqs")
 ActiveState = NodePath("Idle")
 
@@ -46,7 +54,7 @@ script = ExtResource("6_2tctk")
 wait_time = 60.0
 one_shot = true
 
-[node name="SndPop" type="AudioStreamPlayer3D" parent="." index="6"]
+[node name="SndPop" type="AudioStreamPlayer3D" parent="." index="7"]
 stream = ExtResource("7_6f6jp")
 bus = &"SoundEffects"
 

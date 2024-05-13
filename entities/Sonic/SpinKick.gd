@@ -20,6 +20,7 @@ func _ready() -> void:
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 1.0)
 	owner.ToggleHitbox(true)
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_SPINKICK
 	
 	AttackReleased = false
 	
@@ -32,6 +33,7 @@ func Enter(_msg := {}) -> void:
 func Exit() -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 0.0)
 	owner.ToggleHitbox(false)
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
 
 
 func Update(_delta: float) -> void:

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://rj4b8heuvv3s"]
+
+[ext_resource type="Script" path="res://entities/Flicky/Flicky.gd" id="1_vbqcw"]
+[ext_resource type="Texture2D" uid="uid://c1e73bgkapre6" path="res://entities/Flicky/FlickyAnim.png" id="2_aqorx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1xm3b"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de5oa"]
+atlas = ExtResource("2_aqorx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_covjv"]
+atlas = ExtResource("2_aqorx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lyea6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de5oa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_covjv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_woi41"]
+radius = 0.25
+
+[node name="Flicky" type="RigidBody3D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_1xm3b")
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_vbqcw")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_lyea6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_woi41")

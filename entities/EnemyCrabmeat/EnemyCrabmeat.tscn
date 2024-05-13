@@ -1,13 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://b54file0qwj7e"]
+[gd_scene load_steps=16 format=3 uid="uid://b54file0qwj7e"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_eflwk"]
 [ext_resource type="PackedScene" uid="uid://dd14kspiykhby" path="res://models/Crabmeat/ModelCrabmeat.tscn" id="2_6d2dm"]
+[ext_resource type="Script" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.gd" id="2_wdkbs"]
 [ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="3_yv2jd"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_ojqh3"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Idle.gd" id="5_gb616"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Chase.gd" id="6_8trow"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Wander.gd" id="7_lpetq"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Victory.gd" id="8_k2k6m"]
+[ext_resource type="AudioStream" uid="uid://oggnx8vkwvs1" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C1.wav" id="10_6ck42"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7v2y6"]
 radius = 0.3
@@ -27,6 +29,7 @@ radius = 5.0
 [node name="EnemyCrabmeat" instance=ExtResource("1_eflwk")]
 collision_layer = 8
 collision_mask = 11
+script = ExtResource("2_wdkbs")
 
 [node name="WorldCollision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
@@ -80,6 +83,10 @@ script = ExtResource("7_lpetq")
 
 [node name="Victory" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("8_k2k6m")
+
+[node name="SndDefeat" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource("10_6ck42")
+bus = &"SoundEffects"
 
 [connection signal="body_entered" from="PlayerSearch" to="StateMachine/Idle" method="_on_player_search_body_entered"]
 [connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

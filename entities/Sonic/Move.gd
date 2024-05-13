@@ -20,10 +20,10 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	#if owner.Controller.InputVelocity.length() > 0.0:
-		#if owner.Speed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
-			#ChangeState("Skid")
-			#return
+	if owner.Controller.InputVelocity.length() > 0.0:
+		if owner.Speed >= owner.PARAMETERS.SKID_MIN_REQUIRED_SPEED and IsInputSkidding():
+			ChangeState("Skid")
+			return
 	
 	super(_delta)
 

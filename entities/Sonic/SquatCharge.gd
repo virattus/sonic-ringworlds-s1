@@ -22,7 +22,9 @@ func Update(_delta: float) -> void:
 	owner.Move(Vector3.ZERO)
 	
 	if !owner.is_on_floor():
-		ChangeState("Fall")
+		ChangeState("Air", {
+			"SubState": "Fall",
+		})
 		return
 	
 	#Enter DashMode

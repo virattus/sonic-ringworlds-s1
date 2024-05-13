@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=13 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cyk3iwoyy776q" path="res://entities/RingBounce/RingBounce.tscn" id="8_dur5e"]
 [ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="9_s14hi"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
+[ext_resource type="PackedScene" uid="uid://rj4b8heuvv3s" path="res://entities/Flicky/Flicky.tscn" id="11_8ffgm"]
 [ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="11_yd8q3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6h7t0"]
@@ -20,10 +21,10 @@ size = Vector3(200, 20, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.72175, 1.78197e-07, 4.68864)
-bones/3/position = Vector3(-2.50811, -0.75626, 0.879829)
-bones/4/position = Vector3(4.99811, -0.822021, 4.42767)
-bones/5/position = Vector3(2.5636, 0.420875, 0.633456)
+bones/2/position = Vector3(-4.67123, 3.16333e-07, 4.92861)
+bones/3/position = Vector3(-2.49548, -0.75626, 1.0819)
+bones/4/position = Vector3(5.06126, -0.822021, 4.59186)
+bones/5/position = Vector3(2.52571, 0.420875, 0.747124)
 
 [node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
@@ -644,6 +645,9 @@ shape = SubResource("BoxShape3D_6h7t0")
 
 [node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)
+
+[node name="Flicky" parent="." index="13" instance=ExtResource("11_8ffgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.48106, 0)
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]

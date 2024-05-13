@@ -1,6 +1,8 @@
 extends Character
 
 
+@onready var SpritePop = $SpritePop
+
 @onready var SndPop = $SndPop
 
 
