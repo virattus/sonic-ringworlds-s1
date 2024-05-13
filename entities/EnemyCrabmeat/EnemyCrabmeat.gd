@@ -9,6 +9,7 @@ const FLICKY = preload("res://entities/Flicky/Flicky.tscn")
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+	SndDefeat.play()
 	var exp = EXPLOSION.instantiate()
 	get_parent().add_child(exp)
 	exp.global_position = global_position + Vector3(0, 0.5, 0)

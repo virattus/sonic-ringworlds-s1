@@ -10,4 +10,4 @@ func _physics_process(delta: float) -> void:
 	
 	if !GroundContact:
 		GroundContact = true
-		linear_velocity = Vector3(randf(), 0.0, randf()).normalized() + Vector3(0.0, 2.0, 0.0)
+		linear_velocity = Vector3(randf(), 0.0, randf()).normalized() + Vector3(0.0, 3.0, 0.0)
