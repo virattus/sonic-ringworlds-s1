@@ -27,6 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if !Triggered:
+		body.StartingPosition = global_position + Vector3(0, 0.5, 0)
 		Triggered = true
 		Speed = clamp(body.velocity.length(), 0.0, 1.0)
 		$AudioStreamPlayer3D.play()

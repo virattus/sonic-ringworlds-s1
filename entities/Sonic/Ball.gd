@@ -27,7 +27,10 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SndSpinCharge.play()
 	
-	VerticalVelocity = 0.0
+	if _msg.has("VerticalVelocity"):
+		VerticalVelocity = _msg["VerticalVelocity"]
+	else:
+		VerticalVelocity = 0.0
 	
 	LastFramePosition = owner.global_position
 	LastFramePositionCount = 0
@@ -48,10 +51,13 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	var horizVel = owner.velocity * Vector3(1, 0, 1)
-	horizVel = lerp(horizVel, Vector3.ZERO, _delta)
+	
+	var InputVel = owner.Controller.InputVelocity
+	var LerpSpeed = (clamp(-InputVel.dot(horizVel.normalized()), 0.0, 1.0) * owner.PARAMETERS.BALL_LERP_MAGNITUDE) + owner.PARAMETERS.BALL_LERP_BASE
+	
+	horizVel = horizVel.move_toward(Vector3.ZERO, LerpSpeed * _delta)
 	
 	owner.SetVelocity(horizVel)
-	
 	if owner.Speed > owner.PARAMETERS.MOVE_MAX_SPEED:
 		owner.SetVelocity(horizVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED)
 	
@@ -106,6 +112,8 @@ func Update(_delta: float) -> void:
 	
 	#print(VerticalModifier)
 	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta# * (VerticalModifier if IsOnFloor else 1.0)
+	if VerticalVelocity < owner.PARAMETERS.FALL_TERMINAL_VEL:
+		VerticalVelocity = owner.PARAMETERS.FALL_TERMINAL_VEL
 
 	if LastFramePositionCount > LASTFRAMEPOSCOUNT_MAX:
 		ChangeState("Idle")

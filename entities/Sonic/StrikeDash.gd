@@ -7,10 +7,14 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
 	owner.AnimTree.set("parameters/Run/blend_amount", 1.0)
+	
+	owner.ToggleHitbox(true)
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_STRIKEDASH
 
 
 func Exit() -> void:
-	pass
+	owner.ToggleHitbox(false)
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
 
 
 func Update(_delta: float) -> void:
@@ -23,4 +27,8 @@ func Update(_delta: float) -> void:
 		ChangeState("Air", {
 			"SubState": "Fall",
 		})
+		return
+	
+	if !owner.DashMode:
+		ChangeSubState("Run")
 		return

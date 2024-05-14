@@ -69,6 +69,10 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "up_direction")
 	DebugMenu.AddMonitor(self, "FloorNormal")
 	DebugMenu.AddMonitor(self, "GroundPoint")
+	DebugMenu.AddMonitor(self, "DamageThreshold")
+	DebugMenu.AddMonitor(self, "DashMode")
+	DebugMenu.AddMonitor(self, "DashModeCharge")
+	DebugMenu.AddMonitor(self, "DashModeDrain")
 	
 	
 

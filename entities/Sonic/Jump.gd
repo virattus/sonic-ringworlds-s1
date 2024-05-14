@@ -47,6 +47,8 @@ func Update(_delta: float) -> void:
 			else:
 				ChangeState("Wipeout")
 				return
+		else:
+			get_parent().AirVel.y = 0.0
 	
 	
 	if Input.is_action_just_pressed("Jump"):
@@ -63,7 +65,9 @@ func Update(_delta: float) -> void:
 			})
 			return
 		else:
-			ChangeState("Ball")
+			ChangeState("Ball", {
+				"VerticalVelocity": get_parent().AirVel.y,
+			})
 			return
 
 	if get_parent().AirVel.y <= 0.0:
