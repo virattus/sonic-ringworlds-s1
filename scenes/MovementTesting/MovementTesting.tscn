@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=13 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -14,16 +14,27 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_6h7t0"]
 size = Vector3(200, 20, 200)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_soiij"]
+size = Vector3(200, 200, 20)
+
 [node name="MovementTesting" instance=ExtResource("1_8w2gn")]
 
 [node name="Sonic" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.6153, 3.84553e-07, 5.19423)
-bones/3/position = Vector3(-2.4815, -0.75626, 1.30559)
-bones/4/position = Vector3(5.13116, -0.822021, 4.77361)
-bones/5/position = Vector3(2.48377, 0.420875, 0.872948)
+bones/1/position = Vector3(0, -0.334433, 3.08106)
+bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.68231, 2.26302e-07, 4.87595)
+bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
+bones/3/position = Vector3(-2.49825, -0.75626, 1.03756)
+bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
+bones/4/position = Vector3(5.0474, -0.822021, 4.55583)
+bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
+bones/5/position = Vector3(2.53403, 0.420875, 0.722182)
+bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
+bones/6/position = Vector3(0, 0.334433, 5.21777)
+bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
 
 [node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
@@ -641,6 +652,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.7292, 0, -14.2188)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MovementTesting/KillBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24.6508, 0)
 shape = SubResource("BoxShape3D_6h7t0")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MovementTesting/KillBox" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 107.2)
+shape = SubResource("BoxShape3D_soiij")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="MovementTesting/KillBox" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -105.758)
+shape = SubResource("BoxShape3D_soiij")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="MovementTesting/KillBox" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 103.462, 0, 0)
+shape = SubResource("BoxShape3D_soiij")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="MovementTesting/KillBox" index="4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -105.617, 0, 0)
+shape = SubResource("BoxShape3D_soiij")
 
 [node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)

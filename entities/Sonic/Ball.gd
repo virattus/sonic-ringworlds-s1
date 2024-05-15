@@ -15,6 +15,7 @@ const LASTFRAMEPOSCOUNT_MAX = 1.0
 
 
 func _ready() -> void:
+	DebugMenu.AddMonitor(self, "HorizVelocity")
 	DebugMenu.AddMonitor(self, "VerticalVelocity")
 	DebugMenu.AddMonitor(self, "LastFramePosition")
 	DebugMenu.AddMonitor(self, "LastFramePositionCount")
@@ -31,7 +32,7 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("VerticalVelocity"):
 		VerticalVelocity = _msg["VerticalVelocity"]
 	else:
-		VerticalVelocity = 0.0
+		VerticalVelocity = owner.velocity.y
 	
 	HorizVelocity = owner.velocity * Vector3(1, 0, 1)
 	
