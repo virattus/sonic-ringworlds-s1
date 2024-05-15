@@ -2,6 +2,7 @@ extends BasicState
 
 
 var VerticalVelocity := 0.0
+var HorizVelocity := Vector3.ZERO
 
 var IsOnFloor := true
 
@@ -32,6 +33,8 @@ func Enter(_msg := {}) -> void:
 	else:
 		VerticalVelocity = 0.0
 	
+	HorizVelocity = owner.velocity * Vector3(1, 0, 1)
+	
 	LastFramePosition = owner.global_position
 	LastFramePositionCount = 0
 	
@@ -50,18 +53,17 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	var horizVel = owner.velocity * Vector3(1, 0, 1)
+	owner.Move(HorizVelocity + (Vector3.UP * VerticalVelocity))
 	
-	var InputVel = owner.Controller.InputVelocity
-	var LerpSpeed = (clamp(-InputVel.dot(horizVel.normalized()), 0.0, 1.0) * owner.PARAMETERS.BALL_LERP_MAGNITUDE) + owner.PARAMETERS.BALL_LERP_BASE
+	HorizVelocity = owner.velocity * Vector3(1, 0, 1)
 	
-	horizVel = horizVel.move_toward(Vector3.ZERO, LerpSpeed * _delta)
+	if HorizVelocity.length() > owner.PARAMETERS.BALL_HORIZ_MAX_SPEED:
+		HorizVelocity.lerp(HorizVelocity.normalized() * owner.PARAMETERS.BALL_HORIZ_MAX_SPEED, owner.PARAMETERS.BALL_HORIZ_SPEED_LERP_MOD * _delta)
 	
-	owner.SetVelocity(horizVel)
-	if owner.Speed > owner.PARAMETERS.MOVE_MAX_SPEED:
-		owner.SetVelocity(horizVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED)
-	
-	owner.Move(horizVel + (Vector3.UP * VerticalVelocity))
+	if IsOnFloor:
+		var InputVel = owner.Controller.InputVelocity
+		var LerpSpeed = (clamp(-InputVel.dot(HorizVelocity.normalized()), 0.0, 1.0) * owner.PARAMETERS.BALL_LERP_MAGNITUDE) + owner.PARAMETERS.BALL_LERP_BASE
+		HorizVelocity = HorizVelocity.move_toward(Vector3.ZERO, LerpSpeed * _delta)
 	
 	if owner.global_position.distance_to(LastFramePosition) < LASTFRAMEPOS_DIST_MAX:
 		LastFramePositionCount += _delta
