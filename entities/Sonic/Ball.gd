@@ -74,11 +74,12 @@ func Update(_delta: float) -> void:
 	LastFramePosition = owner.global_position
 	
 	
+	owner.up_direction = owner.up_direction.normalized().slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE)
+	
 	var VerticalModifier := 1.0
 	
 	if owner.is_on_floor():
 		owner.FloorNormal = owner.get_floor_normal()
-		owner.up_direction = owner.FloorNormal
 		owner.GroundCast.target_position = -owner.FloorNormal.normalized() * owner.GroundCastLength
 		if owner.GroundCollision == false:
 			print("Ball: Hit Ground")
@@ -106,7 +107,6 @@ func Update(_delta: float) -> void:
 				print("Ball: Left ground")
 				owner.GroundCollision = false
 				VerticalVelocity = 0.1
-	
 	
 	#print(VerticalModifier)
 	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * (VerticalModifier if owner.GroundCollision else 1.0)
