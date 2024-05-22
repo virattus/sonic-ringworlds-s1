@@ -4,8 +4,6 @@ extends BasicState
 var VerticalVelocity := 0.0
 var HorizVelocity := Vector3.ZERO
 
-var IsOnFloor := true
-
 var LastFramePosition := Vector3.ZERO
 var LastFramePositionCount := 0.0
 
@@ -27,6 +25,8 @@ func Enter(_msg := {}) -> void:
 	owner.ToggleHitbox(true)
 	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_BALL
 	
+	owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_BALL
+	
 	owner.SndSpinCharge.play()
 	
 	if _msg.has("VerticalVelocity"):
@@ -39,8 +39,6 @@ func Enter(_msg := {}) -> void:
 	LastFramePosition = owner.global_position
 	LastFramePositionCount = 0
 	
-	IsOnFloor = owner.is_on_floor()
-	
 
 
 func Exit() -> void:
@@ -49,6 +47,8 @@ func Exit() -> void:
 	owner.SonicBall.visible = false
 	owner.ToggleHitbox(false)
 	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
+	
+	owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_NORMAL
 	
 	owner.SndSpinCharge.stop()
 
@@ -61,7 +61,7 @@ func Update(_delta: float) -> void:
 	if HorizVelocity.length() > owner.PARAMETERS.BALL_HORIZ_MAX_SPEED:
 		HorizVelocity.lerp(HorizVelocity.normalized() * owner.PARAMETERS.BALL_HORIZ_MAX_SPEED, owner.PARAMETERS.BALL_HORIZ_SPEED_LERP_MOD * _delta)
 	
-	if IsOnFloor:
+	if owner.GroundCollision:
 		var InputVel = owner.Controller.InputVelocity
 		var LerpSpeed = (clamp(-InputVel.dot(HorizVelocity.normalized()), 0.0, 1.0) * owner.PARAMETERS.BALL_LERP_MAGNITUDE) + owner.PARAMETERS.BALL_LERP_BASE
 		HorizVelocity = HorizVelocity.move_toward(Vector3.ZERO, LerpSpeed * _delta)
@@ -74,55 +74,42 @@ func Update(_delta: float) -> void:
 	LastFramePosition = owner.global_position
 	
 	
-	var VerticalModifier := 0.5
-	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN, false)
-	if collision != null:
-		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:
-			if !IsOnFloor:
-				print("Ball: Hit Ground")
-				IsOnFloor = true
-				owner.GroundCollision = true
-				VerticalVelocity = 0.0
-				
-			owner.FloorNormal = collision.CollisionNormal #owner.get_floor_normal()
-			owner.up_direction = owner.FloorNormal
-			owner.GroundCast.target_position = -owner.FloorNormal.normalized() * owner.GroundCastLength
-			
-			var Dot = owner.FloorNormal.dot(Vector3.DOWN)
-			if Dot < -0.99:
-				if owner.Speed > 1.0:
-					VerticalModifier = 0.0
-			else:
-				VerticalModifier = (Dot + 1.0) * 0.5
-		elif collision.CollisionType == SonicCollision.COLL_TYPE.SIDE:
-			var AirDot = collision.CollisionNormal.dot(Vector3.UP)
-			if AirDot > 0.5: 
-				#
-				var wallDot = owner.velocity.normalized().dot(collision.CollisionNormal)
-				print("Ball: Slammed into wall, dot: " + str(wallDot))
-				ChangeState("Idle")
-				return
-		else: #Handle ceiling hits
-			pass
+	var VerticalModifier := 1.0
+	
+	if owner.is_on_floor():
+		owner.FloorNormal = owner.get_floor_normal()
+		owner.up_direction = owner.FloorNormal
+		owner.GroundCast.target_position = -owner.FloorNormal.normalized() * owner.GroundCastLength
+		if owner.GroundCollision == false:
+			print("Ball: Hit Ground")
+			owner.GroundCollision = true
+		if owner.FloorNormal.dot(Vector3.UP) > 0.75:
+			VerticalVelocity = 0.0
+	elif owner.is_on_wall():
+		pass
+	elif owner.is_on_ceiling(): #Hit ceiling
+		pass
 	else:
-		owner.GroundCast.target_position = Vector3.DOWN * owner.GroundCastLength
-		owner.GroundCast.force_raycast_update()
-		if owner.GroundCast.is_colliding():
-			if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.MOVE_RAYCAST_SNAP_MAX_DISTANCE:
-				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
-				owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
-				print("Ball: Ground Cast found floor, snapping to %s" % owner.global_position)
+		if owner.GroundCollision == true:
+			owner.CharGroundCast.target_position = owner.FloorNormal * -2.0
+			owner.CharGroundCast.force_raycast_update()
+			if owner.CharGroundCast.is_colliding():
+				if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.MOVE_RAYCAST_SNAP_MAX_DISTANCE:
+					print("Ball: CharCast found ground")
+					#owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
+					owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+				else:
+					print("Ball: Too far for even CharCast: %s" % owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()))
+					owner.GroundCollision = false
+					VerticalVelocity = 0.1
 			else:
-				print("Ball: too far from floor, distance is %" % owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()))
-		else:
-			if IsOnFloor:
-				print("Ball: Left Ground")
-				IsOnFloor = false
-				VerticalVelocity = 0.01
+				print("Ball: Left ground")
 				owner.GroundCollision = false
+				VerticalVelocity = 0.1
+	
 	
 	#print(VerticalModifier)
-	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * (VerticalModifier if IsOnFloor else 1.0)
+	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * (VerticalModifier if owner.GroundCollision else 1.0)
 	if owner.PARAMETERS.FALL_TERMINAL_VEL > VerticalVelocity:
 		VerticalVelocity = owner.PARAMETERS.FALL_TERMINAL_VEL
 
@@ -130,7 +117,7 @@ func Update(_delta: float) -> void:
 		ChangeState("Idle")
 		return
 	
-	if IsOnFloor and owner.Speed < 1.0 and owner.FloorNormal.dot(Vector3.UP) > 0.0:
+	if owner.GroundCollision and owner.Speed < 1.0 and owner.FloorNormal.dot(Vector3.UP) > 0.75:
 		ChangeState("Idle")
 		return
 	
