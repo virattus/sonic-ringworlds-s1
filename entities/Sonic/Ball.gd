@@ -75,12 +75,14 @@ func Update(_delta: float) -> void:
 	
 	
 	var VerticalModifier := 0.5
-	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN, !IsOnFloor)
+	var collision : SonicCollision = owner.CollisionDetection(owner.PARAMETERS.LAND_FLOOR_DOT_MIN, owner.PARAMETERS.LAND_WALL_DOT_MIN, false)
 	if collision != null:
 		if collision.CollisionType == SonicCollision.COLL_TYPE.BOTTOM:
 			if !IsOnFloor:
 				print("Ball: Hit Ground")
 				IsOnFloor = true
+				owner.GroundCollision = true
+				VerticalVelocity = 0.0
 				
 			owner.FloorNormal = collision.CollisionNormal #owner.get_floor_normal()
 			owner.up_direction = owner.FloorNormal
@@ -88,11 +90,7 @@ func Update(_delta: float) -> void:
 			
 			var Dot = owner.FloorNormal.dot(Vector3.DOWN)
 			if Dot < -0.99:
-				if owner.Speed < 1.0:
-					ChangeState("Idle")
-					return
-				else:
-					VerticalVelocity = 0.0
+				if owner.Speed > 1.0:
 					VerticalModifier = 0.0
 			else:
 				VerticalModifier = (Dot + 1.0) * 0.5
@@ -108,18 +106,33 @@ func Update(_delta: float) -> void:
 			pass
 	else:
 		owner.GroundCast.target_position = Vector3.DOWN * owner.GroundCastLength
-		if IsOnFloor:
-			print("Ball: Left Ground")
-			IsOnFloor = false
-			VerticalVelocity = 0.01
+		owner.GroundCast.force_raycast_update()
+		if owner.GroundCast.is_colliding():
+			if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.MOVE_RAYCAST_SNAP_MAX_DISTANCE:
+				owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
+				owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+				print("Ball: Ground Cast found floor, snapping to %s" % owner.global_position)
+			else:
+				print("Ball: too far from floor, distance is %" % owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()))
+		else:
+			if IsOnFloor:
+				print("Ball: Left Ground")
+				IsOnFloor = false
+				VerticalVelocity = 0.01
+				owner.GroundCollision = false
 	
 	#print(VerticalModifier)
-	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta# * (VerticalModifier if IsOnFloor else 1.0)
-	if VerticalVelocity < owner.PARAMETERS.FALL_TERMINAL_VEL:
+	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta * (VerticalModifier if IsOnFloor else 1.0)
+	if owner.PARAMETERS.FALL_TERMINAL_VEL > VerticalVelocity:
 		VerticalVelocity = owner.PARAMETERS.FALL_TERMINAL_VEL
 
 	if LastFramePositionCount > LASTFRAMEPOSCOUNT_MAX:
 		ChangeState("Idle")
+		return
+	
+	if IsOnFloor and owner.Speed < 1.0 and owner.FloorNormal.dot(Vector3.UP) > 0.0:
+		ChangeState("Idle")
+		return
 	
 
 

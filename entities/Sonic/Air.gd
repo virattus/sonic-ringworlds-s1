@@ -12,6 +12,7 @@ func _ready() -> void:
 
 
 func Enter(_msg := {}) -> void:
+	owner.GroundCollision = false
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.GroundCast.target_position = Vector3.DOWN * owner.GroundCastLength
 	

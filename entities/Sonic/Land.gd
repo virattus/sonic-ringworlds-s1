@@ -4,6 +4,7 @@ extends BasicState
 
 
 func Enter(_msg := {}) -> void:
+	owner.GroundCollision = true
 	owner.SndLand.play()
 	owner.up_direction = owner.FloorNormal
 	owner.CharMesh.AlignToY(owner.FloorNormal)
