@@ -25,7 +25,7 @@ func Enter(_msg := {}) -> void:
 	owner.ToggleHitbox(true)
 	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_BALL
 	
-	owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_BALL
+	#owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_BALL
 	
 	owner.SndSpinCharge.play()
 	
@@ -48,7 +48,7 @@ func Exit() -> void:
 	owner.ToggleHitbox(false)
 	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
 	
-	owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_NORMAL
+	#owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_NORMAL
 	
 	owner.SndSpinCharge.stop()
 
@@ -56,7 +56,10 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move(HorizVelocity + (Vector3.UP * VerticalVelocity))
 	
-	HorizVelocity = owner.velocity * Vector3(1, 0, 1)
+	var newVel = owner.velocity
+	
+	HorizVelocity = newVel * Vector3(1, 0, 1)
+	VerticalVelocity = newVel.y
 	
 	if HorizVelocity.length() > owner.PARAMETERS.BALL_HORIZ_MAX_SPEED:
 		HorizVelocity.lerp(HorizVelocity.normalized() * owner.PARAMETERS.BALL_HORIZ_MAX_SPEED, owner.PARAMETERS.BALL_HORIZ_SPEED_LERP_MOD * _delta)
@@ -87,8 +90,10 @@ func Update(_delta: float) -> void:
 		if owner.FloorNormal.dot(Vector3.UP) > 0.75:
 			VerticalVelocity = 0.0
 	elif owner.is_on_wall():
+		print("Ball: Hit wall")
 		pass
 	elif owner.is_on_ceiling(): #Hit ceiling
+		print("Ball: Hit Ceiling")
 		pass
 	else:
 		if owner.GroundCollision == true:
@@ -96,9 +101,11 @@ func Update(_delta: float) -> void:
 			owner.CharGroundCast.force_raycast_update()
 			if owner.CharGroundCast.is_colliding():
 				if owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()) < owner.PARAMETERS.MOVE_RAYCAST_SNAP_MAX_DISTANCE:
-					print("Ball: CharCast found ground")
-					#owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
-					owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
+					var castDot = owner.CharGroundCast.get_collision_normal().dot(owner.FloorNormal)
+					if castDot > 0.0:
+						print("Ball: CharCast found ground")
+						#owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
+						owner.global_position = owner.CharGroundCast.get_collision_point() + (owner.CharGroundCast.get_collision_normal() * 0.5)
 				else:
 					print("Ball: Too far for even CharCast: %s" % owner.global_position.distance_to(owner.CharGroundCast.get_collision_point()))
 					owner.GroundCollision = false
@@ -114,17 +121,32 @@ func Update(_delta: float) -> void:
 		VerticalVelocity = owner.PARAMETERS.FALL_TERMINAL_VEL
 
 	if LastFramePositionCount > LASTFRAMEPOSCOUNT_MAX:
-		ChangeState("Idle")
+		UncurlAndIdle()
 		return
 	
 	if owner.GroundCollision and owner.Speed < 1.0 and owner.FloorNormal.dot(Vector3.UP) > 0.75:
-		ChangeState("Idle")
+		UncurlAndIdle()
 		return
 	
 
 
-func AttackHit(Target: Hurtbox):
+func AttackHit(Target: Hurtbox) -> void:
 	print("Ball: Hit enemy")
 	if !owner.is_on_floor():
 		VerticalVelocity = owner.PARAMETERS.ATTACK_BOUNCE_POW
 	owner.DashModeCharge += 0.2
+
+
+func UncurlAndIdle() -> void:
+	owner.CharMesh.look_at(owner.global_position + owner.velocity)
+	owner.CharMesh.AlignToY(owner.up_direction)
+	ChangeState("Idle")
+
+
+func AlignToY(newY: Vector3) -> Basis:
+	var newBasis = Basis.IDENTITY
+	newBasis.y = newY
+	newBasis.x = -newBasis.z.cross(newBasis.y)
+	newBasis = newBasis.orthonormalized()
+	return newBasis
+	

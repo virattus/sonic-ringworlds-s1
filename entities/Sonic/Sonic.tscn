@@ -109,13 +109,13 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, -0.334433, 3.08106)
 bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.61614, 3.0703e-07, 5.19028)
+bones/2/position = Vector3(-4.61728, 3.0564e-07, 5.18487)
 bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.4817, -0.75626, 1.30226)
+bones/3/position = Vector3(-2.48199, -0.75626, 1.2977)
 bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(5.13012, -0.822021, 4.7709)
+bones/4/position = Vector3(5.1287, -0.822021, 4.7672)
 bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.48439, 0.420875, 0.871076)
+bones/5/position = Vector3(2.48525, 0.420875, 0.868512)
 bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
 bones/6/position = Vector3(0, 0.334433, 5.21777)
 bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
@@ -179,6 +179,7 @@ texture_filter = 0
 texture = ExtResource("5_wnnh5")
 
 [node name="Hurtbox" parent="." index="11"]
+visible = false
 collision_layer = 32
 collision_mask = 64
 
@@ -186,6 +187,7 @@ collision_mask = 64
 shape = SubResource("SphereShape3D_yv103")
 
 [node name="Hitbox" parent="." index="12" instance=ExtResource("7_xr2va")]
+visible = false
 collision_layer = 16
 collision_mask = 128
 monitoring = false
@@ -200,6 +202,7 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_r3sgk")
 
 [node name="LockOnArea" type="Area3D" parent="." index="13"]
+visible = false
 collision_layer = 0
 collision_mask = 8
 monitorable = false
