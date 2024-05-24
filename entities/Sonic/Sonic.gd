@@ -17,12 +17,6 @@ var Invincible := false
 var Flicker := false
 var DamageThreshold := 0
 
-const GROUND_CAST_DIST = 0.1
-
-const UP_VEC_LERP_RATE = 10.0
-
-
-const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
 @onready var SonicModel = $CharacterMesh/SonicModel
 @onready var SonicBall = $CharacterMesh/SonicBall
@@ -59,6 +53,14 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 @onready var CharGroundCastLength := 2.0
 @onready var GroundCastLength := 25.0
 
+
+
+const GROUND_CAST_DIST = 0.1
+
+const UP_VEC_LERP_RATE = 10.0
+
+
+const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 

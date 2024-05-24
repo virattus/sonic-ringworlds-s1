@@ -8,7 +8,7 @@ var DEBUG_SCENES = {
 	"RadicalCity": "res://scenes/R_RadicalCity/RadicalCity.tscn",
 	"RegalRuin": "res://scenes/R_RegalRuin/RegalRuin.tscn",
 	"ReactiveFactory": "res://scenes/R_ReactiveFactory/ReactiveFactory.tscn",
-	
+	"SphereMovement": "res://scenes/SphereMovement/SphereMovement.tscn",
 }
 var CurrentScene = null
 
