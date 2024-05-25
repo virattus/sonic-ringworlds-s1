@@ -9,6 +9,7 @@ var DEBUG_SCENES = {
 	"RegalRuin": "res://scenes/R_RegalRuin/RegalRuin.tscn",
 	"ReactiveFactory": "res://scenes/R_ReactiveFactory/ReactiveFactory.tscn",
 	"SphereMovement": "res://scenes/SphereMovement/SphereMovement.tscn",
+	"MapLoader": "res://scenes/GLTFLoader/GLTFLoader.tscn",
 }
 var CurrentScene = null
 

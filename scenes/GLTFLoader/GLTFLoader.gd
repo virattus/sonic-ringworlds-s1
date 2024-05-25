@@ -2,7 +2,9 @@ extends Node3D
 
 
 @export var ScenePath := "res://maps/SonicRRadicalCity/RadicalCity.glb"
+@export var UseFreeCam := false
 
+const SONIC_GAME = preload("res://scenes/SonicGame/SonicGame.tscn")
 
 func _ready() -> void:
 	pass
@@ -37,13 +39,29 @@ func LoadMap() -> bool:
 	for i in collnodes:
 		print(i.name)
 		i.create_convex_collision(false, false)
+		var collshape = i.find_child("CollisionShape3D")
+		if collshape.shape is ConcavePolygonShape3D:
+			collshape.shape.backface_collision = true
+		else:
+			print("this should never appear")
 		
+	
+	var sonic_game = SONIC_GAME.instantiate()
+	add_child(sonic_game)
 	
 	var startNode = scene.find_child("SonicStart")
 	if startNode == null:
 		print("Unable to find start point")
 	else:
-		$FreeCam.global_position = startNode.global_position
+		if UseFreeCam:
+			$FreeCam.global_position = startNode.global_position
+		else:
+			$FreeCam.queue_free()
+			var sonic = sonic_game.find_child("Sonic")
+			sonic.global_position = startNode.global_position
+	
+	
+	
 	
 	return true
 
