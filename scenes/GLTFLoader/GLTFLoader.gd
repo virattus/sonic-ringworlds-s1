@@ -7,7 +7,7 @@ extends Node3D
 const SONIC_GAME = preload("res://scenes/SonicGame/SonicGame.tscn")
 
 func _ready() -> void:
-	pass
+	$FileDialog.show()
 
 
 func LoadScene() -> void:
@@ -42,8 +42,6 @@ func LoadMap() -> bool:
 		var collshape = i.find_child("CollisionShape3D")
 		if collshape.shape is ConcavePolygonShape3D:
 			collshape.shape.backface_collision = true
-		else:
-			print("this should never appear")
 		
 	
 	var sonic_game = SONIC_GAME.instantiate()
@@ -68,7 +66,7 @@ func LoadMap() -> bool:
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	ScenePath = path
-	$FileDialog.queue_free()
+	$FileDialog.hide()
 	
 	LoadScene()
 

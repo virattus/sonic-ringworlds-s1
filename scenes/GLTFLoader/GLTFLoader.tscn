@@ -10,12 +10,11 @@ script = ExtResource("1_6amwv")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 process_mode = 3
-title = "Open Sonic Level (GLTF)"
+title = "Open a File"
 initial_position = 1
 size = Vector2i(900, 500)
-visible = true
 popup_window = true
-ok_button_text = "Load"
+ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.gltf", "*.glb")
