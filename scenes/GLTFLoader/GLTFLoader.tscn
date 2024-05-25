@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://g4q3svgxt2lh"]
+
+[ext_resource type="Script" path="res://scenes/GLTFLoader/GLTFLoader.gd" id="1_6amwv"]
+[ext_resource type="PackedScene" uid="uid://cspnw75c340a2" path="res://entities/FreeCam/FreeCam.tscn" id="2_mj3d5"]
+
+[node name="GltfLoader" type="Node3D"]
+script = ExtResource("1_6amwv")
+
+[node name="FreeCam" parent="." instance=ExtResource("2_mj3d5")]
+
+[node name="FileDialog" type="FileDialog" parent="."]
+process_mode = 3
+title = "Open Sonic Level (GLTF)"
+initial_position = 1
+size = Vector2i(900, 500)
+visible = true
+popup_window = true
+ok_button_text = "Load"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.gltf", "*.glb")
+use_native_dialog = true
+
+[connection signal="canceled" from="FileDialog" to="." method="_on_file_dialog_canceled"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

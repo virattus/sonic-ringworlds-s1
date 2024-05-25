@@ -35,7 +35,7 @@ window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/vrm/plugin.cfg")
 
 [importer_defaults]
 
