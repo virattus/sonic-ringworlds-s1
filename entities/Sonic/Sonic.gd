@@ -101,7 +101,9 @@ func _process(delta: float) -> void:
 		velocity = Vector3.ZERO
 		up_direction = Vector3.UP
 		FloorNormal = Vector3.UP
-		StateM.ChangeState("Idle")
+		StateM.ChangeState("Air", {
+			"SubState": "Fall",
+		})
 
 	if Flicker:
 		CharMesh.visible = (fmod(round(TimerInvincibility.time_left / PARAMETERS.FLICKER_TIME), 2.0) == 0)

@@ -5,6 +5,8 @@ extends Node3D
 @export var UseFreeCam := false
 
 const SONIC_GAME = preload("res://scenes/SonicGame/SonicGame.tscn")
+const RING = preload("res://entities/Coin/Coin.tscn")
+const BALLOON = preload("res://entities/Balloon/Balloon.tscn")
 
 func _ready() -> void:
 	$FileDialog.show()
@@ -12,7 +14,7 @@ func _ready() -> void:
 
 func LoadScene() -> void:
 	LoadMap()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func LoadMap() -> bool:
@@ -42,7 +44,16 @@ func LoadMap() -> bool:
 		var collshape = i.find_child("CollisionShape3D")
 		if collshape.shape is ConcavePolygonShape3D:
 			collshape.shape.backface_collision = true
-		
+	
+	var ringnodes = scene.find_children("Ring*")
+	for i in ringnodes:
+		var newRing = RING.instantiate()
+		i.add_child(newRing)
+	
+	var balloonNodes = scene.find_children("Balloon*")
+	for i in balloonNodes:
+		var newBalloon = BALLOON.instantiate()
+		i.add_child(newBalloon)
 	
 	var sonic_game = SONIC_GAME.instantiate()
 	add_child(sonic_game)
@@ -57,6 +68,7 @@ func LoadMap() -> bool:
 			$FreeCam.queue_free()
 			var sonic = sonic_game.find_child("Sonic")
 			sonic.global_position = startNode.global_position
+			sonic.StartingPosition = startNode.global_position
 	
 	
 	

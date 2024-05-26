@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2fboayv6dfwq"]
+[gd_scene load_steps=6 format=3 uid="uid://c2fboayv6dfwq"]
 
 [ext_resource type="Script" path="res://scenes/SphereMovement/SphereMovement.gd" id="1_qe4n2"]
 [ext_resource type="PackedScene" uid="uid://jgp1lkva5q0v" path="res://scenes/SphereMovement/TestChar/TestChar.tscn" id="3_hgaue"]
+[ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="4_2aetb"]
 [ext_resource type="PackedScene" uid="uid://qfs0856743ua" path="res://scenes/SphereMovement/InverseSphere.glb" id="4_qyhcm"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_brkq3"]
@@ -13,18 +14,20 @@ script = ExtResource("1_qe4n2")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.505356, 0.862911, 0, -0.862911, 0.505356, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="TestChar" parent="." node_paths=PackedStringArray("Cam") instance=ExtResource("3_hgaue")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60706, -24.4792)
+Cam = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="TestChar"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.82427)
 
-[node name="TestChar" parent="." node_paths=PackedStringArray("Cam") instance=ExtResource("3_hgaue")]
-Cam = NodePath("../Camera3D")
-
 [node name="InverseSphere" parent="." instance=ExtResource("4_qyhcm")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-visible = false
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -9.10759, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InverseSphere"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InverseSphere/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_brkq3")
+
+[node name="MovementTesting" parent="." instance=ExtResource("4_2aetb")]
