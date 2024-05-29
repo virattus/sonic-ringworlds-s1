@@ -15,15 +15,14 @@ script = ExtResource("1_qe4n2")
 transform = Transform3D(1, 0, 0, 0, 0.505356, 0.862911, 0, -0.862911, 0.505356, 0, 0, 0)
 
 [node name="TestChar" parent="." node_paths=PackedStringArray("Cam") instance=ExtResource("3_hgaue")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60706, -24.4792)
-Cam = NodePath("Camera3D")
+Cam = NodePath("../Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="TestChar"]
+[node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.82427)
 
 [node name="InverseSphere" parent="." instance=ExtResource("4_qyhcm")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -9.10759, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InverseSphere"]
 
@@ -31,3 +30,4 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -9.10759, 0)
 shape = SubResource("ConcavePolygonShape3D_brkq3")
 
 [node name="MovementTesting" parent="." instance=ExtResource("4_2aetb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.8513, 0, 0)

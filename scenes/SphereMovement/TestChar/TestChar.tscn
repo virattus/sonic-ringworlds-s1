@@ -20,6 +20,7 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="Environment" id="Environment_jr265"]
 
 [node name="TestChar" type="CharacterBody3D"]
+floor_snap_length = 1.0
 script = ExtResource("1_40pk5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

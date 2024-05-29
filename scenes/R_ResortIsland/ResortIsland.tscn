@@ -5,10 +5,13 @@
 
 [node name="ResortIsland" instance=ExtResource("1_4h384")]
 
-[node name="Sonic" parent="." index="1"]
+[node name="Sonic" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2298, 9.39549, 29.4337)
 
-[node name="ThirdPersonCamera" parent="." index="2"]
+[node name="ThirdPersonCamera" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2298, 9.39549, 29.4337)
 
 [node name="ResortIsland" parent="." index="7" instance=ExtResource("2_mtbu1")]
+
+[editable path="Sonic"]
+[editable path="Sonic/CharacterMesh/SonicModel"]

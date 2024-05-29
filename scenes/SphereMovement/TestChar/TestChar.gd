@@ -11,6 +11,7 @@ const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
+	apply_floor_snap()
 	var speed = velocity.length()
 	
 	velocity += Vector3.DOWN * (10.0 * delta)

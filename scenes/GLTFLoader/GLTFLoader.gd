@@ -40,7 +40,7 @@ func LoadMap() -> bool:
 	var collnodes = scene.find_children("*-col")
 	for i in collnodes:
 		print(i.name)
-		i.create_convex_collision(false, false)
+		i.create_trimesh_collision()
 		var collshape = i.find_child("CollisionShape3D")
 		if collshape.shape is ConcavePolygonShape3D:
 			collshape.shape.backface_collision = true
@@ -59,16 +59,19 @@ func LoadMap() -> bool:
 	add_child(sonic_game)
 	
 	var startNode = scene.find_child("SonicStart")
+	var startPos = Vector3.ZERO
 	if startNode == null:
 		print("Unable to find start point")
 	else:
-		if UseFreeCam:
-			$FreeCam.global_position = startNode.global_position
-		else:
-			$FreeCam.queue_free()
-			var sonic = sonic_game.find_child("Sonic")
-			sonic.global_position = startNode.global_position
-			sonic.StartingPosition = startNode.global_position
+		startPos = startNode.global_position
+	
+	if UseFreeCam:
+		$FreeCam.global_position = startPos
+	else:
+		$FreeCam.queue_free()
+		var sonic = sonic_game.find_child("Sonic")
+		sonic.global_position = startPos
+		sonic.StartingPosition = startPos
 	
 	
 	
