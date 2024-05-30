@@ -130,7 +130,7 @@ func Update(_delta: float) -> void:
 	
 
 
-func AttackHit(Target: Hurtbox) -> void:
+func AttackHit(_Target: Hurtbox) -> void:
 	print("Ball: Hit enemy")
 	if !owner.is_on_floor():
 		VerticalVelocity = owner.PARAMETERS.ATTACK_BOUNCE_POW

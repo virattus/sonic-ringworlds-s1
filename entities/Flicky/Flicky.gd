@@ -4,7 +4,7 @@ extends RigidBody3D
 var GroundContact := false
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if get_viewport().get_camera_3d().is_position_behind(global_position):
 		queue_free()
 	

@@ -1,78 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=10 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
-[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="2_gmbf4"]
-[ext_resource type="PackedScene" uid="uid://b4cv687hr7c4p" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.tscn" id="4_eq0bo"]
-[ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="5_76sst"]
 [ext_resource type="PackedScene" uid="uid://y5djm215ls8v" path="res://entities/Coin/Coin.tscn" id="6_fynam"]
 [ext_resource type="PackedScene" uid="uid://dwv57vyogn2kk" path="res://entities/Balloon/Balloon.tscn" id="7_b7r6t"]
 [ext_resource type="PackedScene" uid="uid://dtd6sg2crg1n8" path="res://entities/Checkpoint/CheckPoint.tscn" id="8_axbsj"]
 [ext_resource type="PackedScene" uid="uid://dm7ykl3qt5js" path="res://entities/SonicAfterimage/SonicAfterimage.tscn" id="8_cy2yj"]
-[ext_resource type="PackedScene" uid="uid://cyk3iwoyy776q" path="res://entities/RingBounce/RingBounce.tscn" id="8_dur5e"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
 [ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="11_yd8q3"]
-[ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="13_33qdc"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shw6i"]
-
-[sub_resource type="Sky" id="Sky_jehaj"]
-sky_material = SubResource("ProceduralSkyMaterial_shw6i")
-
-[sub_resource type="Environment" id="Environment_jrfg5"]
-background_mode = 2
-background_color = Color(0.647059, 0.8, 0.996078, 1)
-sky = SubResource("Sky_jehaj")
-ambient_light_source = 2
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(200, 200, 200)
 
 [node name="MovementTesting" instance=ExtResource("1_8w2gn")]
 
-[node name="Sonic" parent="." index="2" node_paths=PackedStringArray("Camera", "Controller") instance=ExtResource("2_gmbf4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
-Camera = NodePath("../ThirdPersonCamera")
-Controller = NodePath("../PlayerController")
-
-[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.74004, 1.55882e-07, 4.60176)
-bones/3/position = Vector3(-2.51268, -0.75626, 0.806661)
-bones/4/position = Vector3(4.97525, -0.822021, 4.36823)
-bones/5/position = Vector3(2.57732, 0.420875, 0.5923)
-
-[node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
-SonicNode = NodePath("../Sonic")
-FrameCount = 3
-
-[node name="SonicAfterimage2" parent="." index="4" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
-SonicNode = NodePath("../Sonic")
-FrameCount = 6
-
-[node name="SonicAfterimage3" parent="." index="5" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
-SonicNode = NodePath("../Sonic")
-FrameCount = 9
-
-[node name="ThirdPersonCamera" parent="." index="6" node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("4_eq0bo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
-RightAnalogue = false
-Char = NodePath("../Sonic")
-Focus = NodePath("../Sonic/CameraFocus")
-
-[node name="PlayerController" parent="." index="7" node_paths=PackedStringArray("Player", "Camera_Node") instance=ExtResource("5_76sst")]
-Player = NodePath("../Sonic")
-Camera_Node = NodePath("../ThirdPersonCamera")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="8"]
-environment = SubResource("Environment_jrfg5")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="9"]
-transform = Transform3D(0.589901, 0.557758, -0.583885, 0, 0.7231, 0.690744, 0.807475, -0.40747, 0.426557, 0, 6.26844, 0)
-light_energy = 0.5
-
-[node name="MovementTesting" parent="." index="10" instance=ExtResource("1_aqers")]
+[node name="MovementTesting" parent="." index="2" instance=ExtResource("1_aqers")]
 
 [node name="Rings" type="Node3D" parent="MovementTesting" index="2"]
 
@@ -668,18 +610,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0887, 7.10198, 14.4688)
 [node name="CheckPoint" parent="MovementTesting" index="10" instance=ExtResource("8_axbsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.7292, 0, -14.2188)
 
-[node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)
+[node name="Sonic" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
-[node name="KillBox" parent="." index="12" instance=ExtResource("13_33qdc")]
+[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
+bones/1/position = Vector3(0, -0.334433, 3.08106)
+bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.63143, 2.88368e-07, 5.11762)
+bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
+bones/3/position = Vector3(-2.48553, -0.75626, 1.24107)
+bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
+bones/4/position = Vector3(5.111, -0.822021, 4.72118)
+bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
+bones/5/position = Vector3(2.49587, 0.420875, 0.836656)
+bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
+bones/6/position = Vector3(0, 0.334433, 5.21777)
+bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 55.0691, 0)
+[node name="CollisionShape3D" parent="KillBox" index="0"]
 shape = SubResource("BoxShape3D_cgjes")
 
-[node name="DeathTimer" type="Timer" parent="." index="13"]
-wait_time = 2.0
-one_shot = true
+[node name="SonicAfterimage" parent="." index="10" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 3
+
+[node name="SonicAfterimage2" parent="." index="11" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 6
+
+[node name="SonicAfterimage3" parent="." index="12" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
+SonicNode = NodePath("../Sonic")
+FrameCount = 9
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]
