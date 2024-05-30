@@ -1,20 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxw1ws66bfvth"]
+[gd_scene load_steps=2 format=3 uid="uid://dxw1ws66bfvth"]
 
-[ext_resource type="PackedScene" uid="uid://csdlei7hte13g" path="res://models/Sonic/Sonic.glb" id="1_xxrqj"]
-[ext_resource type="Material" uid="uid://dmf1brhk80gvp" path="res://models/Sonic/Mat_SonicSpinKickWind.tres" id="2_2o2gp"]
+[ext_resource type="PackedScene" uid="uid://csdlei7hte13g" path="res://models/Sonic/Sonic.glb" id="1_ev4em"]
 
-[node name="SonicModel" instance=ExtResource("1_xxrqj")]
-
-[node name="Skeleton3D" parent="Armature" index="0"]
-bones/2/position = Vector3(-5.13685, -1.06558, 2.36099)
-bones/2/rotation = Quaternion(0.192434, -0.453324, 0.864455, 0.100914)
-bones/3/position = Vector3(-2.48036, -3.58949, 1.51559)
-bones/3/rotation = Quaternion(-0.927768, 0.0484538, 0.129734, 0.346509)
-bones/4/position = Vector3(5.13685, -1.06558, 2.36099)
-bones/4/rotation = Quaternion(-0.145089, -0.458146, 0.873649, -0.0760853)
-bones/5/position = Vector3(2.48036, -3.58949, 1.51559)
-bones/5/rotation = Quaternion(-0.929363, -0.0439835, -0.117764, 0.347105)
-bones/6/position = Vector3(0, 0, 5.26889)
-
-[node name="SpinKickWhoosh" parent="Armature/Skeleton3D" index="3"]
-surface_material_override/0 = ExtResource("2_2o2gp")
+[node name="Sonic_Model" instance=ExtResource("1_ev4em")]
