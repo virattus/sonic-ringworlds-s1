@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=11 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -7,15 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dtd6sg2crg1n8" path="res://entities/Checkpoint/CheckPoint.tscn" id="8_axbsj"]
 [ext_resource type="PackedScene" uid="uid://dm7ykl3qt5js" path="res://entities/SonicAfterimage/SonicAfterimage.tscn" id="8_cy2yj"]
 [ext_resource type="PackedScene" uid="uid://cyk3iwoyy776q" path="res://entities/RingBounce/RingBounce.tscn" id="8_dur5e"]
-[ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="9_s14hi"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
 [ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="11_yd8q3"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6h7t0"]
-size = Vector3(200, 20, 200)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_soiij"]
-size = Vector3(200, 200, 20)
+[sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
+size = Vector3(200, 200, 200)
 
 [node name="MovementTesting" instance=ExtResource("1_8w2gn")]
 
@@ -23,10 +19,10 @@ size = Vector3(200, 200, 20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17063, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.66623, 3.22424e-07, 4.95232)
-bones/3/position = Vector3(-2.49423, -0.75626, 1.10188)
-bones/4/position = Vector3(5.0675, -0.822021, 4.60809)
-bones/5/position = Vector3(2.52197, 0.420875, 0.758357)
+bones/2/position = Vector3(-4.62481, 3.72954e-07, 5.14907)
+bones/3/position = Vector3(-2.48387, -0.75626, 1.26756)
+bones/4/position = Vector3(5.11928, -0.822021, 4.7427)
+bones/5/position = Vector3(2.4909, 0.420875, 0.851554)
 
 [node name="SonicAfterimage" parent="." index="3" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
@@ -639,30 +635,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0887, 7.10198, 14.4688)
 [node name="CheckPoint" parent="MovementTesting" index="10" instance=ExtResource("8_axbsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.7292, 0, -14.2188)
 
-[node name="KillBox" parent="MovementTesting" index="11" instance=ExtResource("9_s14hi")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MovementTesting/KillBox" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24.6508, 0)
-shape = SubResource("BoxShape3D_6h7t0")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="MovementTesting/KillBox" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 107.2)
-shape = SubResource("BoxShape3D_soiij")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="MovementTesting/KillBox" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -105.758)
-shape = SubResource("BoxShape3D_soiij")
-
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="MovementTesting/KillBox" index="3"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 103.462, 0, 0)
-shape = SubResource("BoxShape3D_soiij")
-
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="MovementTesting/KillBox" index="4"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -105.617, 0, 0)
-shape = SubResource("BoxShape3D_soiij")
-
 [node name="RingBounce" parent="." index="11" instance=ExtResource("8_dur5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.449, 3.07356, -5.95444)
+
+[node name="CollisionShape3D" parent="KillBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 55.0691, 0)
+shape = SubResource("BoxShape3D_cgjes")
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]

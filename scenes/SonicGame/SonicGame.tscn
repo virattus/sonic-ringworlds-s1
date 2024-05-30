@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bybnnf47w5dsd"]
+[gd_scene load_steps=12 format=3 uid="uid://bybnnf47w5dsd"]
 
 [ext_resource type="Script" path="res://scenes/SonicGame/SonicGame.gd" id="1_hlded"]
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="2_mpqm8"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4cv687hr7c4p" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.tscn" id="3_t4fox"]
 [ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="4_31dce"]
 [ext_resource type="PackedScene" uid="uid://butvqg7bms767" path="res://overlays/HUD/HUD.tscn" id="5_yctne"]
+[ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="7_gtpja"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shw6i"]
 
@@ -20,6 +21,9 @@ ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.1
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig1oy"]
+size = Vector3(8000, 8000, 8000)
+
 [node name="SonicGame" type="Node"]
 script = ExtResource("1_hlded")
 
@@ -33,10 +37,18 @@ Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.65586, 2.58572e-07, 5.0016)
-bones/3/position = Vector3(-2.49163, -0.75626, 1.14337)
-bones/4/position = Vector3(5.08047, -0.822021, 4.6418)
-bones/5/position = Vector3(2.51419, 0.420875, 0.781699)
+bones/1/position = Vector3(0, -0.334433, 3.08106)
+bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.65556, 3.35449e-07, 5.00304)
+bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
+bones/3/position = Vector3(-2.49156, -0.75626, 1.14458)
+bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
+bones/4/position = Vector3(5.08085, -0.822021, 4.64279)
+bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
+bones/5/position = Vector3(2.51396, 0.420875, 0.782381)
+bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
+bones/6/position = Vector3(0, 0.334433, 5.21777)
+bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
 RightAnalogue = false
@@ -53,6 +65,11 @@ environment = SubResource("Environment_jrfg5")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.589901, 0.557758, -0.583885, 0, 0.7231, 0.690744, 0.807475, -0.40747, 0.426557, 0, 6.26844, 0)
 light_energy = 0.5
+
+[node name="KillBox" parent="." instance=ExtResource("7_gtpja")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
+shape = SubResource("BoxShape3D_ig1oy")
 
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 2.0

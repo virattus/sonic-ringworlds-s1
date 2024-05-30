@@ -1,25 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqe7klcxfc62u"]
+[gd_scene load_steps=7 format=3 uid="uid://bqe7klcxfc62u"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_18wxg"]
 [ext_resource type="PackedScene" uid="uid://73nnyd0gnmtm" path="res://maps/WindyValleyAct3/WindyValleyAct3.tscn" id="2_m3beo"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqj84"]
+size = Vector3(1000, 300, 600)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q8i4k"]
+size = Vector3(200, 200, 250)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x5vn7"]
+size = Vector3(200, 400, 250)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dww5t"]
+size = Vector3(699.621, 400, 520.164)
+
 [node name="SA1_WV_3" instance=ExtResource("1_18wxg")]
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, -0.334433, 3.08106)
-bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.67539, 2.34751e-07, 4.90885)
-bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(-2.49652, -0.75626, 1.06527)
-bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(5.05606, -0.822021, 4.57834)
-bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/4/scale = Vector3(1, 1, 1)
-bones/5/position = Vector3(2.52883, 0.420875, 0.737765)
-bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
-bones/6/position = Vector3(0, 0.334433, 5.21777)
-bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.64976, 3.4252e-07, 5.03057)
+bones/3/position = Vector3(-2.49011, -0.75626, 1.16777)
+bones/4/position = Vector3(5.08809, -0.822021, 4.66163)
+bones/5/position = Vector3(2.50961, 0.420875, 0.795423)
+
+[node name="CollisionShape3D" parent="KillBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 149.721, 0, 22.3643)
+shape = SubResource("BoxShape3D_kqj84")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="KillBox" index="1"]
+transform = Transform3D(0.308453, 0, 0.95124, 0, 1, 0, -0.95124, 0, 0.308453, 130.075, 0, -237.071)
+shape = SubResource("BoxShape3D_q8i4k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="KillBox" index="2"]
+transform = Transform3D(0.308453, 0, 0.95124, 0, 1, 0, -0.95124, 0, 0.308453, -93.2723, -158.288, -328.959)
+shape = SubResource("BoxShape3D_x5vn7")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="KillBox" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.8425, -304.805, -505.24)
+shape = SubResource("BoxShape3D_dww5t")
 
 [node name="WindyValleyAct3" parent="." index="8" instance=ExtResource("2_m3beo")]
 

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://calg7td71k0di"]
+[gd_scene load_steps=4 format=3 uid="uid://calg7td71k0di"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_j7jm6"]
 [ext_resource type="PackedScene" uid="uid://crclqertr0nup" path="res://maps/SonicRRegalRuin/RegalRuin.tscn" id="5_px6x5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2yhfb"]
+size = Vector3(250, 200, 200)
 
 [node name="RegalRuin" instance=ExtResource("1_j7jm6")]
 
@@ -9,16 +12,19 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.61407, 3.86059e-07, 5.2001)
-bones/3/position = Vector3(-2.48119, -0.75626, 1.31053)
-bones/4/position = Vector3(5.13271, -0.822021, 4.77762)
-bones/5/position = Vector3(2.48284, 0.420875, 0.875726)
+bones/2/position = Vector3(-4.70212, 2.78649e-07, 4.78187)
+bones/3/position = Vector3(-2.5032, -0.75626, 0.958341)
+bones/4/position = Vector3(5.02265, -0.822021, 4.49147)
+bones/5/position = Vector3(2.54888, 0.420875, 0.677619)
 
-[node name="ThirdPersonCamera" parent="." index="3" node_paths=PackedStringArray("Char")]
+[node name="ThirdPersonCamera" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
-Char = NodePath("../Sonic")
 
 [node name="RegalRuin" parent="." index="7" instance=ExtResource("5_px6x5")]
+
+[node name="CollisionShape3D" parent="KillBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0959, 53.8017, 0)
+shape = SubResource("BoxShape3D_2yhfb")
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]
