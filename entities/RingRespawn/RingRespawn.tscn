@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhjlx7c3xcjwo"]
+
+[ext_resource type="Script" path="res://entities/RingRespawn/RingRespawn.gd" id="1_2una1"]
+[ext_resource type="Texture2D" uid="uid://dq4glfdh08lsm" path="res://entities/Coin/Ring.png" id="2_ggs80"]
+
+[node name="RingRespawn" type="Node3D"]
+script = ExtResource("1_2una1")
+
+[node name="TimerRespawn" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+modulate = Color(1, 0, 1, 1)
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_ggs80")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[connection signal="timeout" from="TimerRespawn" to="." method="_on_timer_respawn_timeout"]

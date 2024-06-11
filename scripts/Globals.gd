@@ -23,6 +23,7 @@ var PreviousMouseMode := -1
 
 
 var RingCount := 0
+var LivesCount := 3
 var PlayerChar = null
 
 var InvertCamera := false

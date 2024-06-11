@@ -166,6 +166,7 @@ func CollectRing() -> bool:
 func CollectOneUp() -> bool:
 	$SndOneUp.play()
 	DroppedRingSpeed = 1.0
+	Globals.LivesCount += 1
 	return true
 
 

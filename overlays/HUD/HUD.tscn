@@ -60,4 +60,15 @@ offset_left = 87.0
 offset_top = 72.0
 offset_right = 147.0
 offset_bottom = 95.0
-text = "Rings: 0"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
+text = "Rings"
+horizontal_alignment = 1
+
+[node name="LblLives" type="Label" parent="."]
+offset_left = 39.0
+offset_top = 459.0
+offset_right = 96.0
+offset_bottom = 482.0
+text = "Lives: 0"
