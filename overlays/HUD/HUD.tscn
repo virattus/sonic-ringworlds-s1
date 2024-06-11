@@ -49,10 +49,10 @@ text = "Speed: "
 [node name="ArcCanvas" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 90.0
-offset_top = 76.0
-offset_right = 130.0
-offset_bottom = 116.0
+offset_left = 115.0
+offset_top = 92.0
+offset_right = 155.0
+offset_bottom = 132.0
 script = ExtResource("2_bgv3t")
 
 [node name="LblRings" type="Label" parent="."]
@@ -63,7 +63,7 @@ offset_bottom = 95.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 30
-text = "Rings"
+text = "000"
 horizontal_alignment = 1
 
 [node name="LblLives" type="Label" parent="."]

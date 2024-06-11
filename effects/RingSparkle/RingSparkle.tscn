@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://24e88sg7gq7x"]
+
+[ext_resource type="Texture2D" uid="uid://daurh6cycl40c" path="res://effects/RingSparkle/RingSparkle.png" id="1_m46ib"]
+[ext_resource type="Script" path="res://effects/RingSparkle/RingSparkle.gd" id="2_577bg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b16l1"]
+atlas = ExtResource("1_m46ib")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21p6j"]
+atlas = ExtResource("1_m46ib")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3s54h"]
+atlas = ExtResource("1_m46ib")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxogd"]
+atlas = ExtResource("1_m46ib")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scyrd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b16l1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21p6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3s54h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxogd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="RingSparkle" type="AnimatedSprite3D"]
+pixel_size = 0.04
+billboard = 1
+double_sided = false
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_scyrd")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("2_577bg")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

@@ -9,6 +9,8 @@ const RING_MIN_VEL = 5.0
 const FLICKER_RATE = 0.05
 
 
+const RING_SPARKLE = preload("res://effects/RingSparkle/RingSparkle.tscn")
+
 
 func _process(delta: float) -> void:
 	if Flicker:
@@ -26,7 +28,11 @@ func SetVelocity(AdditionalSpeed: float) -> void:
 
 
 func _on_coin_collected(body: Variant) -> void:
+	var sparkle = RING_SPARKLE.instantiate()
+	get_parent().add_child(sparkle)
+	sparkle.global_position = global_position
 	queue_free()
+	
 
 
 func _on_timer_timeout() -> void:
