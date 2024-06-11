@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxyyroddlqhl0"]
+
+[ext_resource type="PackedScene" uid="uid://ct1lpq76lo75q" path="res://entities/Collectible/Collectible.tscn" id="1_ib51k"]
+[ext_resource type="Script" path="res://entities/OneUp/OneUp.gd" id="2_5l71o"]
+[ext_resource type="Texture2D" uid="uid://cdgxw46awwram" path="res://entities/OneUp/OneUp.png" id="4_spalp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ulqyp"]
+
+[node name="OneUp" instance=ExtResource("1_ib51k")]
+script = ExtResource("2_5l71o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_ulqyp")
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="1"]
+pixel_size = 0.04
+billboard = 1
+transparent = false
+double_sided = false
+texture_filter = 0
+texture = ExtResource("4_spalp")

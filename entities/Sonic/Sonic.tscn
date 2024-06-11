@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=53 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -37,6 +37,7 @@
 [ext_resource type="Script" path="res://entities/Sonic/Air.gd" id="18_rcq7g"]
 [ext_resource type="AudioStream" uid="uid://dbfgnbue70wig" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A2.wav" id="20_yjean"]
 [ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="39_jijta"]
+[ext_resource type="AudioStream" uid="uid://cthagnajjhpu0" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C5.wav" id="39_keyd5"]
 [ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="41_0dxtr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d4iho"]
@@ -87,7 +88,7 @@ albedo_color = Color(1, 0, 0, 0.415686)
 radius = 10.0
 
 [node name="Sonic" groups=["Player"] instance=ExtResource("1_paxei")]
-collision_mask = 11
+collision_mask = 2147483659
 floor_stop_on_slope = false
 script = ExtResource("2_p6xw2")
 
@@ -109,13 +110,13 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, -0.334433, 3.08106)
 bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.69419, 2.11807e-07, 4.81951)
+bones/2/position = Vector3(-4.61281, 3.11082e-07, 5.20606)
 bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.50122, -0.75626, 0.990035)
+bones/3/position = Vector3(-2.48087, -0.75626, 1.31555)
 bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(5.03255, -0.822021, 4.51722)
+bones/4/position = Vector3(5.13428, -0.822021, 4.7817)
 bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.54294, 0.420875, 0.695447)
+bones/5/position = Vector3(2.4819, 0.420875, 0.87855)
 bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
 bones/6/position = Vector3(0, 0.334433, 5.21777)
 bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
@@ -348,6 +349,10 @@ bus = &"SoundEffects"
 
 [node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="26"]
 stream = ExtResource("16_4apbf")
+bus = &"SoundEffects"
+
+[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="27"]
+stream = ExtResource("39_keyd5")
 bus = &"SoundEffects"
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]

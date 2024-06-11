@@ -5,6 +5,7 @@ var Triggered := false
 var Complete := false
 var Speed := 0.0
 
+const SPEED_MODIFIER = 0.25
 
 const SPARKLE = preload("res://entities/Checkpoint/Sparkle.tscn")
 
@@ -27,10 +28,31 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if !Triggered:
-		body.StartingPosition = global_position + Vector3(0, 0.5, 0)
+		DeactivateOtherCheckpoints()
 		Triggered = true
-		Speed = clamp(body.velocity.length(), 0.0, 1.0)
-		$AudioStreamPlayer3D.play()
+		body.StartingPosition = global_position + Vector3(0, 0.5, 0)
+		StartCheckPointAnim(body.velocity.length())
+		if Globals.RingCount >= 100:
+			AddOneUp(body)
 
 
+func AddOneUp(body) -> void:
+	Globals.RingCount = 0
+	body.CollectOneUp()
 
+
+func StartCheckPointAnim(Speed: float) -> void:
+	Speed = clamp(Speed * SPEED_MODIFIER, 0.25, 1.0)
+	$SndCheckPointTrigger.play()
+
+
+func DeactivateOtherCheckpoints() -> void:
+	var cps = get_tree().get_nodes_in_group("CheckPoint")
+	for i in cps:
+		i.Deactivate()
+
+
+func Deactivate() -> void:
+	Triggered = false
+	Complete = false
+	$Pivot.rotation_degrees.z = 0.0

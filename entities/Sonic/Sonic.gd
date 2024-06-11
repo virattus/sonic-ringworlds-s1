@@ -17,6 +17,8 @@ var Invincible := false
 var Flicker := false
 var DamageThreshold := 0
 
+var DroppedRingSpeed := 1.0
+
 
 @onready var SonicModel = $CharacterMesh/SonicModel
 @onready var SonicBall = $CharacterMesh/SonicBall
@@ -75,6 +77,7 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "DashMode")
 	DebugMenu.AddMonitor(self, "DashModeCharge")
 	DebugMenu.AddMonitor(self, "DashModeDrain")
+	DebugMenu.AddMonitor(self, "DroppedRingSpeed")
 	
 	
 
@@ -151,9 +154,19 @@ func CollisionDetection(groundMin: float, wallMin: float, debugInfo := false) ->
 	return null
 
 
-func CollectRing() -> void:
-	DashModeCharge += PARAMETERS.DASHMODE_RING_INCREMENT
-	$SndRingCollect.play()
+func CollectRing() -> bool:
+	if Globals.RingCount < 100:
+		$SndRingCollect.play()
+		DashModeCharge += PARAMETERS.DASHMODE_RING_INCREMENT
+		Globals.RingCount += 1
+		return true
+	return false
+
+
+func CollectOneUp() -> bool:
+	$SndOneUp.play()
+	DroppedRingSpeed = 1.0
+	return true
 
 
 func _on_timer_invincibility_timeout() -> void:

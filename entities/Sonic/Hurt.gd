@@ -28,17 +28,24 @@ func Enter(_msg := {}) -> void:
 		owner.SndBonk.play()
 	
 	if _msg.has("DropRings") and _msg["DropRings"]:
-		for i in range(20 if Globals.RingCount > 20 else Globals.RingCount):
+		var DroppedRings = owner.PARAMETERS.HURT_DROPPED_RING_COUNT
+		if Globals.RingCount - owner.PARAMETERS.HURT_DROPPED_RING_COUNT < 0:
+			DroppedRings = Globals.RingCount
+		
+		for i in range(DroppedRings):
 			var newRing = RING.instantiate()
 			owner.get_parent().add_child(newRing)
 			newRing.global_position = owner.global_position
+			newRing.SetVelocity(owner.DroppedRingSpeed)
 		
-		Globals.RingCount = 0
+		Globals.RingCount -= DroppedRings
 		owner.SndRingDrop.play()
 		
 		owner.Invincible = true
 		owner.set_collision_layer_value(2, false)
 		SetInvincible = true
+		
+		owner.DroppedRingSpeed += owner.PARAMETERS.HURT_DROPPED_RING_SPEED
 
 
 func Exit() -> void:
