@@ -53,6 +53,7 @@ offset_left = 115.0
 offset_top = 92.0
 offset_right = 155.0
 offset_bottom = 132.0
+rotation = -1.5708
 script = ExtResource("2_bgv3t")
 
 [node name="LblRings" type="Label" parent="."]
