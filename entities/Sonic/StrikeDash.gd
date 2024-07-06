@@ -21,6 +21,7 @@ func Update(_delta: float) -> void:
 	var vel = (owner.Controller.InputVelocity) * 10.0
 	
 	owner.Move(vel)
+	owner.apply_floor_snap()
 	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
 
 	if !owner.is_on_floor():

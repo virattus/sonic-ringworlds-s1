@@ -36,4 +36,5 @@ func Update(_delta: float) -> void:
 	speed = clamp(speed, -owner.PARAMETERS.MOVE_MAX_SPEED, owner.PARAMETERS.MOVE_MAX_SPEED)
 	
 	owner.Move(vel * speed)
+	owner.apply_floor_snap()
 	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)

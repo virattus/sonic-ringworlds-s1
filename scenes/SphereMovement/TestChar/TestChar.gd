@@ -24,20 +24,21 @@ func _physics_process(delta: float) -> void:
 	
 	velocity += Vector3.DOWN * (10.0 * delta)
 
-	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
-	
-	var CameraForward = (Cam.basis.z * Vector3(1, 0, 1)).normalized()
-	var CameraRight = (Cam.basis.x * Vector3(1, 0, 1)).normalized()
-	
-	print(CameraForward)
-	
-	velocity += ((global_transform.basis.z * playerInput.y) + (global_transform.basis.x * playerInput.x))
-
 	if is_on_floor():
 		if !GroundCollision:
 			GroundCollision = true
 			print("Hit Ground")
 	
+		var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
+		
+		var CameraForward = (Cam.basis.z * Vector3(1, 0, 1)).normalized()
+		var CameraRight = (Cam.basis.x * Vector3(1, 0, 1)).normalized()
+		
+		var newVelocity = ((global_transform.basis.z * playerInput.y) + (global_transform.basis.x * playerInput.x))
+		
+		print(newVelocity)
+		
+		velocity += newVelocity
 		
 		if $RayCast3D.is_colliding():
 			#var collInd = COLLISION_INDICATOR.instantiate()

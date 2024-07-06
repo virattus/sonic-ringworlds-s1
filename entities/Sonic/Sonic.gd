@@ -6,6 +6,8 @@ signal Death
 
 @export var Camera: ThirdPersonCamera
 
+var DebugMove := false
+
 var FloorNormal := Vector3.UP
 var GroundPoint := Vector3.ZERO
 
@@ -85,6 +87,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#super(delta)
 	
+	if Input.is_action_just_pressed("DEBUG_DebugMove"):
+		DebugMove = !DebugMove
+		
+		if DebugMove:
+			StateM.ChangeState("DebugMove", {})
+		else:
+			StateM.ChangeState("Air", {
+				"SubState": "Fall",
+			})
+	
 	if Globals.DEBUG_FORCE_DASHMODE:
 		DashMode = true
 	else:
@@ -97,16 +109,6 @@ func _process(delta: float) -> void:
 				DashModeCharge -= (PARAMETERS.DASHMODE_NORMAL_DISCHARGE_RATE * delta)
 		
 		DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
-	
-	if Input.is_action_just_pressed("DEBUG_ResetPosition"):
-		global_position = StartingPosition
-		Speed = 0.0
-		velocity = Vector3.ZERO
-		up_direction = Vector3.UP
-		FloorNormal = Vector3.UP
-		StateM.ChangeState("Air", {
-			"SubState": "Fall",
-		})
 
 	if Flicker:
 		CharMesh.visible = (fmod(round(TimerInvincibility.time_left / PARAMETERS.FLICKER_TIME), 2.0) == 0)
