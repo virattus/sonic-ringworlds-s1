@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cjhxoxvbcjbtm" path="res://maps/WindyValleyAct3/WindyValleyAct3.glb" id="1_5db8f"]
 
 [node name="WindyValleyAct3" instance=ExtResource("1_5db8f")]
+
+[node name="part3" parent="." index="0"]
+transform = Transform3D(0.1875, 0, 0, 0, -8.19588e-09, -0.1875, 0, 0.1875, -8.19588e-09, 0, 0, 0)
