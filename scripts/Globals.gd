@@ -11,6 +11,7 @@ var DEBUG_SCENES = {
 	"SA1 Windy Valley Act 3": "res://scenes/SA1_WV_3/SA1_WV_3.tscn",
 	"SphereMovement": "res://scenes/SphereMovement/SphereMovement.tscn",
 	"MapLoader": "res://scenes/GLTFLoader/GLTFLoader.tscn",
+	"NewMovement3": "res://scenes/NewMovement3/NewMovement3.tscn",
 }
 var CurrentScene = null
 

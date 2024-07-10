@@ -12,10 +12,10 @@ func Enter(_msg := {}) -> void:
 	owner.CameraFocus.position = Vector3(0, 0.5, 0)
 
 	if owner.velocity.length() > 0.0:
-		if IsInputSkidding():
-			ChangeState("Skid")
-		else:
-			ChangeState("Move")
+		#if IsInputSkidding():
+		#	ChangeState("Skid")
+		#else:
+		ChangeState("Move")
 	else:
 		ChangeState("Idle")
 

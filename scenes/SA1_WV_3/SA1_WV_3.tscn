@@ -18,18 +18,10 @@ size = Vector3(526.382, 257.77, 340.6)
 [node name="SA1_WV_3" instance=ExtResource("1_18wxg")]
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, -0.334433, 3.08106)
-bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.62332, 2.9827e-07, 5.15618)
-bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.4835, -0.75626, 1.27354)
-bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(5.12115, -0.822021, 4.74757)
-bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.48978, 0.420875, 0.85492)
-bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
-bones/6/position = Vector3(0, 0.334433, 5.21777)
-bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.73406, 1.63174e-07, 4.63015)
+bones/3/position = Vector3(-2.51118, -0.75626, 0.830572)
+bones/4/position = Vector3(4.98272, -0.822021, 4.38765)
+bones/5/position = Vector3(2.57284, 0.420875, 0.605749)
 
 [node name="CollisionShape3D" parent="KillBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.372, 0, 55.2357)
