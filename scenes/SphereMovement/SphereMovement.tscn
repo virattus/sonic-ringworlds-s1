@@ -29,7 +29,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.96363, 0.267238, 0, -0.267238, 0.96363, 0, 3.545, 9.824)
 
 [node name="InverseSphere" parent="." instance=ExtResource("4_qyhcm")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 8.33509, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InverseSphere"]
 
