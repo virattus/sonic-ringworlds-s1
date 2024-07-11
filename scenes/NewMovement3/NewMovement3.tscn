@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbn3yw2xtnwo6"]
+[gd_scene load_steps=6 format=3 uid="uid://cbn3yw2xtnwo6"]
 
 [ext_resource type="Script" path="res://scenes/NewMovement3/NewMovement3.gd" id="1_ro58r"]
 [ext_resource type="PackedScene" uid="uid://bdcnl43p3kgbx" path="res://scenes/NewMovement3/MoveEntity/MoveEntity.tscn" id="2_rda3o"]
+[ext_resource type="Script" path="res://scenes/NewMovement3/CamPivot.gd" id="3_m0po4"]
 [ext_resource type="PackedScene" uid="uid://qfs0856743ua" path="res://scenes/SphereMovement/InverseSphere.glb" id="3_yoshw"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_glfvb"]
@@ -12,7 +13,10 @@ script = ExtResource("1_ro58r")
 
 [node name="MoveEntity" parent="." instance=ExtResource("2_rda3o")]
 
-[node name="Camera3D" type="Camera3D" parent="MoveEntity"]
+[node name="CamPivot" type="Node3D" parent="MoveEntity"]
+script = ExtResource("3_m0po4")
+
+[node name="Camera3D" type="Camera3D" parent="MoveEntity/CamPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12.8585)
 
 [node name="InverseSphere" parent="." instance=ExtResource("3_yoshw")]

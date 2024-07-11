@@ -20,6 +20,12 @@ func Update(_delta: float) -> void:
 		return
 	
 	
+	if Input.is_action_just_pressed("Jump"):
+		owner.velocity += owner.up_direction * owner.JUMP_POWER
+		ChangeState("Fall")
+		return
+	
+	
 	var MoveInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
 	
 	if MoveInput.length() > 0.0:

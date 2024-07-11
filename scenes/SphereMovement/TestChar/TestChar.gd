@@ -36,14 +36,14 @@ func _physics_process(delta: float) -> void:
 		
 		var newVelocity = ((global_transform.basis.z * playerInput.y) + (global_transform.basis.x * playerInput.x))
 		
-		print(newVelocity)
+		print(CameraForward)
 		
-		velocity += newVelocity
+		velocity = newVelocity
 		
 		if $RayCast3D.is_colliding():
-			#var collInd = COLLISION_INDICATOR.instantiate()
-			#get_parent().add_child(collInd)
-			#collInd.SetToRaycast($RayCast3D)
+			var collInd = COLLISION_INDICATOR.instantiate()
+			get_parent().add_child(collInd)
+			collInd.SetToRaycast($RayCast3D)
 			
 			var groundNormal = $RayCast3D.get_collision_normal()
 			var yAligned = AlignToY(global_transform, groundNormal)
