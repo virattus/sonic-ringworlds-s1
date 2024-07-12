@@ -5,6 +5,8 @@ extends CharacterBody3D
 
 var GroundCollision := false
 
+@onready var GroundBall = $GroundBallPivot/GroundBall
+
 const AIR_UP_VEC_SLERP = 1.0
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
@@ -20,8 +22,10 @@ func _physics_process(delta: float) -> void:
 	if GroundCollision:
 		apply_floor_snap()
 	
-	var speed = velocity.length()
+	GroundBall.look_at(up_direction)
 	
+	var speed = velocity.length()
+
 	velocity += Vector3.DOWN * (10.0 * delta)
 
 	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
@@ -38,15 +42,20 @@ func _physics_process(delta: float) -> void:
 	
 	#newVelocity.y = 0.0
 	
-	print(newVelocity)
+	#print(newVelocity)
 	
-	velocity += newVelocity
+	velocity += newVelocity * delta * 20.0
+	
+	velocity.x = lerp(velocity.x, 0.0, delta)
+	velocity.z = lerp(velocity.z, 0.0, delta)
+	
 
 	if is_on_floor():
 		if !GroundCollision:
 			GroundCollision = true
 			print("Hit Ground")
 	
+		up_direction = get_floor_normal()
 		
 		if $RayCast3D.is_colliding():
 			var collInd = COLLISION_INDICATOR.instantiate()
@@ -59,6 +68,26 @@ func _physics_process(delta: float) -> void:
 			up_direction = groundNormal
 			#print("Aligned with ground")
 	
+	elif is_on_wall_only():
+		if !GroundCollision:
+			GroundCollision = true
+			print("Hit Wall")
+			
+		up_direction = get_wall_normal()
+	
+	elif is_on_ceiling_only():
+		if up_direction.y < 0.0:
+			#Upside down
+			if !GroundCollision:
+				GroundCollision = true
+				print("Hit Floor Upside Down")
+			up_direction = Vector3.UP
+			pass
+		else:
+			print("Hit Ceiling")
+			velocity.y = 0.0
+			pass
+		
 	else:
 		if GroundCollision:
 			GroundCollision = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://jgp1lkva5q0v"]
+[gd_scene load_steps=7 format=3 uid="uid://jgp1lkva5q0v"]
 
 [ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/TestChar.gd" id="1_40pk5"]
 
@@ -17,8 +17,6 @@ height = 0.25
 transparency = 1
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="Environment" id="Environment_jr265"]
-
 [node name="TestChar" type="CharacterBody3D"]
 floor_snap_length = 1.0
 script = ExtResource("1_40pk5")
@@ -30,12 +28,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6ls5x")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_5qwfu")
 
-[node name="GroundBall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.777671, 0)
-mesh = SubResource("SphereMesh_34iv2")
-surface_material_override/0 = SubResource("StandardMaterial3D_le1cr")
-
 [node name="RayCast3D" type="RayCast3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_jr265")
+[node name="GroundBallPivot" type="Node3D" parent="."]
+
+[node name="GroundBall" type="MeshInstance3D" parent="GroundBallPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.777671, 0)
+mesh = SubResource("SphereMesh_34iv2")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_le1cr")

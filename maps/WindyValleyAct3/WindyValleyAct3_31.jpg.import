@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dtbwhikpepwb"
+path.s3tc="res://.godot/imported/WindyValleyAct3_31.jpg-b049a641d13ed2488938e5abcaf46b85.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "53711f941f65084a7f1a2861f2a2f596"
+}
+
+[deps]
+
+source_file="res://maps/WindyValleyAct3/WindyValleyAct3_31.jpg"
+dest_files=["res://.godot/imported/WindyValleyAct3_31.jpg-b049a641d13ed2488938e5abcaf46b85.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
