@@ -1,13 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://jgp1lkva5q0v"]
+[gd_scene load_steps=12 format=3 uid="uid://jgp1lkva5q0v"]
 
 [ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/TestChar.gd" id="1_40pk5"]
+[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="2_13hrd"]
+[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Idle.gd" id="3_cs10v"]
+[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Run.gd" id="4_mtlid"]
+[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Jump.gd" id="5_fv3w0"]
+[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Fall.gd" id="6_72jmw"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ygfr0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ls5x"]
 albedo_color = Color(0, 1, 1, 1)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5qwfu"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_34iv2"]
 radius = 0.125
@@ -17,6 +20,8 @@ height = 0.25
 transparency = 1
 albedo_color = Color(1, 1, 0, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_5qwfu"]
+
 [node name="TestChar" type="CharacterBody3D"]
 floor_snap_length = 1.0
 script = ExtResource("1_40pk5")
@@ -25,15 +30,28 @@ script = ExtResource("1_40pk5")
 mesh = SubResource("SphereMesh_ygfr0")
 surface_material_override/0 = SubResource("StandardMaterial3D_6ls5x")
 
+[node name="UpIndicator" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.777671, 0)
+mesh = SubResource("SphereMesh_34iv2")
+surface_material_override/0 = SubResource("StandardMaterial3D_le1cr")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_5qwfu")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 
-[node name="GroundBallPivot" type="Node3D" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ActiveState")]
+script = ExtResource("2_13hrd")
+ActiveState = NodePath("Idle")
 
-[node name="GroundBall" type="MeshInstance3D" parent="GroundBallPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.777671, 0)
-mesh = SubResource("SphereMesh_34iv2")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_le1cr")
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_cs10v")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("4_mtlid")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("5_fv3w0")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("6_72jmw")

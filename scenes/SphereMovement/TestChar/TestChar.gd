@@ -5,9 +5,14 @@ extends CharacterBody3D
 
 var GroundCollision := false
 
-@onready var GroundBall = $GroundBallPivot/GroundBall
+@onready var UpIndicator = $UpIndicator
+
+const GRAVITY = 9.8
 
 const AIR_UP_VEC_SLERP = 1.0
+const AIR_DRAG_MODIFIER = 0.5
+
+const JUMP_POWER = 10.0
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
@@ -15,14 +20,19 @@ const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func _ready() -> void:
 	DebugMenu.AddMonitor(self, "up_direction")
+	DebugMenu.AddMonitor(self, "GroundCollision")
 
 
 func _physics_process(delta: float) -> void:
+	UpIndicator.position = up_direction
+
+
+func old_physics(delta: float) -> void:
 	move_and_slide()
 	if GroundCollision:
 		apply_floor_snap()
 	
-	GroundBall.look_at(up_direction)
+	UpIndicator.position = up_direction
 	
 	var speed = velocity.length()
 
@@ -107,3 +117,20 @@ func AlignToY(_transform: Transform3D, newY: Vector3) -> Transform3D:
 	_transform.basis.x = -_transform.basis.z.cross(newY)
 	_transform.basis = _transform.basis.orthonormalized()
 	return _transform
+
+
+func GetInputVector() -> Vector3:
+	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
+	
+	var CameraForward = (Cam.basis.z * Vector3(1, 0, 1)).normalized()
+	var CameraRight = (Cam.basis.x * Vector3(1, 0, 1)).normalized()
+	
+	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
+	
+	var newVelocity = (Quaternion(Vector3.UP, up_direction)) * newInput
+	
+	#newVelocity.y = 0.0
+	
+	#print(newVelocity)
+
+	return newVelocity

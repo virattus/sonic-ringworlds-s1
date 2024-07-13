@@ -13,15 +13,16 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	var MoveCollision = owner.move_and_slide()
-	owner.apply_floor_snap()
-	
-	if !MoveCollision:
-		ChangeState("Fall")
-		return
-	
 	
 	if Input.is_action_just_pressed("Jump"):
 		owner.velocity += owner.up_direction * owner.JUMP_POWER
+		ChangeState("Fall")
+		return
+	
+	if MoveCollision:
+		owner.apply_floor_snap()
+	else:
+		owner.GroundCollision = false
 		ChangeState("Fall")
 		return
 	

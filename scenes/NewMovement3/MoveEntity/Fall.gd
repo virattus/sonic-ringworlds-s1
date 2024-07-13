@@ -15,7 +15,8 @@ func Update(_delta: float) -> void:
 	var MoveCollision = owner.move_and_slide()
 	
 	if MoveCollision:
-		ChangeState("Idle")
+		owner.GroundCollision = true
+		ChangeState("Move")
 		return
 	
 	owner.velocity.y -= owner.GRAVITY * _delta

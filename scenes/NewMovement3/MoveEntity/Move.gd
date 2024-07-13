@@ -14,7 +14,13 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	var MoveCollision = owner.move_and_slide()
-	#owner.apply_floor_snap()
+	owner.apply_floor_snap()
+
+	if Input.is_action_just_pressed("Jump"):
+		owner.GroundCollision = false
+		owner.velocity += owner.up_direction * owner.JUMP_POWER
+		ChangeState("Fall")
+		return
 
 	if MoveCollision:
 		var Coll: KinematicCollision3D = owner.get_last_slide_collision()
@@ -33,9 +39,9 @@ func Update(_delta: float) -> void:
 			if owner.is_on_floor():
 				pass
 			
-			
 
 	if !MoveCollision:
+		owner.GroundCollision = false
 		ChangeState("Fall")
 		return
 
@@ -48,7 +54,7 @@ func Update(_delta: float) -> void:
 	
 	var newInputVel = (MoveInput.y * CamForward) + (MoveInput.x * CamRight)
 	
-	owner.velocity = newInputVel
+	owner.velocity += newInputVel
 
 	if MoveInput.length() <= 0.0:
 		ChangeState("Idle")

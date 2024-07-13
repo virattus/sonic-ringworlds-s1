@@ -7,6 +7,10 @@ extends Node3D
 const ROTATION_AMOUNT = -1.0
 
 
+func _ready() -> void:
+	assert(target)
+
+
 func _physics_process(delta: float) -> void:
 	
 	global_position = target.global_position
