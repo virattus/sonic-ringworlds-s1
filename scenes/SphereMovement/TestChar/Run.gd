@@ -19,11 +19,14 @@ func Update(_delta: float) -> void:
 		ChangeState("Jump")
 		return
 	
+	if !IsColliding:
+		ChangeState("Fall")
+		return
 	
 	var newVel = owner.GetInputVector()
-	
-	if newVel.length() <= 0.0:
-		ChangeState("Idle")
-		return
 		
 	owner.velocity += newVel * _delta * 20.0
+	
+	if owner.velocity.length() <= 0.0:
+		ChangeState("Idle")
+		return

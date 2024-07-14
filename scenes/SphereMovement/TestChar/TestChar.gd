@@ -9,6 +9,8 @@ var GroundCollision := false
 
 const GRAVITY = 9.8
 
+const GROUND_SLERP_RATE = 8.0
+
 const AIR_UP_VEC_SLERP = 1.0
 const AIR_DRAG_MODIFIER = 0.5
 
@@ -23,25 +25,27 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "GroundCollision")
 
 
+#func _physics_process(delta: float) -> void:
+#	UpIndicator.position = up_direction
+
+
 func _physics_process(delta: float) -> void:
-	UpIndicator.position = up_direction
-
-
-func old_physics(delta: float) -> void:
-	move_and_slide()
+	var IsColliding = move_and_slide()
 	if GroundCollision:
 		apply_floor_snap()
 	
 	UpIndicator.position = up_direction
+	$RayCast3D.target_position = -up_direction
+	
+	CreateCollIndicator()
 	
 	var speed = velocity.length()
 
-	velocity += Vector3.DOWN * (10.0 * delta)
 
 	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
 		
-	var CameraForward = (Cam.basis.z * Vector3(1, 0, 1)).normalized()
-	var CameraRight = (Cam.basis.x * Vector3(1, 0, 1)).normalized()
+	var CameraForward = (Cam.basis.z * Vector3(1, 1, 1)).normalized()
+	var CameraRight = (Cam.basis.x * Vector3(1, 1, 1)).normalized()
 	
 	
 	#var newVelocity = ((global_transform.basis.z * playerInput.y) + (global_transform.basis.x * playerInput.x))
@@ -65,17 +69,19 @@ func old_physics(delta: float) -> void:
 			GroundCollision = true
 			print("Hit Ground")
 	
-		up_direction = get_floor_normal()
+		up_direction = up_direction.slerp(get_floor_normal(), GROUND_SLERP_RATE * delta)
 		
-		if $RayCast3D.is_colliding():
-			var collInd = COLLISION_INDICATOR.instantiate()
-			get_parent().add_child(collInd)
-			collInd.SetToRaycast($RayCast3D)
-			
-			var groundNormal = $RayCast3D.get_collision_normal()
-			var yAligned = AlignToY(global_transform, groundNormal)
-			global_transform = global_transform.interpolate_with(yAligned, speed * delta)
-			up_direction = groundNormal
+		
+#		$RayCast3D.force_raycast_update()
+#		if $RayCast3D.is_colliding():
+#			var collInd = COLLISION_INDICATOR.instantiate()
+#			get_parent().add_child(collInd)
+#			collInd.SetToRaycast($RayCast3D)
+#			
+#			var groundNormal = $RayCast3D.get_collision_normal()
+#			var yAligned = AlignToY(global_transform, groundNormal)
+#			global_transform = global_transform.interpolate_with(yAligned, speed * delta)
+#			up_direction = groundNormal
 			#print("Aligned with ground")
 	
 	elif is_on_wall_only():
@@ -83,7 +89,7 @@ func old_physics(delta: float) -> void:
 			GroundCollision = true
 			print("Hit Wall")
 			
-		up_direction = get_wall_normal()
+		up_direction = up_direction.slerp(get_wall_normal(), GROUND_SLERP_RATE * delta)
 	
 	elif is_on_ceiling_only():
 		if up_direction.y < 0.0:
@@ -103,6 +109,7 @@ func old_physics(delta: float) -> void:
 			GroundCollision = false
 			print("left ground")
 		
+		velocity -= Vector3.UP * (10.0 * delta)
 		up_direction = up_direction.slerp(Vector3.UP, AIR_UP_VEC_SLERP * delta)
 
 
@@ -134,3 +141,12 @@ func GetInputVector() -> Vector3:
 	#print(newVelocity)
 
 	return newVelocity
+
+
+func CreateCollIndicator() -> void:
+	$RayCast3D.target_position = -up_direction
+	$RayCast3D.force_raycast_update()
+	if $RayCast3D.is_colliding():
+		var collInd = COLLISION_INDICATOR.instantiate()
+		get_parent().add_child(collInd)
+		collInd.SetToRaycast($RayCast3D)

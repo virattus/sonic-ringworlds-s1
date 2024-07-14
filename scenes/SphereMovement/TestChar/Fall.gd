@@ -14,10 +14,15 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	var IsColliding = owner.move_and_slide()
 	
-	ApplyGravity(_delta)
-	
 	if IsColliding:
-		ChangeState("Idle")
+		ChangeState("Land")
 		return
 
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Jump")
+		return
+
+	ApplyGravity(_delta)
 	ApplyDrag(_delta)
+
+	owner.velocity += owner.GetInputVector()
