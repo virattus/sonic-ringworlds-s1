@@ -19,7 +19,6 @@ enum {
 }
 
 
-var InputVelocity := Vector3.ZERO
 var InputAnalogue := Vector2.ZERO
 var InputAnalogueDeadzone := 0.0
 

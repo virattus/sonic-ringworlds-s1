@@ -61,9 +61,8 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.velocity.y -= owner.PARAMETERS.GRAVITY * _delta
-	
-	owner.Move(owner.velocity)
+	owner.SetVelocity(owner.velocity - (Vector3.UP * owner.PARAMETERS.GRAVITY * _delta))
+	owner.Move()
 	
 	if owner.is_on_floor():
 		if LeftGround:

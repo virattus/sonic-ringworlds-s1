@@ -112,24 +112,16 @@ func _process(delta: float) -> void:
 
 	if Flicker:
 		CharMesh.visible = (fmod(round(TimerInvincibility.time_left / PARAMETERS.FLICKER_TIME), 2.0) == 0)
-
 	
-	#up_direction = up_direction.slerp(FloorNormal.normalized(), delta * UP_VEC_LERP_RATE).normalized()
-	#up_direction = FloorNormal
-	
-	
+	#Update debug indicators
 	UpVectorIndicator.position = up_direction
 	FloorNormalIndicator.position = FloorNormal
-	if Controller.InputVelocity.length() > 0.0:
-		InputIndicator.look_at(global_position - Controller.InputVelocity.normalized())
+	
+	if GetInputVector().length() > 0.0:
+		InputIndicator.look_at(global_position - GetInputVector().normalized())
 		
 	if velocity.length() > 0.0:
 		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()) + Vector3(0.0001, 0.0001, 0.0001))
-	
-
-
-func Move(newVelocity: Vector3) -> void:
-	super(newVelocity)
 
 
 func CollisionDetection(groundMin: float, wallMin: float, debugInfo := false) -> SonicCollision:
@@ -154,6 +146,16 @@ func CollisionDetection(groundMin: float, wallMin: float, debugInfo := false) ->
 				print("Collision: Ceiling Hit")
 			return SonicCollision.new(SonicCollision.COLL_TYPE.TOP, collision.get_position(), collision.get_normal())
 	return null
+
+
+func GetInputVector() -> Vector3:
+	var CameraForward = Camera.GetCameraBasis().z
+	var CameraRight = Camera.GetCameraBasis().x
+	
+	var newInput = (CameraForward * Controller.InputAnalogue.y) + (CameraRight * Controller.InputAnalogue.x)
+	var newVelocity = (Quaternion(Vector3.UP, up_direction)) * newInput
+	
+	return newVelocity
 
 
 func CollectRing() -> bool:

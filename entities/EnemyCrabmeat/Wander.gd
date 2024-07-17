@@ -14,7 +14,7 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	owner.SetVelocity(ChosenPos)
-	owner.Move(owner.velocity)
+	owner.Move()
 	
 	if owner.global_position.distance_to(ChosenPos) < 0.1:
 		ChangeState("Idle")

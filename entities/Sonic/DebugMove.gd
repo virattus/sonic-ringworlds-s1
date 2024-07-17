@@ -7,11 +7,11 @@ const HEIGHT_SPEED = 500.0
 
 
 func Enter(_msg := {}) -> void:
-	pass
+	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
 
 
 func Exit() -> void:
-	pass
+	owner.AnimTree.set("parameters/Death/blend_amount", 0.0)
 
 
 func Update(_delta: float) -> void:
@@ -42,4 +42,5 @@ func Update(_delta: float) -> void:
 		vel.y -= HEIGHT_SPEED * _delta
 	
 	
-	owner.Move(vel)
+	owner.SetVelocity(vel)
+	owner.Move()

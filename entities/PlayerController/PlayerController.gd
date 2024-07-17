@@ -43,13 +43,6 @@ func _process(_delta: float) -> void:
 	InputAnalogue = Input.get_vector(activeTable["Left"], activeTable["Right"], activeTable["Up"], activeTable["Down"], InputAnalogueDeadzone)
 	if InputAnalogue.length() > 1.0:
 		InputAnalogue = InputAnalogue.normalized()
-	
-
-	var floorBasis = Camera_Node.get_node("SpringArm3D/Camera3D").transform.basis
-	floorBasis = basis_aligned_y(floorBasis, Player.up_direction)
-
-	InputVelocity = (Camera_Node.CurrentBasis * Vector3(InputAnalogue.x, 0, InputAnalogue.y))
-	InputVelocity = floorBasis * InputVelocity
 
 	if Input.is_action_just_pressed(activeTable["Jump"]):
 		JumpJustPressed.emit()

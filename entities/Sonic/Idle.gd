@@ -8,13 +8,17 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
 	owner.AnimTree.set("parameters/Idle/blend_amount", 0.0)
 	
+	owner.SetVelocity(Vector3.ZERO)
+	
 
 func Exit() -> void:
 	pass
 
 
 func Update(_delta: float) -> void:
-	owner.Move(Vector3.ZERO)
+	owner.Move()
+	owner.apply_floor_snap()
+	
 	owner.CharMesh.AlignToY(owner.up_direction)
 	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
 	
@@ -54,7 +58,7 @@ func Update(_delta: float) -> void:
 		ChangeState("SquatCharge")
 		return
 	
-	if owner.Controller.InputVelocity.length() > 0.0:
+	if owner.GetInputVector().length() > 0.0:
 		ChangeState("Move", {
 			"SubState": "Walk",
 		})

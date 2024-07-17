@@ -44,8 +44,7 @@ func _process(_delta: float) -> void:
 	GroundCollision = is_on_floor() #or (global_position.y - GroundCast.get_collision_point().y < GROUND_CAST_MIN_DISTANCE)
 
 
-func Move(newVelocity: Vector3) -> void:
-	velocity = newVelocity
+func Move() -> void:
 	move_and_slide()
 	Speed = velocity.length()
 

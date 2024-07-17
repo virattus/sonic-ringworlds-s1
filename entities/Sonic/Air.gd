@@ -41,7 +41,7 @@ func Update(_delta: float) -> void:
 
 
 func UpdateInput(_delta: float) -> void:
-	InputVel += owner.Controller.InputVelocity * _delta
+	InputVel += owner.GetInputVector() * _delta
 	if InputVel.length() > owner.PARAMETERS.JUMP_INPUT_VEL_MAX:
 		InputVel = InputVel.normalized() * owner.PARAMETERS.JUMP_INPUT_VEL_MAX
 
@@ -53,4 +53,5 @@ func AirMove(_delta: float, additionalInput:= Vector3.ZERO) -> void:
 	if vel.length() > owner.PARAMETERS.AIR_MAX_SPEED:
 		vel.move_toward(vel.normalized() * owner.PARAMETERS.AIR_MAX_SPEED, _delta)
 	
-	owner.Move(vel)
+	owner.SetVelocity(vel)
+	owner.Move()
