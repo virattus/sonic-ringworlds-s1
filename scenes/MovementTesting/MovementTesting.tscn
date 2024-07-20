@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dm7ykl3qt5js" path="res://entities/SonicAfterimage/SonicAfterimage.tscn" id="8_cy2yj"]
 [ext_resource type="PackedScene" uid="uid://dxyyroddlqhl0" path="res://entities/OneUp/OneUp.tscn" id="8_lj1tr"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
-[ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="11_yd8q3"]
+[ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat(Old).tscn" id="11_yd8q3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(200, 200, 200)
@@ -486,10 +486,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14419, 9.4994, -7.20331)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.62679, 3.70545e-07, 5.13969)
-bones/3/position = Vector3(-2.48437, -0.75626, 1.25966)
-bones/4/position = Vector3(5.11681, -0.822021, 4.73629)
-bones/5/position = Vector3(2.49238, 0.420875, 0.847111)
+bones/1/position = Vector3(0, -0.334433, 3.08106)
+bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.7207, 1.7947e-07, 4.6936)
+bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
+bones/3/position = Vector3(-2.50784, -0.75626, 0.884002)
+bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
+bones/4/position = Vector3(4.99942, -0.822021, 4.43107)
+bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
+bones/5/position = Vector3(2.56282, 0.420875, 0.635804)
+bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
+bones/6/position = Vector3(0, 0.334433, 5.21777)
+bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
 
 [node name="CollisionShape3D" parent="KillBox" index="0"]
 shape = SubResource("BoxShape3D_cgjes")

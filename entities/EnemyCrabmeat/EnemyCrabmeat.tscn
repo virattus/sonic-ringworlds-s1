@@ -1,92 +1,115 @@
-[gd_scene load_steps=16 format=3 uid="uid://b54file0qwj7e"]
+[gd_scene load_steps=18 format=3 uid="uid://dcbjk0tmj5fb5"]
 
-[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_eflwk"]
+[ext_resource type="PackedScene" uid="uid://cbk11ie7m8c2r" path="res://entities/Enemy/Enemy.tscn" id="1_vrlkf"]
 [ext_resource type="PackedScene" uid="uid://dd14kspiykhby" path="res://models/Crabmeat/ModelCrabmeat.tscn" id="2_6d2dm"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.gd" id="2_wdkbs"]
 [ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="3_yv2jd"]
-[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_ojqh3"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Idle.gd" id="5_gb616"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Chase.gd" id="6_8trow"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Wander.gd" id="7_lpetq"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Victory.gd" id="8_k2k6m"]
-[ext_resource type="AudioStream" uid="uid://oggnx8vkwvs1" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C1.wav" id="10_6ck42"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7v2y6"]
-radius = 0.3
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_k83w5"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_mpnnb"]
 radius = 0.685435
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_s8aw0"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_xuyru"]
 radius = 0.414116
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_50ks0"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_wd14k"]
 radius = 0.222614
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_e8igs"]
-radius = 5.0
+[sub_resource type="Animation" id="Animation_0dfvh"]
+resource_name = "Crab_Hop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterMesh/ModelCrabmeat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.710387, 0), Vector3(0, 0, 0)]
+}
 
-[node name="EnemyCrabmeat" instance=ExtResource("1_eflwk")]
-collision_layer = 8
-collision_mask = 11
+[sub_resource type="Animation" id="Animation_tq5hl"]
+resource_name = "Crab_Idle"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_bqnma"]
+resource_name = "Crab_Run"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_hwqjp"]
+resource_name = "Crab_Walk"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_rl2rn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterMesh/ModelCrabmeat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nfx7j"]
+_data = {
+"Crab_Hop": SubResource("Animation_0dfvh"),
+"Crab_Idle": SubResource("Animation_tq5hl"),
+"Crab_Run": SubResource("Animation_bqnma"),
+"Crab_Walk": SubResource("Animation_hwqjp"),
+"RESET": SubResource("Animation_rl2rn")
+}
+
+[node name="EnemyCrabmeat" instance=ExtResource("1_vrlkf")]
 script = ExtResource("2_wdkbs")
-
-[node name="WorldCollision" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-shape = SubResource("SphereShape3D_7v2y6")
 
 [node name="ModelCrabmeat" parent="CharacterMesh" index="0" instance=ExtResource("2_6d2dm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438099, 0)
-shape = SubResource("SphereShape3D_k83w5")
+shape = SubResource("SphereShape3D_mpnnb")
 
 [node name="Hitbox" parent="." index="5" instance=ExtResource("3_yv2jd")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332627, 0)
-shape = SubResource("SphereShape3D_s8aw0")
+shape = SubResource("SphereShape3D_xuyru")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hitbox" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666749, 0.557141, -0.38463)
-shape = SubResource("SphereShape3D_50ks0")
+shape = SubResource("SphereShape3D_wd14k")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Hitbox" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.647138, 0.557141, -0.38463)
-shape = SubResource("SphereShape3D_50ks0")
+shape = SubResource("SphereShape3D_wd14k")
 
-[node name="PlayerSearch" type="Area3D" parent="." index="6"]
-collision_layer = 0
-collision_mask = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_nfx7j")
+}
+autoplay = "Crab_Idle"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerSearch" index="0"]
-shape = SubResource("SphereShape3D_e8igs")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
-
-[node name="StateMachine" type="Node" parent="." index="8" node_paths=PackedStringArray("ActiveState")]
-script = ExtResource("4_ojqh3")
-ActiveState = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateMachine" index="0"]
+[node name="Idle" parent="StateMachine" index="1"]
 script = ExtResource("5_gb616")
 
 [node name="Timer" type="Timer" parent="StateMachine/Idle" index="0"]
 one_shot = true
 
-[node name="Chase" type="Node" parent="StateMachine" index="1"]
+[node name="Chase" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_8trow")
 
-[node name="Wander" type="Node" parent="StateMachine" index="2"]
+[node name="Wander" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("7_lpetq")
 
-[node name="Victory" type="Node" parent="StateMachine" index="3"]
+[node name="Victory" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("8_k2k6m")
-
-[node name="SndDefeat" type="AudioStreamPlayer" parent="." index="9"]
-stream = ExtResource("10_6ck42")
-bus = &"SoundEffects"
-
-[connection signal="body_entered" from="PlayerSearch" to="StateMachine/Idle" method="_on_player_search_body_entered"]
-[connection signal="timeout" from="StateMachine/Idle/Timer" to="StateMachine/Idle" method="_on_timer_timeout"]

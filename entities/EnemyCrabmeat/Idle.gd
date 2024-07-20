@@ -3,6 +3,7 @@ extends BasicState
 
 
 func Enter(_msg := {}) -> void:
+	owner.AnimPlayer.play("Crab_Idle")
 	$Timer.start(randf() + 0.5)
 
 

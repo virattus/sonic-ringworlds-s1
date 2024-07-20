@@ -4,6 +4,7 @@ extends BasicState
 var Target : Node3D
 
 func Enter(_msg := {}) -> void:
+	owner.AnimPlayer.play("Crab_Run")
 	if _msg.has("Target"):
 		Target = _msg["Target"]
 	

@@ -5,6 +5,7 @@ var ChosenPos := Vector3.ZERO
 
 
 func Enter(_msg := {}) -> void:
+	owner.AnimPlayer.play("Crab_Walk")
 	ChosenPos = owner.global_position + Vector3(randf(), 0.0, randf()).normalized()
 
 

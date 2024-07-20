@@ -130,7 +130,7 @@ func UpdateUpDirection() -> void:
 
 
 func CollisionDetection(groundMin: float, wallMin: float) -> bool:
-	return true
+	return is_on_floor()
 
 
 func GetInputVector() -> Vector3:

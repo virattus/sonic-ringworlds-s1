@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbk11ie7m8c2r"]
+
+[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_pe7ty"]
+[ext_resource type="Script" path="res://entities/Enemy/Enemy.gd" id="2_esaov"]
+[ext_resource type="AudioStream" uid="uid://oggnx8vkwvs1" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C1.wav" id="3_3idfs"]
+[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_p22xk"]
+[ext_resource type="Script" path="res://entities/Enemy/Inactive.gd" id="5_6t018"]
+[ext_resource type="Script" path="res://entities/Enemy/Idle.gd" id="6_drxm1"]
+
+[node name="Enemy" instance=ExtResource("1_pe7ty")]
+script = ExtResource("2_esaov")
+MaxDistFromHome = 10.0
+MaxVisibility = 20.0
+
+[node name="SndDefeat" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("3_3idfs")
+bus = &"SoundEffects"
+
+[node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("ActiveState")]
+script = ExtResource("4_p22xk")
+ActiveState = NodePath("Inactive")
+
+[node name="Inactive" type="Node" parent="StateMachine" index="0" groups=["Enemy"]]
+script = ExtResource("5_6t018")
+
+[node name="Idle" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("6_drxm1")
