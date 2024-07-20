@@ -22,8 +22,7 @@ func Update(_delta: float) -> void:
 		owner.velocity = Vector3.ZERO
 		owner.up_direction = Vector3.UP
 		owner.FloorNormal = Vector3.UP
-		ChangeState("Air", {
-			"SubState": "Fall",
+		ChangeState("Fall", {
 		})
 	
 	var InputAnalogue = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward", 0.25)

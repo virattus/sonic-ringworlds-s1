@@ -22,8 +22,7 @@ func Update(_delta: float) -> void:
 	owner.Move(Vector3.ZERO)
 	
 	if !owner.is_on_floor():
-		ChangeState("Air", {
-			"SubState": "Fall",
+		ChangeState("Fall", {
 		})
 		return
 	
@@ -34,8 +33,7 @@ func Update(_delta: float) -> void:
 		owner.DashModeDrain = true
 		owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
 		owner.SetVelocity(owner.CharMesh.GetForwardVector() * AccumulatedSpeed)
-		ChangeState("Move", {
-			"SubState": "StrikeDash",
+		ChangeState("StrikeDash", {
 		})
 		return
 	

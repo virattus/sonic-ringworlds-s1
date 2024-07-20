@@ -1,4 +1,4 @@
-extends BasicState
+extends "res://entities/Sonic/MoveAir.gd"
 
 
 var MeterAccumulator := 0.0
@@ -28,5 +28,5 @@ func Update(_delta: float) -> void:
 	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
 	
 	if !owner.AnimTree.get("parameters/OSPose/active"):
-		ChangeSubState("Fall")
+		ChangeState("Fall")
 		return

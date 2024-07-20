@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=52 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="7_xr2va"]
 [ext_resource type="Script" path="res://entities/Sonic/Ball.gd" id="8_l4xov"]
 [ext_resource type="Script" path="res://entities/Sonic/Skid.gd" id="8_yskjs"]
-[ext_resource type="Script" path="res://entities/Sonic/Move.gd" id="9_3et1g"]
 [ext_resource type="Script" path="res://entities/Sonic/Hurt.gd" id="9_pbmsm"]
 [ext_resource type="Script" path="res://entities/Sonic/Airdash.gd" id="11_2je5t"]
 [ext_resource type="AudioStream" uid="uid://bgwe6pbgsc4tj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A0.wav" id="11_sc7a7"]
@@ -24,7 +23,6 @@
 [ext_resource type="Script" path="res://entities/Sonic/Land.gd" id="13_70mwn"]
 [ext_resource type="Script" path="res://entities/Sonic/Pose.gd" id="13_gkm31"]
 [ext_resource type="Script" path="res://entities/Sonic/Run.gd" id="13_hjr52"]
-[ext_resource type="Script" path="res://entities/StateMachine/BasicState.gd" id="13_sotg1"]
 [ext_resource type="AudioStream" uid="uid://dssc8qyhyjml7" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A3.wav" id="13_uqyav"]
 [ext_resource type="AudioStream" uid="uid://c7s62yxbwkvxj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_B5.wav" id="14_5bjro"]
 [ext_resource type="Script" path="res://entities/Sonic/Wipeout.gd" id="14_flkpp"]
@@ -34,13 +32,12 @@
 [ext_resource type="Script" path="res://entities/Sonic/Death.gd" id="15_ulagb"]
 [ext_resource type="AudioStream" uid="uid://ci4mwgnbes8o2" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BC.wav" id="16_4apbf"]
 [ext_resource type="AudioStream" uid="uid://y2ekxqu62ugy" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BE.wav" id="16_805h7"]
-[ext_resource type="Script" path="res://entities/Sonic/SpinKick.gd" id="16_mukcc"]
-[ext_resource type="Script" path="res://entities/Sonic/Air.gd" id="18_rcq7g"]
 [ext_resource type="AudioStream" uid="uid://dbfgnbue70wig" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A2.wav" id="20_yjean"]
+[ext_resource type="Script" path="res://entities/Sonic/SpinKick.gd" id="26_pqjut"]
+[ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="27_mtw8o"]
+[ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="28_p62qa"]
 [ext_resource type="Script" path="res://entities/Sonic/DebugMove.gd" id="29_u7sl5"]
-[ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="39_jijta"]
 [ext_resource type="AudioStream" uid="uid://cthagnajjhpu0" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C5.wav" id="39_keyd5"]
-[ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="41_0dxtr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d4iho"]
 
@@ -113,13 +110,13 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, -0.334433, 3.08106)
 bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.61382, 3.86366e-07, 5.20129)
+bones/2/position = Vector3(-4.66329, 3.26021e-07, 4.96633)
 bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.48112, -0.75626, 1.31154)
+bones/3/position = Vector3(-2.49349, -0.75626, 1.11367)
 bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(5.13302, -0.822021, 4.77844)
+bones/4/position = Vector3(5.07119, -0.822021, 4.61767)
 bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.48266, 0.420875, 0.876292)
+bones/5/position = Vector3(2.51976, 0.420875, 0.764991)
 bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
 bones/6/position = Vector3(0, 0.334433, 5.21777)
 bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
@@ -265,59 +262,48 @@ script = ExtResource("29_u7sl5")
 script = ExtResource("7_wafk6")
 
 [node name="Walk" type="Node" parent="StateMachine" index="3"]
-script = ExtResource("13_sotg1")
-
-[node name="Move" type="Node" parent="StateMachine" index="4" node_paths=PackedStringArray("ActiveState")]
-script = ExtResource("9_3et1g")
-ActiveState = NodePath("Walk")
-
-[node name="Walk" type="Node" parent="StateMachine/Move" index="0"]
 script = ExtResource("12_v1qbr")
 
-[node name="Run" type="Node" parent="StateMachine/Move" index="1"]
+[node name="Run" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("13_hjr52")
 
-[node name="StrikeDash" type="Node" parent="StateMachine/Move" index="2"]
+[node name="StrikeDash" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("14_lrtqw")
 
-[node name="Ball" type="Node" parent="StateMachine" index="5"]
+[node name="Ball" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("8_l4xov")
 
-[node name="Skid" type="Node" parent="StateMachine" index="6"]
+[node name="Skid" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("8_yskjs")
 
-[node name="SquatCharge" type="Node" parent="StateMachine" index="7"]
+[node name="SquatCharge" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("6_imrjj")
 
-[node name="Air" type="Node" parent="StateMachine" index="8" node_paths=PackedStringArray("ActiveState")]
-script = ExtResource("18_rcq7g")
-ActiveState = NodePath("Fall")
+[node name="Jump" type="Node" parent="StateMachine" index="9"]
+script = ExtResource("27_mtw8o")
 
-[node name="Jump" type="Node" parent="StateMachine/Air" index="0"]
-script = ExtResource("39_jijta")
+[node name="Fall" type="Node" parent="StateMachine" index="10"]
+script = ExtResource("28_p62qa")
 
-[node name="Airdash" type="Node" parent="StateMachine/Air" index="1"]
+[node name="Airdash" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("11_2je5t")
 
-[node name="SpinKick" type="Node" parent="StateMachine/Air" index="2"]
-script = ExtResource("16_mukcc")
+[node name="SpinKick" type="Node" parent="StateMachine" index="12"]
+script = ExtResource("26_pqjut")
 
-[node name="Fall" type="Node" parent="StateMachine/Air" index="3"]
-script = ExtResource("41_0dxtr")
-
-[node name="Pose" type="Node" parent="StateMachine/Air" index="4"]
+[node name="Pose" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("13_gkm31")
 
-[node name="Land" type="Node" parent="StateMachine" index="9"]
+[node name="Land" type="Node" parent="StateMachine" index="14"]
 script = ExtResource("13_70mwn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="10"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="15"]
 script = ExtResource("14_flkpp")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="11"]
+[node name="Hurt" type="Node" parent="StateMachine" index="16"]
 script = ExtResource("9_pbmsm")
 
-[node name="Death" type="Node" parent="StateMachine" index="12"]
+[node name="Death" type="Node" parent="StateMachine" index="17"]
 script = ExtResource("15_ulagb")
 
 [node name="SndJump" type="AudioStreamPlayer" parent="." index="17"]

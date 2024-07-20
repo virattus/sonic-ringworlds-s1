@@ -2,8 +2,13 @@ extends BasicState
 
 
 
+const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+
 
 func Enter(_msg := {}) -> void:
+	if _msg.has("FloorNormal"):
+		pass
+	
 	owner.GroundCollision = true
 	owner.SndLand.play()
 	owner.up_direction = owner.FloorNormal
@@ -26,14 +31,3 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	pass
-
-
-
-func IsInputSkidding() -> bool:
-	if owner.Controller.InputVelocity.length() > owner.PARAMETERS.SKID_INPUT_MIN:
-		var InputDir = owner.velocity.normalized().dot(owner.Controller.InputVelocity.normalized())
-		if InputDir < owner.PARAMETERS.SKID_ANGLE_MIN:
-			print("Land: Skid ratio: %s" % InputDir)
-			return true
-		
-	return false

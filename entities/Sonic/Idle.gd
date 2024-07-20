@@ -36,21 +36,13 @@ func Update(_delta: float) -> void:
 	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized()) * owner.CharGroundCastLength
 	owner.up_direction = owner.FloorNormal
 	
-	if !owner.GroundCollision:
-		ChangeState("Air", {
-			"SubState": "Fall",
-		})
-		return
-	
-	if owner.up_direction.dot(Vector3.UP) < owner.PARAMETERS.IDLE_MIN_GROUND_ANGLE:
-		ChangeState("Air", {
-			"SubState": "Fall",
+	if !owner.GroundCollision or owner.up_direction.dot(Vector3.UP) < owner.PARAMETERS.IDLE_MIN_GROUND_ANGLE:
+		ChangeState("Fall", {
 		})
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Air", {
-			"SubState": "Jump",
+		ChangeState("Jump", {
 		})
 		return
 	
@@ -59,7 +51,6 @@ func Update(_delta: float) -> void:
 		return
 	
 	if owner.GetInputVector().length() > 0.0:
-		ChangeState("Move", {
-			"SubState": "Walk",
+		ChangeState("Walk", {
 		})
 		return

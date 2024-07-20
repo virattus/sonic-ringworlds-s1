@@ -45,8 +45,7 @@ func Update(_delta: float) -> void:
 			owner.GroundCollision = false
 	
 	if !owner.GroundCollision:
-		ChangeState("Air", {
-			"SubState": "Fall",
+		ChangeState("Fall", {
 		})
 		return
 	

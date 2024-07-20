@@ -1,9 +1,6 @@
 extends Character
 
 
-signal Death
-
-
 @export var Camera: ThirdPersonCamera
 
 var DebugMove := false
@@ -93,8 +90,7 @@ func _process(delta: float) -> void:
 		if DebugMove:
 			StateM.ChangeState("DebugMove", {})
 		else:
-			StateM.ChangeState("Air", {
-				"SubState": "Fall",
+			StateM.ChangeState("Fall", {
 			})
 	
 	if Globals.DEBUG_FORCE_DASHMODE:
@@ -124,28 +120,17 @@ func _process(delta: float) -> void:
 		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()) + Vector3(0.0001, 0.0001, 0.0001))
 
 
-func CollisionDetection(groundMin: float, wallMin: float, debugInfo := false) -> SonicCollision:
-	for i in range(get_slide_collision_count()):
-		var collision = get_slide_collision(i)
-		if debugInfo:
-			var coll = COLLISION_INDICATOR.instantiate()
-			get_parent().add_child(coll)
-			coll.SetToCollision(collision)
-		
-		var dot = up_direction.dot(collision.get_normal())
-		if dot > groundMin:
-			if debugInfo:
-				print("Collision: Floor hit")
-			return SonicCollision.new(SonicCollision.COLL_TYPE.BOTTOM, collision.get_position(), collision.get_normal())
-		elif dot > wallMin:
-			if debugInfo:
-				print("Collision: Side hit")
-			return SonicCollision.new(SonicCollision.COLL_TYPE.SIDE, collision.get_position(), collision.get_normal())
-		else: #Hit ceiling
-			if debugInfo:
-				print("Collision: Ceiling Hit")
-			return SonicCollision.new(SonicCollision.COLL_TYPE.TOP, collision.get_position(), collision.get_normal())
-	return null
+func Move() -> void:
+	super()
+	UpdateUpDirection()
+
+
+func UpdateUpDirection() -> void:
+	pass
+
+
+func CollisionDetection(groundMin: float, wallMin: float) -> bool:
+	return true
 
 
 func GetInputVector() -> Vector3:
@@ -156,6 +141,16 @@ func GetInputVector() -> Vector3:
 	var newVelocity = (Quaternion(Vector3.UP, up_direction)) * newInput
 	
 	return newVelocity
+
+
+func IsInputSkidding() -> bool:
+	if Controller.InputVelocity.length() > PARAMETERS.SKID_INPUT_MIN:
+		var InputDir = velocity.normalized().dot(Controller.InputVelocity.normalized())
+		if InputDir < PARAMETERS.SKID_ANGLE_MIN:
+			print("Land: Skid ratio: %s" % InputDir)
+			return true
+		
+	return false
 
 
 func CollectRing() -> bool:

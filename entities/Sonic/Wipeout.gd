@@ -37,8 +37,7 @@ func Update(_delta: float) -> void:
 		owner.up_direction = owner.FloorNormal
 		owner.CharMesh.AlignToY(owner.FloorNormal)
 	else:
-		ChangeState("Air", {
-			"SubState": "Fall",
+		ChangeState("Fall", {
 		})
 		return
 		

@@ -4,6 +4,7 @@ extends CharacterBody3D
 
 signal HealthChanged(Percentage: float)
 signal HealthEmpty
+signal Death
 
 @export var Controller := CharController.new()
 @export var Health := 1

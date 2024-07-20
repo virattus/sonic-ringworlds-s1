@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 	
 	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
 	
-	var newVelocity = (Quaternion(Vector3.UP, up_direction)) * newInput
+	var newVelocity = (Quaternion(Vector3.UP, up_direction).normalized()) * newInput
 	
 	#newVelocity.y = 0.0
 	
