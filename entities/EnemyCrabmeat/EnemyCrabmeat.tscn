@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcbjk0tmj5fb5"]
+[gd_scene load_steps=17 format=3 uid="uid://dcbjk0tmj5fb5"]
 
 [ext_resource type="PackedScene" uid="uid://cbk11ie7m8c2r" path="res://entities/Enemy/Enemy.tscn" id="1_vrlkf"]
 [ext_resource type="PackedScene" uid="uid://dd14kspiykhby" path="res://models/Crabmeat/ModelCrabmeat.tscn" id="2_6d2dm"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.gd" id="2_wdkbs"]
-[ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="3_yv2jd"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Idle.gd" id="5_gb616"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Chase.gd" id="6_8trow"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Wander.gd" id="7_lpetq"]
@@ -78,8 +77,6 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438099, 0)
 shape = SubResource("SphereShape3D_mpnnb")
-
-[node name="Hitbox" parent="." index="5" instance=ExtResource("3_yv2jd")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.332627, 0)

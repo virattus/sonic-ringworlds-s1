@@ -8,23 +8,29 @@ extends Character
 
 @onready var SndDefeat : AudioStreamPlayer = $SndDefeat
 @onready var StateM : StateMachine = $StateMachine
+@onready var HitBox : Hitbox = $Hitbox
 
+var EnemyActive := true
 
 const EXPLOSION = preload("res://effects/Explosion/Explosion.tscn")
 const FLICKY = preload("res://entities/Flicky/Flicky.tscn")
 
 
+func _ready() -> void:
+	DebugMenu.AddMonitor(self, "EnemyActive")
+
 
 func _physics_process(delta: float) -> void:
 	var cam = get_viewport().get_camera_3d()
 	if cam.global_position.distance_to(global_position) > MaxVisibility:
-		if StateM.CurrentState == "Inactive":
-			CharMesh.visible = true
-			StateM.ChangeState("Idle")
-		else:
+		if StateM.CurrentState != "Inactive":
 			StateM.ChangeState("Inactive")
-			CharMesh.visible = false
+			EnemyActivate(false)
 			global_position = Home
+	else:
+		if StateM.CurrentState == "Inactive":
+			EnemyActivate(true)
+			StateM.ChangeState("Idle")
 
 
 func _on_hurtbox_hurtbox_activated(_Source: Hitbox, _Damage: int) -> void:
@@ -34,6 +40,14 @@ func _on_hurtbox_hurtbox_activated(_Source: Hitbox, _Damage: int) -> void:
 	
 
 
+func EnemyActivate(Active: bool) -> void:
+	CharMesh.visible = Active
+	SpotShadow.visible = Active
+	HurtBox.monitoring = Active
+	HurtBox.monitorable = Active
+	HitBox.monitoring = Active
+	HitBox.monitorable = Active
+	EnemyActive = Active
 
 
 func EnemyDeath() -> void:

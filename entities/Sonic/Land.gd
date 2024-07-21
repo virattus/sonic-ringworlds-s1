@@ -20,7 +20,7 @@ func Enter(_msg := {}) -> void:
 		#if IsInputSkidding():
 		#	ChangeState("Skid")
 		#else:
-		ChangeState("Move")
+		ChangeState("Run")
 	else:
 		ChangeState("Idle")
 

@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dtd6sg2crg1n8" path="res://entities/Checkpoint/CheckPoint.tscn" id="8_axbsj"]
 [ext_resource type="PackedScene" uid="uid://dm7ykl3qt5js" path="res://entities/SonicAfterimage/SonicAfterimage.tscn" id="8_cy2yj"]
 [ext_resource type="PackedScene" uid="uid://dxyyroddlqhl0" path="res://entities/OneUp/OneUp.tscn" id="8_lj1tr"]
+[ext_resource type="PackedScene" uid="uid://dcbjk0tmj5fb5" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="9_dh6p0"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
-[ext_resource type="PackedScene" uid="uid://b54file0qwj7e" path="res://entities/EnemyCrabmeat/EnemyCrabmeat(Old).tscn" id="11_yd8q3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(200, 200, 200)
@@ -458,28 +458,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.83589, 3.1834, -7.76926)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2832, 3.1834, -7.76926)
 Direction = Vector3(0, 0, 1)
 
-[node name="EnemyCrabmeat" parent="MovementTesting" index="5" instance=ExtResource("11_yd8q3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.616)
-
-[node name="Balloon" parent="MovementTesting" index="6" instance=ExtResource("7_b7r6t")]
+[node name="Balloon" parent="MovementTesting" index="5" instance=ExtResource("7_b7r6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.95667, 1.97186, 0)
 
-[node name="Balloon2" parent="MovementTesting" index="7" instance=ExtResource("7_b7r6t")]
+[node name="Balloon2" parent="MovementTesting" index="6" instance=ExtResource("7_b7r6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.0129, 3.53607, 4.65188)
 
-[node name="Balloon3" parent="MovementTesting" index="8" instance=ExtResource("7_b7r6t")]
+[node name="Balloon3" parent="MovementTesting" index="7" instance=ExtResource("7_b7r6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6554, 4.38105, 9.25305)
 
-[node name="Balloon4" parent="MovementTesting" index="9" instance=ExtResource("7_b7r6t")]
+[node name="Balloon4" parent="MovementTesting" index="8" instance=ExtResource("7_b7r6t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0887, 7.10198, 14.4688)
 
-[node name="CheckPoint" parent="MovementTesting" index="10" instance=ExtResource("8_axbsj")]
+[node name="CheckPoint" parent="MovementTesting" index="9" instance=ExtResource("8_axbsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.7292, 0, -14.2188)
 
-[node name="CheckPoint2" parent="MovementTesting" index="11" instance=ExtResource("8_axbsj")]
+[node name="CheckPoint2" parent="MovementTesting" index="10" instance=ExtResource("8_axbsj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.925, 0, 41.849)
 
-[node name="OneUp" parent="MovementTesting" index="12" instance=ExtResource("8_lj1tr")]
+[node name="OneUp" parent="MovementTesting" index="11" instance=ExtResource("8_lj1tr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14419, 9.4994, -7.20331)
 
 [node name="Sonic" parent="." index="3"]
@@ -488,13 +485,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
 bones/1/position = Vector3(0, -0.334433, 3.08106)
 bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.7207, 1.7947e-07, 4.6936)
+bones/2/position = Vector3(-4.61846, 3.04195e-07, 5.17924)
 bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.50784, -0.75626, 0.884002)
+bones/3/position = Vector3(-2.48228, -0.75626, 1.29297)
 bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(4.99942, -0.822021, 4.43107)
+bones/4/position = Vector3(5.12722, -0.822021, 4.76335)
 bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.56282, 0.420875, 0.635804)
+bones/5/position = Vector3(2.48614, 0.420875, 0.865847)
 bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
 bones/6/position = Vector3(0, 0.334433, 5.21777)
 bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
@@ -513,6 +510,9 @@ FrameCount = 6
 [node name="SonicAfterimage3" parent="." index="12" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")
 FrameCount = 9
+
+[node name="EnemyCrabmeat" parent="." index="13" instance=ExtResource("9_dh6p0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2104)
 
 [editable path="Sonic"]
 [editable path="Sonic/CharacterMesh/SonicModel"]
