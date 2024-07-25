@@ -3,6 +3,9 @@ extends "res://entities/Sonic/MoveGround.gd"
 
 
 func Enter(_msg := {}) -> void:
+	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
+	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
 	owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
 
@@ -15,8 +18,16 @@ func Update(_delta: float) -> void:
 	owner.Move()
 	owner.apply_floor_snap()
 	
+	owner.GroundCollision = owner.CollisionDetection(0, 0)
+	
 	owner.CharMesh.AlignToY(owner.up_direction)
 	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
+	
+	
+	if !owner.GroundCollision:
+		ChangeState("Fall")
+		return
+	
 	
 	var newVel = owner.velocity
 	
@@ -24,7 +35,7 @@ func Update(_delta: float) -> void:
 	
 	newVel += inputVel
 	
-	if inputVel.length() >= 0.0:
+	if inputVel.length() >= 0.0 and owner.velocity.normalized() != Vector3.UP:
 		owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	else:
 		newVel = ApplyDrag(newVel, _delta)

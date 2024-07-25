@@ -20,7 +20,10 @@ func Enter(_msg := {}) -> void:
 		#if IsInputSkidding():
 		#	ChangeState("Skid")
 		#else:
-		ChangeState("Run")
+		if owner.Speed >= owner.PARAMETERS.WALK_MAX_SPEED:
+			ChangeState("Run")
+		else:
+			ChangeState("Walk")
 	else:
 		ChangeState("Idle")
 

@@ -19,19 +19,9 @@ func Update(_delta: float) -> void:
 	owner.Move()
 	owner.apply_floor_snap()
 	
+	owner.GroundCollision = owner.CollisionDetection(0, 0)
+	
 	owner.CharMesh.AlignToY(owner.up_direction)
-	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
-	
-	owner.GroundCollision = false
-	if owner.is_on_floor():
-		owner.FloorNormal = owner.get_floor_normal()
-		owner.GroundCollision = true
-	else:
-		owner.CharGroundCast.force_raycast_update()
-		if owner.CharGroundCast.is_colliding():
-			owner.FloorNormal = owner.CharGroundCast.get_collision_normal()
-			owner.GroundCollision = true
-	
 	
 	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized()) * owner.CharGroundCastLength
 	owner.up_direction = owner.FloorNormal

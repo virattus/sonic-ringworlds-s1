@@ -18,6 +18,7 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
+	owner.GroundCollision = owner.CollisionDetection(0, 0)
 	
 	if Input.is_action_just_pressed("Jump"):
 		if Input.is_action_just_pressed("Attack"):

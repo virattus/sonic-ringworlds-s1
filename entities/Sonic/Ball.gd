@@ -22,7 +22,7 @@ func _ready() -> void:
 func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
 	owner.SonicBall.visible = true
-	owner.ToggleHitbox(true)
+	owner.ActivateHitbox(true)
 	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_BALL
 	
 	#owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_BALL
@@ -45,7 +45,7 @@ func Exit() -> void:
 	#owner.CharMesh.LookAt(owner.velocity.normalized())
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
-	owner.ToggleHitbox(false)
+	owner.ActivateHitbox(false)
 	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
 	
 	#owner.floor_max_angle = owner.PARAMETERS.WALL_ANGLE_NORMAL

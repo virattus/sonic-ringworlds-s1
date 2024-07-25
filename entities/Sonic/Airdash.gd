@@ -19,4 +19,10 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	pass
+	owner.Move()
+	
+	owner.GroundCollision = owner.CollisionDetection(0, 0)
+	
+	if owner.GroundCollision:
+		ChangeState("Land")
+		return

@@ -108,18 +108,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, -0.334433, 3.08106)
-bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
-bones/2/position = Vector3(-4.73572, 1.61145e-07, 4.62225)
-bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
-bones/3/position = Vector3(-2.5116, -0.75626, 0.823918)
-bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
-bones/4/position = Vector3(4.98064, -0.822021, 4.38225)
-bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
-bones/5/position = Vector3(2.57408, 0.420875, 0.602006)
-bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
-bones/6/position = Vector3(0, 0.334433, 5.21777)
-bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/1/position = Vector3(0, 0, 3.02695)
+bones/2/position = Vector3(-5.13685, -0.617977, 3.60169)
+bones/2/rotation = Quaternion(2.0291e-08, -0.643313, 0.765604, -4.12946e-08)
+bones/3/position = Vector3(-2.48036, -0.0112146, 1.32578)
+bones/3/rotation = Quaternion(-0.000895131, -4.23255e-17, 0, 1)
+bones/4/position = Vector3(5.13685, 0.815262, 3.60169)
+bones/4/rotation = Quaternion(3.99724e-08, -0.790472, 0.612498, -2.13534e-08)
+bones/5/position = Vector3(2.48036, -2.38909, 1.74924)
+bones/5/rotation = Quaternion(-0.190694, 2.1576e-19, 8.54741e-27, 0.98165)
+bones/6/position = Vector3(0, 0, 5.2659)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
 visible = false
@@ -219,10 +217,10 @@ parameters/Air/blend_amount = 0
 parameters/AirSpinKick/blend_amount = 0.0
 parameters/Death/blend_amount = 0
 parameters/Ground/blend_amount = 1.0
-parameters/GroundSecondary/blend_amount = 0.0
+parameters/GroundSecondary/blend_amount = -1.0
 parameters/Hurt/blend_amount = 0.0
 parameters/Idle/blend_amount = 0.0
-parameters/Movement/blend_amount = 1.0
+parameters/Movement/blend_amount = 0.0
 parameters/OSHurt/active = false
 parameters/OSHurt/internal_active = false
 parameters/OSHurt/request = 0

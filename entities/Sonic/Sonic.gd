@@ -82,8 +82,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	#super(delta)
-	
 	if Input.is_action_just_pressed("DEBUG_DebugMove"):
 		DebugMove = !DebugMove
 		
@@ -130,7 +128,12 @@ func UpdateUpDirection() -> void:
 
 
 func CollisionDetection(groundMin: float, wallMin: float) -> bool:
-	return is_on_floor()
+	var lastSlideCount = get_slide_collision_count()
+	if lastSlideCount > 0:
+		return true
+	return false
+	#for i in range(lastSlideCount):
+		
 
 
 func GetInputVector() -> Vector3:
@@ -175,9 +178,9 @@ func _on_timer_invincibility_timeout() -> void:
 	CharMesh.visible = true
 
 
-func ToggleHitbox(enabled: bool) -> void:
-	HitBox.monitoring = enabled
-	$Hitbox/AttackAreaDebug.visible = enabled
+func ActivateHitbox(Active: bool) -> void:
+	HitBox.monitoring = Active
+	$Hitbox/AttackAreaDebug.visible = Active
 
 
 func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
