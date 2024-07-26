@@ -17,6 +17,7 @@ var GroundCollision := false
 const GROUND_CAST_MIN_DISTANCE = 0.1
 
 @onready var Gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var GravityDirection := Vector3.DOWN
 
 @onready var CharMesh = $CharacterMesh
 @onready var WorldCollision: CollisionShape3D = $WorldCollision

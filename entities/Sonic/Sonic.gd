@@ -6,7 +6,6 @@ extends Character
 var DebugMove := false
 
 var FloorNormal := Vector3.UP
-var GroundPoint := Vector3.ZERO
 
 var DashMode := false
 var DashModeCharge := 0.0
@@ -71,7 +70,6 @@ func _ready() -> void:
 	
 	DebugMenu.AddMonitor(self, "up_direction")
 	DebugMenu.AddMonitor(self, "FloorNormal")
-	DebugMenu.AddMonitor(self, "GroundPoint")
 	DebugMenu.AddMonitor(self, "DamageThreshold")
 	DebugMenu.AddMonitor(self, "DashMode")
 	DebugMenu.AddMonitor(self, "DashModeCharge")
@@ -119,8 +117,20 @@ func _process(delta: float) -> void:
 
 
 func Move() -> void:
-	super()
-	UpdateUpDirection()
+	var isColliding = move_and_slide()
+	if isColliding:
+		var collisionCount = get_slide_collision_count()
+		print(get_slide_collision_count())
+		if collisionCount > 1:
+			for i in range(get_slide_collision_count()):
+				var coll : KinematicCollision3D = get_slide_collision(i)
+				print("test")
+		else:
+			var normal = get_last_slide_collision().get_normal()
+			CreateCollisionIndicator(get_last_slide_collision().get_position(), get_last_slide_collision().get_normal())
+			GroundCollision = true
+	else:
+		GroundCollision = false
 
 
 func UpdateUpDirection() -> void:
@@ -128,6 +138,8 @@ func UpdateUpDirection() -> void:
 
 
 func CollisionDetection(groundMin: float, wallMin: float) -> bool:
+	return GroundCollision
+	
 	var lastSlideCount = get_slide_collision_count()
 	if lastSlideCount > 0:
 		return true
@@ -170,6 +182,12 @@ func CollectOneUp() -> bool:
 	DroppedRingSpeed = 1.0
 	Globals.LivesCount += 1
 	return true
+
+
+func CreateCollisionIndicator(point: Vector3, normal: Vector3) -> void:
+	var collInd = COLLISION_INDICATOR.instantiate()
+	get_parent().add_child(collInd)
+	collInd.SetToVectors(point, normal)
 
 
 func _on_timer_invincibility_timeout() -> void:

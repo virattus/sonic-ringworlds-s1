@@ -3,3 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://csdlei7hte13g" path="res://models/Sonic/Sonic.glb" id="1_ev4em"]
 
 [node name="Sonic_Model" instance=ExtResource("1_ev4em")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/2/rotation = Quaternion(3.09086e-08, -0.707107, 0.707107, -3.09086e-08)
+bones/4/position = Vector3(5.13685, 1.19209e-07, 3.76908)
+bones/4/rotation = Quaternion(3.09086e-08, -0.707107, 0.707107, -3.09086e-08)
+bones/6/position = Vector3(0, 0, 4.32083)

@@ -25,6 +25,7 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_5qwfu"]
 
 [node name="TestChar" type="CharacterBody3D"]
+motion_mode = 1
 floor_snap_length = 1.0
 script = ExtResource("1_40pk5")
 
@@ -44,7 +45,7 @@ shape = SubResource("SphereShape3D_5qwfu")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("2_13hrd")
-ActiveState = NodePath("Inactive")
+ActiveState = NodePath("Idle")
 
 [node name="Inactive" type="Node" parent="StateMachine"]
 script = ExtResource("3_sd2sj")

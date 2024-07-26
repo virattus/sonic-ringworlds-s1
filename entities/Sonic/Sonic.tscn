@@ -88,6 +88,7 @@ radius = 10.0
 
 [node name="Sonic" groups=["Player"] instance=ExtResource("1_paxei")]
 collision_mask = 2147483659
+motion_mode = 1
 floor_stop_on_slope = false
 floor_snap_length = 1.0
 script = ExtResource("2_p6xw2")
@@ -108,16 +109,12 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(0, 0, 3.02695)
-bones/2/position = Vector3(-5.13685, -0.617977, 3.60169)
-bones/2/rotation = Quaternion(2.0291e-08, -0.643313, 0.765604, -4.12946e-08)
-bones/3/position = Vector3(-2.48036, -0.0112146, 1.32578)
-bones/3/rotation = Quaternion(-0.000895131, -4.23255e-17, 0, 1)
-bones/4/position = Vector3(5.13685, 0.815262, 3.60169)
-bones/4/rotation = Quaternion(3.99724e-08, -0.790472, 0.612498, -2.13534e-08)
-bones/5/position = Vector3(2.48036, -2.38909, 1.74924)
-bones/5/rotation = Quaternion(-0.190694, 2.1576e-19, 8.54741e-27, 0.98165)
-bones/6/position = Vector3(0, 0, 5.2659)
+bones/1/position = Vector3(2.46625e-08, 0.282106, 2.99835)
+bones/2/position = Vector3(-5.13685, 0.156726, 3.39099)
+bones/2/rotation = Quaternion(3.31192e-08, -0.75768, 0.652627, -2.85272e-08)
+bones/4/position = Vector3(5.13685, 0.156726, 3.39099)
+bones/4/rotation = Quaternion(3.31192e-08, -0.75768, 0.652627, -2.85272e-08)
+bones/6/position = Vector3(2.46625e-08, 0.282106, 5.2373)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
 visible = false
@@ -216,14 +213,17 @@ anim_player = NodePath("../CharacterMesh/SonicModel/AnimationPlayer")
 parameters/Air/blend_amount = 0
 parameters/AirSpinKick/blend_amount = 0.0
 parameters/Death/blend_amount = 0
-parameters/Ground/blend_amount = 1.0
+parameters/Ground/blend_amount = 0.0
 parameters/GroundSecondary/blend_amount = -1.0
 parameters/Hurt/blend_amount = 0.0
-parameters/Idle/blend_amount = 0.0
+parameters/Idle/blend_amount = 0
 parameters/Movement/blend_amount = 0.0
 parameters/OSHurt/active = false
 parameters/OSHurt/internal_active = false
 parameters/OSHurt/request = 0
+parameters/OSLand/active = false
+parameters/OSLand/internal_active = false
+parameters/OSLand/request = 0
 parameters/OSPose/active = false
 parameters/OSPose/internal_active = false
 parameters/OSPose/request = 0
@@ -234,6 +234,7 @@ parameters/TSWalk/scale = 1.0
 parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 10/scale" = 5.0
 "parameters/TimeScale 11/scale" = 6.0
+"parameters/TimeScale 12/scale" = 4.0
 "parameters/TimeScale 2/scale" = 1.0
 "parameters/TimeScale 3/scale" = 1.0
 "parameters/TimeScale 4/scale" = 1.0
