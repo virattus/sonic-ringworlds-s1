@@ -42,18 +42,7 @@ func _physics_process(delta: float) -> void:
 	
 	var speed = velocity.length()
 
-
-	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
-		
-	var CameraForward = Cam.global_transform.basis.z
-	var CameraRight = Cam.global_transform.basis.x
-	
-	
-	#var newVelocity = ((global_transform.basis.z * playerInput.y) + (global_transform.basis.x * playerInput.x))
-	
-	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
-	
-	var newVelocity = (Quaternion(Vector3.UP, up_direction).normalized()) * newInput
+	var newVelocity = GetInputVector()
 	
 	#newVelocity.y = 0.0
 	
@@ -83,12 +72,15 @@ func AlignToY(_transform: Transform3D, newY: Vector3) -> Transform3D:
 func GetInputVector() -> Vector3:
 	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
 	
-	var CameraForward = (Cam.basis.z * Vector3(1, 0, 1)).normalized()
-	var CameraRight = (Cam.basis.x * Vector3(1, 0, 1)).normalized()
+	#var CameraForward = (Cam.global_transform.basis.z * Vector3(1, 0, 1)).normalized()
+	#var CameraRight = (Cam.global_transform.basis.x * Vector3(1, 0, 1)).normalized()
+	
+	var CameraForward = Cam.global_transform.basis.z
+	var CameraRight = Cam.global_transform.basis.x
 	
 	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
 	
-	var newVelocity = (Quaternion(Vector3.UP, up_direction)) * newInput
+	var newVelocity = (Quaternion(Vector3.UP, up_direction).normalized()) * newInput
 	
 	#newVelocity.y = 0.0
 	
@@ -97,39 +89,39 @@ func GetInputVector() -> Vector3:
 	return newVelocity
 
 
+
+
+
 func UpdateCollision(delta: float) -> void:
-	if is_on_wall():
+	#hit floor
+	if is_on_floor():
+		if !GroundCollision:
+			print("Hit Floor")
+			GroundCollision = true
+		
+		apply_floor_snap()
+		assert(get_floor_normal().is_normalized())
+		up_direction = up_direction.slerp(get_floor_normal(), GROUND_SLERP_RATE * delta)
+	#hit wall
+	elif is_on_wall():
 		var wallNormal = get_wall_normal()
-		
-		var wallDot = up_direction.dot(wallNormal)
-		var vertDot = Vector3.UP.dot(wallNormal)
-		
-		#hit floor
-		if wallDot > 0.75:
-			if !GroundCollision:
-				print("Hit Floor")
-				GroundCollision = true
-			
-			up_direction = up_direction.slerp(wallNormal, GROUND_SLERP_RATE * delta)
-		#hit wall
-		elif wallDot > -0.25:
-			if vertDot > 0.0:
-				print("Landed Sideways")
-				up_direction = wallNormal
-				GroundCollision = true
-			else:
-				print("Hit Wall")
-		#hit ceiling
+		if Vector3.UP.dot(wallNormal) > 0.0:
+			print("Landed Sideways")
+			up_direction = wallNormal
+			GroundCollision = true
+			apply_floor_snap()
 		else:
-			if vertDot > 0.0:
-				print("Landed upside down")
-				up_direction = wallNormal
-				GroundCollision = true
-			else:
-				print("Hit Ceiling")
-				velocity.y = 0.0
-				
-	
+			print("Hit Wall")
+	#hit ceiling
+	elif is_on_ceiling():
+		if Vector3.UP.dot(up_direction) < 0.0:
+			print("Landed upside down")
+			up_direction = get_last_slide_collision().get_normal()
+			GroundCollision = true
+			apply_floor_snap()
+		else:
+			print("Hit Ceiling")
+			#velocity.y = 0.0
 	#Not on anything
 	else:
 		if GroundCollision:
