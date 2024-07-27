@@ -4,9 +4,9 @@ extends CharacterBody3D
 @export var Cam : Node3D
 
 var GroundCollision := false
-var GroundCollisionLock := false
 
 @onready var UpIndicator = $UpIndicator
+@onready var InputIndicator = $InputIndicator
 
 const GRAVITY = 9.8
 
@@ -37,9 +37,6 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	assert(GroundCollision == GroundCollisionLock)
-	
-	var oldVelocity = velocity
 	var IsColliding = move_and_slide()
 	if GroundCollision:
 		apply_floor_snap()
@@ -51,14 +48,18 @@ func _physics_process(delta: float) -> void:
 	#	velocity = newVel
 	
 	UpIndicator.position = up_direction
+
 	$RayCast3D.target_position = -up_direction
 	
 	CreateCollIndicator()
 	
 	var speed = velocity.length()
 
-	var newVelocity = GetInputVector()
+	var newVelocity = GetInputVector(up_direction)
+	if !GroundCollision:
+		newVelocity = GetInputVector(Vector3.UP)
 	
+	InputIndicator.global_position = global_position + newVelocity.normalized()
 	#newVelocity.y = 0.0
 	
 	#print(newVelocity)
@@ -72,10 +73,12 @@ func _physics_process(delta: float) -> void:
 	UpdateCollision(delta)
 
 	if Input.is_action_just_pressed("Jump"):
-		print("Jumping, left floor")
+		if GroundCollision:
+			print("Jumping, left floor")
+		else:
+			print("Jumping, Air")
 		velocity += up_direction * 10.0
 		GroundCollision = false
-		GroundCollisionLock = false
 
 
 func AlignToY(_transform: Transform3D, newY: Vector3) -> Transform3D:
@@ -85,7 +88,7 @@ func AlignToY(_transform: Transform3D, newY: Vector3) -> Transform3D:
 	return _transform
 
 
-func GetInputVector() -> Vector3:
+func GetInputVector(up_dir: Vector3) -> Vector3:
 	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
 	
 	#var CameraForward = (Cam.global_transform.basis.z * Vector3(1, 0, 1)).normalized()
@@ -96,7 +99,7 @@ func GetInputVector() -> Vector3:
 	
 	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
 	
-	var newVelocity = (Quaternion(Vector3.UP, up_direction).normalized()) * newInput
+	var newVelocity = (Quaternion(Vector3.UP, up_dir).normalized()) * newInput
 	
 	#newVelocity.y = 0.0
 	
@@ -114,18 +117,19 @@ func UpdateCollision(delta: float) -> void:
 		if !GroundCollision:
 			print("Hit Floor")
 			GroundCollision = true
-			GroundCollisionLock = true
 		
 		assert(get_floor_normal().is_normalized())
 		up_direction = up_direction.slerp(get_floor_normal(), GROUND_SLERP_RATE * delta)
 	#hit wall
 	elif is_on_wall():
 		var wallNormal = get_wall_normal()
-		if Vector3.UP.dot(wallNormal) > 0.0:
-			print("Landed Sideways")
-			up_direction = wallNormal
-			GroundCollision = true
-			GroundCollisionLock = true
+		#"wall" is actually floor
+		if Vector3.UP.dot(wallNormal) > 0.5:
+			#if falling down
+			if Vector3.UP.dot(velocity.normalized()) < 0.0:
+				print("Landed Sideways")
+				up_direction = wallNormal
+				GroundCollision = true
 		else:
 			if is_on_wall_only():
 				Fall(delta)
@@ -137,7 +141,6 @@ func UpdateCollision(delta: float) -> void:
 			print("Landed upside down")
 			up_direction = get_last_slide_collision().get_normal()
 			GroundCollision = true
-			GroundCollisionLock = true
 		else:
 			print("Hit Ceiling")
 			#velocity.y = 0.0
@@ -151,7 +154,6 @@ func Fall(delta: float) -> void:
 	if GroundCollision:
 		print("Left Floor")
 		GroundCollision = false
-		GroundCollisionLock = false
 	
 	velocity -= Vector3.UP * (10.0 * delta)
 	#up_direction = up_direction.slerp(Vector3.UP, AIR_UP_VEC_SLERP * delta)
