@@ -4,12 +4,13 @@ extends CharacterBody3D
 @export var Cam : Node3D
 
 var GroundCollision := false
+var GroundCollisionLock := false
 
 @onready var UpIndicator = $UpIndicator
 
 const GRAVITY = 9.8
 
-const GROUND_SLERP_RATE = 8.0
+const GROUND_SLERP_RATE = 10.0
 
 const AIR_UP_VEC_SLERP = 1.0
 const AIR_DRAG_MODIFIER = 0.5
@@ -17,6 +18,11 @@ const AIR_DRAG_MODIFIER = 0.5
 const JUMP_POWER = 10.0
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+
+
+####
+#LOOK INTO  PhysicsDirectSpace3D.get_rest_info(parameters: PhysicsShapeQueryParameters3D)
+#for getting the surface normal
 
 
 
@@ -31,9 +37,18 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	assert(GroundCollision == GroundCollisionLock)
+	
+	var oldVelocity = velocity
 	var IsColliding = move_and_slide()
 	if GroundCollision:
 		apply_floor_snap()
+	
+	#if IsColliding:
+	#	var collision = get_last_slide_collision()
+	#	var newVel = oldVelocity.slide(collision.get_normal())
+	#	print(newVel)
+	#	velocity = newVel
 	
 	UpIndicator.position = up_direction
 	$RayCast3D.target_position = -up_direction
@@ -57,9 +72,10 @@ func _physics_process(delta: float) -> void:
 	UpdateCollision(delta)
 
 	if Input.is_action_just_pressed("Jump"):
+		print("Jumping, left floor")
 		velocity += up_direction * 10.0
 		GroundCollision = false
-
+		GroundCollisionLock = false
 
 
 func AlignToY(_transform: Transform3D, newY: Vector3) -> Transform3D:
@@ -98,8 +114,8 @@ func UpdateCollision(delta: float) -> void:
 		if !GroundCollision:
 			print("Hit Floor")
 			GroundCollision = true
+			GroundCollisionLock = true
 		
-		apply_floor_snap()
 		assert(get_floor_normal().is_normalized())
 		up_direction = up_direction.slerp(get_floor_normal(), GROUND_SLERP_RATE * delta)
 	#hit wall
@@ -109,27 +125,36 @@ func UpdateCollision(delta: float) -> void:
 			print("Landed Sideways")
 			up_direction = wallNormal
 			GroundCollision = true
-			apply_floor_snap()
+			GroundCollisionLock = true
 		else:
-			print("Hit Wall")
+			if is_on_wall_only():
+				Fall(delta)
+			else:
+				print("Hit Wall")
 	#hit ceiling
 	elif is_on_ceiling():
 		if Vector3.UP.dot(up_direction) < 0.0:
 			print("Landed upside down")
 			up_direction = get_last_slide_collision().get_normal()
 			GroundCollision = true
-			apply_floor_snap()
+			GroundCollisionLock = true
 		else:
 			print("Hit Ceiling")
 			#velocity.y = 0.0
 	#Not on anything
 	else:
-		if GroundCollision:
-			print("Left Floor")
-			GroundCollision = false
-		
-		velocity -= Vector3.UP * (10.0 * delta)
-		#up_direction = up_direction.slerp(Vector3.UP, AIR_UP_VEC_SLERP * delta)
+		Fall(delta)
+
+
+
+func Fall(delta: float) -> void:
+	if GroundCollision:
+		print("Left Floor")
+		GroundCollision = false
+		GroundCollisionLock = false
+	
+	velocity -= Vector3.UP * (10.0 * delta)
+	#up_direction = up_direction.slerp(Vector3.UP, AIR_UP_VEC_SLERP * delta)
 
 
 func CreateCollIndicator() -> void:

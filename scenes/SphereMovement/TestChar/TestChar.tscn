@@ -25,6 +25,7 @@ albedo_color = Color(1, 1, 0, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_5qwfu"]
 
 [node name="TestChar" type="CharacterBody3D"]
+floor_stop_on_slope = false
 floor_block_on_wall = false
 floor_snap_length = 1.0
 script = ExtResource("1_40pk5")

@@ -39,9 +39,10 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 8.33509, 0)
 shape = SubResource("ConcavePolygonShape3D_brkq3")
 
 [node name="MovementTesting" parent="." instance=ExtResource("4_2aetb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.8513, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8515, -12.5876, 0)
 
 [node name="WindyValleyAct3" parent="." instance=ExtResource("5_cei2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20.8191, 0)
 
 [node name="ReactiveFactory" parent="." instance=ExtResource("7_aaopy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -406.093, 0, -827.624)
