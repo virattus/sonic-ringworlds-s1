@@ -5,8 +5,6 @@ extends Character
 
 var DebugMove := false
 
-var FloorNormal := Vector3.UP
-
 var DashMode := false
 var DashModeCharge := 0.0
 var DashModeDrain := true
@@ -21,7 +19,6 @@ var DroppedRingSpeed := 1.0
 @onready var SonicModel = $CharacterMesh/SonicModel
 @onready var SonicBall = $CharacterMesh/SonicBall
 
-@onready var CharGroundCast = $AngledGroundCast
 @onready var AnimTree: AnimationTree = $AnimationTree
 @onready var StateM: StateMachine = $StateMachine
 @onready var TimerInvincibility = $TimerInvincibility
@@ -34,7 +31,6 @@ var DroppedRingSpeed := 1.0
 @onready var CameraFocus = $CameraFocus
 @onready var HitBox = $Hitbox
 @onready var LockOnArea = $LockOnArea
-
 
 @onready var SndJump = $SndJump
 @onready var SndAirdash = $SndAirdash
@@ -49,16 +45,6 @@ var DroppedRingSpeed := 1.0
 
 
 @onready var StartingPosition := global_position
-@onready var CollisionSize: float = $WorldCollision.shape.radius #lol redo this
-@onready var CharGroundCastLength := 2.0
-@onready var GroundCastLength := 25.0
-
-
-
-const GROUND_CAST_DIST = 0.1
-
-const UP_VEC_LERP_RATE = 10.0
-
 
 const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
@@ -69,7 +55,6 @@ func _ready() -> void:
 	super()
 	
 	DebugMenu.AddMonitor(self, "up_direction")
-	DebugMenu.AddMonitor(self, "FloorNormal")
 	DebugMenu.AddMonitor(self, "DamageThreshold")
 	DebugMenu.AddMonitor(self, "DashMode")
 	DebugMenu.AddMonitor(self, "DashModeCharge")
@@ -91,87 +76,62 @@ func _process(delta: float) -> void:
 	
 	if Globals.DEBUG_FORCE_DASHMODE:
 		DashMode = true
-	else:
-		if DashModeDrain:
-			if DashMode:
-				DashModeCharge -= (PARAMETERS.DASHMODE_ACTIVE_DISCHARGE_RATE * delta)
-				if DashModeCharge <= 0.0:
-					DashMode = false
-			else:
-				DashModeCharge -= (PARAMETERS.DASHMODE_NORMAL_DISCHARGE_RATE * delta)
+		DashModeCharge = 100.0
+	
+	if DashModeDrain:
+		if DashMode:
+			DashModeCharge -= (PARAMETERS.DASHMODE_DISCHARGE_RATE * delta)
+			if DashModeCharge <= 0.0:
+				DashMode = false
+		else:
+			DashModeCharge -= (PARAMETERS.DASHMODE_SLOW_DISCHARGE_RATE * delta)
 		
 		DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
-
+	
 	if Flicker:
-		CharMesh.visible = (fmod(round(TimerInvincibility.time_left / PARAMETERS.FLICKER_TIME), 2.0) == 0)
-	
-	#Update debug indicators
-	UpVectorIndicator.position = up_direction
-	FloorNormalIndicator.position = FloorNormal
-	
-	if GetInputVector().length() > 0.0:
-		InputIndicator.look_at(global_position - GetInputVector().normalized())
-		
-	if velocity.length() > 0.0:
-		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()) + Vector3(0.0001, 0.0001, 0.0001))
+		CharMesh.visible = (fmod(round(TimerInvincibility.time_left / PARAMETERS.FLICKER_CYCLE_TIME), 2.0) == 0)
 
 
-func Move() -> void:
-	var isColliding = move_and_slide()
-	if isColliding:
-		var collisionCount = get_slide_collision_count()
-		print(get_slide_collision_count())
-		if collisionCount > 1:
-			for i in range(get_slide_collision_count()):
-				var coll : KinematicCollision3D = get_slide_collision(i)
-				print("test")
-		else:
-			var normal = get_last_slide_collision().get_normal()
-			CreateCollisionIndicator(get_last_slide_collision().get_position(), get_last_slide_collision().get_normal())
-			GroundCollision = true
+func GetCollision() -> SonicCollision:
+	if is_on_floor():
+		return SonicCollision.new(SonicCollision.FLOOR, get_floor_normal())
+	elif is_on_wall():
+		return SonicCollision.new(SonicCollision.WALL, get_wall_normal())
+	elif is_on_ceiling():
+		return SonicCollision.new(SonicCollision.CEILING) #Can't get ceiling normal
 	else:
+		return SonicCollision.new(SonicCollision.NONE)
+
+
+func ApplyGravity(delta: float) -> void:
+	if GroundCollision:
+		print("Left Floor")
 		GroundCollision = false
-
-
-func UpdateUpDirection() -> void:
-	pass
-
-
-func CollisionDetection(groundMin: float, wallMin: float) -> bool:
-	return GroundCollision
 	
-	var lastSlideCount = get_slide_collision_count()
-	if lastSlideCount > 0:
-		return true
-	return false
-	#for i in range(lastSlideCount):
-		
+	velocity -= Vector3.UP * (PARAMETERS.GRAVITY * delta)
 
 
-func GetInputVector() -> Vector3:
-	var CameraForward = Camera.GetCameraBasis().z
-	var CameraRight = Camera.GetCameraBasis().x
+func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
+	up_direction = up_direction.slerp(floor_normal, PARAMETERS.UPDIR_SLERP_RATE * delta)
+
+
+
+func GetInputVector(up_dir: Vector3) -> Vector3:
+	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
 	
-	var newInput = (CameraForward * Controller.InputAnalogue.y) + (CameraRight * Controller.InputAnalogue.x)
-	var newVelocity = (Quaternion(Vector3.UP, up_direction)) * newInput
+	var CameraForward = Camera.global_transform.basis.z
+	var CameraRight = Camera.global_transform.basis.x
 	
+	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
+	var newVelocity = (Quaternion(Vector3.UP, up_dir).normalized()) * newInput
+
 	return newVelocity
-
-
-func IsInputSkidding() -> bool:
-	if Controller.InputVelocity.length() > PARAMETERS.SKID_INPUT_MIN:
-		var InputDir = velocity.normalized().dot(Controller.InputVelocity.normalized())
-		if InputDir < PARAMETERS.SKID_ANGLE_MIN:
-			print("Land: Skid ratio: %s" % InputDir)
-			return true
-		
-	return false
 
 
 func CollectRing() -> bool:
 	if Globals.RingCount < 100:
 		$SndRingCollect.play()
-		DashModeCharge += PARAMETERS.DASHMODE_RING_INCREMENT
+		DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_RING
 		Globals.RingCount += 1
 		return true
 	return false
@@ -182,6 +142,29 @@ func CollectOneUp() -> bool:
 	DroppedRingSpeed = 1.0
 	Globals.LivesCount += 1
 	return true
+
+
+func SetInvincible(Active: bool) -> void:
+	pass
+
+
+func AlignToY(newY: Vector3) -> Basis:
+	var newBasis = Basis.IDENTITY
+	newBasis.y = newY
+	newBasis.x = -newBasis.z.cross(newBasis.y)
+	newBasis = newBasis.orthonormalized()
+	return newBasis
+
+
+func UpdateDebugIndicators(new_input_vector: Vector3, new_floor_normal: Vector3) -> void:
+	UpVectorIndicator.position = up_direction
+	FloorNormalIndicator.position = new_floor_normal
+	
+	if new_input_vector.length() > 0.0:
+		InputIndicator.look_at(global_position - new_input_vector.normalized())
+		
+	if velocity.length() > 0.0:
+		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()) + Vector3(0.0001, 0.0001, 0.0001))
 
 
 func CreateCollisionIndicator(point: Vector3, normal: Vector3) -> void:

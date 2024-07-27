@@ -15,7 +15,8 @@ func Enter(_msg := {}) -> void:
 	
 
 func Exit() -> void:
-	pass
+	owner.AnimTree.set("parameters/Death/blend_amount", 0.0)
+	owner.SndDeath.play()
 
 
 func Update(_delta: float) -> void:

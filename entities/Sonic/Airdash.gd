@@ -10,8 +10,7 @@ func Enter(_msg := {}) -> void:
 	owner.AirdashTrail.Active = true
 	
 	owner.SndAirdash.play()
-	
-	owner.FloorNormal = Vector3.UP
+
 	owner.up_direction = Vector3.UP
 
 
@@ -21,13 +20,4 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move()
-	
-	owner.GroundCollision = owner.CollisionDetection(0, 0)
-	
-	if owner.GroundCollision:
-		ChangeState("Land")
-		return
-		
-	owner.velocity = ApplyGravity(owner.velocity, _delta)
-	owner.velocity = ApplyDrag(owner.velocity, _delta)
+	pass

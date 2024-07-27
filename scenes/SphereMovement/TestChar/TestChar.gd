@@ -81,7 +81,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			print("Jumping, Air")
 		velocity = (velocity * (InputIndicator.global_position - global_position).normalized()) + (up_direction * 10.0)
-		print(velocity)
 		GroundCollision = false
 	
 	#too slow to continue wallrun
@@ -148,7 +147,7 @@ func UpdateCollision(delta: float) -> void:
 				GroundCollision = true
 		else:
 			if is_on_wall_only():
-				Fall(delta)
+				ApplyGravity(delta)
 			else:
 				print("Hit Wall")
 	#hit ceiling
@@ -162,17 +161,16 @@ func UpdateCollision(delta: float) -> void:
 			velocity.y = 0.0
 	#Not on anything
 	else:
-		Fall(delta)
+		ApplyGravity(delta)
 
 
-
-func Fall(delta: float) -> void:
+func ApplyGravity(delta: float) -> void:
 	if GroundCollision:
 		print("Left Floor")
 		GroundCollision = false
 	
-	velocity -= Vector3.UP * (10.0 * delta)
-	#up_direction = up_direction.slerp(Vector3.UP, AIR_UP_VEC_SLERP * delta)
+	velocity -= Vector3.UP * (9.8 * delta)
+
 
 
 func CreateCollIndicator() -> void:

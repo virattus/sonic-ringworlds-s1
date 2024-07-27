@@ -7,9 +7,9 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Ground/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
 	owner.AnimTree.set("parameters/Idle/blend_amount", 0.0)
-	
+
 	owner.SetVelocity(Vector3.ZERO)
-	
+
 
 func Exit() -> void:
 	pass
@@ -17,30 +17,15 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	owner.Move()
-	owner.apply_floor_snap()
 	
-	owner.GroundCollision = owner.CollisionDetection(0, 0)
+	var collision: SonicCollision = owner.GetCollision()
 	
-	owner.CharMesh.AlignToY(owner.up_direction)
-	
-	owner.CharGroundCast.target_position = -(owner.FloorNormal.normalized()) * owner.CharGroundCastLength
-	owner.up_direction = owner.FloorNormal
-	
-	if !owner.GroundCollision or owner.up_direction.dot(Vector3.UP) < owner.PARAMETERS.IDLE_MIN_GROUND_ANGLE:
-		ChangeState("Fall", {
-		})
+	if collision.CollisionType == SonicCollision.NONE:
+		ChangeState("Fall")
 		return
 	
-	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Jump", {
-		})
-		return
+	var inputVel = owner.GetInputVector(owner.up_direction)
 	
-	if Input.is_action_just_pressed("Attack"):
-		ChangeState("SquatCharge")
-		return
-	
-	if owner.GetInputVector().length() > 0.0:
-		ChangeState("Walk", {
-		})
+	if inputVel.length() > 0.0:
+		ChangeState("Walk")
 		return

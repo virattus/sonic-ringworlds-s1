@@ -15,6 +15,8 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
+	owner.Move()
+	
 	if Input.is_action_just_pressed("DEBUG_ResetPosition"):
 		owner.DebugMove = false
 		owner.global_position = owner.StartingPosition
@@ -42,4 +44,3 @@ func Update(_delta: float) -> void:
 	
 	
 	owner.SetVelocity(vel)
-	owner.Move()

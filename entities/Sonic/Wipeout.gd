@@ -1,5 +1,7 @@
-extends BasicState
+extends "res://entities/Sonic/MoveGround.gd"
 
+
+const WIPEOUT_MIN_SPEED = 1.0
 
 
 func Enter(_msg := {}) -> void:
@@ -10,14 +12,6 @@ func Enter(_msg := {}) -> void:
 	owner.CameraFocus.position = Vector3(0, 0.5, 0)
 	
 	owner.SndSkid.play()
-	
-	owner.up_direction = owner.FloorNormal
-	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized()) 
-	
-	owner.SetVelocity(owner.CharMesh.GetForwardVector() * owner.PARAMETERS.WIPEOUT_START_SPEED)
-	
-	owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized())
-	owner.CharMesh.AlignToY(owner.FloorNormal)
 
 
 
@@ -26,22 +20,11 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.SetVelocity(lerp(owner.velocity, Vector3.ZERO, owner.PARAMETERS.WIPEOUT_SPEED_REDUCTION_RATE * _delta))
-	
 	owner.Move()
-	if owner.velocity.length() > 0.0:
-		owner.CharMesh.look_at(owner.global_position + owner.velocity.normalized()) 
-	
-	if owner.is_on_floor():
-		owner.FloorNormal = owner.get_floor_normal()
-		owner.up_direction = owner.FloorNormal
-		owner.CharMesh.AlignToY(owner.FloorNormal)
-	else:
-		ChangeState("Fall", {
-		})
-		return
-		
-	
-	if owner.Speed <= owner.PARAMETERS.WIPEOUT_MIN_SPEED:
+
+	if owner.Speed < WIPEOUT_MIN_SPEED:
 		ChangeState("Idle")
 		return
+
+	owner.SetVelocity(ApplyDrag(owner.velocity, _delta))
+	
