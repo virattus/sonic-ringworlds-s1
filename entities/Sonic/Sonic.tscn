@@ -109,12 +109,14 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(2.46625e-08, 0.282106, 2.99835)
-bones/2/position = Vector3(-5.13685, 0.156726, 3.39099)
-bones/2/rotation = Quaternion(3.31192e-08, -0.75768, 0.652627, -2.85272e-08)
-bones/4/position = Vector3(5.13685, 0.156726, 3.39099)
-bones/4/rotation = Quaternion(3.31192e-08, -0.75768, 0.652627, -2.85272e-08)
-bones/6/position = Vector3(2.46625e-08, 0.282106, 5.2373)
+bones/1/position = Vector3(-3.08399e-09, 0.556579, 2.96762)
+bones/2/position = Vector3(-5.13685, 0.30921, 3.02313)
+bones/2/rotation = Quaternion(2.54843e-08, -0.802895, 0.596121, -3.56686e-08)
+bones/2/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(5.13685, 0.30921, 3.02313)
+bones/4/rotation = Quaternion(2.54843e-08, -0.802895, 0.596121, -3.56686e-08)
+bones/4/scale = Vector3(1, 1, 1)
+bones/6/position = Vector3(-3.08399e-09, 0.556579, 5.20657)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
 visible = false
@@ -228,7 +230,9 @@ parameters/OSPose/active = false
 parameters/OSPose/internal_active = false
 parameters/OSPose/request = 0
 parameters/Run/blend_amount = -1.0
+parameters/StrikeDash/blend_amount = 0
 parameters/TSRun/scale = 1.0
+parameters/TSSprint/scale = 1.0
 parameters/TSStrikeDash/scale = 1.0
 parameters/TSWalk/scale = 1.0
 parameters/TimeScale/scale = 1.0

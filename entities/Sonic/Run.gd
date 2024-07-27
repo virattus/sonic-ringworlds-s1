@@ -6,8 +6,7 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
-	owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
-	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
+	UpdateAnim()
 
 
 func Exit() -> void:
@@ -21,7 +20,8 @@ func Update(_delta: float) -> void:
 	owner.GroundCollision = owner.CollisionDetection(0, 0)
 	
 	owner.CharMesh.AlignToY(owner.up_direction)
-	owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
+	
+	UpdateAnim()
 	
 	
 	if !owner.GroundCollision:
@@ -33,7 +33,7 @@ func Update(_delta: float) -> void:
 	
 	var inputVel = owner.GetInputVector()
 	
-	newVel += inputVel
+	newVel += inputVel * _delta
 	
 	if inputVel.length() >= 0.0 and owner.velocity.normalized() != Vector3.UP:
 		owner.CharMesh.look_at(owner.global_position + owner.velocity)
@@ -63,3 +63,12 @@ func Update(_delta: float) -> void:
 	if owner.Speed <= owner.PARAMETERS.MOVE_MIN_SPEED:
 		ChangeState("Idle")
 		return
+
+
+func UpdateAnim() -> void:
+	if owner.Speed > owner.PARAMETERS.RUN_MAX_SPEED:
+		owner.AnimTree.set("parameters/Run/blend_amount", 1.0)
+		owner.AnimTree.set("parameters/TSSprint/scale", owner.Speed * owner.PARAMETERS.MOVE_SPRINT_ANIM_SPEED_MODIFIER)
+	else:
+		owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
+		owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.MOVE_RUN_ANIM_SPEED_MODIFIER)
