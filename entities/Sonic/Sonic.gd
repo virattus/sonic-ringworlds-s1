@@ -190,12 +190,13 @@ func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
-	if !Invincible:
-		if Damage > DamageThreshold:
-			if Globals.RingCount > 0:
-				StateM.ChangeState("Hurt", {
-					"BounceDirection": Source.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
-					"DropRings": true,
-				})
-			else:
-				StateM.ChangeState("Death")
+	if Invincible or (Damage < DamageThreshold):
+		return
+	
+	if Globals.RingCount > 0:
+		StateM.ChangeState("Hurt", {
+			"BounceDirection": Source.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+			"DropRings": true,
+		})
+	else:
+		StateM.ChangeState("Death")

@@ -5,9 +5,6 @@ extends "res://entities/Sonic/MoveGround.gd"
 const GROUND_NORMAL_TRANSITION_MIN = 0.75
 const GROUND_NORMAL_HOP = 0.1
 
-const WALK_SPEED_POWER = 20.0
-const WALK_ANIM_SPEED_MOD = 1.0
-
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
@@ -45,19 +42,32 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Jump")
+		return
+	
 	var newVel = owner.velocity
 	
-	#only update model's direction if player moves stick
 	if inputVel.length() > 0.0:
-		owner.CharMesh.look_at(owner.global_position + newVel.normalized())
-	
-	newVel += inputVel * WALK_SPEED_POWER * _delta
-	
-	newVel = ApplyDrag(newVel, _delta)
+		newVel = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)
+	else:
+		newVel = ApplyDrag(newVel, _delta)
 	
 	owner.SetVelocity(newVel)
+	
+	
+	if inputVel.length() > 0.0:
+		#only update model's direction if player moves stick
+		#owner.CharMesh.look_at(owner.global_position + inputVel.normalized())
+		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+			ChangeState("Run")
+			return
+	else:
+		if owner.Speed <= owner.PARAMETERS.WALK_MIN_SPEED:
+			ChangeState("Idle")
+			return
 
 
 func UpdateAnim() -> void:
 	owner.CharMesh.AlignToY(owner.up_direction)
-	owner.AnimTree.set("parameters/TSWalk/scale", owner.Speed * WALK_ANIM_SPEED_MOD)
+	owner.AnimTree.set("parameters/TSWalk/scale", owner.Speed * owner.PARAMETERS.WALK_ANIM_SPEED_MOD)

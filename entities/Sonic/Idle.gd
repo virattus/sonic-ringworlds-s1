@@ -17,11 +17,16 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	owner.Move()
+	owner.apply_floor_snap()
 	
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
 		ChangeState("Fall")
+		return
+	
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Jump")
 		return
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
