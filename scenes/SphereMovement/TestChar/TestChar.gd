@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var Cam : Node3D
 
 var GroundCollision := false
+var Speed := 0.0
 
 @onready var UpIndicator = $UpIndicator
 @onready var InputIndicator = $InputIndicator
@@ -11,6 +12,9 @@ var GroundCollision := false
 const GRAVITY = 9.8
 
 const GROUND_SLERP_RATE = 10.0
+const GROUND_TRANSITION_MIN = 0.75
+const GROUND_WALLRUN_MIN_ANGLE = 0.5
+const GROUND_WALLRUN_MIN_SPEED = 3.0
 
 const AIR_UP_VEC_SLERP = 1.0
 const AIR_DRAG_MODIFIER = 0.5
@@ -28,6 +32,7 @@ const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 
 func _ready() -> void:
 	DebugMenu.AddMonitor(self, "velocity")
+	DebugMenu.AddMonitor(self, "Speed")
 	DebugMenu.AddMonitor(self, "up_direction")
 	DebugMenu.AddMonitor(self, "GroundCollision")
 
@@ -41,33 +46,31 @@ func _physics_process(delta: float) -> void:
 	if GroundCollision:
 		apply_floor_snap()
 	
-	#if IsColliding:
-	#	var collision = get_last_slide_collision()
-	#	var newVel = oldVelocity.slide(collision.get_normal())
-	#	print(newVel)
-	#	velocity = newVel
-	
 	UpIndicator.position = up_direction
 
 	$RayCast3D.target_position = -up_direction
 	
 	CreateCollIndicator()
 	
-	var speed = velocity.length()
+	Speed = velocity.length()
 
 	var newVelocity = GetInputVector(up_direction)
 	if !GroundCollision:
 		newVelocity = GetInputVector(Vector3.UP)
 	
 	InputIndicator.global_position = global_position + newVelocity.normalized()
-	#newVelocity.y = 0.0
 	
-	#print(newVelocity)
+	
 	
 	velocity += newVelocity * delta * 20.0
 	
-	velocity.x = lerp(velocity.x, 0.0, delta)
-	velocity.z = lerp(velocity.z, 0.0, delta)
+	if GroundCollision:
+		velocity = lerp(velocity, Vector3.ZERO, delta)
+	
+	#Air Drag
+	if !GroundCollision:
+		velocity.x = lerp(velocity.x, 0.0, delta)
+		velocity.z = lerp(velocity.z, 0.0, delta)
 	
 
 	UpdateCollision(delta)
@@ -77,8 +80,15 @@ func _physics_process(delta: float) -> void:
 			print("Jumping, left floor")
 		else:
 			print("Jumping, Air")
-		velocity += up_direction * 10.0
+		velocity = (velocity * (InputIndicator.global_position - global_position).normalized()) + (up_direction * 10.0)
+		print(velocity)
 		GroundCollision = false
+	
+	#too slow to continue wallrun
+	if GroundCollision and velocity.length() < GROUND_WALLRUN_MIN_SPEED and up_direction.dot(Vector3.UP) < GROUND_WALLRUN_MIN_ANGLE:
+		print("Falling off wall, too slow to wallrun")
+		GroundCollision = false
+		velocity += up_direction * 0.1
 
 
 func AlignToY(_transform: Transform3D, newY: Vector3) -> Transform3D:
@@ -114,12 +124,18 @@ func GetInputVector(up_dir: Vector3) -> Vector3:
 func UpdateCollision(delta: float) -> void:
 	#hit floor
 	if is_on_floor():
-		if !GroundCollision:
-			print("Hit Floor")
-			GroundCollision = true
+		var floorNormal = get_floor_normal()
 		
-		assert(get_floor_normal().is_normalized())
-		up_direction = up_direction.slerp(get_floor_normal(), GROUND_SLERP_RATE * delta)
+		if up_direction.dot(floorNormal) > GROUND_TRANSITION_MIN:
+			if !GroundCollision:
+				print("Hit Floor")
+				GroundCollision = true
+			up_direction = up_direction.slerp(get_floor_normal(), GROUND_SLERP_RATE * delta)
+		else: #Too far of an angle to transition
+			if GroundCollision:
+				print("Left floor, too great an angle")
+				GroundCollision = false
+				#velocity += up_direction * 0.05
 	#hit wall
 	elif is_on_wall():
 		var wallNormal = get_wall_normal()
@@ -143,7 +159,7 @@ func UpdateCollision(delta: float) -> void:
 			GroundCollision = true
 		else:
 			print("Hit Ceiling")
-			#velocity.y = 0.0
+			velocity.y = 0.0
 	#Not on anything
 	else:
 		Fall(delta)
