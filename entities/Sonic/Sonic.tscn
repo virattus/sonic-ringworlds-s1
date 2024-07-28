@@ -88,7 +88,6 @@ radius = 10.0
 
 [node name="Sonic" groups=["Player"] instance=ExtResource("1_paxei")]
 collision_mask = 2147483659
-motion_mode = 1
 floor_stop_on_slope = false
 floor_snap_length = 1.0
 script = ExtResource("2_p6xw2")
@@ -109,16 +108,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-4.1562e-08, 0.116442, 3.0169)
-bones/2/position = Vector3(-5.13685, 0.0646899, 3.61302)
-bones/2/rotation = Quaternion(2.22176e-08, -0.728433, 0.685117, -3.95707e-08)
+bones/1/position = Vector3(5.02535e-08, 0.574833, 2.96557)
+bones/2/position = Vector3(-5.13685, 0.319352, 2.99866)
+bones/2/rotation = Quaternion(3.52203e-08, -0.805745, 0.592262, -2.58886e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.0646899, 3.61302)
-bones/4/rotation = Quaternion(2.22176e-08, -0.728433, 0.685117, -3.95707e-08)
+bones/4/position = Vector3(5.13685, 0.319352, 2.99866)
+bones/4/rotation = Quaternion(3.52203e-08, -0.805745, 0.592262, -2.58886e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(-4.1562e-08, 0.116442, 5.25585)
+bones/6/position = Vector3(5.02535e-08, 0.574833, 5.20452)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
 visible = false

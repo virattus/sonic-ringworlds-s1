@@ -19,6 +19,7 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	owner.Move()
+	owner.apply_floor_snap()
 	
 	UpdateAnim()
 	
@@ -30,7 +31,6 @@ func Update(_delta: float) -> void:
 		if collision.CollisionType == SonicCollision.CEILING:
 			pass
 		else:
-			owner.UpdateDebugIndicators(inputVel.normalized(), collision.CollisionNormal)
 			owner.UpdateUpDir(collision.CollisionNormal, _delta)
 			if collision.CollisionType == SonicCollision.FLOOR:
 				if owner.up_direction.dot(collision.CollisionNormal) < GROUND_NORMAL_TRANSITION_MIN:
@@ -58,7 +58,7 @@ func Update(_delta: float) -> void:
 	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
-		#owner.CharMesh.look_at(owner.global_position + inputVel.normalized())
+		owner.CharMesh.look_at(owner.global_position + newVel.normalized())
 		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
 			ChangeState("Run")
 			return

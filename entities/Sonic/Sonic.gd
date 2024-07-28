@@ -4,6 +4,8 @@ extends Character
 @export var Camera: ThirdPersonCamera
 
 var DebugMove := false
+var DebugMoveVector := Vector3.ZERO
+var DebugFloorNormal := Vector3.ZERO
 
 var DashMode := false
 var DashModeCharge := 0.0
@@ -14,6 +16,8 @@ var Flicker := false
 var DamageThreshold := 0
 
 var DroppedRingSpeed := 1.0
+
+
 
 
 @onready var SonicModel = $CharacterMesh/SonicModel
@@ -74,6 +78,8 @@ func _process(delta: float) -> void:
 			StateM.ChangeState("Fall", {
 			})
 	
+	UpdateDebugIndicators(DebugMoveVector, DebugFloorNormal)
+	
 	if Globals.DEBUG_FORCE_DASHMODE:
 		DashMode = true
 		DashModeCharge = 100.0
@@ -94,8 +100,10 @@ func _process(delta: float) -> void:
 
 func GetCollision() -> SonicCollision:
 	if is_on_floor():
+		DebugFloorNormal = get_floor_normal()
 		return SonicCollision.new(SonicCollision.FLOOR, get_floor_normal())
 	elif is_on_wall():
+		DebugFloorNormal = get_wall_normal()
 		return SonicCollision.new(SonicCollision.WALL, get_wall_normal())
 	elif is_on_ceiling():
 		return SonicCollision.new(SonicCollision.CEILING) #Can't get ceiling normal
@@ -112,7 +120,8 @@ func ApplyGravity(delta: float) -> void:
 
 
 func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
-	up_direction = up_direction.slerp(floor_normal, PARAMETERS.UPDIR_SLERP_RATE * delta)
+	if floor_normal.is_normalized():
+		up_direction = up_direction.slerp(floor_normal, PARAMETERS.UPDIR_SLERP_RATE * delta)
 
 
 
@@ -124,6 +133,8 @@ func GetInputVector(up_dir: Vector3) -> Vector3:
 	
 	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
 	var newVelocity = (Quaternion(Vector3.UP, up_dir).normalized()) * newInput
+
+	DebugMoveVector = newVelocity
 
 	return newVelocity
 

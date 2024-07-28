@@ -1,6 +1,8 @@
 extends BasicState
 
 
+const LAND_MIN_SPEED = 0.5
+
 
 func Enter(_msg := {}) -> void:
 	if _msg.has("Normal"):
@@ -15,6 +17,13 @@ func Enter(_msg := {}) -> void:
 	owner.SndLand.play()
 	owner.CharMesh.AlignToY(owner.up_direction)
 
+	if owner.Speed > LAND_MIN_SPEED:
+		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+			ChangeState("Run")
+			return
+		else:
+			ChangeState("Walk")
+			return
 	
 
 	owner.SetVelocity(Vector3.ZERO)
