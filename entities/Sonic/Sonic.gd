@@ -120,6 +120,9 @@ func ApplyGravity(delta: float) -> void:
 
 
 func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
+	up_direction = floor_normal
+	return
+	
 	if floor_normal.is_normalized():
 		up_direction = up_direction.slerp(floor_normal, PARAMETERS.UPDIR_SLERP_RATE * delta)
 

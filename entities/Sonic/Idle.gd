@@ -1,4 +1,4 @@
-extends BasicState
+extends "res://entities/Sonic/MoveGround.gd"
 
 
 
@@ -23,6 +23,9 @@ func Update(_delta: float) -> void:
 	
 	if collision.CollisionType == SonicCollision.NONE:
 		ChangeState("Fall")
+		return
+	
+	if !WallRunMinVelocity():
 		return
 	
 	if Input.is_action_just_pressed("Jump"):

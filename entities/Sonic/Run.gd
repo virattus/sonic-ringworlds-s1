@@ -25,21 +25,10 @@ func Update(_delta: float) -> void:
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
-	var collision: SonicCollision = owner.GetCollision()
+	if !HandleCollisions(_delta):
+		return
 	
-	if collision.CollisionType != SonicCollision.NONE:
-		if collision.CollisionType == SonicCollision.CEILING:
-			pass
-		else:
-			owner.UpdateUpDir(collision.CollisionNormal, _delta)
-			if collision.CollisionType == SonicCollision.FLOOR:
-				if owner.up_direction.dot(collision.CollisionNormal) < owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
-					#Too large of an angle to transition
-					owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-					ChangeState("Fall")
-					return
-	else:
-		ChangeState("Fall")
+	if !WallRunMinVelocity():
 		return
 	
 	if Input.is_action_just_pressed("Jump"):

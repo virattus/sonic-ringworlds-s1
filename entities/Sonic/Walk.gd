@@ -2,10 +2,6 @@ extends "res://entities/Sonic/MoveGround.gd"
 
 
 
-const GROUND_NORMAL_TRANSITION_MIN = 0.75
-const GROUND_NORMAL_HOP = 0.1
-
-
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
@@ -25,21 +21,10 @@ func Update(_delta: float) -> void:
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
-	var collision: SonicCollision = owner.GetCollision()
+	if !HandleCollisions(_delta):
+		return
 	
-	if collision.CollisionType != SonicCollision.NONE:
-		if collision.CollisionType == SonicCollision.CEILING:
-			pass
-		else:
-			owner.UpdateUpDir(collision.CollisionNormal, _delta)
-			if collision.CollisionType == SonicCollision.FLOOR:
-				if owner.up_direction.dot(collision.CollisionNormal) < GROUND_NORMAL_TRANSITION_MIN:
-					#Too large of an angle to transition
-					owner.SetVelocity(owner.velocity + (owner.up_direction * GROUND_NORMAL_HOP))
-					ChangeState("Fall")
-					return
-	else:
-		ChangeState("Fall")
+	if !WallRunMinVelocity():
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
