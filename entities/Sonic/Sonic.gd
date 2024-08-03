@@ -6,6 +6,12 @@ extends Character
 var DebugMove := false
 var DebugMoveVector := Vector3.ZERO
 var DebugFloorNormal := Vector3.ZERO
+var DebugCollisionPos := Vector3.ZERO
+var DebugCollisionPositionDeviation := Vector3.ZERO
+var DebugCollisionNormal := Vector3.ZERO
+var DebugCollisionNormalDeviation := Vector3.ZERO
+
+var HasJumped := false
 
 var DashMode := false
 var DashModeCharge := 0.0
@@ -58,6 +64,11 @@ const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 func _ready() -> void:
 	super()
 	
+	DebugMenu.AddMonitor(self, "DebugMove")
+	DebugMenu.AddMonitor(self, "DebugMoveVector")
+	DebugMenu.AddMonitor(self, "DebugFloorNormal")
+	DebugMenu.AddMonitor(self, "DebugCollisionPositionDeviation")
+	DebugMenu.AddMonitor(self, "DebugCollisionNormalDeviation")
 	DebugMenu.AddMonitor(self, "up_direction")
 	DebugMenu.AddMonitor(self, "DamageThreshold")
 	DebugMenu.AddMonitor(self, "DashMode")
@@ -99,14 +110,23 @@ func _process(delta: float) -> void:
 
 
 func GetCollision() -> SonicCollision:
+	var collision = get_last_slide_collision()
+	if collision:
+		DebugCollisionPos = collision.get_position()
+		DebugCollisionNormal = collision.get_normal()
+		CreateCollisionIndicator(DebugCollisionPos, DebugCollisionNormal)
+	
 	if is_on_floor():
 		DebugFloorNormal = get_floor_normal()
+		DebugCollisionNormalDeviation = DebugFloorNormal - DebugCollisionNormal
 		return SonicCollision.new(SonicCollision.FLOOR, get_floor_normal())
 	elif is_on_wall():
 		DebugFloorNormal = get_wall_normal()
+		DebugCollisionNormalDeviation = DebugFloorNormal - DebugCollisionNormal
 		return SonicCollision.new(SonicCollision.WALL, get_wall_normal())
 	elif is_on_ceiling():
-		return SonicCollision.new(SonicCollision.CEILING) #Can't get ceiling normal
+		DebugCollisionNormalDeviation = Vector3.ZERO
+		return SonicCollision.new(SonicCollision.CEILING, DebugCollisionNormal) #Can't get ceiling normal
 	else:
 		return SonicCollision.new(SonicCollision.NONE)
 
@@ -174,7 +194,7 @@ func UpdateDebugIndicators(new_input_vector: Vector3, new_floor_normal: Vector3)
 	UpVectorIndicator.position = up_direction
 	FloorNormalIndicator.position = new_floor_normal
 	
-	if new_input_vector.length() > 0.0:
+	if new_input_vector.length() > 0.0 and new_input_vector != Vector3.UP:
 		InputIndicator.look_at(global_position - new_input_vector.normalized())
 		
 	if velocity.length() > 0.0:

@@ -14,8 +14,11 @@ func Enter(_msg := {}) -> void:
 			return
 	
 	owner.GroundCollision = true
+	owner.HasJumped = false
 	owner.SndLand.play()
 	owner.CharMesh.AlignToY(owner.up_direction)
+	
+	print("Landed")
 
 	if owner.Speed > LAND_MIN_SPEED:
 		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:

@@ -20,10 +20,15 @@ func HandleCollisions() -> bool:
 				if owner.up_direction.dot(collision.CollisionNormal) < 0.5:
 					type = "Wipeout"
 		elif collision.CollisionType == SonicCollision.CEILING:
-			#Landed upside down, need to get a floor normal
-			type = "Wipeout"
-			owner.GroundCast.force_raycast_update()
-			normal = owner.GroundCast.get_collision_normal()
+			if Vector3.UP.dot(owner.up_direction) > 0.0:
+				#Bonked head
+				owner.velocity.y = 0.0
+				return false
+			else:
+				#Landed upside down, need to get a floor normal
+				type = "Wipeout"
+				owner.GroundCast.force_raycast_update()
+				normal = owner.GroundCast.get_collision_normal()
 				
 		ChangeState("Land", {
 			"Type": type,

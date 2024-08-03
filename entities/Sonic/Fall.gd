@@ -20,6 +20,10 @@ func Update(_delta: float) -> void:
 	if !HandleCollisions():
 		return
 
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Airdash")
+		return
+
 	var newVel = owner.velocity
 	var inputVel = owner.GetInputVector(Vector3.UP)
 	

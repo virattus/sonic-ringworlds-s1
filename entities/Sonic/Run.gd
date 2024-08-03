@@ -10,7 +10,6 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
-	UpdateAnim()
 
 
 func Exit() -> void:
@@ -18,15 +17,11 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move()
-	owner.apply_floor_snap()
-	
-	UpdateAnim()
+	if !HandleMovementAndCollisions(_delta):
+		ChangeState("Fall")
+		return
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
-	
-	if !HandleCollisions(_delta):
-		return
 	
 	if !WallRunMinVelocity():
 		return
@@ -34,6 +29,11 @@ func Update(_delta: float) -> void:
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Jump")
 		return
+	
+	if Input.is_action_just_pressed("Attack"):
+		ChangeState("Ball")
+		return
+	
 	
 	if inputVel.length() < RUN_SKID_MIN_STICK_MAGNITUDE:
 		SkidStickBelowMagnitude += 1
@@ -62,15 +62,6 @@ func Update(_delta: float) -> void:
 	if owner.Speed <= owner.PARAMETERS.WALK_MAX_SPEED:
 		ChangeState("Walk")
 		return
-
-
-func UpdateAnim() -> void:
-	if owner.Speed > owner.PARAMETERS.RUN_MAX_SPEED:
-		owner.AnimTree.set("parameters/Run/blend_amount", 1.0)
-		owner.AnimTree.set("parameters/TSSprint/scale", owner.Speed * owner.PARAMETERS.SPRINT_ANIM_SPEED_MOD)
-	else:
-		owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
-		owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.RUN_ANIM_SPEED_MOD)
 
 
 func IsInputSkidding(input: Vector3) -> bool:

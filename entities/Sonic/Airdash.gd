@@ -1,6 +1,7 @@
 extends "res://entities/Sonic/MoveAir.gd"
 
 
+const AIRDASH_FORWARD_SPEED = 25.0
 
 
 func Enter(_msg := {}) -> void:
@@ -10,6 +11,8 @@ func Enter(_msg := {}) -> void:
 	owner.AirdashTrail.Active = true
 	
 	owner.SndAirdash.play()
+	
+	owner.SetVelocity(owner.velocity.normalized() * AIRDASH_FORWARD_SPEED)
 
 	owner.up_direction = Vector3.UP
 
@@ -20,4 +23,17 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	pass
+	owner.Move()
+	
+	if !HandleCollisions():
+		return
+	
+	if (owner.velocity * Vector3(1, 0, 1)).length() <= 0.0:
+		ChangeState("Fall")
+		return
+	
+	owner.ApplyGravity(_delta)
+	var newVel = owner.velocity
+	newVel = ApplyDrag(owner.velocity, _delta)
+	
+	owner.SetVelocity(newVel)
