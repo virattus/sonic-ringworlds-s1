@@ -1,6 +1,7 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
+const WIPEOUT_START_SPEED = 5.0
 const WIPEOUT_MIN_SPEED = 1.0
 
 
@@ -12,6 +13,8 @@ func Enter(_msg := {}) -> void:
 	owner.CameraFocus.position = Vector3(0, 0.5, 0)
 	
 	owner.SndSkid.play()
+	
+	owner.SetVelocity(owner.velocity.normalized() * WIPEOUT_START_SPEED)
 
 
 

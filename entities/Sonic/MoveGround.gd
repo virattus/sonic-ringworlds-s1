@@ -26,6 +26,9 @@ func HandleCollisions(delta: float) -> bool:
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
+		if owner.GroundCollision:
+			print("Left Ground")
+			owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 		owner.CollisionCast.force_raycast_update()
 		if owner.CollisionCast.is_colliding():
 			var collisionNormal = owner.CollisionCast.get_collision_normal()
@@ -34,9 +37,6 @@ func HandleCollisions(delta: float) -> bool:
 				owner.UpdateUpDir(collisionNormal, delta)
 				owner.apply_floor_snap()
 				return true #We ARE colliding with the floor, it turns out
-		
-		if owner.GroundCollision:
-			print("Left Ground")
 		return false
 	elif (collision.CollisionType == SonicCollision.FLOOR):
 		owner.CollisionCast.force_raycast_update()
