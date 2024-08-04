@@ -152,6 +152,7 @@ func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
 	up_direction = floor_normal
 	
 	CollisionCast.target_position = -up_direction * COLLISION_CAST_LENGTH
+	
 	return
 	
 	if floor_normal.is_normalized():
@@ -203,7 +204,7 @@ func AlignToY(newY: Vector3) -> Basis:
 
 func UpdateDebugIndicators(new_input_vector: Vector3, new_floor_normal: Vector3) -> void:
 	UpVectorIndicator.position = up_direction
-	FloorNormalIndicator.position = new_floor_normal
+	FloorNormalIndicator.position = -CollisionCast.target_position.normalized()
 	
 	if new_input_vector.length() > 0.0 and new_input_vector != Vector3.UP:
 		InputIndicator.look_at(global_position - new_input_vector.normalized())

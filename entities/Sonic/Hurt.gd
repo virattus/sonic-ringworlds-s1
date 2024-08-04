@@ -13,7 +13,7 @@ func Enter(_msg := {}) -> void:
 	
 	owner.GroundCollision = false
 	
-	owner.up_direction = Vector3(0, 1, 0)
+	owner.UpdateUpDir(Vector3(0, 1, 0), 1.0)
 	owner.velocity = Vector3(0, owner.PARAMETERS.HURT_INITIAL_UP_SPEED, 0)
 	if _msg.has("BounceDirection"):
 		owner.velocity = _msg["BounceDirection"] + owner.velocity

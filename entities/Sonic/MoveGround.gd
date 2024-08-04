@@ -29,17 +29,31 @@ func HandleCollisions(delta: float) -> bool:
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
+		owner.CollisionCast.force_raycast_update()
+		if owner.CollisionCast.is_colliding():
+			var collisionNormal = owner.CollisionCast.get_collision_normal()
+			if owner.up_direction.dot(collisionNormal) > owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
+				owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), collisionNormal)
+				owner.UpdateUpDir(collisionNormal, delta)
+				owner.apply_floor_snap()
+				return true #We ARE colliding with the floor, it turns out
+		
 		if owner.GroundCollision:
 			print("Left Ground")
 		return false
 	elif (collision.CollisionType == SonicCollision.FLOOR):
-		if owner.up_direction.dot(collision.CollisionNormal) > owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
-			owner.UpdateUpDir(collision.CollisionNormal, delta)
+		owner.CollisionCast.force_raycast_update()
+		if owner.CollisionCast.is_colliding():
+			var collisionNormal = owner.CollisionCast.get_collision_normal()
+			if owner.up_direction.dot(collisionNormal) > owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
+				owner.UpdateUpDir(collisionNormal, delta)
+				owner.apply_floor_snap()
+			else:
+				#Too large of an angle to transition
+				owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
+				ChangeState("Fall")
+				return false
 		else:
-			#Too large of an angle to transition
-			print("Too large of an angle to transition: %s" % owner.up_direction.dot(collision.CollisionNormal))
-			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-			ChangeState("Fall")
 			return false
 	elif (collision.CollisionType == SonicCollision.WALL):
 		

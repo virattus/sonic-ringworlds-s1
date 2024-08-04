@@ -14,7 +14,7 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SetVelocity(owner.velocity.normalized() * AIRDASH_FORWARD_SPEED)
 
-	owner.up_direction = Vector3.UP
+	owner.UpdateUpDir(Vector3.UP, 1.0)
 
 
 func Exit() -> void:

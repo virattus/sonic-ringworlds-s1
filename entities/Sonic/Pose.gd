@@ -25,7 +25,7 @@ func Update(_delta: float) -> void:
 	owner.CharMesh.look_at(-cam.global_transform.origin)
 	
 	owner.CharMesh.AlignToY(owner.up_direction)
-	owner.up_direction = owner.up_direction.slerp(owner.FloorNormal.normalized(), _delta * owner.UP_VEC_LERP_RATE).normalized()
+	owner.UpdateUpDir(Vector3.UP, _delta)
 	
 	if !owner.AnimTree.get("parameters/OSPose/active"):
 		ChangeState("Fall")

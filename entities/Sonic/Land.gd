@@ -6,7 +6,7 @@ const LAND_MIN_SPEED = 0.5
 
 func Enter(_msg := {}) -> void:
 	if _msg.has("Normal"):
-		owner.up_direction = _msg["Normal"]
+		owner.UpdateUpDir(_msg["Normal"], 1.0)
 	
 	if _msg.has("Type"):
 		if _msg["Type"] == "Wipeout":
