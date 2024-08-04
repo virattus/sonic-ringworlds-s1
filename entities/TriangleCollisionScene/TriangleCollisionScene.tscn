@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://him4g8bvfbx0"]
+
+[ext_resource type="Script" path="res://entities/TriangleCollisionScene/TriangleCollisionScene.gd" id="1_au3re"]
+
+[node name="TriangleCollisionScene" type="Node3D"]
+script = ExtResource("1_au3re")

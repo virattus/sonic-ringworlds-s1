@@ -149,7 +149,7 @@ func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
 
 
 func GetInputVector(up_dir: Vector3) -> Vector3:
-	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward")
+	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward", 0.4)
 	
 	var CameraForward = Camera.global_transform.basis.z
 	var CameraRight = Camera.global_transform.basis.x

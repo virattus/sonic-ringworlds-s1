@@ -37,6 +37,7 @@ func HandleCollisions(delta: float) -> bool:
 			owner.UpdateUpDir(collision.CollisionNormal, delta)
 		else:
 			#Too large of an angle to transition
+			print("Too large of an angle to transition: %s" % owner.up_direction.dot(collision.CollisionNormal))
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
 			ChangeState("Fall")
 			return false
