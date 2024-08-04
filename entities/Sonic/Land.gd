@@ -8,6 +8,8 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("Normal"):
 		owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 		owner.UpdateUpDir(_msg["Normal"], 1.0)
+		owner.CharMesh.AlignToY(owner.up_direction)
+	
 	
 	if _msg.has("Type"):
 		if _msg["Type"] == "Wipeout":
