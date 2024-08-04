@@ -16,16 +16,8 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move()
-	owner.apply_floor_snap()
-	
-	var collision: SonicCollision = owner.GetCollision()
-	
-	if collision.CollisionType == SonicCollision.NONE:
+	if !HandleMovementAndCollisions(_delta):
 		ChangeState("Fall")
-		return
-	
-	if !WallRunMinVelocity():
 		return
 	
 	if Input.is_action_just_pressed("Jump"):

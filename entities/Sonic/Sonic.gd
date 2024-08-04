@@ -115,10 +115,6 @@ func _process(delta: float) -> void:
 
 
 func GetCollision() -> SonicCollision:
-	CollisionCast.force_raycast_update()
-	if CollisionCast.is_colliding():
-		CreateCollisionIndicator(CollisionCast.get_collision_point(), CollisionCast.get_collision_normal())
-	
 	var collision = get_last_slide_collision()
 	if collision:
 		DebugCollisionPos = collision.get_position()

@@ -21,6 +21,8 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	UpdateMoveAnimations()
+	
 	owner.CharMesh.AlignToY(owner.up_direction)
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)

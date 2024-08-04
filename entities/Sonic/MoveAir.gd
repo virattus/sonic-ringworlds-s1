@@ -11,29 +11,38 @@ func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
 func HandleCollisions() -> bool:
 	var collision : SonicCollision = owner.GetCollision()
 	
-	if collision.CollisionType != SonicCollision.NONE:
-		owner.GroundCollision = true
-		var type = "Normal"
-		var normal = collision.CollisionNormal
-		if collision.CollisionType == SonicCollision.WALL:
-			if Vector3.UP.dot(owner.up_direction) < 0.5:
-				if owner.up_direction.dot(collision.CollisionNormal) < 0.5:
-					type = "Wipeout"
+	if collision.CollisionType == SonicCollision.NONE:
+		return false
+	else:
+		owner.CollisionCast.force_raycast_update()
+		var CollisionNormal = owner.CollisionCast.get_collision_normal()
+		if collision.CollisionType == SonicCollision.FLOOR:
+			ChangeState("Land", {
+				"Type": "Normal",
+				"Normal": CollisionNormal,
+			})
+			return true
+		elif collision.CollisionType == SonicCollision.WALL:
+			if Vector3.UP.dot(owner.velocity.normalized()) < 0.0:
+				#Heading downwards
+				if Vector3.UP.dot(CollisionNormal) > 0.0:
+					#Appropriate to land on this wall, which is actually a floor
+					ChangeState("Land", {
+						"Type": "Wipeout",
+						"Normal": CollisionNormal,
+					})
+					return true
 		elif collision.CollisionType == SonicCollision.CEILING:
-			if Vector3.UP.dot(owner.up_direction) > 0.0:
-				#Bonked head
+			if Vector3.UP.dot(owner.velocity.normalized()) > 0.0:
+				#travelling up, we bonked our head
 				owner.velocity.y = 0.0
 				return false
 			else:
-				#Landed upside down, need to get a floor normal
-				type = "Wipeout"
-				owner.GroundCast.force_raycast_update()
-				normal = owner.GroundCast.get_collision_normal()
-				
-		ChangeState("Land", {
-			"Type": type,
-			"Normal": normal,
-		})
-		return false
-	
-	return true
+				#Landed upside down
+				owner.GroundCast.force_raycast_update() #Need a ground normal
+				ChangeState("Land", {
+					"Type": "Wipeout",
+					"Normal": owner.GroundCast.get_collision_normal()
+				})
+				return true
+	return false

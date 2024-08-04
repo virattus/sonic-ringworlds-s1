@@ -12,15 +12,12 @@ func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
 
 func HandleMovementAndCollisions(delta: float) -> bool:
 	owner.Move()
-	owner.apply_floor_snap()
 	
 	if !HandleCollisions(delta):
 		return false
 	
 	if !WallRunMinVelocity():
 		return false
-	
-	UpdateRunAnimations()
 	
 	return true
 
@@ -51,7 +48,6 @@ func HandleCollisions(delta: float) -> bool:
 			else:
 				#Too large of an angle to transition
 				owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-				ChangeState("Fall")
 				return false
 		else:
 			return false
@@ -81,7 +77,7 @@ func WallRunMinVelocity() -> bool:
 
 
 
-func UpdateRunAnimations() -> void:
+func UpdateMoveAnimations() -> void:
 	owner.CharMesh.AlignToY(owner.up_direction)
 	
 	if owner.Speed > owner.PARAMETERS.RUN_MAX_SPEED:

@@ -17,6 +17,8 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	UpdateMoveAnimations()
+	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if Input.is_action_just_pressed("Jump"):

@@ -6,6 +6,7 @@ const LAND_MIN_SPEED = 0.5
 
 func Enter(_msg := {}) -> void:
 	if _msg.has("Normal"):
+		owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 		owner.UpdateUpDir(_msg["Normal"], 1.0)
 	
 	if _msg.has("Type"):
