@@ -108,16 +108,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(4.24543e-08, 0.485621, 2.97556)
-bones/2/position = Vector3(-5.13685, 0.26979, 3.11823)
-bones/2/rotation = Quaternion(3.46029e-08, -0.791623, 0.61101, -2.67081e-08)
+bones/1/position = Vector3(-8.0205e-09, 0.00169839, 3.02975)
+bones/2/position = Vector3(-5.13685, 0.000943671, 3.76681)
+bones/2/rotation = Quaternion(2.94057e-08, -0.707422, 0.706792, -3.24116e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.26979, 3.11823)
-bones/4/rotation = Quaternion(3.46029e-08, -0.791623, 0.61101, -2.67081e-08)
+bones/4/position = Vector3(5.13685, 0.000943671, 3.76681)
+bones/4/rotation = Quaternion(2.94057e-08, -0.707422, 0.706792, -3.24116e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(4.24543e-08, 0.485621, 5.21451)
+bones/6/position = Vector3(-8.0205e-09, 0.00169839, 5.2687)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
 visible = false
@@ -127,17 +127,19 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("4_7go32")
 
-[node name="SpotShadow" parent="." index="4"]
+[node name="CollisionCast" type="RayCast3D" parent="." index="4"]
+
+[node name="SpotShadow" parent="." index="5"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
-[node name="UpVectorIndicator" type="Node3D" parent="." index="5"]
+[node name="UpVectorIndicator" type="Node3D" parent="." index="6"]
 
 [node name="UpVectorOrb" type="MeshInstance3D" parent="UpVectorIndicator" index="0"]
 mesh = SubResource("SphereMesh_kteou")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hoqmv")
 
-[node name="InputIndicator" type="Node3D" parent="." index="6"]
+[node name="InputIndicator" type="Node3D" parent="." index="7"]
 
 [node name="InputIndicatorMesh" type="MeshInstance3D" parent="InputIndicator" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.7)
@@ -145,7 +147,7 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hvci8")
 
-[node name="FloorNormalIndicator" type="Node3D" parent="." index="7"]
+[node name="FloorNormalIndicator" type="Node3D" parent="." index="8"]
 
 [node name="FloorIndicatorMesh" type="MeshInstance3D" parent="FloorNormalIndicator" index="0"]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
@@ -153,7 +155,7 @@ mesh = SubResource("SphereMesh_02mkd")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_0akw7")
 
-[node name="VelocityIndicator" type="Node3D" parent="." index="8"]
+[node name="VelocityIndicator" type="Node3D" parent="." index="9"]
 
 [node name="InputIndicatorMesh" type="MeshInstance3D" parent="VelocityIndicator" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.8)
@@ -161,7 +163,7 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
 
-[node name="CameraFocus" type="Node3D" parent="." index="9"]
+[node name="CameraFocus" type="Node3D" parent="." index="10"]
 
 [node name="Sprite3D" type="Sprite3D" parent="CameraFocus" index="0"]
 visible = false
@@ -170,7 +172,7 @@ no_depth_test = true
 texture_filter = 0
 texture = ExtResource("5_wnnh5")
 
-[node name="Hurtbox" parent="." index="10"]
+[node name="Hurtbox" parent="." index="11"]
 visible = false
 collision_layer = 32
 collision_mask = 64
@@ -178,7 +180,7 @@ collision_mask = 64
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
 shape = SubResource("SphereShape3D_yv103")
 
-[node name="Hitbox" parent="." index="11" instance=ExtResource("7_xr2va")]
+[node name="Hitbox" parent="." index="12" instance=ExtResource("7_xr2va")]
 visible = false
 collision_layer = 16
 collision_mask = 128
@@ -193,7 +195,7 @@ mesh = SubResource("SphereMesh_kigcn")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_r3sgk")
 
-[node name="LockOnArea" type="Area3D" parent="." index="12"]
+[node name="LockOnArea" type="Area3D" parent="." index="13"]
 visible = false
 collision_layer = 0
 collision_mask = 8
@@ -202,7 +204,7 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LockOnArea" index="0"]
 shape = SubResource("SphereShape3D_byb1a")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="13"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="14"]
 root_node = NodePath("../CharacterMesh/SonicModel")
 tree_root = ExtResource("7_a387p")
 anim_player = NodePath("../CharacterMesh/SonicModel/AnimationPlayer")
@@ -242,10 +244,10 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 8/scale" = 1.0
 "parameters/TimeScale 9/scale" = 4.0
 
-[node name="TimerInvincibility" type="Timer" parent="." index="14"]
+[node name="TimerInvincibility" type="Timer" parent="." index="15"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="15" node_paths=PackedStringArray("ActiveState")]
+[node name="StateMachine" type="Node" parent="." index="16" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
 ActiveState = NodePath("Initial")
 
@@ -303,47 +305,47 @@ script = ExtResource("9_pbmsm")
 [node name="Death" type="Node" parent="StateMachine" index="17"]
 script = ExtResource("15_ulagb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="16"]
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="17"]
 stream = ExtResource("11_sc7a7")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="17"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="18"]
 stream = ExtResource("15_ce3xb")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("20_yjean")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="22"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="23"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="23"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="24"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="24"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="25"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="25"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="26"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 
-[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="26"]
+[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="27"]
 stream = ExtResource("39_keyd5")
 bus = &"SoundEffects"
 

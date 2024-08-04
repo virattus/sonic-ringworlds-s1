@@ -124,7 +124,6 @@ func UpdateCollision(delta: float) -> void:
 	#hit floor
 	if is_on_floor():
 		var floorNormal = get_floor_normal()
-		
 		if up_direction.dot(floorNormal) > GROUND_TRANSITION_MIN:
 			if !GroundCollision:
 				print("Hit Floor")

@@ -33,6 +33,7 @@ var DroppedRingSpeed := 1.0
 @onready var StateM: StateMachine = $StateMachine
 @onready var TimerInvincibility = $TimerInvincibility
 @onready var AirdashTrail = $CylinderTrail2
+@onready var CollisionCast : RayCast3D = $CollisionCast
 
 @onready var UpVectorIndicator = $UpVectorIndicator/UpVectorOrb
 @onready var FloorNormalIndicator = $FloorNormalIndicator
@@ -55,6 +56,10 @@ var DroppedRingSpeed := 1.0
 
 
 @onready var StartingPosition := global_position
+
+
+const COLLISION_CAST_LENGTH = 1.0
+
 
 const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
@@ -110,11 +115,15 @@ func _process(delta: float) -> void:
 
 
 func GetCollision() -> SonicCollision:
+	CollisionCast.force_raycast_update()
+	if CollisionCast.is_colliding():
+		CreateCollisionIndicator(CollisionCast.get_collision_point(), CollisionCast.get_collision_normal())
+	
 	var collision = get_last_slide_collision()
 	if collision:
 		DebugCollisionPos = collision.get_position()
 		DebugCollisionNormal = collision.get_normal()
-		CreateCollisionIndicator(DebugCollisionPos, DebugCollisionNormal)
+		#CreateCollisionIndicator(DebugCollisionPos, DebugCollisionNormal)
 	
 	if is_on_floor():
 		DebugFloorNormal = get_floor_normal()
@@ -141,6 +150,8 @@ func ApplyGravity(delta: float) -> void:
 
 func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
 	up_direction = floor_normal
+	
+	CollisionCast.target_position = -up_direction * COLLISION_CAST_LENGTH
 	return
 	
 	if floor_normal.is_normalized():
