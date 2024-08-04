@@ -11,10 +11,9 @@ func Enter(_msg := {}) -> void:
 	owner.HasJumped = true
 	
 	owner.SndJump.play()
-	
-	#TODO get this thing to use the model's forward direction for velocity
-	#owner.velocity = owner.velocity * owner.CharMesh.GetForwardVector()
-	owner.velocity += owner.up_direction * owner.PARAMETERS.JUMP_POWER
+
+	#Set velocity to only forward direction + jump direction, fixes bug with jumping after circling sphere
+	owner.SetVelocity((owner.velocity * abs(owner.CharMesh.GetForwardVector())) + (owner.up_direction * owner.PARAMETERS.JUMP_POWER))
 
 
 func Exit() -> void:

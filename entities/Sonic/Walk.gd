@@ -39,7 +39,7 @@ func Update(_delta: float) -> void:
 	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
-		owner.CharMesh.look_at(owner.global_position + newVel.normalized())
+		owner.CharMesh.look_at(owner.global_position + owner.velocity)
 		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
 			ChangeState("Run")
 			return

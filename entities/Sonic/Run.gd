@@ -21,6 +21,8 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	owner.CharMesh.AlignToY(owner.up_direction)
+	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if !WallRunMinVelocity():
@@ -57,7 +59,7 @@ func Update(_delta: float) -> void:
 	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
-		owner.CharMesh.look_at(owner.global_position + newVel.normalized())
+		owner.CharMesh.look_at(owner.global_position + owner.velocity)
 		pass
 	if owner.Speed <= owner.PARAMETERS.WALK_MAX_SPEED:
 		ChangeState("Walk")
