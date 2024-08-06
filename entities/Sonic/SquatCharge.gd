@@ -1,5 +1,11 @@
-extends BasicState
+extends "res://entities/Sonic/MoveGround.gd"
 
+
+var ChargePower := 0.0
+
+const CHARGE_MAX_POWER = 20.0
+const CHARGE_POWER_GENERATE_POWER = 2.0
+const CHARGE_POWER_IDLE_DRAIN = 0.2
 
 
 func Enter(_msg := {}) -> void:
@@ -9,12 +15,39 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Idle/blend_amount", 1.0)
 	
 	owner.DashModeDrain = false
+	owner.SetVelocity(Vector3.ZERO)
 
 
 func Exit() -> void:
-	pass
+	ChargePower = 0.0
 
 
 
 func Update(_delta: float) -> void:
-	pass
+	if !HandleMovementAndCollisions(_delta):
+		ChangeState("Fall")
+		return
+
+	if Input.is_action_just_released("Attack"):
+		print("Strikedash with power %s" % ChargePower)
+		if ChargePower > 0.0:
+			LaunchStrikeDash()
+			return
+		else:
+			ChangeState("Idle")
+			return
+
+	ChargePower = clamp(ChargePower - CHARGE_POWER_IDLE_DRAIN * _delta, 0.0, CHARGE_MAX_POWER)
+	
+	if Input.is_action_just_pressed("Jump"):
+		owner.SndSpinCharge.play()
+		ChargePower += CHARGE_POWER_GENERATE_POWER * _delta
+
+
+func LaunchStrikeDash() -> void:
+	owner.SndSpinLaunch.play()
+	owner.DashMode = true
+	owner.DashModeDrain = true
+	#owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
+	owner.SetVelocity(owner.CharMesh.GetForwardVector() * ChargePower)
+	ChangeState("StrikeDash")

@@ -4,16 +4,12 @@ extends "res://entities/Sonic/MoveGround.gd"
 
 const BALL_MIN_SPEED = 0.5
 
-const DAMAGE_THRESHOLD_BALL = 2
-
-const DAMAGE_THRESHOLD_NORMAL = 1
-
 
 func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
 	owner.SonicBall.visible = true
 	owner.ActivateHitbox(true)
-	owner.DamageThreshold = DAMAGE_THRESHOLD_BALL
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_BALL
 	
 	owner.SndSpinCharge.play()
 
@@ -23,7 +19,7 @@ func Exit() -> void:
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
 	owner.ActivateHitbox(false)
-	owner.DamageThreshold = DAMAGE_THRESHOLD_NORMAL
+	owner.DamageThreshold = owner.PARAMETERS.DAMAGE_THRESHOLD_NORMAL
 	
 	owner.SndSpinCharge.stop()
 

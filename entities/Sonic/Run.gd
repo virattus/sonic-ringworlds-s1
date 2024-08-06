@@ -25,8 +25,6 @@ func Update(_delta: float) -> void:
 	
 	owner.CharMesh.AlignToY(owner.up_direction)
 	
-	var inputVel = owner.GetInputVector(owner.up_direction)
-	
 	if !WallRunMinVelocity():
 		return
 	
@@ -38,6 +36,7 @@ func Update(_delta: float) -> void:
 		ChangeState("Ball")
 		return
 	
+	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if inputVel.length() < RUN_SKID_MIN_STICK_MAGNITUDE:
 		SkidStickBelowMagnitude += 1
