@@ -2,8 +2,6 @@ extends "res://entities/Sonic/MoveGround.gd"
 
 
 
-const BALL_MIN_SPEED = 0.5
-
 
 func Enter(_msg := {}) -> void:
 	owner.SonicModel.visible = false
@@ -31,7 +29,7 @@ func Update(_delta: float) -> void:
 	owner.GroundCollision = HandleCollisions(_delta)
 	
 	
-	if owner.GroundCollision and owner.Speed < BALL_MIN_SPEED:
+	if owner.GroundCollision and owner.Speed < owner.PARAMETERS.BALL_MIN_SPEED:
 		UncurlAndIdle()
 		return
 	
@@ -39,7 +37,21 @@ func Update(_delta: float) -> void:
 		owner.ApplyGravity(_delta)
 		
 	var newVel = owner.velocity
-	newVel = ApplyDrag(newVel, _delta)
+	
+	var inputVel = owner.GetInputVector(owner.up_direction)
+	
+	if inputVel.length() > 0.0:
+		newVel += inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta
+	else:
+		newVel = ApplyDrag(newVel, _delta)
+	
+	var influence = CurveInfluence(_delta)
+		
+	if influence.length() <= 0.05 and newVel.length() < owner.PARAMETERS.BALL_MIN_SPEED:
+		UncurlAndIdle()
+		return
+	
+	newVel += influence
 	
 	owner.SetVelocity(newVel)
 
