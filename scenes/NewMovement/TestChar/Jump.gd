@@ -1,10 +1,11 @@
-extends "res://scenes/SphereMovement/TestChar/Air.gd"
+extends "res://scenes/NewMovement/TestChar/Air.gd"
 
 
 
 
 func Enter(_msg := {}) -> void:
 	owner.GroundCollision = false
+	owner.velocity += owner.up_direction * owner.JUMP_POWER
 
 
 func Exit() -> void:
@@ -13,7 +14,7 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	var IsColliding = owner.move_and_slide()
-	
+
 	if IsColliding:
 		ChangeState("Land")
 		return
@@ -22,7 +23,13 @@ func Update(_delta: float) -> void:
 		ChangeState("Jump")
 		return
 
-	ApplyGravity(_delta)
-	ApplyDrag(_delta)
+	if owner.velocity.y <= 0.0:
+		ChangeState("Fall")
+		return
 
+	ApplyGravity(_delta)
+
+
+	ApplyDrag(_delta)
+	
 	owner.velocity += owner.GetInputVector()

@@ -19,8 +19,6 @@ func Update(_delta: float) -> void:
 	
 	UpdateMoveAnimations()
 	
-	var inputVel = owner.GetInputVector(owner.up_direction)
-	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Jump")
 		return
@@ -31,21 +29,28 @@ func Update(_delta: float) -> void:
 	
 	var newVel = owner.velocity
 	
+	var inputVel = owner.GetInputVector(owner.up_direction)
+	
 	if inputVel.length() > 0.0:
 		newVel = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)
 	else:
 		newVel = ApplyDrag(newVel, _delta)
 	
-	owner.SetVelocity(newVel)
-	
 	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
-		owner.CharMesh.look_at(owner.global_position + owner.velocity)
+		owner.OrientCharMesh()
 		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
 			ChangeState("Run")
 			return
 	else:
-		if owner.Speed <= owner.PARAMETERS.WALK_MIN_SPEED:
+		var influence = CurveInfluence(_delta)
+		
+		if influence.length() <= 0.05 and newVel.length() <= owner.PARAMETERS.IDLE_MAX_SPEED:
 			ChangeState("Idle")
 			return
+		
+		#if owner.up_direction.y > 0.0:
+		newVel += influence
+		
+	owner.SetVelocity(newVel)

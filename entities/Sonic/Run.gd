@@ -56,16 +56,20 @@ func Update(_delta: float) -> void:
 	
 	newVel = ApplyDrag(newVel, _delta)
 	
-	owner.SetVelocity(newVel)
-	
-	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
-		owner.CharMesh.look_at(owner.global_position + owner.velocity)
+		owner.OrientCharMesh()
 		pass
-	if owner.Speed <= owner.PARAMETERS.WALK_MAX_SPEED:
-		ChangeState("Walk")
-		return
+	else:
+		var influence = CurveInfluence(_delta)
+		
+		if owner.Speed <= owner.PARAMETERS.WALK_MAX_SPEED:
+			ChangeState("Walk")
+			return
+		
+		newVel += influence
+	
+	owner.SetVelocity(newVel)
 
 
 func IsInputSkidding(input: Vector3) -> bool:

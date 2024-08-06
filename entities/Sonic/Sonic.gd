@@ -190,6 +190,10 @@ func SetInvincible(Active: bool) -> void:
 	pass
 
 
+func OrientCharMesh() -> void:
+	CharMesh.look_at(global_position + velocity)
+
+
 func AlignToY(newY: Vector3) -> Basis:
 	var newBasis = Basis.IDENTITY
 	newBasis.y = newY
@@ -202,8 +206,12 @@ func UpdateDebugIndicators(new_input_vector: Vector3, new_floor_normal: Vector3)
 	UpVectorIndicator.position = up_direction
 	FloorNormalIndicator.position = -CollisionCast.target_position.normalized()
 	
-	if new_input_vector.length() > 0.0 and new_input_vector != Vector3.UP:
-		InputIndicator.look_at(global_position - new_input_vector.normalized())
+	if new_input_vector.length() > 0.0:
+		InputIndicator.scale = Vector3.ONE
+		if new_input_vector != Vector3.UP:
+			InputIndicator.look_at(global_position - new_input_vector.normalized())
+	else:
+		InputIndicator.scale = Vector3.ZERO
 		
 	if velocity.length() > 0.0:
 		VelocityIndicator.transform = VelocityIndicator.transform.looking_at(VelocityIndicator.position + (VelocityIndicator.position - velocity.normalized()) + Vector3(0.0001, 0.0001, 0.0001))

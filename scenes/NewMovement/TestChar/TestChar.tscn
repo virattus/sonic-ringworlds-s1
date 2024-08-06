@@ -1,13 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://jgp1lkva5q0v"]
 
-[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/TestChar.gd" id="1_40pk5"]
+[ext_resource type="Script" path="res://scenes/NewMovement/TestChar/TestChar.gd" id="1_40pk5"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="2_13hrd"]
-[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Idle.gd" id="3_cs10v"]
+[ext_resource type="Script" path="res://scenes/NewMovement/TestChar/Idle.gd" id="3_cs10v"]
 [ext_resource type="Script" path="res://entities/StateMachine/BasicState.gd" id="3_sd2sj"]
-[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Run.gd" id="4_mtlid"]
-[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Jump.gd" id="5_fv3w0"]
-[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Fall.gd" id="6_72jmw"]
-[ext_resource type="Script" path="res://scenes/SphereMovement/TestChar/Land.gd" id="7_gmggr"]
+[ext_resource type="Script" path="res://scenes/NewMovement/TestChar/Run.gd" id="4_mtlid"]
+[ext_resource type="Script" path="res://scenes/NewMovement/TestChar/Jump.gd" id="5_fv3w0"]
+[ext_resource type="Script" path="res://scenes/NewMovement/TestChar/Fall.gd" id="6_72jmw"]
+[ext_resource type="Script" path="res://scenes/NewMovement/TestChar/Land.gd" id="7_gmggr"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_ygfr0"]
 

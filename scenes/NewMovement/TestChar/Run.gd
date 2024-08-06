@@ -1,4 +1,4 @@
-extends "res://scenes/SphereMovement/TestChar/Move.gd"
+extends "res://scenes/NewMovement/TestChar/Move.gd"
 
 
 

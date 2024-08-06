@@ -1,7 +1,9 @@
 extends BasicState
 
 
-const WALLRUN_ANGLE_SPEED_RATIO = 5.0
+const WALLRUN_ANGLE_SPEED_RATIO = 4.0
+
+const WALLRUN_CURVE_INFLUENCE_MOD = 2.0
 
 
 func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
@@ -10,13 +12,23 @@ func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
 	return velocity
 
 
+func CurveInfluence(delta: float) -> Vector3:
+	var influence = (Vector3.DOWN * owner.PARAMETERS.GRAVITY * delta) * clamp(Vector3.DOWN.dot(owner.up_direction) + 1.0, 0.0, 1.0)
+	return influence * WALLRUN_CURVE_INFLUENCE_MOD
+
+
 func HandleMovementAndCollisions(delta: float) -> bool:
 	owner.Move()
 	
 	if !HandleCollisions(delta):
-		return false
+		return false 
 	
-	if !WallRunMinVelocity():
+	var minVel = WallRunMinVelocity()
+	#print(minVel)
+	if owner.Speed < minVel:
+		print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
+		owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
+		ChangeState("Fall")
 		return false
 	
 	return true
@@ -26,9 +38,6 @@ func HandleCollisions(delta: float) -> bool:
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
-		if owner.GroundCollision:
-			print("Left Ground")
-			owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 		owner.CollisionCast.force_raycast_update()
 		if owner.CollisionCast.is_colliding():
 			var collisionNormal = owner.CollisionCast.get_collision_normal()
@@ -37,6 +46,10 @@ func HandleCollisions(delta: float) -> bool:
 				owner.UpdateUpDir(collisionNormal, delta)
 				owner.apply_floor_snap()
 				return true #We ARE colliding with the floor, it turns out
+			else:
+				if owner.GroundCollision:
+					print("Left Ground")
+					owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 		return false
 	elif (collision.CollisionType == SonicCollision.FLOOR):
 		owner.CollisionCast.force_raycast_update()
@@ -62,18 +75,13 @@ func HandleCollisions(delta: float) -> bool:
 
 
 
-func WallRunMinVelocity() -> bool:
+func WallRunMinVelocity() -> float:
 	var floorAngle = Vector3.DOWN.dot(owner.up_direction.normalized())
 	
 	var reqSpeed = (floorAngle) * WALLRUN_ANGLE_SPEED_RATIO
 	
-	if owner.Speed < reqSpeed:
-		print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, reqSpeed])
-		owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-		ChangeState("Fall")
-		return false
 	
-	return true
+	return reqSpeed
 
 
 

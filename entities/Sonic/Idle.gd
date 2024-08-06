@@ -24,8 +24,19 @@ func Update(_delta: float) -> void:
 		ChangeState("Jump")
 		return
 	
-	var inputVel = owner.GetInputVector(owner.up_direction)
+	if Input.is_action_just_pressed("Attack"):
+		ChangeState("SquatCharge")
+		return
 	
-	if inputVel.length() > 0.0:
+	var newVel : Vector3 = owner.velocity
+	
+	newVel += CurveInfluence(_delta)
+	
+	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
+	
+	newVel += inputVel * owner.PARAMETERS.WALK_SPEED_POWER
+	
+	if newVel.length() > owner.PARAMETERS.IDLE_MAX_SPEED:
+		owner.SetVelocity(newVel)
 		ChangeState("Walk")
 		return

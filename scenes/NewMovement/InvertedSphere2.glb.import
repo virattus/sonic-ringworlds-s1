@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://gflld2g2sjdc"
-path="res://.godot/imported/InvertedSphere2.glb-419edd5b92a455fe28f7ad4eeb1e4068.scn"
+path="res://.godot/imported/InvertedSphere2.glb-64867a0d3c8b34821f25fb7326ceaf35.scn"
 
 [deps]
 
-source_file="res://scenes/SphereMovement/InvertedSphere2.glb"
-dest_files=["res://.godot/imported/InvertedSphere2.glb-419edd5b92a455fe28f7ad4eeb1e4068.scn"]
+source_file="res://scenes/NewMovement/InvertedSphere2.glb"
+dest_files=["res://.godot/imported/InvertedSphere2.glb-64867a0d3c8b34821f25fb7326ceaf35.scn"]
 
 [params]
 

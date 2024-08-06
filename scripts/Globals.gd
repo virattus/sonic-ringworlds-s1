@@ -9,9 +9,9 @@ var DEBUG_SCENES = {
 	"RegalRuin": "res://scenes/R_RegalRuin/RegalRuin.tscn",
 	"ReactiveFactory": "res://scenes/R_ReactiveFactory/ReactiveFactory.tscn",
 	"SA1 Windy Valley Act 3": "res://scenes/SA1_WV_3/SA1_WV_3.tscn",
-	"SphereMovement": "res://scenes/SphereMovement/SphereMovement.tscn",
+	"NewMovement": "res://scenes/NewMovement/NewMovement.tscn",
 	"MapLoader": "res://scenes/GLTFLoader/GLTFLoader.tscn",
-	"NewMovement3": "res://scenes/NewMovement3/NewMovement3.tscn",
+	"SphereTest": "res://scenes/SphereTest/SphereTest.tscn",
 }
 var CurrentScene = null
 

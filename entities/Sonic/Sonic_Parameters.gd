@@ -11,7 +11,8 @@ const GROUND_NORMAL_HOP = 0.1
 
 const ATTACK_BOUNCE_POW = 8.0
 
-const WALK_MIN_SPEED = 0.5
+const IDLE_MAX_SPEED = 0.1
+
 const WALK_MAX_SPEED = 8.0
 const WALK_SPEED_POWER = 5.0
 const WALK_ANIM_SPEED_MOD = 1.0

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://qfs0856743ua"
-path="res://.godot/imported/InverseSphere.glb-a0e2c9d04f7a5f5fbba320408a659d5c.scn"
+path="res://.godot/imported/InverseSphere.glb-7c6962ad29727dabc848cd372ce56209.scn"
 
 [deps]
 
-source_file="res://scenes/SphereMovement/InverseSphere.glb"
-dest_files=["res://.godot/imported/InverseSphere.glb-a0e2c9d04f7a5f5fbba320408a659d5c.scn"]
+source_file="res://scenes/NewMovement/InverseSphere.glb"
+dest_files=["res://.godot/imported/InverseSphere.glb-7c6962ad29727dabc848cd372ce56209.scn"]
 
 [params]
 
@@ -39,7 +39,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://scenes/SphereMovement/InverseSphere.res"
+"save_to_file/path": "res://scenes/NewMovement/InverseSphere.res"
 }
 }
 }
