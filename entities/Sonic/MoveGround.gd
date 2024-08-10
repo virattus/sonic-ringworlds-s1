@@ -13,7 +13,7 @@ func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
 
 
 func CurveInfluence(delta: float) -> Vector3:
-	var influence = (Vector3.DOWN * owner.PARAMETERS.GRAVITY * delta) * clamp(Vector3.DOWN.dot(owner.up_direction) + 1.0, 0.0, 1.0)
+	var influence = (Vector3.DOWN * owner.PARAMETERS.GRAVITY * delta) * (owner.up_direction * Vector3(1, 0, 1)).length()
 	return influence * WALLRUN_CURVE_INFLUENCE_MOD
 
 
