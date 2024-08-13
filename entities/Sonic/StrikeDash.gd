@@ -34,5 +34,6 @@ func Update(_delta: float) -> void:
 	owner.SetVelocity(newVel)
 	
 	if !owner.DashMode:
-		ChangeState("Run")
+		#ChangeState("Run")
+		ChangeState("Walk")
 		return

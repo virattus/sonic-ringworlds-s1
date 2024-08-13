@@ -24,12 +24,15 @@ func Enter(_msg := {}) -> void:
 	print("Landed")
 
 	if owner.Speed > LAND_MIN_SPEED:
-		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
-			ChangeState("Run")
-			return
-		else:
-			ChangeState("Walk")
-			return
+		ChangeState("Walk")
+		return
+		
+		#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+		#	ChangeState("Run")
+		#	return
+		#else:
+		#	ChangeState("Walk")
+		#	return
 	
 
 	owner.SetVelocity(Vector3.ZERO)
