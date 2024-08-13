@@ -24,12 +24,14 @@ func Update(_delta: float) -> void:
 		ChangeState("Airdash")
 		return
 
-	var newVel = owner.velocity
 	var inputVel = owner.GetInputVector(Vector3.UP)
+	
+	owner.ApplyGravity(_delta)
+	var newVel = owner.velocity
 	
 	newVel += inputVel * _delta
 	
 	newVel = ApplyDrag(newVel, _delta)
 
 	owner.SetVelocity(newVel)
-	owner.ApplyGravity(_delta)
+

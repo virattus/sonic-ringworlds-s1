@@ -1,6 +1,7 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
+const MAX_SPEED = 18.0
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
@@ -32,7 +33,10 @@ func Update(_delta: float) -> void:
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if inputVel.length() > 0.0:
-		newVel = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)
+		var inputValue : Vector3 = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)
+		newVel = inputValue 
+		if newVel.length() > MAX_SPEED:
+			newVel = newVel.normalized() * MAX_SPEED
 	else:
 		newVel = ApplyDrag(newVel, _delta)
 	
@@ -40,9 +44,9 @@ func Update(_delta: float) -> void:
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
 		owner.OrientCharMesh()
-		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
-			ChangeState("Run")
-			return
+		#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+		#	ChangeState("Run")
+		#	return
 	else:
 		var influence = CurveInfluence(_delta)
 		
