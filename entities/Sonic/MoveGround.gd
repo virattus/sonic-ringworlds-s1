@@ -34,35 +34,48 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 	return true
 
 
+func CheckCollisionCast() -> bool:
+	owner.CollisionCast.force_raycast_update()
+	if owner.CollisionCast.is_colliding():
+		return true
+	else:
+		return false
+
+
+func CheckGroundTransition() -> bool:
+	if owner.up_direction.dot(owner.CollisionCast.get_collision_normal()) > owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
+		return true
+	else:
+		return false
+
+
+func CheckFloorCollision(delta: float) -> bool:
+	if CheckCollisionCast():
+		if CheckGroundTransition():
+			if !owner.GroundCollision:
+				owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
+			owner.UpdateUpDir(owner.CollisionCast.get_collision_normal(), delta)
+			owner.apply_floor_snap()
+			return true
+		else:
+			#ground angle too steep
+			print("Ground Angle too steep")
+			return false
+	else:
+		#definitely not on ground
+		return false
+
+
 func HandleCollisions(delta: float) -> bool:
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
-		owner.CollisionCast.force_raycast_update()
-		if owner.CollisionCast.is_colliding():
-			var collisionNormal = owner.CollisionCast.get_collision_normal()
-			if owner.up_direction.dot(collisionNormal) > owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
-				owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), collisionNormal)
-				owner.UpdateUpDir(collisionNormal, delta)
-				owner.apply_floor_snap()
-				return true #We ARE colliding with the floor, it turns out
-			else:
-				if owner.GroundCollision:
-					print("Left Ground")
-					owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
-		return false
-	elif (collision.CollisionType == SonicCollision.FLOOR):
-		owner.CollisionCast.force_raycast_update()
-		if owner.CollisionCast.is_colliding():
-			var collisionNormal = owner.CollisionCast.get_collision_normal()
-			if owner.up_direction.dot(collisionNormal) > owner.PARAMETERS.GROUND_NORMAL_TRANSITION_MIN:
-				owner.UpdateUpDir(collisionNormal, delta)
-				owner.apply_floor_snap()
-			else:
-				#Too large of an angle to transition
-				owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-				return false
+		return CheckFloorCollision(delta)
+	elif collision.CollisionType == SonicCollision.FLOOR:
+		if CheckFloorCollision(delta):
+			return true
 		else:
+			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
 			return false
 	elif (collision.CollisionType == SonicCollision.WALL):
 		
@@ -72,7 +85,6 @@ func HandleCollisions(delta: float) -> bool:
 			pass
 		
 	return true
-
 
 
 func WallRunMinVelocity() -> float:

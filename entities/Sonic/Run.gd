@@ -5,6 +5,7 @@ var SkidStickBelowMagnitude := 0
 
 const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
 const RUN_SKID_STICK_MAX_MAG_COUNT = 15
+const RUN_SKID_MAX_ANGLE = 0.15
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
@@ -24,9 +25,6 @@ func Update(_delta: float) -> void:
 	UpdateMoveAnimations()
 	
 	owner.CharMesh.AlignToY(owner.up_direction)
-	
-	if !WallRunMinVelocity():
-		return
 	
 	if Input.is_action_just_pressed("Jump"):
 		ChangeState("Jump")
@@ -58,7 +56,6 @@ func Update(_delta: float) -> void:
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
 		owner.OrientCharMesh()
-		pass
 	else:
 		var influence = CurveInfluence(_delta)
 		

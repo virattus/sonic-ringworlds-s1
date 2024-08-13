@@ -1,9 +1,14 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
+var SmokeAccumulator := 0.0
+
 const SKID_DRAG_COEFF = 3.0
 const SKID_MOVEMENT_SPEED = 10.0
 const SKID_TRANSITION_MIN_SPEED = 1.0
+
+const SMOKE = preload("res://effects/Smoke/Smoke.tscn")
+const SMOKE_EMIT_RATE = 0.1
 
 
 func Enter(_msg := {}) -> void:
@@ -14,6 +19,8 @@ func Enter(_msg := {}) -> void:
 	owner.SndSkid.play()
 	
 	owner.SetVelocity(owner.velocity.normalized() * SKID_MOVEMENT_SPEED)
+	
+	CreateSmoke()
 
 
 func Exit() -> void:
@@ -22,6 +29,12 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	owner.Move()
+	
+	SmokeAccumulator += _delta
+	if SmokeAccumulator >= SMOKE_EMIT_RATE:
+		SmokeAccumulator -= SMOKE_EMIT_RATE 
+		CreateSmoke()
+	
 	
 	var collision: SonicCollision = owner.GetCollision()
 	
@@ -33,9 +46,14 @@ func Update(_delta: float) -> void:
 		ChangeState("Idle")
 		return
 	
+	owner.ApplyGravity(_delta)
 	var newVel = owner.velocity
 	newVel = ApplyDrag(newVel, SKID_DRAG_COEFF * _delta)
 	
 	owner.SetVelocity(newVel)
 	
  
+func CreateSmoke() -> void:
+	var newSmoke = SMOKE.instantiate()
+	owner.get_parent().add_child(newSmoke)
+	newSmoke.global_position = owner.global_position

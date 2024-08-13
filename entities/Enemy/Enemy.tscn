@@ -18,6 +18,7 @@ script = ExtResource("3_sc6xo")
 
 [node name="SndDefeat" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource("3_3idfs")
+volume_db = 10.0
 bus = &"SoundEffects"
 
 [node name="StateMachine" type="Node" parent="." index="7" node_paths=PackedStringArray("ActiveState")]

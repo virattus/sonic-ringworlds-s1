@@ -8,6 +8,8 @@ const HEIGHT_SPEED = 500.0
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
+	
+	owner.up_direction = Vector3.UP
 
 
 func Exit() -> void:

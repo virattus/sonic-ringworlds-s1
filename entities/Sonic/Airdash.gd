@@ -28,6 +28,7 @@ func Update(_delta: float) -> void:
 	owner.Move()
 	
 	if HandleCollisions():
+		ChangeState("Hurt")
 		return
 	
 	if (owner.velocity * Vector3(1, 0, 1)).length() <= AIRDASH_MIN_REQ_SPEED:

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqxthbom7ndko"]
+
+[ext_resource type="Texture2D" uid="uid://qwk3fm0ofg1h" path="res://effects/Smoke/Smoke.png" id="1_flatg"]
+[ext_resource type="Script" path="res://effects/Smoke/Smoke.gd" id="1_jbllv"]
+
+[node name="Smoke" type="Sprite3D"]
+pixel_size = 0.02
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_flatg")
+script = ExtResource("1_jbllv")

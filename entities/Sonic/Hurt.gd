@@ -4,7 +4,10 @@ extends BasicState
 var SetInvincible := false
 var LeftGround := false
 
+const HURT_INITIAL_UP_SPEED = 5.0
+
 const RING = preload("res://entities/RingBounce/RingBounce.tscn")
+
 
 
 func Enter(_msg := {}) -> void:
@@ -14,7 +17,7 @@ func Enter(_msg := {}) -> void:
 	owner.GroundCollision = false
 	
 	owner.UpdateUpDir(Vector3(0, 1, 0), 1.0)
-	owner.velocity = Vector3(0, owner.PARAMETERS.HURT_INITIAL_UP_SPEED, 0)
+	owner.velocity = Vector3(0, HURT_INITIAL_UP_SPEED, 0)
 	if _msg.has("BounceDirection"):
 		owner.velocity = _msg["BounceDirection"] + owner.velocity
 	
@@ -62,12 +65,13 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.SetVelocity(owner.velocity - (Vector3.UP * owner.PARAMETERS.GRAVITY * _delta))
 	owner.Move()
 	
-	if owner.is_on_floor():
+	if owner.GroundCollision:
 		if LeftGround:
 			ChangeState("Idle")
 			return
 	else:
 		LeftGround = true
+	
+	owner.SetVelocity(owner.velocity - (Vector3.UP * owner.PARAMETERS.GRAVITY * _delta))
