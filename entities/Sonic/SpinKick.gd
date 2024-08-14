@@ -1,9 +1,16 @@
 extends "res://entities/Sonic/MoveAir.gd"
 
 
-var Target : Node3D = null
+var Target : Enemy = null
+var PrevTarget : Enemy = null
 
 var AttackReleased := false
+
+const SPINKICK_INPUT_MOD = 5.0
+
+
+func _ready() -> void:
+	DebugMenu.AddMonitor(self, "Target")
 
 
 func Enter(_msg := {}) -> void:
@@ -14,7 +21,10 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 0.0)
+	
+	owner.ActivateHitbox(false)
 	AttackReleased = false
+	Target = null
 
 
 func Update(_delta: float) -> void:
@@ -32,17 +42,27 @@ func Update(_delta: float) -> void:
 	
 	var newVel = owner.velocity
 	
-	if AttackReleased:
+	if AttackReleased or Target == null:
 		var inputVel = owner.GetInputVector(owner.up_direction)
-		newVel += inputVel * _delta
+		newVel += inputVel * SPINKICK_INPUT_MOD * _delta
 		newVel = ApplyDrag(newVel, _delta)
 	else:
-		if Target != null:
-			newVel.move_toward((Target.global_position - owner.global_position) * Vector3(1, 0, 1), _delta)
+		var direction = owner.global_position.direction_to(Target.global_position)
+		var distanceTo = owner.global_position.distance_to(Target.global_position)
+		print("direction: %s distanceTo: %s" % [direction, distanceTo])
+		newVel = (direction * distanceTo * Vector3(1, 0, 1)) + (newVel * Vector3.UP)
+
 	
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
 	owner.SetVelocity(newVel)
+
+
+func TargetStillValid() -> void:
+	if Target == null:
+		return
+	
+	
 
 
 func GetNextTarget() -> void:
@@ -62,6 +82,12 @@ func GetNextTarget() -> void:
 	for i in range(invalidTargets.size()):
 		potentialTargets.erase(i)
 	
+	potentialTargets.erase(PrevTarget)
+	
+	if potentialTargets.size() == 0:
+		#no valid targets
+		return
+	
 	
 	var closest = potentialTargets[0]
 	for i in potentialTargets:
@@ -69,12 +95,11 @@ func GetNextTarget() -> void:
 			closest = i
 	
 	Target = closest
-	
-	print(potentialTargets.size())
 
 
 func AttackHit(_Target: Hurtbox) -> void:
 	print("SpinKick: Hit enemy")
 	owner.DashModeCharge += 0.2
 	owner.velocity.y = owner.PARAMETERS.ATTACK_BOUNCE_POW
+	PrevTarget = Target
 	Target = null

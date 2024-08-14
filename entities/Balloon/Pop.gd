@@ -32,4 +32,5 @@ func Update(_delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
+	owner.EnemyDefeated = false
 	ChangeState("Idle")

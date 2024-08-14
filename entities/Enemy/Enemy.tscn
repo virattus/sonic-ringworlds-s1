@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://entities/Enemy/Idle.gd" id="6_drxm1"]
 
 [node name="Enemy" groups=["Enemy"] instance=ExtResource("1_pe7ty")]
+collision_layer = 8
 script = ExtResource("2_esaov")
 MaxDistFromHome = 10.0
 MaxVisibility = 20.0

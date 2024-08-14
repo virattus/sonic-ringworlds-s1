@@ -11,8 +11,9 @@ func _ready() -> void:
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
-	super(Source, Damage)
+	Health -= Damage
 	if Health <= 0:
+		EnemyDefeated = true
 		SndPop.play()
 		$StateMachine.ChangeState("Pop")
 		

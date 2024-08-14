@@ -107,16 +107,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(5.05468e-08, 0.578188, 2.9652)
-bones/2/position = Vector3(-5.13685, 0.321216, 2.99417)
-bones/2/rotation = Quaternion(3.52431e-08, -0.806267, 0.591552, -2.58575e-08)
+bones/1/position = Vector3(2.2895e-08, 0.261888, 3.00061)
+bones/2/position = Vector3(-5.13685, 0.145494, 3.41809)
+bones/2/rotation = Quaternion(3.29665e-08, -0.754184, 0.656663, -2.87036e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.321216, 2.99417)
-bones/4/rotation = Quaternion(3.52431e-08, -0.806267, 0.591552, -2.58575e-08)
+bones/4/position = Vector3(5.13685, 0.145494, 3.41809)
+bones/4/rotation = Quaternion(3.29665e-08, -0.754184, 0.656663, -2.87036e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(5.05468e-08, 0.578188, 5.20415)
+bones/6/position = Vector3(2.2895e-08, 0.261888, 5.23957)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
@@ -275,6 +275,10 @@ script = ExtResource("8_l4xov")
 [node name="Skid" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("8_yskjs")
 
+[node name="TmrMaxSkid" type="Timer" parent="StateMachine/Skid" index="0"]
+wait_time = 5.0
+one_shot = true
+
 [node name="SquatCharge" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("6_imrjj")
 
@@ -351,5 +355,6 @@ bus = &"SoundEffects"
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
 [connection signal="timeout" from="TimerInvincibility" to="." method="_on_timer_invincibility_timeout"]
+[connection signal="timeout" from="StateMachine/Skid/TmrMaxSkid" to="StateMachine/Skid" method="_on_tmr_max_skid_timeout"]
 
 [editable path="CharacterMesh/SonicModel"]

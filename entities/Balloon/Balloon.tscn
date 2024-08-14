@@ -16,6 +16,7 @@ radius = 1.36325
 
 [node name="Balloon" instance=ExtResource("1_uj0vn")]
 script = ExtResource("2_dxsl7")
+MaxVisibility = 80.0
 
 [node name="WorldCollision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.277, 0)
@@ -48,7 +49,7 @@ script = ExtResource("5_w0551")
 script = ExtResource("6_2tctk")
 
 [node name="Timer" type="Timer" parent="StateMachine/Pop" index="0"]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 
 [node name="SndPop" type="AudioStreamPlayer3D" parent="." index="8"]

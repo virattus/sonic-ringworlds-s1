@@ -20,10 +20,14 @@ func Enter(_msg := {}) -> void:
 	owner.SetVelocity(owner.velocity.normalized() * SKID_MOVEMENT_SPEED)
 	
 	owner.CreateSmoke()
+	
+	#failsafe
+	$TmrMaxSkid.start()
 
 
 func Exit() -> void:
 	owner.SndSkid.stop()
+	$TmrMaxSkid.stop()
 
 
 func Update(_delta: float) -> void:
@@ -51,3 +55,7 @@ func Update(_delta: float) -> void:
 	newVel = owner.ApplyDrag(newVel, SKID_DRAG_COEFF * _delta)
 	
 	owner.SetVelocity(newVel)
+
+
+func _on_tmr_max_skid_timeout() -> void:
+	ChangeState("Fall")
