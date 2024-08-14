@@ -1,15 +1,9 @@
 extends BasicState
 
 
-const WALLRUN_ANGLE_SPEED_RATIO = 4.0
+const WALLRUN_ANGLE_SPEED_RATIO = 7.0
 
-const WALLRUN_CURVE_INFLUENCE_MOD = 2.0
-
-
-func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
-	velocity = lerp(velocity, Vector3.ZERO, delta)
-	
-	return velocity
+const WALLRUN_CURVE_INFLUENCE_MOD = 1.25
 
 
 func CurveInfluence(delta: float) -> Vector3:
@@ -28,7 +22,6 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 	if owner.Speed < minVel:
 		print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
 		owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-		ChangeState("Fall")
 		return false
 	
 	return true
@@ -88,10 +81,9 @@ func HandleCollisions(delta: float) -> bool:
 
 
 func WallRunMinVelocity() -> float:
-	var floorAngle = Vector3.DOWN.dot(owner.up_direction.normalized())
+	var floorAngle = clamp(Vector3.DOWN.dot(owner.up_direction), 0.0, 1.0)
 	
 	var reqSpeed = (floorAngle) * WALLRUN_ANGLE_SPEED_RATIO
-	
 	
 	return reqSpeed
 

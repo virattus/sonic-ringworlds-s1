@@ -1,7 +1,7 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
-const BALL_UNCURL_MIN_UP_DOT = 0.75
+const BALL_UNCURL_MIN_UP_DOT = 0.85
 
 
 func Enter(_msg := {}) -> void:
@@ -28,14 +28,12 @@ func Update(_delta: float) -> void:
 	
 	owner.GroundCollision = HandleCollisions(_delta)
 	
+	var minVel = WallRunMinVelocity()
+	if owner.Speed < minVel:
+		print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
+		owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
+		owner.GroundCollision = false
 	
-	if owner.GroundCollision and owner.Speed < owner.PARAMETERS.BALL_MIN_SPEED and Vector3.UP.dot(owner.up_direction) > BALL_UNCURL_MIN_UP_DOT:
-		UncurlAndIdle()
-		return
-	
-	if !owner.GroundCollision:
-		owner.ApplyGravity(_delta)
-		
 	var newVel = owner.velocity
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
@@ -43,11 +41,14 @@ func Update(_delta: float) -> void:
 	if inputVel.length() > 0.0:
 		newVel += inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta
 	else:
-		newVel = ApplyDrag(newVel, _delta / 2.0)
-	
-	var influence = CurveInfluence(_delta)
+		newVel = owner.ApplyDrag(newVel, _delta / 2.0)
 		
-	if influence.length() <= 0.05 and newVel.length() < owner.PARAMETERS.BALL_MIN_SPEED:
+	if !owner.GroundCollision:
+		newVel = owner.ApplyGravity(newVel, _delta)
+	
+	var influence := CurveInfluence(_delta)
+	
+	if Vector3.UP.dot(owner.up_direction) > BALL_UNCURL_MIN_UP_DOT and influence.length() < 0.05 and newVel.length() < owner.PARAMETERS.BALL_MIN_SPEED:
 		UncurlAndIdle()
 		return
 	
@@ -95,6 +96,13 @@ func HandleCollisions(delta: float) -> bool:
 			return CheckCollisionCast()
 	
 	return true
+
+
+func ApplyAirDrag(vel: Vector3, delta: float) -> Vector3:
+	vel.x = lerp(vel.x, 0.0, delta)
+	vel.z = lerp(vel.z, 0.0, delta)
+	
+	return vel
 
 
 func AttackHit(_Target: Hurtbox) -> void:

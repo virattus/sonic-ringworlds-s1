@@ -64,6 +64,7 @@ const COLLISION_CAST_LENGTH = 1.0
 const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
+const SMOKE = preload("res://effects/Smoke/Smoke.tscn")
 
 
 func _ready() -> void:
@@ -119,7 +120,6 @@ func GetCollision() -> SonicCollision:
 	if collision:
 		DebugCollisionPos = collision.get_position()
 		DebugCollisionNormal = collision.get_normal()
-		#CreateCollisionIndicator(DebugCollisionPos, DebugCollisionNormal)
 	
 	if is_on_floor():
 		DebugFloorNormal = get_floor_normal()
@@ -136,12 +136,12 @@ func GetCollision() -> SonicCollision:
 		return SonicCollision.new(SonicCollision.NONE)
 
 
-func ApplyGravity(delta: float) -> void:
-	if GroundCollision:
-		print("Left Floor")
-		GroundCollision = false
-	
-	velocity -= Vector3.UP * (PARAMETERS.GRAVITY * delta)
+func ApplyGravity(vel: Vector3, delta: float) -> Vector3:
+	return vel - Vector3.UP * (PARAMETERS.GRAVITY * delta)
+
+
+func ApplyDrag(vel: Vector3, delta: float) -> Vector3:
+	return lerp(vel, Vector3.ZERO, delta)
 
 
 func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
@@ -250,3 +250,9 @@ func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 		})
 	else:
 		StateM.ChangeState("Death")
+
+
+func CreateSmoke() -> void:
+	var newSmoke = SMOKE.instantiate()
+	get_parent().add_child(newSmoke)
+	newSmoke.global_position = global_position

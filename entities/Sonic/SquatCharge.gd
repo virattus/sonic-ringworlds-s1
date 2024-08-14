@@ -5,7 +5,7 @@ var ChargePower := 0.0
 
 const CHARGE_MAX_POWER = 20.0
 const CHARGE_POWER_GENERATE_POWER = 2.0
-const CHARGE_POWER_IDLE_DRAIN = 0.2
+const CHARGE_POWER_IDLE_DRAIN = 0.0
 
 
 func Enter(_msg := {}) -> void:

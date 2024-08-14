@@ -38,5 +38,9 @@ func Update(_delta: float) -> void:
 	
 	if newVel.length() > owner.PARAMETERS.IDLE_MAX_SPEED:
 		owner.SetVelocity(newVel)
-		ChangeState("Walk")
-		return
+		if owner.DashMode:
+			ChangeState("StrikeDash")
+			return
+		else:
+			ChangeState("Walk")
+			return

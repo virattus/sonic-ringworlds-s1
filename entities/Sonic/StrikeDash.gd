@@ -22,6 +22,14 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
+	if !owner.DashMode:
+		#ChangeState("Run")
+		ChangeState("Walk")
+		return
+	
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Jump")
+		return
 	
 	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
 	
@@ -29,11 +37,6 @@ func Update(_delta: float) -> void:
 	
 	newVel += inputVel * owner.PARAMETERS.RUN_SPEED_POWER * _delta
 	
-	newVel = ApplyDrag(newVel, _delta)
+	newVel = owner.ApplyDrag(newVel, _delta)
 	
 	owner.SetVelocity(newVel)
-	
-	if !owner.DashMode:
-		#ChangeState("Run")
-		ChangeState("Walk")
-		return

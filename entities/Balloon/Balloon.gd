@@ -1,4 +1,4 @@
-extends Character
+extends "res://entities/Enemy/Enemy.gd"
 
 
 @onready var SpritePop = $SpritePop

@@ -11,13 +11,16 @@ extends Character
 @onready var HitBox : Hitbox = $Hitbox
 
 var EnemyActive := true
+var EnemyDefeated := false
 
+const DEFEATSOUND = preload("res://entities/Enemy/EnemyDefeatSound/EnemyDefeatSound.tscn")
 const EXPLOSION = preload("res://effects/Explosion/Explosion.tscn")
 const FLICKY = preload("res://entities/Flicky/Flicky.tscn")
 
 
 func _ready() -> void:
 	DebugMenu.AddMonitor(self, "EnemyActive")
+	DebugMenu.AddMonitor(self, "EnemyDefeated")
 
 
 func _physics_process(delta: float) -> void:
@@ -51,12 +54,23 @@ func EnemyActivate(Active: bool) -> void:
 
 
 func EnemyDeath() -> void:
+	EnemyDefeated = true
 	StateM.ChangeState("Inactive")
-	SndDefeat.play()
+	queue_free()
+
+
+func SpawnDefeatSound() -> void:
+	var sound = DEFEATSOUND.instantiate()
+	get_parent().add_child(sound)
+
+
+func SpawnExplosion() -> void:
 	var explosion = EXPLOSION.instantiate()
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position + Vector3(0, 0.5, 0)
+
+
+func SpawnFlicky() -> void:
 	var flicky = FLICKY.instantiate()
 	get_parent().add_child(flicky)
 	flicky.global_position = global_position + Vector3(0, 0.5, 0)
-	queue_free()

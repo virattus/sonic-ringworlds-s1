@@ -1,28 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwv57vyogn2kk"]
+[gd_scene load_steps=10 format=3 uid="uid://dwv57vyogn2kk"]
 
-[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_pspdp"]
+[ext_resource type="PackedScene" uid="uid://cbk11ie7m8c2r" path="res://entities/Enemy/Enemy.tscn" id="1_uj0vn"]
 [ext_resource type="PackedScene" uid="uid://h4kvfn8eais1" path="res://entities/Balloon/balloon_model.tscn" id="2_5xh2y"]
 [ext_resource type="Script" path="res://entities/Balloon/Balloon.gd" id="2_dxsl7"]
 [ext_resource type="Texture2D" uid="uid://ce86k7g83srx7" path="res://entities/Balloon/Pop.png" id="4_cqi2n"]
-[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_qdvqs"]
 [ext_resource type="Script" path="res://entities/Balloon/Idle.gd" id="5_w0551"]
 [ext_resource type="Script" path="res://entities/Balloon/Pop.gd" id="6_2tctk"]
 [ext_resource type="AudioStream" uid="uid://chjlkccl4d21f" path="res://entities/Balloon/673836__nicholasjudy567__balloon-pop-giant-balloon-popping-loud_edit.wav" id="7_6f6jp"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_hgypv"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_mv1vp"]
 radius = 1.104
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_nlaba"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_433np"]
 radius = 1.36325
 
-[node name="Balloon" groups=["Enemy"] instance=ExtResource("1_pspdp")]
-collision_layer = 8
-collision_mask = 11
+[node name="Balloon" instance=ExtResource("1_uj0vn")]
 script = ExtResource("2_dxsl7")
 
 [node name="WorldCollision" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276508, 0)
-shape = SubResource("SphereShape3D_hgypv")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.277, 0)
+shape = SubResource("SphereShape3D_mv1vp")
 
 [node name="SpritePop" type="Sprite3D" parent="." index="1"]
 visible = false
@@ -38,23 +35,23 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.252161, 0)
-shape = SubResource("SphereShape3D_nlaba")
+shape = SubResource("SphereShape3D_433np")
 
-[node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("ActiveState")]
-script = ExtResource("4_qdvqs")
-ActiveState = NodePath("Idle")
+[node name="Hitbox" parent="." index="6"]
+monitoring = false
+monitorable = false
 
-[node name="Idle" type="Node" parent="StateMachine" index="0"]
+[node name="Idle" parent="StateMachine" index="1"]
 script = ExtResource("5_w0551")
 
-[node name="Pop" type="Node" parent="StateMachine" index="1"]
+[node name="Pop" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("6_2tctk")
 
 [node name="Timer" type="Timer" parent="StateMachine/Pop" index="0"]
 wait_time = 10.0
 one_shot = true
 
-[node name="SndPop" type="AudioStreamPlayer3D" parent="." index="7"]
+[node name="SndPop" type="AudioStreamPlayer3D" parent="." index="8"]
 stream = ExtResource("7_6f6jp")
 bus = &"SoundEffects"
 

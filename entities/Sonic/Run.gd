@@ -51,7 +51,7 @@ func Update(_delta: float) -> void:
 	
 	newVel += inputVel * owner.PARAMETERS.RUN_SPEED_POWER * _delta
 	
-	newVel = ApplyDrag(newVel, _delta)
+	newVel = owner.ApplyDrag(newVel, _delta)
 	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick

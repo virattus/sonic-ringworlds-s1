@@ -23,11 +23,17 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move()
+	if !HandleMovementAndCollisions(_delta):
+		ChangeState("Fall")
+		return
 
 	if owner.Speed < WIPEOUT_MIN_SPEED:
 		ChangeState("Idle")
 		return
 
-	owner.SetVelocity(ApplyDrag(owner.velocity, _delta))
+	var newVel = owner.velocity
+	
+	newVel = owner.ApplyDrag(newVel, _delta)
+
+	owner.SetVelocity(newVel)
 	

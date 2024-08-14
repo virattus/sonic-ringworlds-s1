@@ -6,10 +6,10 @@ const LAND_MIN_SPEED = 0.5
 
 func Enter(_msg := {}) -> void:
 	if _msg.has("Normal"):
-		owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 		owner.UpdateUpDir(_msg["Normal"], 1.0)
 		owner.CharMesh.AlignToY(owner.up_direction)
 	
+	owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 	
 	if _msg.has("Type"):
 		if _msg["Type"] == "Wipeout":
@@ -22,10 +22,16 @@ func Enter(_msg := {}) -> void:
 	owner.CharMesh.AlignToY(owner.up_direction)
 	
 	print("Landed")
+	
+	owner.CreateSmoke()
 
 	if owner.Speed > LAND_MIN_SPEED:
-		ChangeState("Walk")
-		return
+		if owner.DashMode:
+			ChangeState("StrikeDash")
+			return
+		else:
+			ChangeState("Walk")
+			return
 		
 		#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
 		#	ChangeState("Run")

@@ -25,13 +25,13 @@ func Update(_delta: float) -> void:
 		return
 
 	var inputVel = owner.GetInputVector(Vector3.UP)
-	
-	owner.ApplyGravity(_delta)
+
 	var newVel = owner.velocity
 	
 	newVel += inputVel * _delta
 	
 	newVel = ApplyDrag(newVel, _delta)
+	newVel = owner.ApplyGravity(newVel, _delta)
 
 	owner.SetVelocity(newVel)
 

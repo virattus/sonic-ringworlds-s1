@@ -19,11 +19,14 @@ func HandleCollisions() -> bool:
 	else:
 		if collision.CollisionType == SonicCollision.FLOOR:
 			owner.CollisionCast.force_raycast_update()
-			ChangeState("Land", {
-				"Type": "Normal",
-				"Normal": owner.CollisionCast.get_collision_normal(),
-			})
-			return true
+			if owner.CollisionCast.is_colliding():
+				ChangeState("Land", {
+					"Type": "Normal",
+					"Normal": owner.CollisionCast.get_collision_normal(),
+				})
+				return true
+			else:
+				return false
 		elif collision.CollisionType == SonicCollision.WALL:
 			if owner.velocity.y < 0.0:
 				#Heading downwards

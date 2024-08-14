@@ -1,6 +1,12 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
+var SkidStickBelowMagnitude := 0
+
+const SKID_MIN_STICK_MAGNITUDE = 0.6
+const SKID_STICK_MAX_MAG_COUNT = 15
+const SKID_MAX_ANGLE = 0.15
+
 const MAX_SPEED = 18.0
 
 func Enter(_msg := {}) -> void:
@@ -32,13 +38,23 @@ func Update(_delta: float) -> void:
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
+	if inputVel.length() < SKID_MIN_STICK_MAGNITUDE:
+		SkidStickBelowMagnitude += 1
+	else:
+		if SkidStickBelowMagnitude > 0 and SkidStickBelowMagnitude < SKID_STICK_MAX_MAG_COUNT:
+			if IsInputSkidding(inputVel):
+				ChangeState("Skid")
+				return
+		else:
+			SkidStickBelowMagnitude = 0
+	
 	if inputVel.length() > 0.0:
 		var inputValue : Vector3 = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)
 		newVel = inputValue 
 		if newVel.length() > MAX_SPEED:
 			newVel = newVel.normalized() * MAX_SPEED
 	else:
-		newVel = ApplyDrag(newVel, _delta)
+		newVel = owner.ApplyDrag(newVel, _delta)
 	
 	
 	if inputVel.length() > 0.0:
@@ -54,7 +70,24 @@ func Update(_delta: float) -> void:
 			ChangeState("Idle")
 			return
 		
-		#if owner.up_direction.y > 0.0:
 		newVel += influence
 		
+		if newVel.length() > 2.0:
+			if owner.CharMesh.GetForwardVector().dot(newVel.normalized()) > 0.0:
+				owner.CharMesh.LerpMeshOrientation(newVel.normalized(), _delta)
+			else:
+				owner.CharMesh.LerpMeshOrientation(-newVel.normalized(), _delta)
+		
 	owner.SetVelocity(newVel)
+
+
+
+func IsInputSkidding(input: Vector3) -> bool:
+	var ForwardVector = owner.CharMesh.GetForwardVector()
+	var forwardDot = ForwardVector.dot(input.normalized())
+	
+	if forwardDot < 0.0:
+		print("Input skidding? %s" % forwardDot)
+		return true
+	
+	return false

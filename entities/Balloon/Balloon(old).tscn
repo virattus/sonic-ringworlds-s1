@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://dn0ylr8gckmsd"]
+
+[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_whpdi"]
+[ext_resource type="Script" path="res://entities/Balloon/Balloon.gd" id="2_ne0vl"]
+[ext_resource type="Texture2D" uid="uid://ce86k7g83srx7" path="res://entities/Balloon/Pop.png" id="3_ftrqm"]
+[ext_resource type="PackedScene" uid="uid://h4kvfn8eais1" path="res://entities/Balloon/balloon_model.tscn" id="4_3ccsn"]
+[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="5_q7tvt"]
+[ext_resource type="Script" path="res://entities/Balloon/Idle.gd" id="6_jay4k"]
+[ext_resource type="Script" path="res://entities/Balloon/Pop.gd" id="7_ago0m"]
+[ext_resource type="AudioStream" uid="uid://chjlkccl4d21f" path="res://entities/Balloon/673836__nicholasjudy567__balloon-pop-giant-balloon-popping-loud_edit.wav" id="8_ym5jb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hgypv"]
+radius = 1.104
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nlaba"]
+radius = 1.36325
+
+[node name="Balloon" groups=["Enemy"] instance=ExtResource("1_whpdi")]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("2_ne0vl")
+MaxDistFromHome = 10.0
+MaxVisibility = 20.0
+
+[node name="WorldCollision" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.276508, 0)
+shape = SubResource("SphereShape3D_hgypv")
+
+[node name="SpritePop" type="Sprite3D" parent="." index="1"]
+visible = false
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_ftrqm")
+
+[node name="BalloonModel" parent="CharacterMesh" index="0" instance=ExtResource("4_3ccsn")]
+
+[node name="Hurtbox" parent="." index="5"]
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.252161, 0)
+shape = SubResource("SphereShape3D_nlaba")
+
+[node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("ActiveState")]
+script = ExtResource("5_q7tvt")
+ActiveState = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("6_jay4k")
+
+[node name="Pop" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("7_ago0m")
+
+[node name="Timer" type="Timer" parent="StateMachine/Pop" index="0"]
+wait_time = 10.0
+one_shot = true
+
+[node name="SndPop" type="AudioStreamPlayer3D" parent="." index="7"]
+stream = ExtResource("8_ym5jb")
+bus = &"SoundEffects"
+
+[connection signal="timeout" from="StateMachine/Pop/Timer" to="StateMachine/Pop" method="_on_timer_timeout"]
