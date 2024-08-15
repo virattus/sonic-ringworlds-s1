@@ -483,14 +483,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14419, 9.4994, -7.20331)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-4.9108e-08, 0.0301252, 3.02657)
-bones/2/position = Vector3(-5.13685, 0.0167364, 3.72871)
-bones/2/rotation = Quaternion(2.15418e-08, -0.712681, 0.701489, -4.02735e-08)
+bones/1/position = Vector3(-6.4653e-09, 0.517901, 2.97195)
+bones/2/position = Vector3(-5.13685, 0.287723, 3.07497)
+bones/2/rotation = Quaternion(2.52111e-08, -0.796788, 0.604259, -3.60306e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.0167364, 3.72871)
-bones/4/rotation = Quaternion(2.15418e-08, -0.712681, 0.701489, -4.02735e-08)
+bones/4/position = Vector3(5.13685, 0.287723, 3.07497)
+bones/4/rotation = Quaternion(2.52111e-08, -0.796788, 0.604259, -3.60306e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(-4.9108e-08, 0.0301252, 5.26552)
+bones/6/position = Vector3(-6.4653e-09, 0.517901, 5.2109)
 
 [node name="CollisionShape3D" parent="KillBox" index="0"]
 shape = SubResource("BoxShape3D_cgjes")

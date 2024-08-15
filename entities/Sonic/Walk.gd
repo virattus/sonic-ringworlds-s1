@@ -38,15 +38,16 @@ func Update(_delta: float) -> void:
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
-	if inputVel.length() < SKID_MIN_STICK_MAGNITUDE:
-		SkidStickBelowMagnitude += 1
-	else:
-		if SkidStickBelowMagnitude > 0 and SkidStickBelowMagnitude < SKID_STICK_MAX_MAG_COUNT:
-			if IsInputSkidding(inputVel):
-				ChangeState("Skid")
-				return
-		else:
-			SkidStickBelowMagnitude = 0
+	#TODO disabling skidding until a working solution is found
+	#if inputVel.length() < SKID_MIN_STICK_MAGNITUDE:
+	#	SkidStickBelowMagnitude += 1
+	#else:
+	#	if SkidStickBelowMagnitude > 0 and SkidStickBelowMagnitude < SKID_STICK_MAX_MAG_COUNT:
+	#		if IsInputSkidding(inputVel):
+	#			ChangeState("Skid")
+	#			return
+	#	else:
+	#		SkidStickBelowMagnitude = 0
 	
 	if inputVel.length() > 0.0:
 		var inputValue : Vector3 = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)

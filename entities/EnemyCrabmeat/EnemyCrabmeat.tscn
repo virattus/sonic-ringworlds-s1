@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcbjk0tmj5fb5"]
+[gd_scene load_steps=18 format=3 uid="uid://dcbjk0tmj5fb5"]
 
 [ext_resource type="PackedScene" uid="uid://cbk11ie7m8c2r" path="res://entities/Enemy/Enemy.tscn" id="1_vrlkf"]
 [ext_resource type="PackedScene" uid="uid://dd14kspiykhby" path="res://models/Crabmeat/ModelCrabmeat.tscn" id="2_6d2dm"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Chase.gd" id="6_8trow"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Wander.gd" id="7_lpetq"]
 [ext_resource type="Script" path="res://entities/EnemyCrabmeat/Victory.gd" id="8_k2k6m"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_riqlc"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mpnnb"]
 radius = 0.685435
@@ -69,7 +71,12 @@ _data = {
 }
 
 [node name="EnemyCrabmeat" instance=ExtResource("1_vrlkf")]
+collision_mask = 1
 script = ExtResource("2_wdkbs")
+
+[node name="WorldCollision" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_riqlc")
 
 [node name="ModelCrabmeat" parent="CharacterMesh" index="0" instance=ExtResource("2_6d2dm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

@@ -82,7 +82,8 @@ height = 1.5
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.415686)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_byb1a"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_modop"]
+height = 12.0
 radius = 10.0
 
 [node name="Sonic" groups=["Player"] instance=ExtResource("1_paxei")]
@@ -107,16 +108,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(2.2895e-08, 0.261888, 3.00061)
-bones/2/position = Vector3(-5.13685, 0.145494, 3.41809)
-bones/2/rotation = Quaternion(3.29665e-08, -0.754184, 0.656663, -2.87036e-08)
+bones/1/position = Vector3(2.02211e-08, 0.231302, 3.00404)
+bones/2/position = Vector3(-5.13685, 0.128501, 3.45908)
+bones/2/rotation = Quaternion(3.27336e-08, -0.748856, 0.662732, -2.89689e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.145494, 3.41809)
-bones/4/rotation = Quaternion(3.29665e-08, -0.754184, 0.656663, -2.87036e-08)
+bones/4/position = Vector3(5.13685, 0.128501, 3.45908)
+bones/4/rotation = Quaternion(3.27336e-08, -0.748856, 0.662732, -2.89689e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(2.2895e-08, 0.261888, 5.23957)
+bones/6/position = Vector3(2.02211e-08, 0.231302, 5.24299)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
@@ -202,7 +203,8 @@ collision_mask = 8
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LockOnArea" index="0"]
-shape = SubResource("SphereShape3D_byb1a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+shape = SubResource("CylinderShape3D_modop")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="14"]
 root_node = NodePath("../CharacterMesh/SonicModel")
