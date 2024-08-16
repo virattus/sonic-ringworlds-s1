@@ -15,7 +15,12 @@ func Enter(_msg := {}) -> void:
 	owner.SndAirdash.play()
 	$TimerAirdash.start()
 	
-	owner.SetVelocity(owner.velocity.normalized() * AIRDASH_FORWARD_SPEED)
+	var newVel : Vector3 = owner.velocity
+	#Clamp Y vel so the player can't just rocket straight up
+	newVel.y = clamp(newVel.y, -1.0, 0.6)
+	
+	
+	owner.SetVelocity(newVel.normalized() * AIRDASH_FORWARD_SPEED)
 
 	owner.UpdateUpDir(Vector3.UP, 1.0)
 	owner.CharMesh.AlignToY(Vector3.UP)
@@ -39,6 +44,7 @@ func Update(_delta: float) -> void:
 	if collision.CollisionType == SonicCollision.WALL:
 		if collision.CollisionNormal.dot(owner.velocity.normalized()) < 0.25:
 			#Bounce off wall
+			owner.SndBonk.play()
 			ChangeState("Hurt", {
 				"BounceDirection": (collision.CollisionNormal * Vector3(1, 0, 1)).normalized(),
 			})
