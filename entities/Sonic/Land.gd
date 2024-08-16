@@ -16,6 +16,11 @@ func Enter(_msg := {}) -> void:
 			ChangeState("Wipeout")
 			return
 	
+	if _msg.has("Flicker"):
+		owner.Flicker = true
+		owner.TimerFlicker.wait_time = _msg["Flicker"]
+		owner.TimerFlicker.start()
+	
 	owner.GroundCollision = true
 	owner.HasJumped = false
 	owner.SndLand.play()

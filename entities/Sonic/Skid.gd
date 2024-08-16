@@ -22,12 +22,12 @@ func Enter(_msg := {}) -> void:
 	owner.CreateSmoke()
 	
 	#failsafe
-	$TmrMaxSkid.start()
+	$TimerMaxSkid.start()
 
 
 func Exit() -> void:
 	owner.SndSkid.stop()
-	$TmrMaxSkid.stop()
+	$TimerMaxSkid.stop()
 
 
 func Update(_delta: float) -> void:

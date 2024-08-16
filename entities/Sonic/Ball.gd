@@ -61,14 +61,14 @@ func HandleCollisions(delta: float) -> bool:
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
-		if CheckFloorCollision(delta):
+		if CheckFloorRaycast(delta):
 			return true
 		else:
 			if owner.GroundCollision:
 				print("Left Ground")
 			return false
 	elif collision.CollisionType == SonicCollision.FLOOR:
-		if CheckFloorCollision(delta):
+		if CheckFloorRaycast(delta):
 			return true
 		else:
 			#Too large of an angle to transition

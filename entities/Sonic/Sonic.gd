@@ -31,7 +31,6 @@ var DroppedRingSpeed := 1.0
 
 @onready var AnimTree: AnimationTree = $AnimationTree
 @onready var StateM: StateMachine = $StateMachine
-@onready var TimerInvincibility = $TimerInvincibility
 @onready var AirdashTrail = $CylinderTrail2
 @onready var CollisionCast : RayCast3D = $CollisionCast
 
@@ -42,6 +41,9 @@ var DroppedRingSpeed := 1.0
 @onready var CameraFocus = $CameraFocus
 @onready var HitBox = $Hitbox
 @onready var LockOnArea = $LockOnArea
+
+@onready var TimerInvincibility = $TimerInvincibility
+@onready var TimerFlicker = $TimerFlicker
 
 @onready var SndJump = $SndJump
 @onready var SndAirdash = $SndAirdash
@@ -112,7 +114,7 @@ func _process(delta: float) -> void:
 		DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
 	
 	if Flicker:
-		CharMesh.visible = (fmod(round(TimerInvincibility.time_left / PARAMETERS.FLICKER_CYCLE_TIME), 2.0) == 0)
+		CharMesh.visible = (fmod(round(TimerFlicker.time_left / PARAMETERS.FLICKER_CYCLE_TIME), 2.0) == 0)
 
 
 func GetCollision() -> SonicCollision:
@@ -223,10 +225,20 @@ func CreateCollisionIndicator(point: Vector3, normal: Vector3) -> void:
 	collInd.SetToVectors(point, normal)
 
 
+func CreateSmoke() -> void:
+	var newSmoke = SMOKE.instantiate()
+	get_parent().add_child(newSmoke)
+	newSmoke.global_position = global_position
+
+
 func _on_timer_invincibility_timeout() -> void:
 	Invincible = false
 	Flicker = false
 	CharMesh.visible = true
+
+
+func _on_timer_flicker_timeout() -> void:
+	Flicker = false
 
 
 func ActivateHitbox(Active: bool) -> void:
@@ -250,9 +262,3 @@ func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 		})
 	else:
 		StateM.ChangeState("Death")
-
-
-func CreateSmoke() -> void:
-	var newSmoke = SMOKE.instantiate()
-	get_parent().add_child(newSmoke)
-	newSmoke.global_position = global_position

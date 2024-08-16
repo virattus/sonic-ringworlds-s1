@@ -7,7 +7,6 @@ extends Character
 
 @onready var Home: Vector3 = global_position
 
-@onready var SndDefeat : AudioStreamPlayer = $SndDefeat
 @onready var StateM : StateMachine = $StateMachine
 @onready var HitBox : Hitbox = $Hitbox
 

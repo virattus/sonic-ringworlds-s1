@@ -13,30 +13,44 @@ func Enter(_msg := {}) -> void:
 	owner.AirdashTrail.Active = true
 	
 	owner.SndAirdash.play()
+	$TimerAirdash.start()
 	
 	owner.SetVelocity(owner.velocity.normalized() * AIRDASH_FORWARD_SPEED)
 
 	owner.UpdateUpDir(Vector3.UP, 1.0)
+	owner.CharMesh.AlignToY(Vector3.UP)
+	owner.CharMesh.LookAt(owner.global_position + owner.velocity)
 
 
 func Exit() -> void:
 	owner.AirdashTrail.Active = false
 	owner.SndAirdash.stop()
+	$TimerAirdash.stop()
 
 
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	if HandleCollisions():
-		ChangeState("Hurt")
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision):
+		#Landed
 		return
 	
-	if (owner.velocity * Vector3(1, 0, 1)).length() <= AIRDASH_MIN_REQ_SPEED:
-		ChangeState("Fall")
-		return
-	
-	owner.ApplyGravity(_delta)
+	if collision.CollisionType == SonicCollision.WALL:
+		if collision.CollisionNormal.dot(owner.velocity.normalized()) < 0.25:
+			#Bounce off wall
+			ChangeState("Hurt", {
+				"BounceDirection": (collision.CollisionNormal * Vector3(1, 0, 1)).normalized(),
+			})
+			return
+
 	var newVel = owner.velocity
-	newVel = ApplyDrag(owner.velocity, _delta * AIRDASH_DRAG_COEFF)
+	
+	newVel = ApplyDrag(owner.velocity, _delta)
+	newVel = owner.ApplyGravity(newVel, _delta)
 	
 	owner.SetVelocity(newVel)
+
+
+func _on_timer_airdash_timeout() -> void:
+	ChangeState("Fall")

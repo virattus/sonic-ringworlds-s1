@@ -108,16 +108,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(2.02211e-08, 0.231302, 3.00404)
-bones/2/position = Vector3(-5.13685, 0.128501, 3.45908)
-bones/2/rotation = Quaternion(3.27336e-08, -0.748856, 0.662732, -2.89689e-08)
+bones/1/position = Vector3(-2.95465e-08, 0.00625663, 3.02924)
+bones/2/position = Vector3(-5.13685, 0.00347604, 3.7607)
+bones/2/rotation = Quaternion(2.53719e-08, -0.708267, 0.705944, -3.64452e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.128501, 3.45908)
-bones/4/rotation = Quaternion(3.27336e-08, -0.748856, 0.662732, -2.89689e-08)
+bones/4/position = Vector3(5.13685, 0.00347604, 3.7607)
+bones/4/rotation = Quaternion(2.53719e-08, -0.708267, 0.705944, -3.64452e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(2.02211e-08, 0.231302, 5.24299)
+bones/6/position = Vector3(-2.95465e-08, 0.00625663, 5.26819)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
@@ -249,7 +249,10 @@ parameters/TimeScale/scale = 1.0
 [node name="TimerInvincibility" type="Timer" parent="." index="15"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="16" node_paths=PackedStringArray("ActiveState")]
+[node name="TimerFlicker" type="Timer" parent="." index="16"]
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." index="17" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
 ActiveState = NodePath("Initial")
 
@@ -277,7 +280,7 @@ script = ExtResource("8_l4xov")
 [node name="Skid" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("8_yskjs")
 
-[node name="TmrMaxSkid" type="Timer" parent="StateMachine/Skid" index="0"]
+[node name="TimerMaxSkid" type="Timer" parent="StateMachine/Skid" index="0"]
 wait_time = 5.0
 one_shot = true
 
@@ -292,6 +295,11 @@ script = ExtResource("28_p62qa")
 
 [node name="Airdash" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("11_2je5t")
+
+[node name="TimerAirdash" type="Timer" parent="StateMachine/Airdash" index="0"]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
 
 [node name="SpinKick" type="Node" parent="StateMachine" index="12"]
 script = ExtResource("26_pqjut")
@@ -311,52 +319,54 @@ script = ExtResource("9_pbmsm")
 [node name="Death" type="Node" parent="StateMachine" index="17"]
 script = ExtResource("15_ulagb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="17"]
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="18"]
 stream = ExtResource("11_sc7a7")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("15_ce3xb")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("20_yjean")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="22"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="23"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="23"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="24"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="24"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="25"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="25"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="26"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="26"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="27"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 
-[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="27"]
+[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="28"]
 stream = ExtResource("39_keyd5")
 bus = &"SoundEffects"
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
 [connection signal="timeout" from="TimerInvincibility" to="." method="_on_timer_invincibility_timeout"]
-[connection signal="timeout" from="StateMachine/Skid/TmrMaxSkid" to="StateMachine/Skid" method="_on_tmr_max_skid_timeout"]
+[connection signal="timeout" from="TimerFlicker" to="." method="_on_timer_flicker_timeout"]
+[connection signal="timeout" from="StateMachine/Skid/TimerMaxSkid" to="StateMachine/Skid" method="_on_tmr_max_skid_timeout"]
+[connection signal="timeout" from="StateMachine/Airdash/TimerAirdash" to="StateMachine/Airdash" method="_on_timer_airdash_timeout"]
 
 [editable path="CharacterMesh/SonicModel"]

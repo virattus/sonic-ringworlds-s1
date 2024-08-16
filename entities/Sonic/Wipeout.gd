@@ -15,6 +15,7 @@ func Enter(_msg := {}) -> void:
 	owner.SndSkid.play()
 	
 	owner.SetVelocity(owner.velocity.normalized() * WIPEOUT_START_SPEED)
+	owner.CharMesh.LookAt(owner.velocity.normalized())
 
 
 

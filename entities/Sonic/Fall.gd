@@ -17,7 +17,9 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	if HandleCollisions():
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision):
+		#Landed
 		return
 
 	if Input.is_action_just_pressed("Jump"):

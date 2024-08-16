@@ -14,7 +14,11 @@ func CurveInfluence(delta: float) -> Vector3:
 func HandleMovementAndCollisions(delta: float) -> bool:
 	owner.Move()
 	
-	if !HandleCollisions(delta):
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision, delta):
+		owner.GroundCollision = true
+	else:
+		owner.GroundCollision = false
 		return false 
 	
 	var minVel = WallRunMinVelocity()
@@ -42,7 +46,7 @@ func CheckGroundTransition() -> bool:
 		return false
 
 
-func CheckFloorCollision(delta: float) -> bool:
+func CheckFloorRaycast(delta: float) -> bool:
 	if CheckCollisionCast():
 		if CheckGroundTransition():
 			if !owner.GroundCollision:
@@ -59,13 +63,11 @@ func CheckFloorCollision(delta: float) -> bool:
 		return false
 
 
-func HandleCollisions(delta: float) -> bool:
-	var collision: SonicCollision = owner.GetCollision()
-	
+func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 	if collision.CollisionType == SonicCollision.NONE:
-		return CheckFloorCollision(delta)
+		return CheckFloorRaycast(delta)
 	elif collision.CollisionType == SonicCollision.FLOOR:
-		if CheckFloorCollision(delta):
+		if CheckFloorRaycast(delta):
 			return true
 		else:
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))

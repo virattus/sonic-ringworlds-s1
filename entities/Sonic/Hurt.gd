@@ -1,4 +1,4 @@
-extends BasicState
+extends "res://entities/Sonic/MoveAir.gd"
 
 
 var SetInvincible := false
@@ -14,16 +14,14 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Hurt/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/OSHurt/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	owner.GroundCollision = false
-	
-	owner.UpdateUpDir(Vector3(0, 1, 0), 1.0)
 	owner.velocity = Vector3(0, HURT_INITIAL_UP_SPEED, 0)
 	if _msg.has("BounceDirection"):
 		owner.velocity = _msg["BounceDirection"] + owner.velocity
 	
+	owner.UpdateUpDir(Vector3(0, 1, 0), 1.0)
 	owner.CharMesh.look_at(owner.global_position - (owner.velocity * Vector3(1, 0, 1)).normalized())
 	
-	if owner.is_on_floor():
+	if owner.GroundCollision:
 		LeftGround = false
 	else:
 		LeftGround = true
@@ -67,11 +65,18 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	if owner.GroundCollision:
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision):
 		if LeftGround:
-			ChangeState("Idle")
+			ChangeState("Land", {
+				"Flicker": 1.0,
+			})
 			return
-	else:
-		LeftGround = true
+		else:
+			LeftGround = true
+		
+	var newVel : Vector3 = owner.velocity
 	
-	owner.SetVelocity(owner.velocity - (Vector3.UP * owner.PARAMETERS.GRAVITY * _delta))
+	newVel = owner.ApplyGravity(newVel, _delta)
+	
+	owner.SetVelocity(newVel)

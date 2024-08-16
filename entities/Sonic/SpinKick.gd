@@ -35,7 +35,8 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	if HandleCollisions():
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision):
 		ChangeState("Land")
 		return
 	
@@ -52,15 +53,14 @@ func Update(_delta: float) -> void:
 	
 	var newVel = owner.velocity
 	
+	newVel = owner.ApplyGravity(newVel, _delta)
+	
 	if AttackReleased or Target == null:
 		newVel += inputVel * SPINKICK_INPUT_MOD * _delta
 		newVel = ApplyDrag(newVel, _delta)
 	else:
 		var direction = owner.global_position.direction_to(Target.global_position)
-		newVel = (direction * CurrentSpeed * Vector3(1, 0, 1)) + (newVel * Vector3.UP)
-
-	
-	newVel = owner.ApplyGravity(newVel, _delta)
+		newVel = (direction * Vector3(1, 0, 1) * CurrentSpeed) + (newVel * Vector3.UP)
 	
 	owner.SetVelocity(newVel)
 
@@ -147,7 +147,7 @@ func GetNextTarget(inputDir: Vector3) -> void:
 	
 	Target = closest
 	CurrentSpeed = newSpeed
-	print("SpinKick: Found target newSpeed: %s" % [CurrentSpeed])
+	print("SpinKick: Found target: Distance: %s TargetSpeed: %s" % [owner.global_position.distance_to(Target.global_position), CurrentSpeed])
 
 
 func AttackHit(_Target: Hurtbox) -> void:

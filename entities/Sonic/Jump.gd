@@ -25,7 +25,9 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	if HandleCollisions():
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision):
+		#We landed while travelling up, this should probably never happen
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
