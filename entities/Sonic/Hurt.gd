@@ -4,7 +4,11 @@ extends "res://entities/Sonic/MoveAir.gd"
 var SetInvincible := false
 var LeftGround := false
 
+
 const HURT_INITIAL_UP_SPEED = 5.0
+const HURT_INVINCIBILITY_TIME = 2.0
+const HURT_DROPPED_RING_COUNT = 20
+const HURT_DROPPED_RING_SPEED = 1.25
 
 const RING = preload("res://entities/RingBounce/RingBounce.tscn")
 
@@ -29,9 +33,11 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("Bonk") and _msg["Bonk"]:
 		owner.SndBonk.play()
 	
+	owner.CanCollectRings = false
+	
 	if _msg.has("DropRings") and _msg["DropRings"]:
-		var DroppedRings = owner.PARAMETERS.HURT_DROPPED_RING_COUNT
-		if Globals.RingCount - owner.PARAMETERS.HURT_DROPPED_RING_COUNT < 0:
+		var DroppedRings = HURT_DROPPED_RING_COUNT
+		if Globals.RingCount - HURT_DROPPED_RING_COUNT < 0:
 			DroppedRings = Globals.RingCount
 		
 		for i in range(DroppedRings):
@@ -44,10 +50,10 @@ func Enter(_msg := {}) -> void:
 		owner.SndRingDrop.play()
 		
 		owner.Invincible = true
-		owner.set_collision_layer_value(2, false)
 		SetInvincible = true
+		owner.ActivateHurtbox(false)
 		
-		owner.DroppedRingSpeed += owner.PARAMETERS.HURT_DROPPED_RING_SPEED
+		owner.DroppedRingSpeed += HURT_DROPPED_RING_SPEED
 
 
 func Exit() -> void:
@@ -55,11 +61,12 @@ func Exit() -> void:
 	owner.AnimTree.set("parameters/OSHurt/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	
 	owner.Flicker = true
+	owner.CanCollectRings = true
 	
 	if SetInvincible:
-		owner.TimerInvincibility.start(owner.PARAMETERS.HURT_INVINCIBILITY_TIME)
-		owner.set_collision_layer_value(2, true)
+		owner.TimerInvincibility.start(HURT_INVINCIBILITY_TIME)
 		SetInvincible = false
+		owner.ActivateHurtbox(true)
 
 
 func Update(_delta: float) -> void:

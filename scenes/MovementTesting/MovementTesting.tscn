@@ -11,11 +11,29 @@
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
-size = Vector3(200, 200, 200)
+size = Vector3(300, 200, 200)
 
 [node name="MovementTesting" instance=ExtResource("1_8w2gn")]
 
-[node name="MovementTesting" parent="." index="2" instance=ExtResource("1_aqers")]
+[node name="Sonic" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
+
+[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
+bones/1/position = Vector3(-1.80678e-08, 0.385183, 2.98681)
+bones/2/position = Vector3(-5.13685, 0.213991, 3.25284)
+bones/2/rotation = Quaternion(2.4252e-08, -0.775161, 0.631764, -3.72467e-08)
+bones/4/position = Vector3(5.13685, 0.213991, 3.25284)
+bones/4/rotation = Quaternion(2.4252e-08, -0.775161, 0.631764, -3.72467e-08)
+bones/6/position = Vector3(-1.80678e-08, 0.385183, 5.22576)
+
+[node name="KillBox" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
+
+[node name="CollisionShape3D" parent="KillBox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.93445, 34.0933, 0)
+shape = SubResource("BoxShape3D_cgjes")
+
+[node name="MovementTesting" parent="." index="9" instance=ExtResource("1_aqers")]
 
 [node name="Rings" type="Node3D" parent="MovementTesting" index="2"]
 
@@ -478,22 +496,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.925, 0, 41.849)
 
 [node name="OneUp" parent="MovementTesting" index="11" instance=ExtResource("8_lj1tr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14419, 9.4994, -7.20331)
-
-[node name="Sonic" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
-
-[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-6.4653e-09, 0.517901, 2.97195)
-bones/2/position = Vector3(-5.13685, 0.287723, 3.07497)
-bones/2/rotation = Quaternion(2.52111e-08, -0.796788, 0.604259, -3.60306e-08)
-bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.287723, 3.07497)
-bones/4/rotation = Quaternion(2.52111e-08, -0.796788, 0.604259, -3.60306e-08)
-bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(-6.4653e-09, 0.517901, 5.2109)
-
-[node name="CollisionShape3D" parent="KillBox" index="0"]
-shape = SubResource("BoxShape3D_cgjes")
 
 [node name="SonicAfterimage" parent="." index="10" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")

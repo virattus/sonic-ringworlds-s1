@@ -14,8 +14,16 @@ func Enter(_msg := {}) -> void:
 	
 	print("Jumped")
 
+	var newVel : Vector3 = owner.velocity
+	
 	#Set velocity to only forward direction + jump direction, fixes bug with jumping after circling sphere
-	owner.SetVelocity((owner.velocity * abs(owner.CharMesh.GetForwardVector())) + (owner.up_direction * owner.PARAMETERS.JUMP_POWER))
+	#thanks to https://gamedev.stackexchange.com/questions/198103/how-can-i-zero-out-velocity-in-an-arbitrary-direction
+	#Up direction should be normalised, but not newVel
+	newVel = newVel - (owner.up_direction * owner.up_direction.dot(newVel))
+	
+	newVel += owner.up_direction * owner.PARAMETERS.JUMP_POWER
+	
+	owner.SetVelocity(newVel)
 
 
 func Exit() -> void:

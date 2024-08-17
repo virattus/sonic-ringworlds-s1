@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_pe7ty"]
 [ext_resource type="Script" path="res://entities/Enemy/Enemy.gd" id="2_esaov"]
-[ext_resource type="Script" path="res://entities/Hitbox/Hitbox.gd" id="3_sc6xo"]
+[ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="3_lrkkl"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="4_p22xk"]
 [ext_resource type="Script" path="res://entities/Enemy/Inactive.gd" id="5_6t018"]
 [ext_resource type="Script" path="res://entities/Enemy/Idle.gd" id="6_drxm1"]
@@ -13,8 +13,7 @@ script = ExtResource("2_esaov")
 MaxDistFromHome = 10.0
 MaxVisibility = 20.0
 
-[node name="Hitbox" type="Area3D" parent="." index="5"]
-script = ExtResource("3_sc6xo")
+[node name="Hitbox" parent="." index="5" instance=ExtResource("3_lrkkl")]
 
 [node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("4_p22xk")

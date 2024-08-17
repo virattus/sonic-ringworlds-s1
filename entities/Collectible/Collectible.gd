@@ -2,7 +2,7 @@ class_name Collectible
 extends Area3D
 
 
-signal Collected(body)
+signal Collected(body: Character)
 
 
 

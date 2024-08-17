@@ -3,12 +3,14 @@ extends BasicState
 
 var VerticalVelocity := 0.0
 
+const DEATH_INITIAL_VERTICAL_VELOCITY = 5.0
+
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
 	
 	owner.SndDeath.play()
-	VerticalVelocity = owner.PARAMETERS.DEATH_INITIAL_VERTICAL_VELOCITY
+	VerticalVelocity = DEATH_INITIAL_VERTICAL_VELOCITY
 	owner.DashModeDrain = false
 	
 	owner.HealthEmpty.emit()

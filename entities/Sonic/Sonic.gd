@@ -11,6 +11,7 @@ var DebugCollisionPositionDeviation := Vector3.ZERO
 var DebugCollisionNormal := Vector3.ZERO
 var DebugCollisionNormalDeviation := Vector3.ZERO
 
+var CanCollectRings := true
 var HasJumped := false
 
 var DashMode := false
@@ -39,7 +40,7 @@ var DroppedRingSpeed := 1.0
 @onready var InputIndicator = $InputIndicator
 @onready var VelocityIndicator = $VelocityIndicator
 @onready var CameraFocus = $CameraFocus
-@onready var HitBox = $Hitbox
+@onready var HitBox : Hitbox = $Hitbox
 @onready var LockOnArea = $LockOnArea
 
 @onready var TimerInvincibility = $TimerInvincibility
@@ -173,11 +174,15 @@ func GetInputVector(up_dir: Vector3) -> Vector3:
 
 
 func CollectRing() -> bool:
+	if !CanCollectRings:
+		return false
+	
 	if Globals.RingCount < 100:
 		$SndRingCollect.play()
 		DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_RING
 		Globals.RingCount += 1
 		return true
+	
 	return false
 
 
@@ -244,6 +249,10 @@ func _on_timer_flicker_timeout() -> void:
 func ActivateHitbox(Active: bool) -> void:
 	HitBox.monitoring = Active
 	$Hitbox/AttackAreaDebug.visible = Active
+
+
+func ActivateHurtbox(Active: bool) -> void:
+	HurtBox.monitoring = Active
 
 
 func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:

@@ -16,6 +16,11 @@ func Enter(_msg := {}) -> void:
 	$TimerAirdash.start()
 	
 	var newVel : Vector3 = owner.velocity
+	
+	#if the player is standing still, shoot forward
+	if (newVel * Vector3(1, 0, 1)).length() <= 0.0:
+		newVel = owner.CharMesh.GetForwardVector()
+	
 	#Clamp Y vel so the player can't just rocket straight up
 	newVel.y = clamp(newVel.y, -1.0, 0.6)
 	

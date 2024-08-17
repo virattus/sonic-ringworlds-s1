@@ -72,12 +72,20 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 		else:
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
 			return false
-	elif (collision.CollisionType == SonicCollision.WALL):
-		
+	elif collision.CollisionType == SonicCollision.WALL:
+		#I don't know if we actually need to handle this
 		if owner.is_on_wall_only():
 			return false
 		else:
-			pass
+			return true
+	else:
+		if owner.up_direction.y > 0.0:
+			#Bonked head
+			return false
+		else:
+			#Landed upside down
+			return true
+		
 		
 	return true
 

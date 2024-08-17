@@ -28,11 +28,12 @@ func Update(_delta: float) -> void:
 	
 	owner.GroundCollision = HandleCollisions(_delta)
 	
-	var minVel = WallRunMinVelocity()
-	if owner.Speed < minVel:
-		print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
-		owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-		owner.GroundCollision = false
+	if owner.GroundCollision:
+		var minVel = WallRunMinVelocity()
+		if owner.Speed < minVel:
+			print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
+			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
+			owner.GroundCollision = false
 	
 	var newVel = owner.velocity
 	

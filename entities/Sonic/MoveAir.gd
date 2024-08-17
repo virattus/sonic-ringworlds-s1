@@ -24,7 +24,11 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 				})
 				return true
 			else:
-				return false
+				ChangeState("Land", {
+					"Type": "Normal",
+					"Normal": owner.up_direction,
+				})
+				return true
 		elif collision.CollisionType == SonicCollision.WALL:
 			if owner.velocity.y < 0.0:
 				#Heading downwards
