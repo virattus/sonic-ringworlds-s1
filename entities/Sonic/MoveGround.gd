@@ -16,6 +16,15 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 	
 	var collision : SonicCollision = owner.GetCollision()
 	if CheckGroundCollision(collision, delta):
+		if collision.CollisionType == SonicCollision.FLOOR and CheckWallCollision():
+			print("Colliding with wall and floor")
+			if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
+				ChangeState("Land", {
+					"Normal": Vector3.UP,
+					"Type": "Normal",
+				})
+				return false
+		
 		owner.apply_floor_snap()
 		owner.GroundCollision = true
 	else:
@@ -89,6 +98,10 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 		
 		
 	return true
+
+
+func CheckWallCollision() -> bool:
+	return owner.is_on_wall()
 
 
 func WallRunMinVelocity() -> float:
