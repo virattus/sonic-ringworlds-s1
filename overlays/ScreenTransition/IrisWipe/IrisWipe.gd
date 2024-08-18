@@ -32,4 +32,3 @@ func WipeOut(length: float) -> void:
 	Speed = length
 	Accumulator = Speed
 	Direction = -1.0
-

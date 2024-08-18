@@ -36,4 +36,6 @@ const DASHMODE_INCREMENT_RING = 1.0
 
 const BALL_MIN_SPEED = 1.0
 
+const AIR_INPUT_MOD = 2.0
+
 const JUMP_POWER = 12.0

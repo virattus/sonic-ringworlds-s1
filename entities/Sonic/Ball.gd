@@ -26,21 +26,29 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	owner.GroundCollision = HandleCollisions(_delta)
+	var collision: SonicCollision = owner.GetCollision()
+	owner.GroundCollision = CheckGroundCollision(collision, _delta)
 	
 	if owner.GroundCollision:
 		var minVel = WallRunMinVelocity()
-		if owner.Speed < minVel:
-			print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
-			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
+		var planeVel = (owner.velocity - (owner.up_direction * owner.up_direction.dot(owner.velocity)))
+		var planeSpeed = planeVel.length()
+		
+		if planeSpeed < minVel:
+			print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [planeSpeed, minVel])
+			owner.SetVelocity(planeVel + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
 			owner.GroundCollision = false
+		else:
+			owner.apply_floor_snap()
+			owner.SetVelocity(planeVel)
 	
 	var newVel = owner.velocity
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if inputVel.length() > 0.0:
-		newVel += inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta
+		var combinedVel = newVel + (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta)
+		newVel = inputVel.normalized() * combinedVel.length()
 	else:
 		newVel = owner.ApplyDrag(newVel, _delta / 2.0)
 		
@@ -58,9 +66,7 @@ func Update(_delta: float) -> void:
 	owner.SetVelocity(newVel)
 
 
-func HandleCollisions(delta: float) -> bool:
-	var collision: SonicCollision = owner.GetCollision()
-	
+func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:	
 	if collision.CollisionType == SonicCollision.NONE:
 		if CheckFloorRaycast(delta):
 			return true
@@ -93,8 +99,12 @@ func HandleCollisions(delta: float) -> bool:
 			return false
 		else:
 			#falling down
-			owner.CollisionCast.target_position = -owner.up_direction
-			return CheckCollisionCast()
+			owner.CollisionCast.target_position = owner.up_direction
+			owner.CollisionCast.force_raycast_update()
+			if CheckCollisionCast():
+				owner.UpdateUpDir(owner.CollisionCast.get_collision_normal(), delta)
+			
+			return true
 	
 	return true
 

@@ -58,11 +58,10 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 	
-	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
-	
 	var newVel : Vector3 = owner.velocity
 	
-	newVel += inputVel * _delta
+	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
+	newVel += inputVel * owner.PARAMETERS.AIR_INPUT_MOD * _delta
 	
 	newVel = owner.ApplyGravity(newVel, _delta)
 	

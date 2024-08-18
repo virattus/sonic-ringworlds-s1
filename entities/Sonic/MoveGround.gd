@@ -16,6 +16,7 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 	
 	var collision : SonicCollision = owner.GetCollision()
 	if CheckGroundCollision(collision, delta):
+		owner.apply_floor_snap()
 		owner.GroundCollision = true
 	else:
 		owner.GroundCollision = false
@@ -52,7 +53,6 @@ func CheckFloorRaycast(delta: float) -> bool:
 			if !owner.GroundCollision:
 				owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
 			owner.UpdateUpDir(owner.CollisionCast.get_collision_normal(), delta)
-			owner.apply_floor_snap()
 			return true
 		else:
 			#ground angle too steep
@@ -68,6 +68,7 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 		return CheckFloorRaycast(delta)
 	elif collision.CollisionType == SonicCollision.FLOOR:
 		if CheckFloorRaycast(delta):
+			owner.apply_floor_snap()
 			return true
 		else:
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))

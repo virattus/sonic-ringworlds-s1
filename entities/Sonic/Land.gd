@@ -1,4 +1,4 @@
-extends BasicState
+extends "res://entities/Sonic/MoveGround.gd"
 
 
 const LAND_MIN_SPEED = 0.5
@@ -63,7 +63,10 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move()
+	if !HandleMovementAndCollisions(_delta):
+		ChangeState("Fall")
+		return
+	
 	
 	if !owner.AnimTree.get("parameters/OSLand/active"):
 		ChangeState("Idle")

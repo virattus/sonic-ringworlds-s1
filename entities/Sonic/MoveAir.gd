@@ -51,7 +51,7 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 				#reset collisioncast
 				owner.CollisionCast.target_position = -owner.up_direction * owner.COLLISION_CAST_LENGTH
 		elif collision.CollisionType == SonicCollision.CEILING:
-			if Vector3.UP.dot(owner.velocity.normalized()) < 0.0:
+			if Vector3.UP.dot(owner.up_direction) < 0.0:
 				#Landed upside down
 				owner.GroundCast.force_raycast_update() #Need a ground normal
 				ChangeState("Land", {
