@@ -49,7 +49,7 @@ func Update(_delta: float) -> void:
 	if inputVel.length() > 0.0:
 		#var combinedVel = newVel + (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta)
 		#newVel = (inputVel.normalized() * combinedVel.length())
-		newVel += inputVel * _delta
+		newVel += inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta
 	else:
 		newVel = owner.ApplyDrag(newVel, _delta / 2.0)
 		
