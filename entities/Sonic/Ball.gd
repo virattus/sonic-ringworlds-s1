@@ -30,6 +30,11 @@ func Update(_delta: float) -> void:
 	owner.GroundCollision = CheckGroundCollision(collision, _delta)
 	
 	if owner.GroundCollision:
+		if collision.CollisionType == SonicCollision.FLOOR and CheckWallCollision():
+			print("Ball: Colliding with wall and floor")
+			if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
+				owner.up_direction = owner.get_wall_normal()
+		
 		var minVel = WallRunMinVelocity()
 		var planeVel = (owner.velocity - (owner.up_direction * owner.up_direction.dot(owner.velocity)))
 		var planeSpeed = planeVel.length()
@@ -51,7 +56,10 @@ func Update(_delta: float) -> void:
 		#newVel = (inputVel.normalized() * combinedVel.length())
 		newVel += inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta
 	else:
-		newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+		if owner.GroundCollision:
+			newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+		else:
+			newVel = ApplyAirDrag(newVel, _delta / 2.0)
 		
 	if !owner.GroundCollision:
 		newVel = owner.ApplyGravity(newVel, _delta)

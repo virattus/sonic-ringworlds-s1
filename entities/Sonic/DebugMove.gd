@@ -10,6 +10,7 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
 	
 	owner.up_direction = Vector3.UP
+	owner.CharMesh.AlignToY(owner.up_direction)
 
 
 func Exit() -> void:

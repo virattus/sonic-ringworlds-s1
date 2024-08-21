@@ -24,4 +24,3 @@ var InputAnalogueDeadzone := 0.0
 
 var InputJump := BUTTON_RELEASED
 var InputAttack := BUTTON_RELEASED
-

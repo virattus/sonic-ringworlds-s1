@@ -1,7 +1,7 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
-const LAND_MIN_SPEED = 0.5
+const LAND_CROUCH_MAX_SPEED = 0.5
 
 
 func Enter(_msg := {}) -> void:
@@ -29,21 +29,27 @@ func Enter(_msg := {}) -> void:
 	print("Landed")
 	
 	owner.CreateSmoke()
+	
+	var newInput = owner.GetInputVector(owner.up_direction)
 
-	if owner.Speed > LAND_MIN_SPEED:
-		if owner.DashMode:
-			ChangeState("StrikeDash")
+	if newInput.length() > 0.0 or owner.up_direction.dot(owner.velocity) > LAND_CROUCH_MAX_SPEED:
+		if newInput.normalized().dot(owner.CharMesh.GetForwardVector()) < 0.0:
+			ChangeState("Skid")
 			return
 		else:
-			ChangeState("Walk")
-			return
-		
-		#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
-		#	ChangeState("Run")
-		#	return
-		#else:
-		#	ChangeState("Walk")
-		#	return
+			if owner.DashMode:
+				ChangeState("StrikeDash")
+				return
+			else:
+				ChangeState("Walk")
+				return
+			
+			#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+			#	ChangeState("Run")
+			#	return
+			#else:
+			#	ChangeState("Walk")
+			#	return
 	
 
 	owner.SetVelocity(Vector3.ZERO)
