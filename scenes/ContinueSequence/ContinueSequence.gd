@@ -21,7 +21,7 @@ var PlatformScenes = [
 
 func _ready() -> void:
 	Globals.RingCount = 0
-	Globals.LivesCount = 3
+	Globals.LivesCount = 0
 	
 	CreatePlatforms(Vector3.ZERO)
 
@@ -37,7 +37,7 @@ func CreatePlatforms(startPoint: Vector3) -> void:
 		GeneratePlatform(startPoint)
 
 
-func GeneratePlatform(startPoint: Vector3) -> void:
+func GeneratePlatform(startPoint: Vector3, recursion := true) -> void:
 	var Direction: Vector3 = Vector3((randf() - 0.5) * 2.0, (randf() - 0.5) * 0.1, (randf() - 0.5) * 2.0).normalized()
 	var Distance: float = randf_range(MIN_PLATFORM_DIST, MAX_PLATFORM_DIST)
 	
@@ -45,7 +45,8 @@ func GeneratePlatform(startPoint: Vector3) -> void:
 	for i in Platforms.get_children():
 		if i.global_position.distance_to(FinalPosition) < PLATFORM_BETWEEN_MIN_DIST:
 			#keep platforms from spawning inside each other
-			return GeneratePlatform(startPoint)
+			if recursion:
+				return GeneratePlatform(startPoint, false)
 	
 	
 	var platformID: int = randi() % PlatformScenes.size()

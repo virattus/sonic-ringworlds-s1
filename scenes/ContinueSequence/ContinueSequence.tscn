@@ -15,14 +15,14 @@ script = ExtResource("2_o63sj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17745, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(6.80362e-09, 0.58909, 2.96398)
-bones/2/position = Vector3(-5.13685, 0.327273, 2.97956)
-bones/2/rotation = Quaternion(2.70195e-08, -0.807958, 0.58924, -3.40539e-08)
+bones/1/position = Vector3(1.88609e-08, 0.215743, 3.00578)
+bones/2/position = Vector3(-5.13685, 0.119857, 3.47993)
+bones/2/rotation = Quaternion(3.26143e-08, -0.746127, 0.665804, -2.91032e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.327273, 2.97956)
-bones/4/rotation = Quaternion(2.70195e-08, -0.807958, 0.58924, -3.40539e-08)
+bones/4/position = Vector3(5.13685, 0.119857, 3.47993)
+bones/4/rotation = Quaternion(3.26143e-08, -0.746127, 0.665804, -2.91032e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(6.80362e-09, 0.58909, 5.20293)
+bones/6/position = Vector3(1.88609e-08, 0.215743, 5.24473)
 
 [node name="Platform1" parent="." index="3" instance=ExtResource("3_3ampg")]
 

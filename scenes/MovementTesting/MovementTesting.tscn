@@ -21,14 +21,14 @@ size = Vector3(300, 200, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(2.72496e-08, 0.58909, 2.96398)
-bones/2/position = Vector3(-5.13685, 0.327273, 2.97956)
-bones/2/rotation = Quaternion(3.08151e-08, -0.807958, 0.58924, -3.02583e-08)
+bones/1/position = Vector3(-1.24265e-08, 0.449713, 2.97958)
+bones/2/position = Vector3(-5.13685, 0.249841, 3.16636)
+bones/2/rotation = Quaternion(2.47224e-08, -0.785804, 0.618476, -3.66606e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.327273, 2.97956)
-bones/4/rotation = Quaternion(3.08151e-08, -0.807958, 0.58924, -3.02583e-08)
+bones/4/position = Vector3(5.13685, 0.249841, 3.16636)
+bones/4/rotation = Quaternion(2.47224e-08, -0.785804, 0.618476, -3.66606e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(2.72496e-08, 0.58909, 5.20293)
+bones/6/position = Vector3(-1.24265e-08, 0.449713, 5.21854)
 
 [node name="KillBox" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
