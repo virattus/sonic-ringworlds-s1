@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dep600s5j8pii"]
+
+[ext_resource type="PackedScene" uid="uid://ckmf1fbvxyruy" path="res://entities/Spikes/Spikes.glb" id="1_gjldc"]
+[ext_resource type="Script" path="res://entities/Spikes/Spikes.gd" id="2_cfoev"]
+[ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="3_8407p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i544w"]
+size = Vector3(1.25, 0.75, 1.25)
+
+[node name="Spikes" instance=ExtResource("1_gjldc")]
+script = ExtResource("2_cfoev")
+
+[node name="Hitbox" parent="." index="2" instance=ExtResource("3_8407p")]
+ApplyDamage = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.360356, 0)
+shape = SubResource("BoxShape3D_i544w")
+
+[connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]

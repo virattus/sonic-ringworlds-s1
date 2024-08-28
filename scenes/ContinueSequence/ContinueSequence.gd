@@ -14,6 +14,7 @@ const PLATFORM_BETWEEN_MIN_DIST = 20.0
 var PlatformScenes = [
 	preload("res://scenes/ContinueSequence/Platforms/Platform1.tscn"),
 	preload("res://scenes/ContinueSequence/Platforms/Platform2.tscn"),
+	preload("res://scenes/ContinueSequence/Platforms/Platform3.tscn"),
 	preload("res://scenes/ContinueSequence/Platforms/PlatformSphere.tscn"),
 ]
 
@@ -44,8 +45,7 @@ func GeneratePlatform(startPoint: Vector3) -> void:
 	for i in Platforms.get_children():
 		if i.global_position.distance_to(FinalPosition) < PLATFORM_BETWEEN_MIN_DIST:
 			#keep platforms from spawning inside each other
-			GeneratePlatform(startPoint)
-			return
+			return GeneratePlatform(startPoint)
 	
 	
 	var platformID: int = randi() % PlatformScenes.size()
