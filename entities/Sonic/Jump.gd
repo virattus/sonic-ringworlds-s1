@@ -4,26 +4,39 @@ extends "res://entities/Sonic/MoveAir.gd"
 
 
 func Enter(_msg := {}) -> void:
-	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
-	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
+	if _msg.has("JumpSound") and _msg["JumpSound"] != true:
+		pass
+	else:
+		owner.SndJump.play()
 	
-	owner.GroundCollision = false
-	owner.HasJumped = true
+	var JumpForce = owner.PARAMETERS.JUMP_POWER
+	if _msg.has("JumpForce"):
+		JumpForce = _msg["JumpForce"]
 	
-	owner.SndJump.play()
-	
-	print("Jumped")
+	if _msg.has("JumpDirection"):
+		owner.up_direction = _msg["JumpDirection"]
+		owner.CharMesh.AlignToY(owner.up_direction)
 
 	var newVel : Vector3 = owner.velocity
+	if _msg.has("IgnoreVel") and _msg["IgnoreVel"] == true:
+		newVel = Vector3.ZERO
 	
 	#Set velocity to only forward direction + jump direction, fixes bug with jumping after circling sphere
 	#thanks to https://gamedev.stackexchange.com/questions/198103/how-can-i-zero-out-velocity-in-an-arbitrary-direction
 	#Up direction should be normalised, but not newVel
 	newVel = newVel - (owner.up_direction * owner.up_direction.dot(newVel))
 	
-	newVel += owner.up_direction * owner.PARAMETERS.JUMP_POWER
+	newVel += owner.up_direction * JumpForce
 	
 	owner.SetVelocity(newVel)
+	
+	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
+	
+	owner.GroundCollision = false
+	owner.HasJumped = true
+	
+	print("Jumped")
 
 
 func Exit() -> void:
@@ -47,7 +60,7 @@ func Update(_delta: float) -> void:
 			return
 	
 	if Input.is_action_just_pressed("Attack"):
-		if !owner.DashMode:
+		if owner.DashMode:
 			ChangeState("SpinKick")
 			return
 		else:

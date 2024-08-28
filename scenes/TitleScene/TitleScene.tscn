@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr7ak3cx7pwau"]
+
+[ext_resource type="Script" path="res://scenes/TitleScene/TitleScene.gd" id="1_m372y"]
+
+[node name="TitleScene" type="Node2D"]
+script = ExtResource("1_m372y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 464.0
+offset_top = 225.0
+offset_right = 655.0
+offset_bottom = 248.0
+text = "Sonic Ringworlds Stage 1"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 476.0
+offset_top = 353.0
+offset_right = 667.0
+offset_bottom = 376.0
+text = "Press Any Key to begin"

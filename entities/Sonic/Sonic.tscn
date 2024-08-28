@@ -109,16 +109,16 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-2.39371e-08, 0.318047, 2.99433)
-bones/2/position = Vector3(-5.13685, 0.176693, 3.34282)
-bones/2/rotation = Quaternion(2.37546e-08, -0.76384, 0.645405, -3.78455e-08)
+bones/1/position = Vector3(3.77033e-08, 0.431275, 2.98165)
+bones/2/position = Vector3(-5.13685, 0.239597, 3.19107)
+bones/2/rotation = Quaternion(3.42167e-08, -0.782787, 0.622289, -2.72011e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.176693, 3.34282)
-bones/4/rotation = Quaternion(2.37546e-08, -0.76384, 0.645405, -3.78455e-08)
+bones/4/position = Vector3(5.13685, 0.239597, 3.19107)
+bones/4/rotation = Quaternion(3.42167e-08, -0.782787, 0.622289, -2.72011e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(-2.39371e-08, 0.318047, 5.23328)
+bones/6/position = Vector3(3.77033e-08, 0.431275, 5.2206)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]

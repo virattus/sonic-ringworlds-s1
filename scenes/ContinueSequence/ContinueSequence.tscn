@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://wpdatubm2mm0"]
+
+[ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_mbox1"]
+[ext_resource type="Script" path="res://scenes/ContinueSequence/ContinueSequence.gd" id="2_o63sj"]
+[ext_resource type="PackedScene" uid="uid://bepjxmmyttytv" path="res://scenes/ContinueSequence/Platforms/Platform1.tscn" id="3_3ampg"]
+[ext_resource type="PackedScene" uid="uid://sjqktp3mubfv" path="res://scenes/ContinueSequence/ContinueSkySphere.glb" id="3_ruam8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r2o7g"]
+size = Vector3(20, 100, 20)
+
+[node name="ContinueSequence" instance=ExtResource("1_mbox1")]
+script = ExtResource("2_o63sj")
+
+[node name="Sonic" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17745, 0)
+
+[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
+bones/1/position = Vector3(1.70354e-09, 0.0194862, 3.02776)
+bones/2/position = Vector3(-5.13685, 0.0108258, 3.74297)
+bones/2/rotation = Quaternion(3.10664e-08, -0.710717, 0.703478, -3.075e-08)
+bones/4/position = Vector3(5.13685, 0.0108258, 3.74297)
+bones/4/rotation = Quaternion(3.10664e-08, -0.710717, 0.703478, -3.075e-08)
+bones/6/position = Vector3(1.70354e-09, 0.0194862, 5.26671)
+
+[node name="Platform1" parent="." index="3" instance=ExtResource("3_3ampg")]
+
+[node name="ContinueSkySphere" parent="ThirdPersonCamera" index="1" instance=ExtResource("3_ruam8")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+
+[node name="CollisionShape3D" parent="KillBox" index="0"]
+shape = SubResource("BoxShape3D_r2o7g")
+
+[node name="Platforms" type="Node3D" parent="." index="10"]
+
+[editable path="Sonic"]
+[editable path="Sonic/CharacterMesh/SonicModel"]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4beg44vwtk1g"]
+
+[ext_resource type="PackedScene" uid="uid://cia5x5d7o3hc" path="res://entities/Spring/Spring.glb" id="1_ip1nx"]
+
+[node name="SpringModel" instance=ExtResource("1_ip1nx")]

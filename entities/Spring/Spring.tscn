@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dn6vfjo5tgnbi"]
+
+[ext_resource type="Script" path="res://entities/Spring/Spring.gd" id="1_4omq4"]
+[ext_resource type="PackedScene" uid="uid://b4beg44vwtk1g" path="res://entities/Spring/SpringModel.tscn" id="1_wr4pb"]
+[ext_resource type="AudioStream" uid="uid://uyhs754j3ci4" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_CC.wav" id="3_2ehpe"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l8pbs"]
+radius = 1.01155
+
+[node name="Spring" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_4omq4")
+
+[node name="SpringModel" parent="." instance=ExtResource("1_wr4pb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.364159, 0)
+shape = SubResource("SphereShape3D_l8pbs")
+
+[node name="sndBounce" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2ehpe")
+bus = &"SoundEffects"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
