@@ -13,6 +13,7 @@ var DebugCollisionNormalDeviation := Vector3.ZERO
 
 var CanCollectRings := true
 var HasJumped := false
+var IsUnderwater := false
 
 var DashMode := false
 var DashModeCharge := 0.0
@@ -79,13 +80,16 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "DebugCollisionPositionDeviation")
 	DebugMenu.AddMonitor(self, "DebugCollisionNormalDeviation")
 	DebugMenu.AddMonitor(self, "up_direction")
-	DebugMenu.AddMonitor(self, "DamageThreshold")
+	DebugMenu.AddMonitor(self, "CanCollectRings")
+	DebugMenu.AddMonitor(self, "HasJumped")
+	DebugMenu.AddMonitor(self, "IsUnderwater")
+	DebugMenu.AddMonitor(self, "Invincible")
 	DebugMenu.AddMonitor(self, "DashMode")
 	DebugMenu.AddMonitor(self, "DashModeCharge")
 	DebugMenu.AddMonitor(self, "DashModeDrain")
+	DebugMenu.AddMonitor(self, "DamageThreshold")
 	DebugMenu.AddMonitor(self, "DroppedRingSpeed")
-	
-	
+
 
 
 func _process(delta: float) -> void:

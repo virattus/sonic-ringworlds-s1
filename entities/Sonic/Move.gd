@@ -1,9 +1,10 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
+const RUN_RATIO_DIVISOR = 200.0
 
 const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
-const RUN_SKID_MAX_ANGLE = -0.15
+const RUN_SKID_MAX_ANGLE = -0.75
 
 
 func Enter(_msg := {}) -> void:
@@ -84,7 +85,8 @@ func CalculateWalkVelocity(inputVel: Vector3, delta: float) -> Vector3:
 func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
 	var newVel = owner.velocity
 	
-	var ratio = owner.Speed / owner.PARAMETERS.MOVE_MAX_SPEED
+	var ratio = (owner.Speed - owner.PARAMETERS.WALK_MAX_SPEED) / RUN_RATIO_DIVISOR
+	print("Run ratio: %s" % ratio)
 	
 	var newSpeed = (newVel + (inputVel * owner.PARAMETERS.RUN_SPEED_POWER * delta)).length()
 	
@@ -92,7 +94,7 @@ func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
 	
 	newVel = newVel.normalized() * newSpeed
 	
-	newVel = owner.ApplyDrag(newVel, delta)
+	#newVel = owner.ApplyDrag(newVel, delta)
 	
 	#Remove excess velocity for curves/spheres
 	newVel = newVel - (owner.up_direction * owner.up_direction.dot(newVel))

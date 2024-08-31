@@ -8,7 +8,7 @@ uniform vec2 uv_offset = vec2(0.0);
 uniform sampler2D depth_texture: hint_depth_texture, repeat_disable, filter_nearest;
 
 
-void vertex() 
+void vertex()
 {
 	UV = UV * uv_scale + uv_offset;
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(INV_VIEW_MATRIX[0], INV_VIEW_MATRIX[1], INV_VIEW_MATRIX[2], MODEL_MATRIX[3]);
@@ -29,7 +29,7 @@ void vertex()
 }
 
 
-void fragment() 
+void fragment()
 {
 	vec2 base_uv = UV;
 	vec4 albedo_tex = texture(texture_albedo,base_uv);

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dvehyw4jodnp"]
+
+[ext_resource type="Shader" path="res://entities/Water/Water.gdshader" id="1_wwwm1"]
+[ext_resource type="Texture2D" uid="uid://mdwaog7aao2a" path="res://entities/Water/Water.png" id="2_q5nxy"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_wwwm1")
+shader_parameter/texture_albedo = ExtResource("2_q5nxy")

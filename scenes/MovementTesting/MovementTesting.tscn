@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=14 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dcbjk0tmj5fb5" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="9_dh6p0"]
 [ext_resource type="PackedScene" uid="uid://dep600s5j8pii" path="res://entities/Spikes/Spikes.tscn" id="9_j82kp"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
+[ext_resource type="PackedScene" uid="uid://bjr18jlu05h2" path="res://entities/Water/Water.tscn" id="10_p0iry"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(300, 200, 200)
@@ -21,12 +22,12 @@ size = Vector3(300, 200, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-1.24265e-08, 0.449713, 2.97958)
-bones/2/position = Vector3(-5.13685, 0.249841, 3.16636)
-bones/2/rotation = Quaternion(2.47224e-08, -0.785804, 0.618476, -3.66606e-08)
-bones/4/position = Vector3(5.13685, 0.249841, 3.16636)
-bones/4/rotation = Quaternion(2.47224e-08, -0.785804, 0.618476, -3.66606e-08)
-bones/6/position = Vector3(-1.24265e-08, 0.449713, 5.21854)
+bones/1/position = Vector3(-7.08332e-09, 0.510832, 2.97274)
+bones/2/position = Vector3(-5.13685, 0.283795, 3.08444)
+bones/2/rotation = Quaternion(2.51609e-08, -0.795662, 0.605741, -3.60964e-08)
+bones/4/position = Vector3(5.13685, 0.283795, 3.08444)
+bones/4/rotation = Quaternion(2.51609e-08, -0.795662, 0.605741, -3.60964e-08)
+bones/6/position = Vector3(-7.08332e-09, 0.510832, 5.21169)
 
 [node name="KillBox" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
@@ -530,6 +531,9 @@ ResetVelocity = true
 
 [node name="Spikes" parent="MovementTesting" index="18" instance=ExtResource("9_j82kp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.6713, 0, 0)
+
+[node name="Water" parent="MovementTesting" index="19" instance=ExtResource("10_p0iry")]
+transform = Transform3D(5.135, 0, 0, 0, 13.99, 0, 0, 0, 5.135, 48.7722, 2.6295, 31.003)
 
 [node name="SonicAfterimage" parent="." index="10" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")

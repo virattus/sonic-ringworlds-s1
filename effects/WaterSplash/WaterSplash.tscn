@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6wwfag71ylgy"]
+
+[ext_resource type="Texture2D" uid="uid://bh3vo1c1d4nle" path="res://effects/WaterSplash/WaterSplash.png" id="1_yp71u"]
+[ext_resource type="Script" path="res://effects/WaterSplash/water_splash.gd" id="2_eun11"]
+
+[node name="WaterSplash" type="Sprite3D"]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+sorting_offset = 1.0
+offset = Vector2(0, 64)
+billboard = 2
+shaded = true
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_yp71u")
+script = ExtResource("2_eun11")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

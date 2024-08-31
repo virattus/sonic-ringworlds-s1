@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjr18jlu05h2"]
+
+[ext_resource type="Script" path="res://entities/Water/water.gd" id="1_0gab4"]
+[ext_resource type="Material" uid="uid://dvehyw4jodnp" path="res://entities/Water/Mat_Water.tres" id="1_2ejtv"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aou70"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0qet7"]
+size = Vector3(2, 0.5, 2)
+
+[node name="Water" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_0gab4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_aou70")
+surface_material_override/0 = ExtResource("1_2ejtv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.256836, 0)
+shape = SubResource("BoxShape3D_0qet7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
