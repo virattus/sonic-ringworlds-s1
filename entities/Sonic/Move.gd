@@ -1,13 +1,10 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
-var SkidStickBelowMagnitude := 0
 
-const SKID_MIN_STICK_MAGNITUDE = 0.6
-const SKID_STICK_MAX_MAG_COUNT = 15
-const SKID_MAX_ANGLE = 0.15
+const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
+const RUN_SKID_MAX_ANGLE = -0.15
 
-const MAX_SPEED = 18.0
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
@@ -17,7 +14,7 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	pass
-
+	
 
 func Update(_delta: float) -> void:
 	if !HandleMovementAndCollisions(_delta):
@@ -38,24 +35,19 @@ func Update(_delta: float) -> void:
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
-	#TODO disabling skidding until a working solution is found
-	#if inputVel.length() < SKID_MIN_STICK_MAGNITUDE:
-	#	SkidStickBelowMagnitude += 1
-	#else:
-	#	if SkidStickBelowMagnitude > 0 and SkidStickBelowMagnitude < SKID_STICK_MAX_MAG_COUNT:
-	#		if IsInputSkidding(inputVel):
-	#			ChangeState("Skid")
-	#			return
-	#	else:
-	#		SkidStickBelowMagnitude = 0
-	
 	if inputVel.length() > 0.0:
-		var inputValue : Vector3 = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta) + (inputVel.normalized() * owner.Speed)
-		newVel = inputValue 
-		if newVel.length() > MAX_SPEED:
-			newVel = newVel.normalized() * MAX_SPEED
+		if newVel.length() > owner.PARAMETERS.WALK_MAX_SPEED:
+			if HandleSkid(inputVel):
+				return
+			else:
+				newVel = CalculateRunVelocity(inputVel, _delta)
+		else:
+			newVel = CalculateWalkVelocity(inputVel, _delta)
 	else:
 		newVel = owner.ApplyDrag(newVel, _delta)
+	
+	if newVel.length() > owner.PARAMETERS.MOVE_MAX_SPEED:
+		newVel = newVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED
 	
 	
 	if inputVel.length() > 0.0:
@@ -82,12 +74,46 @@ func Update(_delta: float) -> void:
 	owner.SetVelocity(newVel)
 
 
+func CalculateWalkVelocity(inputVel: Vector3, delta: float) -> Vector3:
+	var inputValue : Vector3 = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * delta) + (inputVel.normalized() * owner.Speed)
+	var newVel = inputValue
+	
+	return newVel
+
+
+func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
+	var newVel = owner.velocity
+	
+	var ratio = owner.Speed / owner.PARAMETERS.MOVE_MAX_SPEED
+	
+	var newSpeed = (newVel + (inputVel * owner.PARAMETERS.RUN_SPEED_POWER * delta)).length()
+	
+	newVel = (newVel * ratio) + ((inputVel * owner.PARAMETERS.RUN_SPEED_POWER * delta) * (1.0 - ratio))
+	
+	newVel = newVel.normalized() * newSpeed
+	
+	newVel = owner.ApplyDrag(newVel, delta)
+	
+	#Remove excess velocity for curves/spheres
+	newVel = newVel - (owner.up_direction * owner.up_direction.dot(newVel))
+	
+	return newVel
+
+
+func HandleSkid(input: Vector3) -> bool:
+	if input.length() > RUN_SKID_MIN_STICK_MAGNITUDE:
+		if IsInputSkidding(input):
+			ChangeState("Skid")
+			return true
+	
+	return false
+
 
 func IsInputSkidding(input: Vector3) -> bool:
 	var ForwardVector = owner.CharMesh.GetForwardVector()
 	var forwardDot = ForwardVector.dot(input.normalized())
 	
-	if forwardDot < 0.0:
+	if forwardDot < RUN_SKID_MAX_ANGLE:
 		print("Input skidding? %s" % forwardDot)
 		return true
 	

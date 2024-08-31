@@ -42,5 +42,5 @@ func Update(_delta: float) -> void:
 			ChangeState("StrikeDash")
 			return
 		else:
-			ChangeState("Walk")
+			ChangeState("Move")
 			return

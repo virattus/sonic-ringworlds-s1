@@ -23,8 +23,7 @@ func Update(_delta: float) -> void:
 		return
 	
 	if !owner.DashMode:
-		#ChangeState("Run")
-		ChangeState("Walk")
+		ChangeState("Move")
 		return
 	
 	if Input.is_action_just_pressed("Jump"):

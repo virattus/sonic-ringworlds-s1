@@ -41,15 +41,8 @@ func Enter(_msg := {}) -> void:
 				ChangeState("StrikeDash")
 				return
 			else:
-				ChangeState("Walk")
+				ChangeState("Move")
 				return
-			
-			#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
-			#	ChangeState("Run")
-			#	return
-			#else:
-			#	ChangeState("Walk")
-			#	return
 	
 
 	owner.SetVelocity(Vector3.ZERO)
