@@ -11,9 +11,13 @@ var DebugCollisionPositionDeviation := Vector3.ZERO
 var DebugCollisionNormal := Vector3.ZERO
 var DebugCollisionNormalDeviation := Vector3.ZERO
 
+var StickToFloor := true
+
 var CanCollectRings := true
 var HasJumped := false
+
 var IsUnderwater := false
+var Oxygen := 1.0
 
 var DashMode := false
 var DashModeCharge := 0.0
@@ -64,6 +68,8 @@ var DroppedRingSpeed := 1.0
 
 const COLLISION_CAST_LENGTH = 1.0
 
+const OXYGEN_DRAIN_RATE = 0.0333
+
 
 const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
@@ -80,9 +86,11 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "DebugCollisionPositionDeviation")
 	DebugMenu.AddMonitor(self, "DebugCollisionNormalDeviation")
 	DebugMenu.AddMonitor(self, "up_direction")
+	DebugMenu.AddMonitor(self, "StickToFloor")
 	DebugMenu.AddMonitor(self, "CanCollectRings")
 	DebugMenu.AddMonitor(self, "HasJumped")
 	DebugMenu.AddMonitor(self, "IsUnderwater")
+	DebugMenu.AddMonitor(self, "Oxygen")
 	DebugMenu.AddMonitor(self, "Invincible")
 	DebugMenu.AddMonitor(self, "DashMode")
 	DebugMenu.AddMonitor(self, "DashModeCharge")
@@ -102,6 +110,18 @@ func _process(delta: float) -> void:
 			StateM.ChangeState("Fall", {})
 	
 	UpdateDebugIndicators(DebugMoveVector, DebugFloorNormal)
+	
+	#hacky, but whatever
+	if IsUnderwater:
+		if Oxygen <= 0.0:
+			if StateM.CurrentState != "Death":
+				StateM.ChangeState("Death")
+				return
+			
+		Oxygen -= delta * OXYGEN_DRAIN_RATE
+	else:
+		Oxygen = 1.0
+		
 	
 	if Globals.DEBUG_FORCE_DASHMODE:
 		DashMode = true

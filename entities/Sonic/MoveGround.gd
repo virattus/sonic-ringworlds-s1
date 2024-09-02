@@ -25,18 +25,20 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 				})
 				return false
 		
+		var minVel = WallRunMinVelocity()
+		#print(minVel)
+		if owner.Speed < minVel:
+			print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
+			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
+			owner.GroundCollision = false
+			owner.StickToFloor = false
+			return false
+		
 		owner.apply_floor_snap()
 		owner.GroundCollision = true
 	else:
 		owner.GroundCollision = false
 		return false 
-	
-	var minVel = WallRunMinVelocity()
-	#print(minVel)
-	if owner.Speed < minVel:
-		print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [owner.Speed, minVel])
-		owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
-		return false
 	
 	return true
 

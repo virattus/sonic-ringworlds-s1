@@ -22,6 +22,7 @@ func Enter(_msg := {}) -> void:
 		owner.TimerFlicker.start()
 	
 	owner.GroundCollision = true
+	owner.StickToFloor = true
 	owner.HasJumped = false
 	owner.SndLand.play()
 	owner.CharMesh.AlignToY(owner.up_direction)

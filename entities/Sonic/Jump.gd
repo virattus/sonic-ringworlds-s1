@@ -1,6 +1,11 @@
 extends "res://entities/Sonic/MoveAir.gd"
 
 
+#If the player jumps while upside down, the state will change immediately to negative,
+#this just sets a minimum time to be jumping
+var JumpTimeAccumulator := 0.0
+
+const MIN_JUMP_TIME = 1.5
 
 
 func Enter(_msg := {}) -> void:
@@ -45,7 +50,7 @@ func Enter(_msg := {}) -> void:
 
 
 func Exit() -> void:
-	pass
+	JumpTimeAccumulator = 0.0
 
 
 func Update(_delta: float) -> void:
@@ -76,9 +81,16 @@ func Update(_delta: float) -> void:
 			ChangeState("Ball")
 			return
 	
+	JumpTimeAccumulator += _delta
+	
 	if owner.velocity.y < 0.0:
-		ChangeState("Fall")
-		return
+		if owner.up_direction.dot(Vector3.UP) > 0.0:
+			ChangeState("Fall")
+			return
+		elif JumpTimeAccumulator > MIN_JUMP_TIME:
+			ChangeState("Fall")
+			return
+
 	
 	owner.CharMesh.AlignToY(owner.up_direction)
 	

@@ -72,7 +72,7 @@ func Update(_delta: float) -> void:
 				orientation = -orientation
 			
 			owner.CharMesh.LerpMeshOrientation(orientation, _delta)
-		
+	
 	owner.SetVelocity(newVel)
 
 
