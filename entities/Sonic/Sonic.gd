@@ -159,9 +159,7 @@ func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
 	
 	CollisionCast.target_position = -up_direction * COLLISION_CAST_LENGTH
 	
-	return
-	
-	if floor_normal.is_normalized():
+	if delta > 0.0 and floor_normal.is_normalized():
 		up_direction = up_direction.slerp(floor_normal, PARAMETERS.UPDIR_SLERP_RATE * delta)
 
 

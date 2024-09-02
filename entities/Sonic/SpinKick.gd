@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 func Enter(_msg := {}) -> void:
-	owner.UpdateUpDir(Vector3.UP, 0.0)
+	owner.UpdateUpDir(Vector3.UP, -1.0)
 	owner.CharMesh.AlignToY(Vector3.UP)
 	owner.AnimTree.set("parameters/AirSpinKick/blend_amount", 1.0)
 	

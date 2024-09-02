@@ -27,7 +27,7 @@ func Enter(_msg := {}) -> void:
 	
 	owner.SetVelocity(newVel.normalized() * AIRDASH_FORWARD_SPEED)
 
-	owner.UpdateUpDir(Vector3.UP, 1.0)
+	owner.UpdateUpDir(Vector3.UP, -1.0)
 	owner.CharMesh.AlignToY(Vector3.UP)
 	owner.CharMesh.LookAt(owner.global_position + owner.velocity)
 

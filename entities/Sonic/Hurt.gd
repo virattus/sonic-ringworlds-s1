@@ -22,7 +22,7 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("BounceDirection"):
 		owner.velocity = _msg["BounceDirection"] + owner.velocity
 	
-	owner.UpdateUpDir(Vector3(0, 1, 0), 1.0)
+	owner.UpdateUpDir(Vector3(0, 1, 0), -1.0)
 	owner.CharMesh.look_at(owner.global_position - (owner.velocity * Vector3(1, 0, 1)).normalized())
 	
 	if owner.GroundCollision:

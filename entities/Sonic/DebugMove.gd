@@ -25,7 +25,7 @@ func Update(_delta: float) -> void:
 		owner.global_position = owner.StartingPosition
 		owner.Speed = 0.0
 		owner.velocity = Vector3.ZERO
-		owner.UpdateUpDir(Vector3.UP, 1.0)
+		owner.UpdateUpDir(Vector3.UP, -1.0)
 		ChangeState("Fall", {
 		})
 	

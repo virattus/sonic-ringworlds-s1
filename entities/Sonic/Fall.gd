@@ -42,6 +42,12 @@ func Update(_delta: float) -> void:
 			ChangeState("Ball")
 			return
 
+
+	owner.CharMesh.AlignToY(owner.up_direction)
+
+	if owner.IsUnderwater:
+		owner.UpdateUpDir(Vector3.UP, _delta)
+
 	var newVel = owner.velocity
 	
 	var inputVel = owner.GetInputVector(Vector3.UP)
