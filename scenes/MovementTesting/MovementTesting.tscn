@@ -22,12 +22,12 @@ size = Vector3(300, 200, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-7.08332e-09, 0.510832, 2.97274)
-bones/2/position = Vector3(-5.13685, 0.283795, 3.08444)
-bones/2/rotation = Quaternion(2.51609e-08, -0.795662, 0.605741, -3.60964e-08)
-bones/4/position = Vector3(5.13685, 0.283795, 3.08444)
-bones/4/rotation = Quaternion(2.51609e-08, -0.795662, 0.605741, -3.60964e-08)
-bones/6/position = Vector3(-7.08332e-09, 0.510832, 5.21169)
+bones/1/position = Vector3(2.99692e-08, 0.342808, 2.99155)
+bones/2/position = Vector3(-5.13685, 0.190449, 3.30964)
+bones/2/rotation = Quaternion(3.35723e-08, -0.768045, 0.640396, -2.79926e-08)
+bones/4/position = Vector3(5.13685, 0.190449, 3.30964)
+bones/4/rotation = Quaternion(3.35723e-08, -0.768045, 0.640396, -2.79926e-08)
+bones/6/position = Vector3(2.99692e-08, 0.342808, 5.23051)
 
 [node name="KillBox" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
@@ -533,7 +533,7 @@ ResetVelocity = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.6713, 0, 0)
 
 [node name="Water" parent="MovementTesting" index="19" instance=ExtResource("10_p0iry")]
-transform = Transform3D(5.135, 0, 0, 0, 13.99, 0, 0, 0, 5.135, 48.7722, 2.6295, 31.003)
+transform = Transform3D(48, 0, 0, 0, 8, 0, 0, 0, 32, 28.736, -4.47278, 71.286)
 
 [node name="SonicAfterimage" parent="." index="10" node_paths=PackedStringArray("SonicNode") instance=ExtResource("8_cy2yj")]
 SonicNode = NodePath("../Sonic")

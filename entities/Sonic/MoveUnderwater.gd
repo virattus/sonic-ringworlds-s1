@@ -1,10 +1,10 @@
-extends "res://entities/Sonic/MoveGround.gd"
+extends "res://entities/Sonic/Move.gd"
 
 
 
 
 func Enter(_msg := {}) -> void:
-	pass
+	super(_msg)
 
 
 func Exit() -> void:

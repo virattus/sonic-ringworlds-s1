@@ -21,7 +21,7 @@ const WALK_MAX_SPEED = 8.0
 const WALK_SPEED_POWER = 3.0
 const WALK_ANIM_SPEED_MOD = 1.0
 
-const RUN_MAX_SPEED = 14.0
+const RUN_MAX_SPEED = 16.0
 const RUN_SPEED_POWER = 3.0
 const RUN_ANIM_SPEED_MOD = 0.5
 
@@ -38,6 +38,7 @@ const DASHMODE_INCREMENT_RING = 1.0
 
 const BALL_MIN_SPEED = 1.0
 
-const AIR_INPUT_MOD = 2.0
+const AIR_INPUT_VEL = 2.0
+const AIR_WATER_INPUT_VEL = 1.0
 
 const JUMP_POWER = 10.0

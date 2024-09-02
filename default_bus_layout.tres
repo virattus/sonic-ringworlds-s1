@@ -2,11 +2,12 @@
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_pkab6"]
 resource_name = "Reverb"
-room_size = 1.0
-damping = 0.27
-hipass = 0.09
-dry = 0.25
-wet = 0.51
+room_size = 0.2
+damping = 1.0
+spread = 0.5
+hipass = 0.19
+dry = 0.0
+wet = 1.0
 
 [resource]
 bus/0/volume_db = -21.0931

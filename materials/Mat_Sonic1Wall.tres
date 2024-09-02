@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://h26g8hhwpm5q"]
+
+[ext_resource type="Texture2D" uid="uid://c4lggjtgcu2qx" path="res://textures/Sonic1Wall.png" id="1_o3pqm"]
+
+[resource]
+albedo_texture = ExtResource("1_o3pqm")

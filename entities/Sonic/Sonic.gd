@@ -99,8 +99,7 @@ func _process(delta: float) -> void:
 		if DebugMove:
 			StateM.ChangeState("DebugMove", {})
 		else:
-			StateM.ChangeState("Fall", {
-			})
+			StateM.ChangeState("Fall", {})
 	
 	UpdateDebugIndicators(DebugMoveVector, DebugFloorNormal)
 	
@@ -144,7 +143,11 @@ func GetCollision() -> SonicCollision:
 
 
 func ApplyGravity(vel: Vector3, delta: float) -> Vector3:
-	return vel - Vector3.UP * (PARAMETERS.GRAVITY * delta)
+	var gravity = PARAMETERS.GRAVITY
+	if IsUnderwater:
+		gravity = PARAMETERS.GRAVITY / 4.0
+	
+	return vel - Vector3.UP * (gravity * delta)
 
 
 func ApplyDrag(vel: Vector3, delta: float) -> Vector3:

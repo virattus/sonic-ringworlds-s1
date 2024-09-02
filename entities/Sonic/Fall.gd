@@ -23,12 +23,16 @@ func Update(_delta: float) -> void:
 		return
 
 	if Input.is_action_just_pressed("Jump"):
-		if Input.is_action_just_pressed("Attack"):
-			ChangeState("Pose")
+		if owner.IsUnderwater:
+			ChangeState("Jump")
 			return
 		else:
-			ChangeState("Airdash")
-			return
+			if Input.is_action_just_pressed("Attack"):
+				ChangeState("Pose")
+				return
+			else:
+				ChangeState("Airdash")
+				return
 	
 	if Input.is_action_just_pressed("Attack"):
 		if owner.DashMode:
@@ -41,7 +45,7 @@ func Update(_delta: float) -> void:
 	var newVel = owner.velocity
 	
 	var inputVel = owner.GetInputVector(Vector3.UP)
-	newVel += inputVel * owner.PARAMETERS.AIR_INPUT_MOD * _delta
+	newVel += inputVel * owner.PARAMETERS.AIR_INPUT_VEL * _delta
 	
 	newVel = ApplyDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)

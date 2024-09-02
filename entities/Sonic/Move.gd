@@ -6,6 +6,8 @@ const RUN_RATIO_DIVISOR = 200.0
 const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
 const RUN_SKID_MAX_ANGLE = -0.75
 
+const MOVE_CHARMESH_VEL_ORIENT_MIN_SPEED = 2.0
+
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
@@ -54,9 +56,7 @@ func Update(_delta: float) -> void:
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
 		owner.OrientCharMesh()
-		#if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
-		#	ChangeState("Run")
-		#	return
+		
 	else:
 		var influence = CurveInfluence(_delta)
 		
@@ -66,29 +66,37 @@ func Update(_delta: float) -> void:
 		
 		newVel += influence
 		
-		if newVel.length() > 2.0:
-			if owner.CharMesh.GetForwardVector().dot(newVel.normalized()) > 0.0:
-				owner.CharMesh.LerpMeshOrientation(newVel.normalized(), _delta)
-			else:
-				owner.CharMesh.LerpMeshOrientation(-newVel.normalized(), _delta)
+		if newVel.length() > MOVE_CHARMESH_VEL_ORIENT_MIN_SPEED:
+			var orientation = newVel.normalized()
+			if owner.CharMesh.GetForwardVector().dot(orientation) < 0.0:
+				orientation = -orientation
+			
+			owner.CharMesh.LerpMeshOrientation(orientation, _delta)
 		
 	owner.SetVelocity(newVel)
 
 
 func CalculateWalkVelocity(inputVel: Vector3, delta: float) -> Vector3:
-	var inputValue : Vector3 = (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * delta) + (inputVel.normalized() * owner.Speed)
+	var speedMod = owner.PARAMETERS.WALK_SPEED_POWER
+	if owner.IsUnderwater:
+		speedMod = owner.PARAMETERS.WALK_SPEED_POWER / 3.0
+	
+	var inputValue : Vector3 = (inputVel * speedMod * delta) + (inputVel.normalized() * owner.Speed)
 	var newVel = inputValue
 	
 	return newVel
 
 
 func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
-	var newVel = owner.velocity
+	var newVel : Vector3 = owner.velocity
 	
-	var ratio = (owner.Speed - owner.PARAMETERS.WALK_MAX_SPEED) / RUN_RATIO_DIVISOR
+	var ratio : float = (owner.Speed - owner.PARAMETERS.WALK_MAX_SPEED) / RUN_RATIO_DIVISOR
 	print("Run ratio: %s" % ratio)
 	
-	var newSpeed = (newVel + (inputVel * owner.PARAMETERS.RUN_SPEED_POWER * delta)).length()
+	var newSpeed : float = (newVel + (inputVel * owner.PARAMETERS.RUN_SPEED_POWER * delta)).length()
+	
+	if newVel.length() >= owner.PARAMETERS.RUN_MAX_SPEED:
+		newSpeed = lerp(newSpeed, owner.PARAMETERS.RUN_MAX_SPEED, delta)
 	
 	newVel = (newVel * ratio) + ((inputVel * owner.PARAMETERS.RUN_SPEED_POWER * delta) * (1.0 - ratio))
 	

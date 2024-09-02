@@ -5,8 +5,12 @@ const AIR_WIPEOUT_MIN = 0.75
 
 
 func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
-	velocity.x = lerp(velocity.x, 0.0, delta)
-	velocity.z = lerp(velocity.z, 0.0, delta)
+	var delMod = 1.0
+	if owner.IsUnderwater:
+		delMod = 2.0
+	
+	velocity.x = lerp(velocity.x, 0.0, delta * delMod)
+	velocity.z = lerp(velocity.z, 0.0, delta * delMod)
 	
 	return velocity
 

@@ -31,5 +31,3 @@ func _physics_process(delta: float) -> void:
 		$AfterImage.global_transform = RecordedData.back()
 		RecordedData.pop_back()
 	
-
-

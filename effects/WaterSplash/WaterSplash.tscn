@@ -7,8 +7,8 @@
 transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 sorting_offset = 1.0
 offset = Vector2(0, 64)
+modulate = Color(1, 1, 1, 0.254902)
 billboard = 2
-shaded = true
 double_sided = false
 texture_filter = 0
 texture = ExtResource("1_yp71u")
