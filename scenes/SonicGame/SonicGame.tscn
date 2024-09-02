@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bybnnf47w5dsd"]
+[gd_scene load_steps=13 format=3 uid="uid://bybnnf47w5dsd"]
 
 [ext_resource type="Script" path="res://scenes/SonicGame/SonicGame.gd" id="1_hlded"]
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="2_mpqm8"]
 [ext_resource type="PackedScene" uid="uid://cspov7b53hufw" path="res://overlays/IngameOptions/IngameOptions.tscn" id="3_jth67"]
 [ext_resource type="PackedScene" uid="uid://b4cv687hr7c4p" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.tscn" id="3_t4fox"]
 [ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="4_31dce"]
+[ext_resource type="PackedScene" uid="uid://duk7ha7p415ep" path="res://entities/MusicController/MusicController.tscn" id="4_40tvp"]
 [ext_resource type="PackedScene" uid="uid://butvqg7bms767" path="res://overlays/HUD/HUD.tscn" id="5_yctne"]
 [ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="7_gtpja"]
 
@@ -32,19 +33,21 @@ Sonic = NodePath("../Sonic")
 
 [node name="IngameOptions" parent="." instance=ExtResource("3_jth67")]
 
+[node name="MusicController" parent="." instance=ExtResource("4_40tvp")]
+
 [node name="Sonic" parent="." node_paths=PackedStringArray("Camera", "Controller") instance=ExtResource("2_mpqm8")]
 Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-4.94285e-08, 0.0264596, 3.02698)
-bones/2/position = Vector3(-5.13685, 0.0146999, 3.73362)
-bones/2/rotation = Quaternion(2.1513e-08, -0.712005, 0.702175, -4.03028e-08)
+bones/1/position = Vector3(-3.01303e-08, 0.247205, 3.00226)
+bones/2/position = Vector3(-5.13685, 0.137336, 3.43777)
+bones/2/rotation = Quaternion(2.32216e-08, -0.751633, 0.659582, -3.84645e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.0146999, 3.73362)
-bones/4/rotation = Quaternion(2.1513e-08, -0.712005, 0.702175, -4.03028e-08)
+bones/4/position = Vector3(5.13685, 0.137336, 3.43777)
+bones/4/rotation = Quaternion(2.32216e-08, -0.751633, 0.659582, -3.84645e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(-4.94285e-08, 0.0264596, 5.26593)
+bones/6/position = Vector3(-3.01303e-08, 0.247205, 5.24121)
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
 RightAnalogue = false

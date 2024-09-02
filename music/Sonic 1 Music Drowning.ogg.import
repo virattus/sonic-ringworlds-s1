@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dd1oldhs4312d"
+path="res://.godot/imported/Sonic 1 Music Drowning.ogg-9825ad12bd9386eb00da27dd62ad3703.oggvorbisstr"
+
+[deps]
+
+source_file="res://music/Sonic 1 Music Drowning.ogg"
+dest_files=["res://.godot/imported/Sonic 1 Music Drowning.ogg-9825ad12bd9386eb00da27dd62ad3703.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://duk7ha7p415ep"]
+
+[ext_resource type="Script" path="res://entities/MusicController/MusicController.gd" id="1_355ip"]
+[ext_resource type="AudioStream" uid="uid://dd1oldhs4312d" path="res://music/Sonic 1 Music Drowning.ogg" id="2_60qh1"]
+[ext_resource type="AudioStream" uid="uid://c3qc4cj04sqdu" path="res://music/Sonic The Hedgehog OST - Scrap Brain Zone.ogg" id="3_kj4wx"]
+
+[node name="MusicController" type="Node"]
+script = ExtResource("1_355ip")
+
+[node name="MusicDrowning" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_60qh1")
+bus = &"Music"
+playback_type = 1
+
+[node name="MusicActiveTrack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kj4wx")
+autoplay = true
+bus = &"Music"
+playback_type = 1

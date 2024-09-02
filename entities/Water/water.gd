@@ -24,6 +24,7 @@ func _on_body_entered(body: Node3D) -> void:
 
 func _on_body_exited(body: Node3D) -> void:
 	body.IsUnderwater = false
+	body.Oxygen = 1.0
 	CreateSplash(body.global_position)
 	AudioServer.set_bus_effect_enabled(AUDIO_BUS_SF, AUDIO_EFF_REVERB, false)
 
