@@ -40,14 +40,12 @@ Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-3.01303e-08, 0.247205, 3.00226)
-bones/2/position = Vector3(-5.13685, 0.137336, 3.43777)
-bones/2/rotation = Quaternion(2.32216e-08, -0.751633, 0.659582, -3.84645e-08)
-bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.137336, 3.43777)
-bones/4/rotation = Quaternion(2.32216e-08, -0.751633, 0.659582, -3.84645e-08)
-bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(-3.01303e-08, 0.247205, 5.24121)
+bones/1/position = Vector3(-1.53253e-08, 0.416555, 2.9833)
+bones/2/position = Vector3(-5.13685, 0.231419, 3.2108)
+bones/2/rotation = Quaternion(2.44817e-08, -0.780366, 0.625323, -3.69629e-08)
+bones/4/position = Vector3(5.13685, 0.231419, 3.2108)
+bones/4/rotation = Quaternion(2.44817e-08, -0.780366, 0.625323, -3.69629e-08)
+bones/6/position = Vector3(-1.53253e-08, 0.416555, 5.22225)
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
 RightAnalogue = false

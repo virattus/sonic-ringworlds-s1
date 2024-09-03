@@ -3,14 +3,23 @@ extends BasicState
 
 var VerticalVelocity := 0.0
 
+var Gravity := 0.0
+
 const DEATH_INITIAL_VERTICAL_VELOCITY = 5.0
 
 
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
 	
-	owner.SndDeath.play()
 	VerticalVelocity = DEATH_INITIAL_VERTICAL_VELOCITY
+	if _msg.has("InitialVerticalVel"):
+		VerticalVelocity = _msg["InitialVerticalVelocity"]
+
+	Gravity = owner.PARAMETERS.GRAVITY
+	if _msg.has("Gravity"):
+		Gravity = _msg["Gravity"]
+	
+	owner.SndDeath.play()
 	owner.DashModeDrain = false
 	
 	owner.HealthEmpty.emit()
@@ -26,6 +35,6 @@ func Update(_delta: float) -> void:
 	
 	owner.CharMesh.look_at(cam.global_transform.origin)
 	
-	VerticalVelocity -= owner.PARAMETERS.GRAVITY * _delta
+	VerticalVelocity -= Gravity * _delta
 	
 	owner.CharMesh.global_position.y += VerticalVelocity * _delta

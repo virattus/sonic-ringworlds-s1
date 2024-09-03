@@ -11,6 +11,7 @@ var DebugCollisionPositionDeviation := Vector3.ZERO
 var DebugCollisionNormal := Vector3.ZERO
 var DebugCollisionNormalDeviation := Vector3.ZERO
 
+var CurrentGravity := 1.0
 var StickToFloor := true
 
 var CanCollectRings := true
@@ -80,12 +81,15 @@ const SMOKE = preload("res://effects/Smoke/Smoke.tscn")
 func _ready() -> void:
 	super()
 	
+	CurrentGravity = PARAMETERS.GRAVITY
+	
 	DebugMenu.AddMonitor(self, "DebugMove")
 	DebugMenu.AddMonitor(self, "DebugMoveVector")
 	DebugMenu.AddMonitor(self, "DebugFloorNormal")
 	DebugMenu.AddMonitor(self, "DebugCollisionPositionDeviation")
 	DebugMenu.AddMonitor(self, "DebugCollisionNormalDeviation")
 	DebugMenu.AddMonitor(self, "up_direction")
+	DebugMenu.AddMonitor(self, "CurrentGravity")
 	DebugMenu.AddMonitor(self, "StickToFloor")
 	DebugMenu.AddMonitor(self, "CanCollectRings")
 	DebugMenu.AddMonitor(self, "HasJumped")
@@ -163,9 +167,9 @@ func GetCollision() -> SonicCollision:
 
 
 func ApplyGravity(vel: Vector3, delta: float) -> Vector3:
-	var gravity = PARAMETERS.GRAVITY
+	var gravity = CurrentGravity
 	if IsUnderwater:
-		gravity = PARAMETERS.GRAVITY / 4.0
+		gravity = CurrentGravity / 4.0
 	
 	return vel - Vector3.UP * (gravity * delta)
 
@@ -220,6 +224,14 @@ func CollectOneUp() -> bool:
 
 func SetInvincible(Active: bool) -> void:
 	pass
+
+
+func SetAfterimageOrb(Active: bool) -> void:
+	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachBody/AfterimageOrbEmitter.Active = Active
+	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachFootL/AfterimageOrbEmitter.Active = Active
+	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachFootR/AfterimageOrbEmitter.Active = Active
+	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachHandL/AfterimageOrbEmitter.Active = Active
+	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachHandR/AfterimageOrbEmitter.Active = Active
 
 
 func OrientCharMesh() -> void:

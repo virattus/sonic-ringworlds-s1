@@ -7,7 +7,8 @@ const WALLRUN_CURVE_INFLUENCE_MOD = 1.25
 
 
 func CurveInfluence(delta: float) -> Vector3:
-	var influence = (Vector3.DOWN * owner.PARAMETERS.GRAVITY * delta) * (owner.up_direction * Vector3(1, 0, 1)).length()
+	#var influence = (Vector3.DOWN * owner.PARAMETERS.GRAVITY * delta) * (owner.up_direction * Vector3(1, 0, 1)).length()
+	var influence = (Vector3.DOWN * owner.CurrentGravity * delta) * (owner.up_direction * Vector3(1, 0, 1)).length()
 	return influence * WALLRUN_CURVE_INFLUENCE_MOD
 
 

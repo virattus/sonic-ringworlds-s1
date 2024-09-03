@@ -88,9 +88,11 @@ func TargetTrajectoryMinSpeed(newTarget: Enemy) -> float:
 	var frameCount := 0
 	var vertVel = owner.velocity.y
 	while vertVel > newTarget.global_position.y:
-		vertVel -= owner.PARAMETERS.GRAVITY * FRAME_DELTA
+		vertVel -= owner.CurrentGravity * FRAME_DELTA
+		#vertVel -= owner.PARAMETERS.GRAVITY * FRAME_DELTA
 	
-	return HorizDistanceTo / (VertDistanceTo / (owner.PARAMETERS.GRAVITY * FRAME_DELTA))
+	return HorizDistanceTo / (VertDistanceTo / (owner.CurrentGravity * FRAME_DELTA))
+	#return HorizDistanceTo / (VertDistanceTo / (owner.PARAMETERS.GRAVITY * FRAME_DELTA))
 	#return HorizDistanceTo / frameCount
 
 

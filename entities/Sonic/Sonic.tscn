@@ -1,10 +1,11 @@
-[gd_scene load_steps=51 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=52 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="3_fv7oc"]
 [ext_resource type="PackedScene" uid="uid://dxw1ws66bfvth" path="res://models/Sonic/sonic_model.tscn" id="3_u1arj"]
 [ext_resource type="Texture2D" uid="uid://dnwju36a7f23x" path="res://models/Sonic/Ball.png" id="4_7go32"]
+[ext_resource type="PackedScene" uid="uid://bkhmplefq77tp" path="res://effects/AfterimageOrb/AfterimageOrbEmitter.tscn" id="5_8ctx7"]
 [ext_resource type="Texture2D" uid="uid://b3jasmhu3jyr6" path="res://icons/CameraTarget.png" id="5_wnnh5"]
 [ext_resource type="PackedScene" uid="uid://cb1pkubp6xxtj" path="res://effects/CylinderTrail2/CylinderTrail2.tscn" id="6_ev1dy"]
 [ext_resource type="Script" path="res://entities/Sonic/SquatCharge.gd" id="6_imrjj"]
@@ -108,19 +109,70 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(2.47513e-08, 0.58909, 2.96398)
-bones/2/position = Vector3(-5.13685, 0.327273, 2.97956)
-bones/2/rotation = Quaternion(3.03514e-08, -0.807958, 0.58924, -3.07221e-08)
-bones/2/scale = Vector3(1, 1, 1)
+bones/1/position = Vector3(2.7866e-08, 0.31875, 2.99425)
+bones/2/position = Vector3(-5.13685, 0.177084, 3.34188)
+bones/2/rotation = Quaternion(3.33938e-08, -0.76396, 0.645263, -2.82053e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.327273, 2.97956)
-bones/4/rotation = Quaternion(3.03514e-08, -0.807958, 0.58924, -3.07221e-08)
-bones/4/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(5.13685, 0.177084, 3.34188)
+bones/4/rotation = Quaternion(3.33938e-08, -0.76396, 0.645263, -2.82053e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(2.47513e-08, 0.58909, 5.20293)
+bones/6/position = Vector3(2.7866e-08, 0.31875, 5.2332)
 bones/6/scale = Vector3(1, 1, 1)
+
+[node name="BoneAttachBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, -2.7866e-08, 2.99425, 0.31875)
+bone_name = "Head"
+bone_idx = 1
+
+[node name="AfterimageOrbEmitter" parent="CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachBody" index="0" node_paths=PackedStringArray("SceneRoot") instance=ExtResource("5_8ctx7")]
+transform = Transform3D(-10, 0, 8.88178e-14, 0, 10, 0, -8.88178e-14, 0, -10, -5.17416e-08, 1.97226, -0.0196478)
+SceneRoot = NodePath("../../../../../..")
+Size = 1.3
+Colour = Color(0, 0, 1, 1)
+
+[node name="BoneAttachFootL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 2.48036, 1.32379, 1.78814e-07)
+bone_name = "Foot.L"
+bone_idx = 3
+
+[node name="AfterimageOrbEmitter" parent="CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachFootL" index="0" node_paths=PackedStringArray("SceneRoot") instance=ExtResource("5_8ctx7")]
+transform = Transform3D(-10, 0, 8.88178e-14, 0, 10, 0, -8.88178e-14, 0, -10, -5.17416e-08, 1.97226, -0.0196478)
+SceneRoot = NodePath("../../../../../..")
+Size = 0.5
+Colour = Color(1, 0, 0, 1)
+
+[node name="BoneAttachFootR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -2.48036, 1.32379, 1.78814e-07)
+bone_name = "Foot.R"
+bone_idx = 5
+
+[node name="AfterimageOrbEmitter" parent="CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachFootR" index="0" node_paths=PackedStringArray("SceneRoot") instance=ExtResource("5_8ctx7")]
+transform = Transform3D(-10, 0, 8.88178e-14, 0, 10, 0, -8.88178e-14, 0, -10, -5.17416e-08, 1.97226, -0.0196478)
+SceneRoot = NodePath("../../../../../..")
+Size = 0.5
+Colour = Color(1, 0, 0, 1)
+
+[node name="BoneAttachHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, 1.46233e-08, -8.61911e-08, 1.77636e-14, -0.985911, -0.167271, -8.74228e-08, 0.16727, -0.985911, 5.13685, 3.34188, 0.177084)
+bone_name = "Hand.L"
+bone_idx = 2
+
+[node name="AfterimageOrbEmitter" parent="CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachHandL" index="0" node_paths=PackedStringArray("SceneRoot") instance=ExtResource("5_8ctx7")]
+transform = Transform3D(-10, 0, 8.88178e-14, 0, 10, 0, -8.88178e-14, 0, -10, -5.17416e-08, 1.97226, -0.0196478)
+SceneRoot = NodePath("../../../../../..")
+Size = 0.3
+
+[node name="BoneAttachHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, 1.46233e-08, -8.61911e-08, 1.77636e-14, -0.985911, -0.167271, -8.74228e-08, 0.16727, -0.985911, -5.13685, 3.34188, 0.177084)
+bone_name = "Hand.R"
+bone_idx = 4
+
+[node name="AfterimageOrbEmitter" parent="CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachHandR" index="0" node_paths=PackedStringArray("SceneRoot") instance=ExtResource("5_8ctx7")]
+transform = Transform3D(-10, 0, 8.88178e-14, 0, 10, 0, -8.88178e-14, 0, -10, -5.17416e-08, 1.97226, -0.0196478)
+SceneRoot = NodePath("../../../../../..")
+Size = 0.3
 
 [node name="SonicBall" type="Sprite3D" parent="CharacterMesh" index="1"]
 visible = false
