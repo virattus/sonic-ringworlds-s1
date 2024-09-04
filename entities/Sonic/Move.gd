@@ -128,3 +128,27 @@ func IsInputSkidding(input: Vector3) -> bool:
 		return true
 	
 	return false
+
+
+func UpdateMoveAnimations() -> void:
+	owner.CharMesh.AlignToY(owner.up_direction)
+	
+	if owner.DashMode:
+		if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+			owner.AnimTree.set("parameters/StrikeDash/blend_amount", 1.0)
+			owner.AnimTree.set("parameters/TSStrikeDash/scale", owner.Speed * owner.PARAMETERS.SPRINT_ANIM_SPEED_MOD)
+		else:
+			owner.AnimTree.set("parameters/StrikeDash/blend_amount", 0.0)
+			owner.AnimTree.set("parameters/Run/blend_amount", -1.0)
+			owner.AnimTree.set("parameters/TSWalk/scale", owner.Speed * owner.PARAMETERS.WALK_ANIM_SPEED_MOD)
+	else:
+		owner.AnimTree.set("parameters/StrikeDash/blend_amount", 0.0)
+		if owner.Speed > owner.PARAMETERS.RUN_MAX_SPEED:
+			owner.AnimTree.set("parameters/Run/blend_amount", 1.0)
+			owner.AnimTree.set("parameters/TSSprint/scale", owner.Speed * owner.PARAMETERS.SPRINT_ANIM_SPEED_MOD)
+		elif owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+			owner.AnimTree.set("parameters/Run/blend_amount", 0.0)
+			owner.AnimTree.set("parameters/TSRun/scale", owner.Speed * owner.PARAMETERS.RUN_ANIM_SPEED_MOD)
+		else:
+			owner.AnimTree.set("parameters/Run/blend_amount", -1.0)
+			owner.AnimTree.set("parameters/TSWalk/scale", owner.Speed * owner.PARAMETERS.WALK_ANIM_SPEED_MOD)

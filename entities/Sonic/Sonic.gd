@@ -127,19 +127,19 @@ func _process(delta: float) -> void:
 		Oxygen = 1.0
 		
 	
-	if Globals.DEBUG_FORCE_DASHMODE:
-		DashMode = true
-		DashModeCharge = 100.0
-	
 	if DashModeDrain:
 		if DashMode:
 			DashModeCharge -= (PARAMETERS.DASHMODE_DISCHARGE_RATE * delta)
 			if DashModeCharge <= 0.0:
-				DashMode = false
+				SetDashMode(false)
 		else:
 			DashModeCharge -= (PARAMETERS.DASHMODE_SLOW_DISCHARGE_RATE * delta)
 		
 		DashModeCharge = clamp(DashModeCharge, PARAMETERS.DASHMODE_MIN_CHARGE, PARAMETERS.DASHMODE_MAX_CHARGE)
+	
+	if Globals.DEBUG_FORCE_DASHMODE:
+		DashMode = true
+		DashModeCharge = 100.0
 	
 	if Flicker:
 		CharMesh.visible = (fmod(round(TimerFlicker.time_left / PARAMETERS.FLICKER_CYCLE_TIME), 2.0) == 0)
@@ -226,6 +226,19 @@ func SetInvincible(Active: bool) -> void:
 	pass
 
 
+func SetDashMode(Active: bool) -> void:
+	DashMode = Active
+	DashModeDrain = Active
+	SetAfterimageOrb(Active)
+	
+	if Active:
+		ActivateHitbox(true)
+		DamageThreshold = PARAMETERS.DAMAGE_THRESHOLD_STRIKEDASH
+	else:
+		ActivateHitbox(false)
+		DamageThreshold = PARAMETERS.DAMAGE_THRESHOLD_NORMAL
+
+
 func SetAfterimageOrb(Active: bool) -> void:
 	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachBody/AfterimageOrbEmitter.Active = Active
 	$CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachFootL/AfterimageOrbEmitter.Active = Active
@@ -295,6 +308,7 @@ func ActivateHurtbox(Active: bool) -> void:
 func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 	if StateM.ActiveState.has_method("AttackHit"):
 		StateM.ActiveState.AttackHit(Target)
+		DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_ENEMY
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:

@@ -4,7 +4,7 @@ extends "res://entities/Sonic/MoveGround.gd"
 var ChargePower := 0.0
 
 const CHARGE_MAX_POWER = 20.0
-const CHARGE_POWER_GENERATE_POWER = 2.0
+const CHARGE_POWER_GENERATE_POWER = 200.0
 const CHARGE_POWER_IDLE_DRAIN = 0.0
 
 
@@ -46,8 +46,8 @@ func Update(_delta: float) -> void:
 
 func LaunchStrikeDash() -> void:
 	owner.SndSpinLaunch.play()
-	owner.DashMode = true
-	owner.DashModeDrain = true
+	if owner.DashModeCharge >= 1.0:
+		owner.SetDashMode(true)
 	#owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
 	owner.SetVelocity(owner.CharMesh.GetForwardVector() * ChargePower)
-	ChangeState("StrikeDash")
+	ChangeState("Move")

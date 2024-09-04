@@ -13,7 +13,7 @@ uniform float grow : hint_range(-16.0, 16.0, 0.001);
 uniform float alpha_scissor_threshold : hint_range(0.0, 1.0, 0.001);
 uniform float point_size : hint_range(0.1, 128.0, 0.1);
 
-void vertex() 
+void vertex()
 {
 	// Billboard Mode: Enabled
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
@@ -34,7 +34,7 @@ void vertex()
 	VERTEX += NORMAL * grow;
 }
 
-void fragment() 
+void fragment()
 {
 	vec2 base_uv = UV;
 
@@ -45,7 +45,7 @@ void fragment()
 	if(((int(FRAGCOORD.x) >> 2) % 2 == 0) == ((int(FRAGCOORD.y) >> 2) % 2 != 0))
 		discard;
 
-	
+
 	ALPHA *= COLOR.a * albedo_tex.a;
 	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
 }

@@ -38,12 +38,8 @@ func Enter(_msg := {}) -> void:
 			ChangeState("Skid")
 			return
 		else:
-			if owner.DashMode:
-				ChangeState("StrikeDash")
-				return
-			else:
-				ChangeState("Move")
-				return
+			ChangeState("Move")
+			return
 	
 
 	owner.SetVelocity(Vector3.ZERO)

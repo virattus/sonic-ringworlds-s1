@@ -10,6 +10,7 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", 1.0)
 	
+	owner.SetAfterimageOrb(false)
 	owner.AirdashTrail.Active = true
 	
 	owner.SndAirdash.play()
@@ -34,6 +35,8 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	owner.AirdashTrail.Active = false
+	owner.SetAfterimageOrb(owner.DashMode)
+	
 	owner.SndAirdash.stop()
 	$TimerAirdash.stop()
 
