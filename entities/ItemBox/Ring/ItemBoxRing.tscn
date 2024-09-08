@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmvul107l0dvg"]
+
+[ext_resource type="PackedScene" uid="uid://bc8vbxj2akg2u" path="res://entities/ItemBox/ItemBox.tscn" id="1_smeie"]
+
+[node name="ItemBoxRing" instance=ExtResource("1_smeie")]
+
+[node name="SpriteIcon" parent="Icosphere" index="0"]
+region_rect = Rect2(0, 48, 16, 16)

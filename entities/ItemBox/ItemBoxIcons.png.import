@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdgxw46awwram"
-path="res://.godot/imported/OneUp.png-95d73c184a367a731ef1955b1ed7686c.ctex"
+uid="uid://cfd1o8uq5whn7"
+path="res://.godot/imported/ItemBoxIcons.png-7ad69c83cf5956eed5e0e135edd93cfc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/OneUp/OneUp.png"
-dest_files=["res://.godot/imported/OneUp.png-95d73c184a367a731ef1955b1ed7686c.ctex"]
+source_file="res://entities/ItemBox/ItemBoxIcons.png"
+dest_files=["res://.godot/imported/ItemBoxIcons.png-7ad69c83cf5956eed5e0e135edd93cfc.ctex"]
 
 [params]
 

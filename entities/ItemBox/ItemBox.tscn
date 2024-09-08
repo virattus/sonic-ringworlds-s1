@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://bc8vbxj2akg2u"]
+[gd_scene load_steps=10 format=4 uid="uid://bc8vbxj2akg2u"]
 
 [ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/Hurtbox/Hurtbox.tscn" id="1_6m1vd"]
 [ext_resource type="Script" path="res://entities/ItemBox/ItemBox.gd" id="2_n0vx0"]
+[ext_resource type="Texture2D" uid="uid://cfd1o8uq5whn7" path="res://entities/ItemBox/ItemBoxIcons.png" id="3_1v8jt"]
 [ext_resource type="AudioStream" uid="uid://oggnx8vkwvs1" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C1.wav" id="3_mcu8b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1y0pg"]
@@ -90,6 +91,15 @@ shape = SubResource("SphereShape3D_1y0pg")
 gi_mode = 0
 mesh = SubResource("ArrayMesh_o5jdy")
 skeleton = NodePath("")
+
+[node name="SpriteIcon" type="Sprite3D" parent="Icosphere"]
+transform = Transform3D(1.34228, 0, 0, 0, 1.34228, 0, 0, 0, 1.34228, 0, 0, 0)
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_1v8jt")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
 
 [node name="SndItemBoxOpened" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_mcu8b")

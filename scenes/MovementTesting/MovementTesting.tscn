@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=15 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -6,12 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://dwv57vyogn2kk" path="res://entities/Balloon/Balloon.tscn" id="7_b7r6t"]
 [ext_resource type="PackedScene" uid="uid://dtd6sg2crg1n8" path="res://entities/Checkpoint/CheckPoint.tscn" id="8_axbsj"]
 [ext_resource type="PackedScene" uid="uid://dn6vfjo5tgnbi" path="res://entities/Spring/Spring.tscn" id="8_f1xj6"]
-[ext_resource type="PackedScene" uid="uid://dxyyroddlqhl0" path="res://entities/OneUp/OneUp.tscn" id="8_lj1tr"]
+[ext_resource type="PackedScene" uid="uid://dxyyroddlqhl0" path="res://entities/ItemBox/OneUp/OneUp.tscn" id="8_lj1tr"]
 [ext_resource type="PackedScene" uid="uid://dcbjk0tmj5fb5" path="res://entities/EnemyCrabmeat/EnemyCrabmeat.tscn" id="9_dh6p0"]
 [ext_resource type="PackedScene" uid="uid://dep600s5j8pii" path="res://entities/Spikes/Spikes.tscn" id="9_j82kp"]
 [ext_resource type="PackedScene" uid="uid://c1qri5bywfs8x" path="res://entities/Elevator/Elevator.tscn" id="10_0e4rn"]
 [ext_resource type="PackedScene" uid="uid://bjr18jlu05h2" path="res://entities/Water/Water.tscn" id="10_p0iry"]
 [ext_resource type="PackedScene" uid="uid://on38c03lqkyd" path="res://entities/BoosterGround/BoosterGround.tscn" id="11_kueol"]
+[ext_resource type="PackedScene" uid="uid://c71uqkxc2gu6x" path="res://entities/ItemBox/Robotnik/ItemBoxRobotnik.tscn" id="12_f252l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(300, 200, 200)
@@ -22,21 +23,29 @@ size = Vector3(300, 200, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-5.35756e-09, 0.530572, 2.97053)
-bones/2/position = Vector3(-5.13685, 0.294762, 3.05798)
-bones/2/rotation = Quaternion(2.5301e-08, -0.7988, 0.601597, -3.59123e-08)
-bones/4/position = Vector3(5.13685, 0.294762, 3.05798)
-bones/4/rotation = Quaternion(2.5301e-08, -0.7988, 0.601597, -3.59123e-08)
-bones/6/position = Vector3(-5.35756e-09, 0.530572, 5.20948)
+bones/1/position = Vector3(-1.50993e-08, 0.419139, 2.98301)
+bones/2/position = Vector3(-5.13685, 0.232855, 3.20733)
+bones/2/rotation = Quaternion(2.45005e-08, -0.780792, 0.624791, -3.69395e-08)
+bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
+bones/4/position = Vector3(5.13685, 0.232855, 3.20733)
+bones/4/rotation = Quaternion(2.45005e-08, -0.780792, 0.624791, -3.69395e-08)
+bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
+bones/6/position = Vector3(-1.50993e-08, 0.419139, 5.22196)
 
 [node name="BoneAttachBody" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 5.35756e-09, 2.97053, 0.530572)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 1.50993e-08, 2.98301, 0.419139)
+
+[node name="BoneAttachFootL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 2.48036, 1.32379, 1.78814e-07)
+
+[node name="BoneAttachFootR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
+transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -2.48036, 1.32379, 1.78814e-07)
 
 [node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, -2.78859e-09, -8.78155e-08, -2.69314e-08, -0.961111, -0.276161, -8.36303e-08, 0.276161, -0.961111, 5.13685, 3.05798, 0.294762)
+transform = Transform3D(1, -7.89927e-09, -8.82995e-08, -2.70686e-08, -0.975664, -0.219272, -8.44185e-08, 0.219272, -0.975664, 5.13685, 3.20733, 0.232855)
 
 [node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, -2.78859e-09, -8.78155e-08, -2.69314e-08, -0.961111, -0.276161, -8.36303e-08, 0.276161, -0.961111, -5.13685, 3.05798, 0.294762)
+transform = Transform3D(1, -7.89927e-09, -8.82995e-08, -2.70686e-08, -0.975664, -0.219272, -8.44185e-08, 0.219272, -0.975664, -5.13685, 3.20733, 0.232855)
 
 [node name="KillBox" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
@@ -563,6 +572,9 @@ BoostForce = 20.0
 [node name="BoosterGround5" parent="MovementTesting" index="24" instance=ExtResource("11_kueol")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.0643, 0, 38.8311)
 BoostForce = 20.0
+
+[node name="ItemBoxRobotnik" parent="MovementTesting" index="25" instance=ExtResource("12_f252l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.33, 21.0188, 0)
 
 [node name="EnemyCrabmeat" parent="." index="10" instance=ExtResource("9_dh6p0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2104)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c71uqkxc2gu6x"]
+
+[ext_resource type="PackedScene" uid="uid://bc8vbxj2akg2u" path="res://entities/ItemBox/ItemBox.tscn" id="1_m1bwi"]
+[ext_resource type="Script" path="res://entities/ItemBox/Robotnik/item_box_robotnik.gd" id="2_48n88"]
+[ext_resource type="AudioStream" uid="uid://cbq3loeljts3v" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A6.wav" id="3_mlbs0"]
+[ext_resource type="Script" path="res://entities/Hitbox/Hitbox.gd" id="3_rnlvf"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qjdra"]
+
+[node name="ItemBoxRobotnik" instance=ExtResource("1_m1bwi")]
+script = ExtResource("2_48n88")
+
+[node name="Hitbox" type="Area3D" parent="." index="0"]
+script = ExtResource("3_rnlvf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_qjdra")
+
+[node name="CollisionShape3D" parent="." index="1"]
+shape = null
+
+[node name="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = null
+
+[node name="SpriteIcon" parent="Icosphere" index="0"]
+region_rect = Rect2(48, 0, 16, 16)
+
+[node name="SndSpikes" type="AudioStreamPlayer" parent="." index="5"]
+stream = ExtResource("3_mlbs0")
+bus = &"SoundEffects"
+
+[connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
+[connection signal="finished" from="SndSpikes" to="." method="_on_snd_spikes_finished"]
