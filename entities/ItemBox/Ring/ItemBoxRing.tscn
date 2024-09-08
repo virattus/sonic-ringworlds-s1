@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmvul107l0dvg"]
+[gd_scene load_steps=3 format=3 uid="uid://cmvul107l0dvg"]
 
 [ext_resource type="PackedScene" uid="uid://bc8vbxj2akg2u" path="res://entities/ItemBox/ItemBox.tscn" id="1_smeie"]
+[ext_resource type="Script" path="res://entities/ItemBox/Ring/item_box_ring.gd" id="2_jpa3b"]
 
 [node name="ItemBoxRing" instance=ExtResource("1_smeie")]
+script = ExtResource("2_jpa3b")
 
 [node name="SpriteIcon" parent="Icosphere" index="0"]
 region_rect = Rect2(0, 48, 16, 16)

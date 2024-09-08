@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2dagcf2axymc"]
+
+[ext_resource type="PackedScene" uid="uid://bc8vbxj2akg2u" path="res://entities/ItemBox/ItemBox.tscn" id="1_ocoqf"]
+[ext_resource type="Script" path="res://entities/ItemBox/SpeedUp/item_box_speed_up.gd" id="2_3o3ap"]
+
+[node name="ItemBoxSpeedUp" instance=ExtResource("1_ocoqf")]
+script = ExtResource("2_3o3ap")
