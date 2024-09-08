@@ -25,10 +25,7 @@ func Enter(_msg := {}) -> void:
 	owner.UpdateUpDir(Vector3(0, 1, 0), -1.0)
 	owner.CharMesh.look_at(owner.global_position - (owner.velocity * Vector3(1, 0, 1)).normalized())
 	
-	if owner.GroundCollision:
-		LeftGround = false
-	else:
-		LeftGround = true
+	LeftGround = !owner.GroundCollision
 	
 	if _msg.has("Bonk") and _msg["Bonk"]:
 		owner.SndBonk.play()

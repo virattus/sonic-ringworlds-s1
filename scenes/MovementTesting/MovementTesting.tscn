@@ -25,21 +25,21 @@ size = Vector3(300, 200, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-3.76986e-08, 0.160634, 3.01195)
-bones/2/position = Vector3(-5.13685, 0.0892412, 3.55379)
-bones/2/rotation = Quaternion(2.25597e-08, -0.736366, 0.676583, -3.92023e-08)
-bones/4/position = Vector3(5.13685, 0.0892412, 3.55379)
-bones/4/rotation = Quaternion(2.25597e-08, -0.736366, 0.676583, -3.92023e-08)
-bones/6/position = Vector3(-3.76986e-08, 0.160634, 5.25091)
+bones/1/position = Vector3(-4.84706e-08, 0.0102639, 3.02879)
+bones/2/position = Vector3(-5.13685, 0.00570232, 3.75533)
+bones/2/rotation = Quaternion(2.18257e-08, -0.70901, 0.705199, -3.99913e-08)
+bones/4/position = Vector3(5.13685, 0.00570232, 3.75533)
+bones/4/rotation = Quaternion(2.18257e-08, -0.70901, 0.705199, -3.99913e-08)
+bones/6/position = Vector3(-4.84706e-08, 0.0102639, 5.26774)
 
 [node name="BoneAttachBody" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 3.76986e-08, 3.01195, 0.160634)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 4.84706e-08, 3.02879, 0.0102639)
 
 [node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, -1.98229e-08, -8.82615e-08, -2.72075e-08, -0.996426, -0.0844704, -8.62716e-08, 0.0844705, -0.996426, 5.13685, 3.55379, 0.0892412)
+transform = Transform3D(1, -2.54544e-08, -8.74914e-08, -2.59256e-08, -0.999986, -0.00538993, -8.73529e-08, 0.00538981, -0.999986, 5.13685, 3.75533, 0.00570232)
 
 [node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, -1.98229e-08, -8.82615e-08, -2.72075e-08, -0.996426, -0.0844704, -8.62716e-08, 0.0844705, -0.996426, -5.13685, 3.55379, 0.0892412)
+transform = Transform3D(1, -2.54544e-08, -8.74914e-08, -2.59256e-08, -0.999986, -0.00538993, -8.73529e-08, 0.00538981, -0.999986, -5.13685, 3.75533, 0.00570232)
 
 [node name="KillBox" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
@@ -532,69 +532,114 @@ SpringPower = 40.0
 ResetVelocity = true
 
 [node name="Spring5" parent="MovementTesting" index="16" instance=ExtResource("8_f1xj6")]
-transform = Transform3D(0.64679, 0.762668, 0, -0.762669, 0.646789, 0, 0, 0, 1, 1.2, 16, 12.8)
+transform = Transform3D(0.64679, 0.762668, 0, -0.762669, 0.646789, 0, 0, 0, 1, 3.305, 17.574, 13.289)
 SpringPower = 40.0
 ResetVelocity = true
 
 [node name="Spring6" parent="MovementTesting" index="17" instance=ExtResource("8_f1xj6")]
-transform = Transform3D(-1, 8.74227e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 19.3525, 29.1537, 13.8642)
+transform = Transform3D(-1, -8.74228e-08, 0, 6.18172e-08, -0.707107, 0.707107, -6.18172e-08, 0.707107, 0.707107, 10.1, 23.756, 13.298)
 SpringPower = 40.0
 ResetVelocity = true
 
-[node name="Spikes" parent="MovementTesting" index="18" instance=ExtResource("9_j82kp")]
+[node name="Spring7" parent="MovementTesting" index="18" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(-0.79653, -0.604599, 0, -0.439286, 0.578738, 0.687087, -0.415413, 0.547286, -0.726575, 10.1, 16.908, 19.228)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring8" parent="MovementTesting" index="19" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(0.62932, -0.777146, 0, 0.61902, 0.501272, 0.604599, -0.469862, -0.380486, 0.79653, 5.029, 22.061, 23.817)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring9" parent="MovementTesting" index="20" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(0.125049, -0.450911, 0.883765, 0.96363, 0.267238, 0, -0.236176, 0.851623, 0.46793, -3.845, 28.227, 19.472)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring10" parent="MovementTesting" index="21" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(0.267238, -0.96363, 0, 0.257519, 0.0714163, -0.96363, 0.928583, 0.257519, 0.267238, -8.994, 31.272, 29.196)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring11" parent="MovementTesting" index="22" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(-0.560639, -0.82806, 0, 0.569999, -0.385918, -0.725374, 0.600654, -0.406673, 0.688354, -30.81, 30.485, 35.026)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring12" parent="MovementTesting" index="23" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.588, 21.918, 28.75)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring13" parent="MovementTesting" index="24" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(0.436641, -0.41789, 0.796688, 0.691425, 0.722448, 0, -0.575566, 0.55085, 0.60439, -43.588, 35, 28.75)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring14" parent="MovementTesting" index="25" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(-4.3286e-08, -0.990268, 0.139173, 1, -4.37114e-08, 0, 6.08345e-09, 0.139173, 0.990268, -48.947, 45.388, 35.814)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spring15" parent="MovementTesting" index="26" instance=ExtResource("8_f1xj6")]
+transform = Transform3D(-1, 8.74227e-08, 0, -8.74227e-08, -1, 0, 0, 0, 1, -64.6965, 44.415, 38.2845)
+SpringPower = 40.0
+ResetVelocity = true
+
+[node name="Spikes" parent="MovementTesting" index="27" instance=ExtResource("9_j82kp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.6713, 0, 0)
 
-[node name="ItemBoxShield" parent="MovementTesting" index="19" instance=ExtResource("13_eumha")]
+[node name="ItemBoxShield" parent="MovementTesting" index="28" instance=ExtResource("13_eumha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.4513, 0, -37.7735)
 
-[node name="ItemBoxShield2" parent="MovementTesting" index="20" instance=ExtResource("13_eumha")]
+[node name="ItemBoxShield2" parent="MovementTesting" index="29" instance=ExtResource("13_eumha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.2004, 0, -37.7735)
 ShieldType = "FIRE"
 
-[node name="ItemBoxShield3" parent="MovementTesting" index="21" instance=ExtResource("13_eumha")]
+[node name="ItemBoxShield3" parent="MovementTesting" index="30" instance=ExtResource("13_eumha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.6094, 0, -37.7735)
 ShieldType = "WATER"
 
-[node name="ItemBoxShield4" parent="MovementTesting" index="22" instance=ExtResource("13_eumha")]
+[node name="ItemBoxShield4" parent="MovementTesting" index="31" instance=ExtResource("13_eumha")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.6141, 0, -37.7735)
 ShieldType = "THUNDER"
 
-[node name="Water" parent="MovementTesting" index="23" instance=ExtResource("10_p0iry")]
+[node name="Water" parent="MovementTesting" index="32" instance=ExtResource("10_p0iry")]
 transform = Transform3D(48, 0, 0, 0, 8, 0, 0, 0, 32, 28.736, -4.47278, 71.286)
 
-[node name="BoosterGround" parent="MovementTesting" index="24" instance=ExtResource("11_kueol")]
+[node name="BoosterGround" parent="MovementTesting" index="33" instance=ExtResource("11_kueol")]
 transform = Transform3D(-0.89685, 0, -0.442336, 0, 1, 0, 0.442336, 0, -0.89685, -8.26461, 0, 11.5962)
 BoostForce = 20.0
 
-[node name="BoosterGround2" parent="MovementTesting" index="25" instance=ExtResource("11_kueol")]
+[node name="BoosterGround2" parent="MovementTesting" index="34" instance=ExtResource("11_kueol")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46.038, 0, 33.9684)
 BoostForce = 20.0
 
-[node name="BoosterGround3" parent="MovementTesting" index="26" instance=ExtResource("11_kueol")]
+[node name="BoosterGround3" parent="MovementTesting" index="35" instance=ExtResource("11_kueol")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 41.1228, 0, 33.9684)
 BoostForce = 20.0
 
-[node name="BoosterGround4" parent="MovementTesting" index="27" instance=ExtResource("11_kueol")]
+[node name="BoosterGround4" parent="MovementTesting" index="36" instance=ExtResource("11_kueol")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 41.1228, 0, 38.8311)
 BoostForce = 20.0
 
-[node name="BoosterGround5" parent="MovementTesting" index="28" instance=ExtResource("11_kueol")]
+[node name="BoosterGround5" parent="MovementTesting" index="37" instance=ExtResource("11_kueol")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.0643, 0, 38.8311)
 BoostForce = 20.0
 
-[node name="ItemBoxRobotnik" parent="MovementTesting" index="29" instance=ExtResource("12_f252l")]
+[node name="ItemBoxRobotnik" parent="MovementTesting" index="38" instance=ExtResource("12_f252l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.33, 20.0886, 0)
 
-[node name="ItemBoxRobotnik2" parent="MovementTesting" index="30" instance=ExtResource("12_f252l")]
+[node name="ItemBoxRobotnik2" parent="MovementTesting" index="39" instance=ExtResource("12_f252l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.2589, 40.1414, -18.2042)
 
-[node name="ItemBoxRing" parent="MovementTesting" index="31" instance=ExtResource("14_cms30")]
+[node name="ItemBoxRing" parent="MovementTesting" index="40" instance=ExtResource("14_cms30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.6347, 40.1414, -18.2042)
 
-[node name="ItemBoxRing2" parent="MovementTesting" index="32" instance=ExtResource("14_cms30")]
+[node name="ItemBoxRing2" parent="MovementTesting" index="41" instance=ExtResource("14_cms30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.2918, 40.1414, -18.2042)
 
-[node name="ItemBoxRing3" parent="MovementTesting" index="33" instance=ExtResource("14_cms30")]
+[node name="ItemBoxRing3" parent="MovementTesting" index="42" instance=ExtResource("14_cms30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7256, 40.1414, -18.2042)
 
 [node name="EnemyCrabmeat" parent="." index="10" instance=ExtResource("9_dh6p0")]
