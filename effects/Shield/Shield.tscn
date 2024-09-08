@@ -6,11 +6,14 @@
 script = ExtResource("1_3gojj")
 
 [node name="BackSprite" type="AnimatedSprite3D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
 pixel_size = 0.03
 billboard = 1
 texture_filter = 0
 
 [node name="FrontSprite" type="AnimatedSprite3D" parent="."]
+sorting_offset = 5.0
+modulate = Color(1, 1, 1, 0.501961)
 pixel_size = 0.03
 billboard = 1
 texture_filter = 0

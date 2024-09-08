@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpnpfsukxmg3y"]
+
+[ext_resource type="PackedScene" uid="uid://bc8vbxj2akg2u" path="res://entities/ItemBox/ItemBox.tscn" id="1_0lo47"]
+[ext_resource type="Script" path="res://entities/ItemBox/Shield/ItemBoxShield.gd" id="2_gfflv"]
+
+[node name="ItemBoxShield" instance=ExtResource("1_0lo47")]
+script = ExtResource("2_gfflv")
+ShieldType = "NORMAL"
+
+[node name="SpriteIcon" parent="ItemBoxClassic" index="1"]
+region_rect = Rect2(32, 32, 16, 16)

@@ -8,3 +8,6 @@ script = ExtResource("2_5l71o")
 
 [node name="SpriteIcon" parent="Icosphere" index="0"]
 region_rect = Rect2(16, 48, 16, 16)
+
+[node name="SpriteIcon" parent="ItemBoxClassic" index="1"]
+region_rect = Rect2(16, 48, 16, 16)

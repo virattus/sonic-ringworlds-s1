@@ -55,7 +55,7 @@ func LookAt(target: Vector3) -> void:
 	CharMesh.look_at(target)
 
 
-func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 	if Health <= 0:
 		return
 	
@@ -64,3 +64,7 @@ func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 	HealthChanged.emit(float(Damage) / float(MaxHealth))
 	if Health <= 0:
 		HealthEmpty.emit()
+
+
+func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+	DamageReceived(Source.global_position, Damage)

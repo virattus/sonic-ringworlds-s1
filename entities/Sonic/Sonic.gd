@@ -1,3 +1,4 @@
+class_name Player
 extends Character
 
 
@@ -220,14 +221,14 @@ func GetInputVector(up_dir: Vector3) -> Vector3:
 	return newVelocity
 
 
-func CollectRing() -> bool:
+func CollectRing(ringCount := 1) -> bool:
 	if !CanCollectRings:
 		return false
 	
 	if Globals.RingCount < 100:
 		$SndRingCollect.play()
 		DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_RING
-		Globals.RingCount += 1
+		Globals.RingCount += ringCount
 		return true
 	
 	return false
@@ -244,11 +245,13 @@ func SetInvincible(Active: bool) -> void:
 	pass
 
 
-func SetShieldState(newState: ShieldState) -> void:
-	CurrentShieldState = newState
+func SetShieldState(newState: ShieldState) -> void:	
+	if CurrentShieldState != ShieldState.NONE:
+		CurrentShield.queue_free()
+		CurrentShield = null
 	
-	CurrentShield.queue_free()
-	CurrentShield = null
+	CurrentShieldState = newState
+
 	
 	match newState:
 		ShieldState.NORMAL_SHIELD:
@@ -352,18 +355,24 @@ func AttackHit(Target: Hurtbox, ChargeValue = -1.0) -> void:
 			DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_ENEMY
 
 
+
+
 func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 	AttackHit(Target)
 
 
-func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 	if Invincible or (Damage < DamageThreshold):
 		return
 	
 	if Globals.RingCount > 0:
 		StateM.ChangeState("Hurt", {
-			"BounceDirection": Source.global_position.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+			"BounceDirection": SourcePos.direction_to(global_position).normalized() * Vector3(3, 0, 3),
 			"DropRings": true,
 		})
 	else:
 		StateM.ChangeState("Death")
+
+
+func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+	DamageReceived(Source.global_position, Damage)

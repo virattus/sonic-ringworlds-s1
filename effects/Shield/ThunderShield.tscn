@@ -26,6 +26,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jamun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mcjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jamun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mcjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jamun")
 }],
 "loop": true,
 "name": &"default",

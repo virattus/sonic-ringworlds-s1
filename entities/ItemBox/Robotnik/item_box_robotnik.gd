@@ -3,13 +3,15 @@ extends "res://entities/ItemBox/ItemBox.gd"
 
 func ActivateItemBox(source: Character) -> void:
 	$SndSpikes.play()
-	$Icosphere.visible = false
+	DeactivateCollision()
+	ItemBoxModel.visible = false
+	source.DamageReceived(global_position, 1)
+
 
 
 func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
-	$SndSpikes.play()
-	$Hitbox.monitoring = false
-	$Hitbox.monitorable = false
+	ActivateItemBox(Target.get_parent())
+	
 
 
 func _on_snd_spikes_finished() -> void:

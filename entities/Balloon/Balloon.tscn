@@ -31,6 +31,9 @@ texture = ExtResource("4_cqi2n")
 
 [node name="BalloonModel" parent="CharacterMesh" index="0" instance=ExtResource("2_5xh2y")]
 
+[node name="SpotShadow" parent="." index="4"]
+visible = false
+
 [node name="Hurtbox" parent="." index="5"]
 monitoring = false
 
@@ -40,7 +43,6 @@ shape = SubResource("SphereShape3D_433np")
 
 [node name="Hitbox" parent="." index="6"]
 monitoring = false
-monitorable = false
 
 [node name="Idle" parent="StateMachine" index="1"]
 script = ExtResource("5_w0551")

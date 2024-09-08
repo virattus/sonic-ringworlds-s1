@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmwxy6mkx17s5"]
+
+[ext_resource type="PackedScene" uid="uid://cib720vwpwm6y" path="res://entities/ItemBox/ItemBoxClassic.glb" id="1_ndkxt"]
+
+[node name="ItemBoxClassic" instance=ExtResource("1_ndkxt")]

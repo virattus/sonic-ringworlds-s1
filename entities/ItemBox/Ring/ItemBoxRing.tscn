@@ -5,6 +5,10 @@
 
 [node name="ItemBoxRing" instance=ExtResource("1_smeie")]
 script = ExtResource("2_jpa3b")
+RingCount = 10
 
 [node name="SpriteIcon" parent="Icosphere" index="0"]
+region_rect = Rect2(0, 48, 16, 16)
+
+[node name="SpriteIcon" parent="ItemBoxClassic" index="1"]
 region_rect = Rect2(0, 48, 16, 16)
