@@ -20,33 +20,23 @@ size = Vector3(300, 200, 200)
 
 [node name="Sonic" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.23502, 0)
-Health = 1
-MaxHealth = 1
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(5.12035e-10, 0.00585699, 3.02928)
-bones/2/position = Vector3(-5.13685, 0.003254, 3.76123)
-bones/2/rotation = Quaternion(3.09561e-08, -0.708193, 0.706019, -3.0861e-08)
-bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.003254, 3.76123)
-bones/4/rotation = Quaternion(3.09561e-08, -0.708193, 0.706019, -3.0861e-08)
-bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(5.12035e-10, 0.00585699, 5.26824)
+bones/1/position = Vector3(-5.35756e-09, 0.530572, 2.97053)
+bones/2/position = Vector3(-5.13685, 0.294762, 3.05798)
+bones/2/rotation = Quaternion(2.5301e-08, -0.7988, 0.601597, -3.59123e-08)
+bones/4/position = Vector3(5.13685, 0.294762, 3.05798)
+bones/4/rotation = Quaternion(2.5301e-08, -0.7988, 0.601597, -3.59123e-08)
+bones/6/position = Vector3(-5.35756e-09, 0.530572, 5.20948)
 
 [node name="BoneAttachBody" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, -5.12035e-10, 3.02928, 0.00585699)
-
-[node name="BoneAttachFootL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 2.48036, 1.32379, 1.78814e-07)
-
-[node name="BoneAttachFootR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -2.48036, 1.32379, 1.78814e-07)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 5.35756e-09, 2.97053, 0.530572)
 
 [node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 2.68876e-10, -8.74224e-08, 2.13163e-14, -0.999995, -0.00307536, -8.74228e-08, 0.00307542, -0.999995, 5.13685, 3.76123, 0.003254)
+transform = Transform3D(1, -2.78859e-09, -8.78155e-08, -2.69314e-08, -0.961111, -0.276161, -8.36303e-08, 0.276161, -0.961111, 5.13685, 3.05798, 0.294762)
 
 [node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 2.68876e-10, -8.74224e-08, 2.13163e-14, -0.999995, -0.00307536, -8.74228e-08, 0.00307542, -0.999995, -5.13685, 3.76123, 0.003254)
+transform = Transform3D(1, -2.78859e-09, -8.78155e-08, -2.69314e-08, -0.961111, -0.276161, -8.36303e-08, 0.276161, -0.961111, -5.13685, 3.05798, 0.294762)
 
 [node name="KillBox" parent="." index="8"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
@@ -556,6 +546,22 @@ transform = Transform3D(48, 0, 0, 0, 8, 0, 0, 0, 32, 28.736, -4.47278, 71.286)
 
 [node name="BoosterGround" parent="MovementTesting" index="20" instance=ExtResource("11_kueol")]
 transform = Transform3D(-0.89685, 0, -0.442336, 0, 1, 0, 0.442336, 0, -0.89685, -8.26461, 0, 11.5962)
+BoostForce = 20.0
+
+[node name="BoosterGround2" parent="MovementTesting" index="21" instance=ExtResource("11_kueol")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46.038, 0, 33.9684)
+BoostForce = 20.0
+
+[node name="BoosterGround3" parent="MovementTesting" index="22" instance=ExtResource("11_kueol")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 41.1228, 0, 33.9684)
+BoostForce = 20.0
+
+[node name="BoosterGround4" parent="MovementTesting" index="23" instance=ExtResource("11_kueol")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 41.1228, 0, 38.8311)
+BoostForce = 20.0
+
+[node name="BoosterGround5" parent="MovementTesting" index="24" instance=ExtResource("11_kueol")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.0643, 0, 38.8311)
 BoostForce = 20.0
 
 [node name="EnemyCrabmeat" parent="." index="10" instance=ExtResource("9_dh6p0")]
