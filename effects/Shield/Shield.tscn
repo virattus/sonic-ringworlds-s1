@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://o4mwfebtj0dv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4cs7n"]
+
+[node name="Shield" type="AnimatedSprite3D"]
+sorting_offset = 1.0
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_4cs7n")

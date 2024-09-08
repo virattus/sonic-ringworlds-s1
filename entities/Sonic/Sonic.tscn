@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=52 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" path="res://entities/Sonic/Jump.gd" id="27_mtw8o"]
 [ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="28_p62qa"]
 [ext_resource type="Script" path="res://entities/Sonic/DebugMove.gd" id="29_u7sl5"]
+[ext_resource type="PackedScene" uid="uid://bm0xdtf4gqfrl" path="res://effects/Shield/FireShield.tscn" id="38_l4shp"]
 [ext_resource type="AudioStream" uid="uid://cthagnajjhpu0" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C5.wav" id="39_keyd5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d4iho"]
@@ -108,20 +109,20 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-6.81153e-09, 0.513941, 2.97239)
-bones/2/position = Vector3(-5.13685, 0.285523, 3.08027)
-bones/2/rotation = Quaternion(2.5183e-08, -0.796157, 0.60509, -3.60675e-08)
+bones/1/position = Vector3(-2.44754e-08, 0.31189, 2.99502)
+bones/2/position = Vector3(-5.13685, 0.173272, 3.35107)
+bones/2/rotation = Quaternion(2.37086e-08, -0.76279, 0.646646, -3.78998e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.285523, 3.08027)
-bones/4/rotation = Quaternion(2.5183e-08, -0.796157, 0.60509, -3.60675e-08)
+bones/4/position = Vector3(5.13685, 0.173272, 3.35107)
+bones/4/rotation = Quaternion(2.37086e-08, -0.76279, 0.646646, -3.78998e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(-6.81153e-09, 0.513941, 5.21134)
+bones/6/position = Vector3(-2.44754e-08, 0.31189, 5.23397)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="BoneAttachBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 6.81153e-09, 2.97239, 0.513941)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 2.44754e-08, 2.99502, 0.31189)
 bone_name = "Head"
 bone_idx = 1
 
@@ -157,7 +158,7 @@ Size = 0.5
 Colour = Color(1, 0, 0, 1)
 
 [node name="BoneAttachHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, -3.54886e-09, -8.79067e-08, -2.69548e-08, -0.963493, -0.267733, -8.37474e-08, 0.267732, -0.963493, 5.13685, 3.08027, 0.285523)
+transform = Transform3D(1, -1.28462e-08, -8.84814e-08, -2.7157e-08, -0.986511, -0.163697, -8.51849e-08, 0.163697, -0.986511, 5.13685, 3.35107, 0.173272)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -168,7 +169,7 @@ Active = false
 Size = 0.3
 
 [node name="BoneAttachHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, -3.54886e-09, -8.79067e-08, -2.69548e-08, -0.963493, -0.267733, -8.37474e-08, 0.267732, -0.963493, -5.13685, 3.08027, 0.285523)
+transform = Transform3D(1, -1.28462e-08, -8.84814e-08, -2.7157e-08, -0.986511, -0.163697, -8.51849e-08, 0.163697, -0.986511, -5.13685, 3.35107, 0.173272)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -414,6 +415,8 @@ bus = &"SoundEffects"
 [node name="SndOneUp" type="AudioStreamPlayer" parent="." index="28"]
 stream = ExtResource("39_keyd5")
 bus = &"SoundEffects"
+
+[node name="FireShield" parent="." index="29" instance=ExtResource("38_l4shp")]
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
 [connection signal="timeout" from="TimerInvincibility" to="." method="_on_timer_invincibility_timeout"]
