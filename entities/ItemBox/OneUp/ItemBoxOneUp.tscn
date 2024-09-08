@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxyyroddlqhl0"]
 
 [ext_resource type="PackedScene" uid="uid://bc8vbxj2akg2u" path="res://entities/ItemBox/ItemBox.tscn" id="1_lcp37"]
-[ext_resource type="Script" path="res://entities/ItemBox/OneUp/OneUp.gd" id="2_5l71o"]
+[ext_resource type="Script" path="res://entities/ItemBox/OneUp/ItemBoxOneUp.gd" id="2_5l71o"]
 
 [node name="ItemBoxOneUp" instance=ExtResource("1_lcp37")]
 script = ExtResource("2_5l71o")

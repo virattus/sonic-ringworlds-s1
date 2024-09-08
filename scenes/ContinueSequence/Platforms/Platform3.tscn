@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://cfbrldg065rcf"]
 
 [ext_resource type="Script" path="res://scenes/ContinueSequence/Platforms/PlatformTrigger.gd" id="1_j7n56"]
-[ext_resource type="PackedScene" uid="uid://dxyyroddlqhl0" path="res://entities/ItemBox/OneUp/OneUp.tscn" id="2_m7eku"]
+[ext_resource type="PackedScene" uid="uid://dxyyroddlqhl0" path="res://entities/ItemBox/OneUp/ItemBoxOneUp.tscn" id="2_m7eku"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pgvu"]
 resource_name = "Material.001"

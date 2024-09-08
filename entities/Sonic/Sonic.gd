@@ -374,5 +374,11 @@ func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 		StateM.ChangeState("Death")
 
 
+func Kill() -> void:
+	SetAfterimageOrb(false)
+	SetShieldState(ShieldState.NONE)
+	StateM.ChangeState("Death")
+
+
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
 	DamageReceived(Source.global_position, Damage)
