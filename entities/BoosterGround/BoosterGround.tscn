@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://on38c03lqkyd"]
+
+[ext_resource type="PackedScene" uid="uid://bki6plrn34jum" path="res://entities/BoosterGround/BoosterGround.glb" id="1_rq02y"]
+[ext_resource type="Script" path="res://entities/BoosterGround/BoosterGround.gd" id="2_ygxii"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yqe0n"]
+size = Vector3(1.5, 0.41, 3)
+
+[node name="BoosterGround" instance=ExtResource("1_rq02y")]
+script = ExtResource("2_ygxii")
+
+[node name="Area3D" type="Area3D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00430298, 0, -0.235046)
+shape = SubResource("BoxShape3D_yqe0n")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

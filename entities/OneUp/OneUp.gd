@@ -1,6 +1,6 @@
-extends Collectible
+extends "res://entities/ItemBox/ItemBox.gd"
 
 
-func _on_body_entered(body: Node3D) -> void:
-	if body.CollectOneUp():
-		super(body)
+func ActivateItemBox(source: Character) -> void:
+	source.CollectOneUp()
+	super(source)

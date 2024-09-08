@@ -1,6 +1,9 @@
 extends "res://entities/Sonic/MoveGround.gd"
 
 
+var IgnoreInput := 0.0
+
+
 const RUN_RATIO_DIVISOR = 200.0
 
 const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
@@ -13,10 +16,17 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
+	
+	if _msg.has("IgnoreInput"):
+		IgnoreInput = _msg["IgnoreInput"]
+		
+	if _msg.has("Boost"):
+		owner.SetVelocity(_msg["Boost"])
+		owner.SndSpinLaunch.play()
 
 
 func Exit() -> void:
-	pass
+	IgnoreInput = 0.0
 	
 
 func Update(_delta: float) -> void:
@@ -37,6 +47,10 @@ func Update(_delta: float) -> void:
 	var newVel = owner.velocity
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
+	
+	if IgnoreInput > 0.0:
+		inputVel = Vector3.ZERO
+		IgnoreInput -= _delta
 	
 	if inputVel.length() > 0.0:
 		if newVel.length() > owner.PARAMETERS.WALK_MAX_SPEED:

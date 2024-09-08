@@ -305,10 +305,17 @@ func ActivateHurtbox(Active: bool) -> void:
 	HurtBox.monitoring = Active
 
 
-func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
+func AttackHit(Target: Hurtbox, ChargeValue = -1.0) -> void:
 	if StateM.ActiveState.has_method("AttackHit"):
 		StateM.ActiveState.AttackHit(Target)
-		DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_ENEMY
+		if ChargeValue >= 0.0:
+			DashModeCharge += ChargeValue
+		else:
+			DashModeCharge += PARAMETERS.DASHMODE_INCREMENT_ENEMY
+
+
+func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
+	AttackHit(Target)
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
