@@ -1,6 +1,15 @@
 extends Character
 
 
+enum ShieldState {
+	NONE,
+	NORMAL_SHIELD,
+	FIRE_SHIELD,
+	WATER_SHIELD,
+	THUNDER_SHIELD,
+}
+
+
 @export var Camera: ThirdPersonCamera
 
 var DebugMove := false
@@ -19,6 +28,9 @@ var HasJumped := false
 
 var IsUnderwater := false
 var Oxygen := 1.0
+
+var CurrentShieldState := ShieldState.NONE
+var CurrentShield = null
 
 var DashMode := false
 var DashModeCharge := 0.0
@@ -76,6 +88,12 @@ const PARAMETERS = preload("res://entities/Sonic/Sonic_Parameters.gd")
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 const SMOKE = preload("res://effects/Smoke/Smoke.tscn")
+
+const NORMAL_SHIELD = preload("res://effects/Shield/NormalShield.tscn")
+const FIRE_SHIELD = preload("res://effects/Shield/FireShield.tscn")
+const THUNDER_SHIELD = preload("res://effects/Shield/ThunderShield.tscn")
+const WATER_SHIELD = preload("res://effects/Shield/WaterShield.tscn")
+
 
 
 func _ready() -> void:
@@ -224,6 +242,26 @@ func CollectOneUp() -> bool:
 
 func SetInvincible(Active: bool) -> void:
 	pass
+
+
+func SetShieldState(newState: ShieldState) -> void:
+	CurrentShieldState = newState
+	
+	CurrentShield.queue_free()
+	CurrentShield = null
+	
+	match newState:
+		ShieldState.NORMAL_SHIELD:
+			CurrentShield = NORMAL_SHIELD.instantiate()
+		ShieldState.FIRE_SHIELD:
+			CurrentShield = FIRE_SHIELD.instantiate()
+		ShieldState.WATER_SHIELD:
+			CurrentShield = WATER_SHIELD.instantiate()
+		ShieldState.THUNDER_SHIELD:
+			CurrentShield = THUNDER_SHIELD.instantiate()
+	
+	add_child(CurrentShield)
+
 
 
 func SetDashMode(Active: bool) -> void:

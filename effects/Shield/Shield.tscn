@@ -1,8 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://o4mwfebtj0dv"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_4cs7n"]
+[ext_resource type="Script" path="res://effects/Shield/shield.gd" id="1_3gojj"]
 
-[node name="Shield" type="AnimatedSprite3D"]
-sorting_offset = 1.0
+[node name="Shield" type="Node3D"]
+script = ExtResource("1_3gojj")
+
+[node name="BackSprite" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.03
 billboard = 1
-sprite_frames = SubResource("SpriteFrames_4cs7n")
+texture_filter = 0
+
+[node name="FrontSprite" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0

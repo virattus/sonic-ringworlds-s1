@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://djrvc0vhuj5gc"]
+
+[ext_resource type="PackedScene" uid="uid://o4mwfebtj0dv" path="res://effects/Shield/Shield.tscn" id="1_i1dh4"]
+[ext_resource type="Texture2D" uid="uid://xsu0swfjbg1v" path="res://effects/Shield/NormalShield.png" id="2_qgcp4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4eicr"]
+atlas = ExtResource("2_qgcp4")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s6f42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4eicr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_noby7"]
+atlas = ExtResource("2_qgcp4")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7104f"]
+atlas = ExtResource("2_qgcp4")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckqoj"]
+atlas = ExtResource("2_qgcp4")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngo58"]
+atlas = ExtResource("2_qgcp4")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4hqm"]
+atlas = ExtResource("2_qgcp4")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v1v50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_noby7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7104f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckqoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngo58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4hqm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="NormalShield" instance=ExtResource("1_i1dh4")]
+
+[node name="BackSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_s6f42")
+
+[node name="FrontSprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_v1v50")
+autoplay = "default"

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://u37meei8q5pa"]
+
+[ext_resource type="Texture2D" uid="uid://b10uijtobs66v" path="res://effects/ThunderSparkle/ThunderSparkle.png" id="1_m84kc"]
+[ext_resource type="Script" path="res://effects/ThunderSparkle/ThunderSparkle.gd" id="2_knqes"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vax0"]
+atlas = ExtResource("1_m84kc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gegc"]
+atlas = ExtResource("1_m84kc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sav5c"]
+atlas = ExtResource("1_m84kc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eapm4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vax0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gegc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sav5c")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ThunderSparkle" type="AnimatedSprite3D"]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_eapm4")
+autoplay = "default"
+script = ExtResource("2_knqes")

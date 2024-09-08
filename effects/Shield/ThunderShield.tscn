@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://b0lkgr8umnm5h"]
+
+[ext_resource type="PackedScene" uid="uid://o4mwfebtj0dv" path="res://effects/Shield/Shield.tscn" id="1_abfc5"]
+[ext_resource type="Texture2D" uid="uid://db16b4t0ylryh" path="res://effects/Shield/ThunderShield.png" id="2_lp53t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3eje"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mcjs"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jamun"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rc3cd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3eje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mcjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jamun")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhowt"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wggng"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67vmt"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnjl8"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hx3yq"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reum6"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2b6i"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqr1l"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whh6m"]
+atlas = ExtResource("2_lp53t")
+region = Rect2(96, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_38823"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhowt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wggng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67vmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnjl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hx3yq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reum6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2b6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqr1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whh6m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ThunderShield" instance=ExtResource("1_abfc5")]
+
+[node name="BackSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_rc3cd")
+autoplay = "default"
+frame_progress = 0.409797
+
+[node name="FrontSprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_38823")
+autoplay = "default"

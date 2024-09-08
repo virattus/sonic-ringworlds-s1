@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://b0watkbt7uyj"]
+
+[ext_resource type="PackedScene" uid="uid://o4mwfebtj0dv" path="res://effects/Shield/Shield.tscn" id="1_fehim"]
+[ext_resource type="Texture2D" uid="uid://dv7dx156oj7a5" path="res://effects/Shield/WaterShield.png" id="2_udhp7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drum3"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u6dq1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drum3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw0p2"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcjae"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrni4"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge85d"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8fik"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r841k"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ypdn"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyxfp"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4mly"]
+atlas = ExtResource("2_udhp7")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t3pwx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw0p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qcjae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrni4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge85d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8fik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r841k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ypdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyxfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4mly")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="WaterShield" instance=ExtResource("1_fehim")]
+
+[node name="BackSprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_u6dq1")
+
+[node name="FrontSprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_t3pwx")
+autoplay = "default"
