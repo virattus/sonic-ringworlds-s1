@@ -46,7 +46,7 @@ func Update(_delta: float) -> void:
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if !TargetStillValid():
-		Target == null
+		self.Target == null
 	
 	if !AttackReleased and Target == null:
 		GetNextTarget(inputVel)

@@ -95,3 +95,8 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 			return false
 	#this should never fire
 	return false
+
+
+func AttackHit(_Target: Hurtbox) -> void:
+	print("%s: Hit enemy" % self.name)
+	owner.velocity.y = owner.PARAMETERS.ATTACK_BOUNCE_POW

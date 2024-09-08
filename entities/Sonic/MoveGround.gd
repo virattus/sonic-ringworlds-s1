@@ -99,7 +99,6 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 			#Landed upside down
 			return true
 		
-		
 	return true
 
 
