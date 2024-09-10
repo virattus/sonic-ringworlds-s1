@@ -44,6 +44,7 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
 	
 	owner.GroundCollision = false
+	owner.StickToFloor = false
 	owner.HasJumped = true
 	
 	print("Jumped")
@@ -66,6 +67,7 @@ func Update(_delta: float) -> void:
 			
 	if CheckGroundCollision(collision):
 		#We landed while travelling up, this should (probably) never happen
+		assert(false)
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
