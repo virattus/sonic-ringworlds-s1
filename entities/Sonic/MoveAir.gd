@@ -50,7 +50,13 @@ func CheckFloorRaycast(delta: float) -> bool:
 func CheckGroundCollision(collision: SonicCollision) -> bool:
 	if collision.CollisionType == SonicCollision.NONE:
 		if owner.StickToFloor:
-			return CheckFloorRaycast(1.0)
+			if CheckFloorRaycast(1.0):
+				ChangeState("Land", {
+					"Type": "Normal",
+					"Normal": owner.CollisionCast.get_collision_normal(),
+				})
+				return true
+			return false
 	elif collision.CollisionType == SonicCollision.FLOOR:
 		if CheckFloorRaycast(1.0):
 			ChangeState("Land", {

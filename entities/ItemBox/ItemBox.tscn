@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bc8vbxj2akg2u"]
+[gd_scene load_steps=13 format=4 uid="uid://bc8vbxj2akg2u"]
 
 [ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/Hurtbox/Hurtbox.tscn" id="1_6m1vd"]
 [ext_resource type="Script" path="res://entities/ItemBox/ItemBox.gd" id="2_n0vx0"]
@@ -6,8 +6,14 @@
 [ext_resource type="AudioStream" uid="uid://oggnx8vkwvs1" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C1.wav" id="3_mcu8b"]
 [ext_resource type="PackedScene" uid="uid://dmwxy6mkx17s5" path="res://entities/ItemBox/Model_ItemBoxClassic.tscn" id="5_lgl37"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4km4s"]
+size = Vector3(1.58359, 2.286, 1.83459)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7rdm4"]
+size = Vector3(1.683, 2.34954, 1.95605)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_juad7"]
-size = Vector3(1.45835, 2.28594, 1.81625)
+size = Vector3(1.52109, 2.19302, 1.70776)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0p8v"]
 resource_name = "Cap"
@@ -75,19 +81,26 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_moavr")
 
-[node name="ItemBox" type="Area3D"]
-collision_layer = 4
-collision_mask = 2
+[node name="ItemBox" type="CharacterBody3D"]
+collision_mask = 10
 script = ExtResource("2_n0vx0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00532162, 1.14583, -0.184373)
-shape = SubResource("BoxShape3D_juad7")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00112343, 1.14583, -0.108385)
+shape = SubResource("BoxShape3D_4km4s")
+
+[node name="TouchHurtbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TouchHurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17724, -0.0974228)
+shape = SubResource("BoxShape3D_7rdm4")
 
 [node name="Hurtbox" parent="." instance=ExtResource("1_6m1vd")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10716, -0.106458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00752056, 1.11893, -0.113782)
 shape = SubResource("BoxShape3D_juad7")
 
 [node name="Icosphere" type="MeshInstance3D" parent="."]
@@ -120,6 +133,9 @@ texture = ExtResource("3_1v8jt")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="ExplosionPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15648, 0)
+
+[connection signal="body_entered" from="TouchHurtbox" to="." method="_on_touch_hurtbox_body_entered"]
 [connection signal="HurtboxActivated" from="Hurtbox" to="." method="_on_hurtbox_hurtbox_activated"]
 [connection signal="finished" from="SndItemBoxOpened" to="." method="_on_snd_item_box_opened_finished"]

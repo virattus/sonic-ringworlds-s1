@@ -26,6 +26,7 @@ var StickToFloor := true
 
 var CanCollectRings := true
 var HasJumped := false
+var CanHang := false
 
 var IsUnderwater := false
 var Oxygen := 1.0
@@ -241,6 +242,9 @@ func CollectOneUp() -> bool:
 	return true
 
 
+
+
+
 func SetInvincible(Active: bool) -> void:
 	pass
 
@@ -363,6 +367,14 @@ func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 
 func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 	if Invincible or (Damage < DamageThreshold):
+		return
+	
+	if CurrentShieldState != ShieldState.NONE:
+		SetShieldState(ShieldState.NONE)
+		StateM.ChangeState("Hurt", {
+			"BounceDirection": SourcePos.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+			"DropRings": false,
+		})
 		return
 	
 	if Globals.RingCount > 0:

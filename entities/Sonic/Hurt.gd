@@ -22,10 +22,14 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("BounceDirection"):
 		owner.velocity = _msg["BounceDirection"] + owner.velocity
 	
+	#failsafe
+	owner.ActivateHitbox(false)
+	
 	owner.UpdateUpDir(Vector3(0, 1, 0), -1.0)
 	owner.CharMesh.look_at(owner.global_position - (owner.velocity * Vector3(1, 0, 1)).normalized())
 	
 	LeftGround = !owner.GroundCollision
+	owner.StickToFloor = false
 	
 	if _msg.has("Bonk") and _msg["Bonk"]:
 		owner.SndBonk.play()
@@ -57,6 +61,8 @@ func Exit() -> void:
 	owner.AnimTree.set("parameters/Hurt/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/OSHurt/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	
+	owner.StickToFloor = true
+	
 	owner.Flicker = true
 	owner.CanCollectRings = true
 	
@@ -77,7 +83,8 @@ func Update(_delta: float) -> void:
 			})
 			return
 		else:
-			LeftGround = true
+			if owner.velocity.y < 0.0:
+				LeftGround = true
 		
 	var newVel : Vector3 = owner.velocity
 	

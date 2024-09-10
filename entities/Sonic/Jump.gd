@@ -57,8 +57,15 @@ func Update(_delta: float) -> void:
 	owner.Move()
 	
 	var collision : SonicCollision = owner.GetCollision()
+	if collision.CollisionType == SonicCollision.CEILING:
+		if owner.CanHang and Input.is_action_pressed("Jump"):
+			#We might be able to hang, see if it's possible
+			if AbleToHang():
+				ChangeState("Hang")
+				return
+			
 	if CheckGroundCollision(collision):
-		#We landed while travelling up, this should probably never happen
+		#We landed while travelling up, this should (probably) never happen
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
@@ -108,3 +115,7 @@ func Update(_delta: float) -> void:
 	
 	
 	owner.SetVelocity(newVel)
+
+
+func AbleToHang() -> bool:
+	return false
