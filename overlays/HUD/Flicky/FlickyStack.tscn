@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://denld17jxxl47"]
+
+[ext_resource type="Script" path="res://overlays/HUD/Flicky/FlickyStack.gd" id="1_ujnce"]
+[ext_resource type="PackedScene" uid="uid://ct1gg4n15s557" path="res://overlays/HUD/Flicky/FlickyIcon.tscn" id="2_s3qsq"]
+
+[node name="FlickyStack" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ujnce")
+
+[node name="FlickyIcon1" parent="." instance=ExtResource("2_s3qsq")]
+
+[node name="FlickyIcon2" parent="." instance=ExtResource("2_s3qsq")]
+position = Vector2(100, 0)
+
+[node name="FlickyIcon3" parent="." instance=ExtResource("2_s3qsq")]
+position = Vector2(200, 0)
+
+[node name="FlickyIcon4" parent="." instance=ExtResource("2_s3qsq")]
+position = Vector2(300, 0)
+
+[node name="FlickyIcon5" parent="." instance=ExtResource("2_s3qsq")]
+position = Vector2(400, 0)

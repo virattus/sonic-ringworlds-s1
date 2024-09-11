@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://daqpkl6e5l87k"]
+
+[ext_resource type="PackedScene" uid="uid://dnni03kowb43s" path="res://entities/CagedFlicky/Cage.glb" id="1_m71xr"]
+[ext_resource type="Script" path="res://entities/CagedFlicky/CagedFlicky.gd" id="2_e0vns"]
+[ext_resource type="Texture2D" uid="uid://8q8nheatiyqh" path="res://entities/CagedFlicky/Cage.png" id="2_h53ir"]
+[ext_resource type="Texture2D" uid="uid://c1e73bgkapre6" path="res://entities/Flicky/FlickyAnim.png" id="3_b0yqy"]
+[ext_resource type="PackedScene" uid="uid://diggpp8iee3x4" path="res://entities/Hurtbox/Hurtbox.tscn" id="4_1rjcb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktsw6"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("2_h53ir")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ymibj"]
+radius = 1.0
+
+[node name="CagedFlicky" instance=ExtResource("1_m71xr")]
+script = ExtResource("2_e0vns")
+FlickyID = 1
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(-1.34359e-07, 4.37114e-08, -4.37114e-08, 1)
+
+[node name="Cylinder" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ktsw6")
+
+[node name="BirdBone" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, -8.74228e-08, -8.74227e-08, -8.74228e-08, -1, 2.53568e-07, -8.74228e-08, -2.53568e-07, -1, 4.37114e-08, -0.486937, 1.56885e-07)
+bone_name = "Bird"
+bone_idx = 2
+
+[node name="Sprite3D" type="Sprite3D" parent="Armature/Skeleton3D/BirdBone" index="0"]
+pixel_size = 0.05
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_b0yqy")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CageBone" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -4.92967e-15, 1.42109e-14, 6.25408e-15, -1, -1.51495e-08, 0, 1.51495e-08, -1, -4.37114e-08, 0, -1.19209e-07)
+bone_name = "Cage"
+bone_idx = 1
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Armature/Skeleton3D/CageBone" index="0"]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/CageBone/CharacterBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ymibj")
+
+[node name="Hurtbox" parent="Armature/Skeleton3D/CageBone" index="1" instance=ExtResource("4_1rjcb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/CageBone/Hurtbox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ymibj")
+
+[connection signal="HurtboxActivated" from="Armature/Skeleton3D/CageBone/Hurtbox" to="." method="_on_hurtbox_hurtbox_activated"]

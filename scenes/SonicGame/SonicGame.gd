@@ -10,6 +10,7 @@ const PLAYER_DROWNING_MIN = 12.75 / 30.0
 
 func _ready() -> void:
 	Globals.RingCount = 0
+	Globals.CollectedFlickies = [false, false, false, false, false]
 
 
 func _physics_process(delta: float) -> void:
@@ -35,3 +36,7 @@ func _on_death_timer_timeout() -> void:
 	else:
 		Globals.LivesCount -= 1
 		get_tree().reload_current_scene()
+
+
+func _on_caged_flicky_cage_destroyed(ID: int) -> void:
+	$HUD.ActivateFlickyIcon(ID)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1gg4n15s557"]
+
+[ext_resource type="Texture2D" uid="uid://dmc0l6ki27aua" path="res://overlays/HUD/Flicky/FlickyIcons.png" id="1_sqt4c"]
+[ext_resource type="Script" path="res://overlays/HUD/Flicky/FlickyIcon.gd" id="2_m7hj7"]
+
+[node name="FlickyIcon" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_sqt4c")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("2_m7hj7")
