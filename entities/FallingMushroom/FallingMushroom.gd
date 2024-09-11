@@ -39,3 +39,5 @@ func _on_body_exited(body: Node3D) -> void:
 
 func _on_timer_timeout() -> void:
 	Fall = true
+	$CollisionShape3D3.set_deferred("disabled", true)
+	$Cap/CharacterBody3D/CollisionShape3D2.set_deferred("disabled", true)
