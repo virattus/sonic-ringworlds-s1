@@ -34,7 +34,7 @@ animations = [{
 
 [node name="AirBubbleSpawner" type="AnimatedSprite3D"]
 offset = Vector2(0, 8)
-pixel_size = 0.02
+pixel_size = 0.08
 billboard = 1
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_63ql3")
