@@ -35,6 +35,7 @@ radius = 0.25
 [node name="Flicky" type="RigidBody3D"]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_1xm3b")
+can_sleep = false
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_vbqcw")

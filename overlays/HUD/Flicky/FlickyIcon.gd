@@ -13,5 +13,6 @@ func Activate() -> void:
 
 func ShrunkComplete() -> void:
 	modulate = ACTIVE_COLOUR
+	region_rect.position.x = 64
 	var growTween = create_tween()
 	growTween.tween_property(self, "scale:x", 1.0, 0.5)
