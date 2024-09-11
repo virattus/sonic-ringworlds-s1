@@ -39,6 +39,10 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 		owner.GroundCollision = true
 	else:
 		owner.GroundCollision = false
+		if owner.RunOnWater:
+			if owner.IsOnWaterSurface():
+				owner.UpdateUpDir(owner.WaterSurfaceCast.get_collision_normal(), -1.0)
+				return true
 		return false 
 	
 	return true

@@ -82,7 +82,8 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_moavr")
 
 [node name="ItemBox" type="CharacterBody3D"]
-collision_mask = 10
+collision_layer = 1024
+collision_mask = 0
 script = ExtResource("2_n0vx0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -91,7 +92,7 @@ shape = SubResource("BoxShape3D_4km4s")
 
 [node name="TouchHurtbox" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TouchHurtbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17724, -0.0974228)

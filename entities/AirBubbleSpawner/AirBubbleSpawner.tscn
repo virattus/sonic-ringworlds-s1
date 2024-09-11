@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvxqyp8q8o3qu"]
+
+[ext_resource type="Script" path="res://entities/AirBubbleSpawner/AirBubbleSpawner.gd" id="1_ju0w0"]
+[ext_resource type="Texture2D" uid="uid://curddixfv0yr6" path="res://entities/AirBubbleSpawner/AirBubbleSpawner.png" id="1_n08n5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2en7t"]
+atlas = ExtResource("1_n08n5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr8rt"]
+atlas = ExtResource("1_n08n5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4djyr"]
+atlas = ExtResource("1_n08n5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_63ql3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2en7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr8rt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4djyr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AirBubbleSpawner" type="AnimatedSprite3D"]
+offset = Vector2(0, 8)
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_63ql3")
+autoplay = "default"
+frame_progress = 0.0551457
+script = ExtResource("1_ju0w0")
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251526, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100, 0)
+target_position = Vector3(0, -100, 0)
+collision_mask = 2048

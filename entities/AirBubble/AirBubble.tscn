@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d27cfoiymgtim"]
+
+[ext_resource type="Script" path="res://entities/AirBubble/AirBubble.gd" id="1_k15hk"]
+[ext_resource type="Texture2D" uid="uid://dv7dx156oj7a5" path="res://effects/Shield/WaterShield.png" id="1_rtmqm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvce0"]
+
+[node name="AirBubble" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_k15hk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xvce0")
+
+[node name="BubbleSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+pixel_size = 0.02
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_rtmqm")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

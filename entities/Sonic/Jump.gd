@@ -9,6 +9,9 @@ const MIN_JUMP_TIME = 1.5
 
 
 func Enter(_msg := {}) -> void:
+	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
+	
 	if _msg.has("JumpSound") and _msg["JumpSound"] != true:
 		pass
 	else:
@@ -40,9 +43,6 @@ func Enter(_msg := {}) -> void:
 	owner.CharMesh.LookAt(owner.global_position + frontVel.normalized())
 	owner.CharMesh.AlignToY(owner.up_direction)
 	
-	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
-	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
-	
 	owner.GroundCollision = false
 	owner.StickToFloor = false
 	owner.HasJumped = true
@@ -66,8 +66,6 @@ func Update(_delta: float) -> void:
 				return
 			
 	if CheckGroundCollision(collision):
-		#We landed while travelling up, this should (probably) never happen
-		assert(false)
 		return
 	
 	if Input.is_action_just_pressed("Jump"):

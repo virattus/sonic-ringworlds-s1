@@ -8,6 +8,7 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Air/blend_amount", 0.0)
 	
 	owner.GroundCollision = false
+	owner.StickToFloor = false
 
 
 func Exit() -> void:

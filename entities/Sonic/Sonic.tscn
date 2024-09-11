@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=54 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_paxei"]
 [ext_resource type="Script" path="res://entities/Sonic/Sonic.gd" id="2_p6xw2"]
@@ -38,6 +38,8 @@
 [ext_resource type="Script" path="res://entities/Sonic/Fall.gd" id="28_p62qa"]
 [ext_resource type="Script" path="res://entities/Sonic/DebugMove.gd" id="29_u7sl5"]
 [ext_resource type="AudioStream" uid="uid://cthagnajjhpu0" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C5.wav" id="39_keyd5"]
+[ext_resource type="AudioStream" uid="uid://bykct827tocf8" path="res://entities/Sonic/204017__duckduckpony__footsteps_water_light_004.wav" id="39_t1b43"]
+[ext_resource type="AudioStream" uid="uid://cogy343od62no" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_AD.wav" id="40_g3ws3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d4iho"]
 
@@ -109,22 +111,26 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(9.15451e-09, 0.104715, 3.01821)
-bones/2/position = Vector3(-5.13685, 0.0581753, 3.62874)
-bones/2/rotation = Quaternion(3.17482e-08, -0.726313, 0.687364, -3.00456e-08)
+bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
+bones/1/position = Vector3(-3.9761e-09, 0.546374, 2.96876)
+bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+bones/2/position = Vector3(-5.13685, 0.303541, 3.03681)
+bones/2/rotation = Quaternion(2.54125e-08, -0.801292, 0.598273, -3.57644e-08)
+bones/2/scale = Vector3(1, 1, 1)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.0581753, 3.62874)
-bones/4/rotation = Quaternion(3.17482e-08, -0.726313, 0.687364, -3.00456e-08)
+bones/4/position = Vector3(5.13685, 0.303541, 3.03681)
+bones/4/rotation = Quaternion(2.54125e-08, -0.801292, 0.598273, -3.57644e-08)
+bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(9.15451e-09, 0.104715, 5.25717)
+bones/6/position = Vector3(-3.9761e-09, 0.546374, 5.20771)
+bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 bones/6/scale = Vector3(1, 1, 1)
 
 [node name="BoneAttachBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, -9.15451e-09, 3.01821, 0.104715)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 1.00427e-08, 2.97653, 0.47698)
 bone_name = "Head"
-bone_idx = 1
 
 [node name="AfterimageOrbEmitter" parent="CharacterMesh/SonicModel/Armature/Skeleton3D/BoneAttachBody" index="0" node_paths=PackedStringArray("SceneRoot") instance=ExtResource("5_8ctx7")]
 transform = Transform3D(-10, 0, 8.88178e-14, 0, 10, 0, -8.88178e-14, 0, -10, -5.17416e-08, 1.97226, -0.0196478)
@@ -158,7 +164,7 @@ Size = 0.5
 Colour = Color(1, 0, 0, 1)
 
 [node name="BoneAttachHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 4.8136e-09, -8.72902e-08, 1.77636e-14, -0.998483, -0.055061, -8.74228e-08, 0.055061, -0.998483, 5.13685, 3.62874, 0.0581753)
+transform = Transform3D(1, -2.06805e-09, -8.77228e-08, -2.69082e-08, -0.958783, -0.284138, -8.35195e-08, 0.284138, -0.958783, 5.13685, 3.03681, 0.303541)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -169,7 +175,7 @@ Active = false
 Size = 0.3
 
 [node name="BoneAttachHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 4.8136e-09, -8.72902e-08, 1.77636e-14, -0.998483, -0.055061, -8.74228e-08, 0.055061, -0.998483, -5.13685, 3.62874, 0.0581753)
+transform = Transform3D(1, -2.06805e-09, -8.77228e-08, -2.69082e-08, -0.958783, -0.284138, -8.35195e-08, 0.284138, -0.958783, -5.13685, 3.03681, 0.303541)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -190,17 +196,20 @@ texture = ExtResource("4_7go32")
 
 [node name="CollisionCast" type="RayCast3D" parent="." index="4"]
 
-[node name="SpotShadow" parent="." index="5"]
+[node name="WaterSurfaceCast" type="RayCast3D" parent="." index="5"]
+collision_mask = 4096
+
+[node name="SpotShadow" parent="." index="6"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 
-[node name="UpVectorIndicator" type="Node3D" parent="." index="6"]
+[node name="UpVectorIndicator" type="Node3D" parent="." index="7"]
 
 [node name="UpVectorOrb" type="MeshInstance3D" parent="UpVectorIndicator" index="0"]
 mesh = SubResource("SphereMesh_kteou")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hoqmv")
 
-[node name="InputIndicator" type="Node3D" parent="." index="7"]
+[node name="InputIndicator" type="Node3D" parent="." index="8"]
 
 [node name="InputIndicatorMesh" type="MeshInstance3D" parent="InputIndicator" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.7)
@@ -208,7 +217,7 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hvci8")
 
-[node name="FloorNormalIndicator" type="Node3D" parent="." index="8"]
+[node name="FloorNormalIndicator" type="Node3D" parent="." index="9"]
 
 [node name="FloorIndicatorMesh" type="MeshInstance3D" parent="FloorNormalIndicator" index="0"]
 transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
@@ -216,7 +225,7 @@ mesh = SubResource("SphereMesh_02mkd")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_0akw7")
 
-[node name="VelocityIndicator" type="Node3D" parent="." index="9"]
+[node name="VelocityIndicator" type="Node3D" parent="." index="10"]
 
 [node name="InputIndicatorMesh" type="MeshInstance3D" parent="VelocityIndicator" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.8)
@@ -224,7 +233,7 @@ mesh = SubResource("CylinderMesh_potmg")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
 
-[node name="CameraFocus" type="Node3D" parent="." index="10"]
+[node name="CameraFocus" type="Node3D" parent="." index="11"]
 
 [node name="Sprite3D" type="Sprite3D" parent="CameraFocus" index="0"]
 visible = false
@@ -233,7 +242,7 @@ no_depth_test = true
 texture_filter = 0
 texture = ExtResource("5_wnnh5")
 
-[node name="Hurtbox" parent="." index="11"]
+[node name="Hurtbox" parent="." index="12"]
 visible = false
 collision_layer = 32
 collision_mask = 64
@@ -241,7 +250,7 @@ collision_mask = 64
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
 shape = SubResource("SphereShape3D_yv103")
 
-[node name="Hitbox" parent="." index="12" instance=ExtResource("7_xr2va")]
+[node name="Hitbox" parent="." index="13" instance=ExtResource("7_xr2va")]
 visible = false
 collision_layer = 16
 collision_mask = 128
@@ -256,7 +265,7 @@ mesh = SubResource("SphereMesh_kigcn")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_r3sgk")
 
-[node name="LockOnArea" type="Area3D" parent="." index="13"]
+[node name="LockOnArea" type="Area3D" parent="." index="14"]
 visible = false
 collision_layer = 0
 collision_mask = 8
@@ -266,7 +275,7 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
 shape = SubResource("CylinderShape3D_modop")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="14"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="15"]
 root_node = NodePath("../CharacterMesh/SonicModel")
 tree_root = ExtResource("7_a387p")
 anim_player = NodePath("../CharacterMesh/SonicModel/AnimationPlayer")
@@ -275,9 +284,13 @@ parameters/AirSpinKick/blend_amount = 0.0
 parameters/Death/blend_amount = 0
 parameters/Ground/blend_amount = 0.0
 parameters/GroundSecondary/blend_amount = -1.0
+parameters/Hang/blend_amount = 0
 parameters/Hurt/blend_amount = 0.0
 parameters/Idle/blend_amount = 0
-parameters/Movement/blend_amount = 0.0
+parameters/Movement/blend_amount = 0
+parameters/OSHang/active = false
+parameters/OSHang/internal_active = false
+parameters/OSHang/request = 0
 parameters/OSHurt/active = false
 parameters/OSHurt/internal_active = false
 parameters/OSHurt/request = 0
@@ -289,6 +302,7 @@ parameters/OSPose/internal_active = false
 parameters/OSPose/request = 0
 parameters/Run/blend_amount = -1.0
 parameters/StrikeDash/blend_amount = 0
+parameters/TSHang/scale = 1.0
 parameters/TSRun/scale = 1.0
 parameters/TSSprint/scale = 1.0
 parameters/TSStrikeDash/scale = 1.0
@@ -297,6 +311,8 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 10/scale" = 5.0
 "parameters/TimeScale 11/scale" = 6.0
 "parameters/TimeScale 12/scale" = 2.0
+"parameters/TimeScale 13/scale" = 1.0
+"parameters/TimeScale 14/scale" = 1.0
 "parameters/TimeScale 2/scale" = 1.0
 "parameters/TimeScale 3/scale" = 1.0
 "parameters/TimeScale 4/scale" = 1.0
@@ -306,13 +322,13 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 8/scale" = 1.0
 "parameters/TimeScale 9/scale" = 4.0
 
-[node name="TimerInvincibility" type="Timer" parent="." index="15"]
+[node name="TimerInvincibility" type="Timer" parent="." index="16"]
 one_shot = true
 
-[node name="TimerFlicker" type="Timer" parent="." index="16"]
+[node name="TimerFlicker" type="Timer" parent="." index="17"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="17" node_paths=PackedStringArray("ActiveState")]
+[node name="StateMachine" type="Node" parent="." index="18" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("3_fv7oc")
 ActiveState = NodePath("Initial")
 
@@ -376,52 +392,61 @@ script = ExtResource("9_pbmsm")
 [node name="Death" type="Node" parent="StateMachine" index="16"]
 script = ExtResource("15_ulagb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="18"]
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("11_sc7a7")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("15_ce3xb")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("12_24j27")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("20_yjean")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="22"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="23"]
 stream = ExtResource("12_d0rrw")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="23"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="24"]
 stream = ExtResource("14_5bjro")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="24"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="25"]
 stream = ExtResource("15_gklbx")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="25"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="26"]
 stream = ExtResource("13_uqyav")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="26"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="27"]
 stream = ExtResource("16_805h7")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="27"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="28"]
 stream = ExtResource("16_4apbf")
 bus = &"SoundEffects"
 
-[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="28"]
+[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="29"]
 stream = ExtResource("39_keyd5")
 bus = &"SoundEffects"
 
-[node name="SndShieldActive" type="AudioStreamPlayer" parent="." index="29"]
+[node name="SndShieldActive" type="AudioStreamPlayer" parent="." index="30"]
 stream = ExtResource("39_keyd5")
+bus = &"SoundEffects"
+
+[node name="SndWaterRunFootstep" type="AudioStreamPlayer" parent="." index="31"]
+stream = ExtResource("39_t1b43")
+max_polyphony = 8
+bus = &"SoundEffects"
+
+[node name="SndWaterBreathe" type="AudioStreamPlayer" parent="." index="32"]
+stream = ExtResource("40_g3ws3")
 bus = &"SoundEffects"
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]

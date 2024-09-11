@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://5t6xaywrjshf"]
+
+[ext_resource type="Texture2D" uid="uid://dv7dx156oj7a5" path="res://effects/Shield/WaterShield.png" id="1_rm52t"]
+[ext_resource type="Script" path="res://effects/Bubble/Bubble.gd" id="2_ss5fj"]
+
+[node name="Bubble" type="Sprite3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("1_rm52t")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+script = ExtResource("2_ss5fj")

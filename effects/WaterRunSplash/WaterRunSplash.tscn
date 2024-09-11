@@ -7,13 +7,13 @@
 script = ExtResource("1_uvhqt")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.5, 0.663414, -0.55667, 0, 0.642788, 0.766044, 0.866025, -0.383022, 0.321394, 0, 0, 0)
+transform = Transform3D(0.25, 0.365998, -0.392443, 0, 0.906308, 0.211309, 0.433013, -0.211309, 0.226577, 0, -0.5, 0)
 offset = Vector2(128, 64)
 modulate = Color(1, 1, 1, 0.501961)
 texture = ExtResource("1_60qkh")
 
 [node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform3D(0.5, -0.663414, 0.55667, 0, 0.642788, 0.766044, -0.866025, -0.383022, 0.321394, 0, 0, 0)
+transform = Transform3D(0.25, -0.365998, 0.392443, 0, 0.906308, 0.211309, -0.433013, -0.211309, 0.226577, 0, -0.5, 0)
 offset = Vector2(-128, 64)
 modulate = Color(1, 1, 1, 0.501961)
 texture = ExtResource("1_60qkh")

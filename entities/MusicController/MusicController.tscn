@@ -14,6 +14,5 @@ playback_type = 1
 
 [node name="MusicActiveTrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_kj4wx")
-autoplay = true
 bus = &"Music"
 playback_type = 1

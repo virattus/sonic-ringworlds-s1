@@ -23,11 +23,13 @@ var DebugCollisionNormalDeviation := Vector3.ZERO
 
 var CurrentGravity := 1.0
 var StickToFloor := true
+var AlignToSurface := true
 
 var CanCollectRings := true
 var HasJumped := false
 var CanHang := false
 
+var RunOnWater := false
 var IsUnderwater := false
 var Oxygen := 1.0
 
@@ -54,6 +56,7 @@ var DroppedRingSpeed := 1.0
 @onready var StateM: StateMachine = $StateMachine
 @onready var AirdashTrail = $CylinderTrail2
 @onready var CollisionCast : RayCast3D = $CollisionCast
+@onready var WaterSurfaceCast : RayCast3D = $WaterSurfaceCast
 
 @onready var UpVectorIndicator = $UpVectorIndicator/UpVectorOrb
 @onready var FloorNormalIndicator = $FloorNormalIndicator
@@ -76,6 +79,10 @@ var DroppedRingSpeed := 1.0
 @onready var SndDeath = $SndDeath
 @onready var SndSpinCharge = $SndSpinCharge
 @onready var SndSpinLaunch = $SndSpinLaunch
+@onready var SndOneUp = $SndOneUp
+@onready var SndShieldActive = $SndShieldActive
+@onready var SndWaterRunFootstep = $SndWaterRunFootstep
+@onready var SndWaterBreathe = $SndWaterBreathe
 
 
 @onready var StartingPosition := global_position
@@ -111,8 +118,10 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "up_direction")
 	DebugMenu.AddMonitor(self, "CurrentGravity")
 	DebugMenu.AddMonitor(self, "StickToFloor")
+	DebugMenu.AddMonitor(self, "AlignToSurface")
 	DebugMenu.AddMonitor(self, "CanCollectRings")
 	DebugMenu.AddMonitor(self, "HasJumped")
+	DebugMenu.AddMonitor(self, "RunOnWater")
 	DebugMenu.AddMonitor(self, "IsUnderwater")
 	DebugMenu.AddMonitor(self, "Oxygen")
 	DebugMenu.AddMonitor(self, "Invincible")
@@ -139,7 +148,7 @@ func _process(delta: float) -> void:
 	if IsUnderwater:
 		if Oxygen <= 0.0:
 			if StateM.CurrentState != "Death":
-				StateM.ChangeState("Death")
+				StateM.ChangeState("Death", {})
 				return
 			
 		Oxygen -= delta * OXYGEN_DRAIN_RATE
@@ -242,7 +251,25 @@ func CollectOneUp() -> bool:
 	return true
 
 
+func SetRunOnWater(Active: bool) -> void:
+	RunOnWater = Active
+	set_collision_mask_value(13, Active)
 
+
+func SetUnderwater(Active: bool) -> void:
+	IsUnderwater = Active
+	Oxygen = 1.0
+
+
+func IsOnWaterSurface() -> bool:
+	return WaterSurfaceCast.is_colliding()
+
+
+func BreatheAirBubble() -> void:
+	Oxygen = 1.0
+	SndWaterBreathe.play()
+	velocity = Vector3.ZERO
+	StateM.ChangeState("Fall")
 
 
 func SetInvincible(Active: bool) -> void:
@@ -344,6 +371,8 @@ func _on_timer_flicker_timeout() -> void:
 func ActivateHitbox(Active: bool) -> void:
 	HitBox.monitoring = Active
 	$Hitbox/AttackAreaDebug.visible = Active
+	#disable player collision with item boxes, so that the player can roll through them
+	set_collision_mask_value(11, !Active)
 
 
 func ActivateHurtbox(Active: bool) -> void:

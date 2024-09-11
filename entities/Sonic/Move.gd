@@ -3,6 +3,8 @@ extends "res://entities/Sonic/MoveGround.gd"
 
 var IgnoreInput := 0.0
 
+var FootstepAccumulator := 0.0
+
 
 const RUN_RATIO_DIVISOR = 200.0
 
@@ -10,6 +12,11 @@ const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
 const RUN_SKID_MAX_ANGLE = -0.75
 
 const MOVE_CHARMESH_VEL_ORIENT_MIN_SPEED = 2.0
+
+const FOOTSTEP_TIME_MOD = 0.5
+
+
+const WATER_RUN_SPLASH = preload("res://effects/WaterRunSplash/WaterRunSplash.tscn")
 
 
 func Enter(_msg := {}) -> void:
@@ -27,6 +34,7 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	IgnoreInput = 0.0
+	owner.SetRunOnWater(false)
 	
 
 func Update(_delta: float) -> void:
@@ -44,6 +52,22 @@ func Update(_delta: float) -> void:
 		ChangeState("Ball")
 		return
 	
+	if owner.Speed > owner.PARAMETERS.WALK_MAX_SPEED:
+		owner.SetRunOnWater(true)
+	else:
+		owner.SetRunOnWater(false)
+	
+	FootstepAccumulator += _delta
+	if FootstepAccumulator > (1.0 - (owner.Speed / owner.PARAMETERS.MOVE_MAX_SPEED)) * FOOTSTEP_TIME_MOD:
+		if !owner.GroundCollision and owner.IsOnWaterSurface(): #raycast doesn't hit solid ground idiot
+			owner.SndWaterRunFootstep.play()
+			var splash = WATER_RUN_SPLASH.instantiate()
+			owner.get_parent().add_child(splash)
+			splash.global_transform = owner.CharMesh.global_transform
+			
+		FootstepAccumulator = 0.0
+			
+	
 	var newVel = owner.velocity
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
@@ -54,10 +78,11 @@ func Update(_delta: float) -> void:
 	
 	if inputVel.length() > 0.0:
 		if newVel.length() > owner.PARAMETERS.WALK_MAX_SPEED:
-			if HandleSkid(inputVel):
-				return
-			else:
-				newVel = CalculateRunVelocity(inputVel, _delta)
+			if owner.GroundCollision: #Only skid if not running on water
+				if HandleSkid(inputVel):
+					return
+					
+			newVel = CalculateRunVelocity(inputVel, _delta)
 		else:
 			newVel = CalculateWalkVelocity(inputVel, _delta)
 	else:
