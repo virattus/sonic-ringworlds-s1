@@ -37,6 +37,10 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
+	if Input.is_action_just_pressed("Jump"):
+		ChangeState("Jump")
+		return
+	
 	var InputVel = owner.GetInputVector(Vector3.UP)
 	
 	if InputVel.length() > 0.0:

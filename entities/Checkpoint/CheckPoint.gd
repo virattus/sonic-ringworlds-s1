@@ -1,49 +1,30 @@
-extends Area3D
+extends Node3D
 
 
-var Triggered := false
-var Complete := false
-var Speed := 0.0
+@export_enum("INACTIVE", "ACTIVE", "BROKEN") var CheckpointState := "INACTIVE"
 
-const SPEED_MODIFIER = 0.25
+var Damage := 0
+var Invulnerable := false
 
 const SPARKLE = preload("res://entities/Checkpoint/Sparkle.tscn")
 
 
-func _physics_process(delta: float) -> void:
-	if Complete:
-		return
-	
-	if Triggered:
-		$Pivot.rotate_z(Speed)
-		Speed = lerp(Speed, 0.0, delta)
-		if Speed < 0.1:
-			$Pivot.rotation_degrees.z = 180.0
-			Complete = true
-		
-		var sparkle = SPARKLE.instantiate()
-		add_child(sparkle)
-		sparkle.global_position = $Pivot/SpriteSpinner.global_position
 
 
-func _on_body_entered(body: Node3D) -> void:
-	if !Triggered:
-		DeactivateOtherCheckpoints()
-		Triggered = true
-		body.StartingPosition = global_position + Vector3(0, 0.5, 0)
-		StartCheckPointAnim(body.velocity.length())
-		if Globals.RingCount >= 100:
-			AddOneUp(body)
+func BreakCheckpoint(body: Player) -> void:
+	body.DashModeCharge = 1.0
+	$SndShatter.play()
+	CheckpointState = "BROKEN"
+	$CheckpointGlass.visible = false
+	$CheckpointGlassBroken.visible = true
+	$Hurtbox/CollisionShape3D.set_deferred("disabled", true)
+	$Timer.start()
+
 
 
 func AddOneUp(body) -> void:
 	Globals.RingCount = 0
 	body.CollectOneUp()
-
-
-func StartCheckPointAnim(Speed: float) -> void:
-	Speed = clamp(Speed * SPEED_MODIFIER, 0.25, 1.0)
-	$SndCheckPointTrigger.play()
 
 
 func DeactivateOtherCheckpoints() -> void:
@@ -52,7 +33,21 @@ func DeactivateOtherCheckpoints() -> void:
 		i.Deactivate()
 
 
-func Deactivate() -> void:
-	Triggered = false
-	Complete = false
-	$Pivot.rotation_degrees.z = 0.0
+func _on_hurtbox_hurtbox_activated(Source: Hitbox, _Damage: int) -> void:
+	if Invulnerable:
+		return
+		
+	Damage += 1
+	if Damage >= 2:
+		BreakCheckpoint(Source.get_parent())
+	else:
+		Invulnerable = true
+		$SndCrack.play()
+		$Timer.start()
+
+
+func _on_timer_timeout() -> void:
+	if CheckpointState == "BROKEN":
+		$SpritePop.visible = false
+	else:
+		Invulnerable = false
