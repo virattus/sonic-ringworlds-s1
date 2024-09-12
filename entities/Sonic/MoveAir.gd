@@ -65,7 +65,10 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 			})
 			return true
 		else:
-			return false
+			ChangeState("Teetering", {
+				
+			})
+			return true
 	elif collision.CollisionType == SonicCollision.WALL:
 		#This only fires if we're hitting just a wall, so we need to make certain that we're 
 		#actually colliding with a wall specifically, and not just rubbing on one as we fall down

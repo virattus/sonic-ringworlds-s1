@@ -17,7 +17,7 @@ const BUBBLE = preload("res://effects/Bubble/Bubble.tscn")
 func _ready() -> void:
 	WaterMaxHeight = $RayCast3D.get_collision_point().y
 	$RayCast3D.queue_free()
-	print("Bubble Spawner: Max height %s" % WaterMaxHeight)
+	#print("Bubble Spawner: Max height %s" % WaterMaxHeight)
 
 
 func _physics_process(delta: float) -> void:

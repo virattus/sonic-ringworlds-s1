@@ -11,7 +11,7 @@ const EXPLOSION = preload("res://effects/Explosion/Explosion.tscn")
 const FLICKY = preload("res://entities/Flicky/Flicky.tscn")
 
 
-func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
+func _on_hurtbox_hurtbox_activated(_Source: Hitbox, Damage: int) -> void:
 	CageDestroyed.emit(FlickyID - 1)
 	
 	var flicky = FLICKY.instantiate()

@@ -28,6 +28,7 @@ var AlignToSurface := true
 var CanCollectRings := true
 var HasJumped := false
 var CanHang := false
+var HangMovementAxis := Vector3.ZERO
 
 var RunOnWater := false
 var IsUnderwater := false

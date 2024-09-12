@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://io6exwde1xx0"]
+
+[ext_resource type="Script" path="res://entities/HangPoint/HangPoint.gd" id="1_kheg0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jocuu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j5m8m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_peb7b"]
+
+[node name="HangPoint" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_kheg0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_jocuu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.831916, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_j5m8m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_peb7b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

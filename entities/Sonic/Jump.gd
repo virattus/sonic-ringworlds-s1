@@ -118,4 +118,4 @@ func Update(_delta: float) -> void:
 
 
 func AbleToHang() -> bool:
-	return false
+	return true

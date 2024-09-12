@@ -18,7 +18,7 @@ func _ready() -> void:
 		$TouchHurtbox/CollisionShape3D.set_deferred("disabled", true)
 
 
-func ActivateItemBox(source: Character) -> void:
+func ActivateItemBox(_source: Character) -> void:
 	$SndItemBoxOpened.play()
 	ItemBoxModel.visible = false
 	DeactivateCollision()

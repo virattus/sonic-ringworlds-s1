@@ -90,8 +90,18 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.PARAMETERS.GROUND_NORMAL_HOP))
 			return false
 	elif collision.CollisionType == SonicCollision.WALL:
-		#I don't know if we actually need to handle this
 		if owner.is_on_wall_only():
+			if CheckFloorRaycast(delta):
+				return true
+			else:
+				owner.CollisionCast.target_position = owner.to_local(owner.get_last_slide_collision().get_position()).normalized()
+				owner.CollisionCast.force_raycast_update()
+				owner.CollisionCast.target_position = -owner.up_direction * owner.COLLISION_CAST_LENGTH
+				if owner.CollisionCast.is_colliding():
+					ChangeState("Teetering", {
+						
+					})
+					return true
 			return false
 		else:
 			return true
