@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqr1urum33k1o"]
+
+[ext_resource type="PackedScene" uid="uid://cbk11ie7m8c2r" path="res://entities/Enemy/Enemy.tscn" id="1_p3vco"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Bit/Idle.gd" id="2_57hxm"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Bit/Bit.gd" id="2_ij7s4"]
+[ext_resource type="Texture2D" uid="uid://xml48b052bv7" path="res://entities/Boss/BounceRobotnik/Bit/Bit.png" id="2_v4h5m"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Bit/Follow.gd" id="3_6xqm4"]
+[ext_resource type="Texture2D" uid="uid://duwshmekgj2q1" path="res://entities/Boss/BounceRobotnik/Bit/BitPop.png" id="3_40agg"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Bit/Pop.gd" id="6_3oey1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3o520"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ynkdx"]
+
+[node name="RobotnikBit" instance=ExtResource("1_p3vco")]
+script = ExtResource("2_ij7s4")
+HomeMaxDist = 10.0
+
+[node name="SpriteBit" type="Sprite3D" parent="." index="0"]
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_v4h5m")
+
+[node name="SpritePop" type="Sprite3D" parent="." index="1"]
+visible = false
+pixel_size = 0.04
+billboard = 1
+double_sided = false
+texture_filter = 0
+texture = ExtResource("3_40agg")
+
+[node name="WorldCollision" parent="." index="2"]
+shape = SubResource("SphereShape3D_3o520")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("SphereShape3D_ynkdx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_ynkdx")
+
+[node name="Idle" parent="StateMachine" index="1"]
+script = ExtResource("2_57hxm")
+
+[node name="Follow" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("3_6xqm4")
+
+[node name="Pop" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("6_3oey1")

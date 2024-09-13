@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8fm5g07kdnwf"]
+
+[ext_resource type="Script" path="res://entities/GameCamera/GameCamera.gd" id="1_veeo6"]
+
+[node name="GameCamera" type="Node3D"]
+script = ExtResource("1_veeo6")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]

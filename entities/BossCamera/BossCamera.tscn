@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c57jxsuxpisjc"]
+
+[ext_resource type="PackedScene" uid="uid://b8fm5g07kdnwf" path="res://entities/GameCamera/GameCamera.tscn" id="1_g1pys"]
+[ext_resource type="Script" path="res://entities/BossCamera/BossCamera.gd" id="1_hgpin"]
+[ext_resource type="Texture2D" uid="uid://b3jasmhu3jyr6" path="res://icons/CameraTarget.png" id="3_w2q0m"]
+
+[node name="BossCamera" instance=ExtResource("1_g1pys")]
+script = ExtResource("1_hgpin")
+
+[node name="SpringArm3D" parent="." index="0"]
+collision_mask = 0
+
+[node name="CameraTarget" type="Sprite3D" parent="." index="1"]
+pixel_size = 0.03
+billboard = 1
+texture_filter = 0
+texture = ExtResource("3_w2q0m")

@@ -11,7 +11,7 @@ enum ShieldState {
 }
 
 
-@export var Camera: ThirdPersonCamera
+@export var Camera: GameCamera
 
 var DebugMove := false
 var DebugMoveVector := Vector3.ZERO
@@ -221,8 +221,11 @@ func UpdateUpDir(floor_normal: Vector3, delta: float) -> void:
 func GetInputVector(up_dir: Vector3) -> Vector3:
 	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward", 0.4)
 	
-	var CameraForward = Camera.global_transform.basis.z
-	var CameraRight = Camera.global_transform.basis.x
+	#var CameraForward = Camera.global_transform.basis.z
+	#var CameraRight = Camera.global_transform.basis.x
+	
+	var CameraForward = (Camera.GetBasis().z * Vector3(1, 0, 1)).normalized()
+	var CameraRight = (Camera.GetBasis().x * Vector3(1, 0, 1)).normalized()
 	
 	var newInput = (CameraForward * playerInput.y) + (CameraRight * playerInput.x)
 	var newVelocity = (Quaternion(Vector3.UP, up_dir).normalized()) * newInput

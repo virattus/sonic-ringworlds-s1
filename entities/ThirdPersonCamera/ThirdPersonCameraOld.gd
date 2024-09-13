@@ -1,6 +1,5 @@
-extends GameCamera
-
-
+class_name ThirdPersonCamera
+extends Node3D
 
 @export var Active := true
 @export var RightAnalogue := true
@@ -14,6 +13,7 @@ var up_axis := Vector3.UP
 var CamRotation := 0.0
 
 
+@onready var cam = $SpringArm3D/Camera3D
 
 const CAM_ROT_ACCEL_SPEED = 1.0
 const CAM_MAX_ROT_SPEED = 1.0
@@ -23,7 +23,6 @@ const CAM_ARM_MIN_LENGTH = 3.0
 const CAM_ARM_SPEED_MIN = 6.0
 const CAM_ARM_SPEED_MAX = 28.0
 const CAM_ARM_SPEED_SCALE = 0.05
-
 
 
 func _ready() -> void:
@@ -37,7 +36,7 @@ func _process(delta: float) -> void:
 	
 	up_axis = self.transform.basis.y
 	
-	position = Char.position + Vector3(0, 1, 0)
+	position = Char.position
 	
 	#var alignment = basis_aligned_y(transform.basis, char.up_direction)
 	#transform.basis = transform.basis.slerp(alignment, 0.2)
@@ -52,6 +51,14 @@ func _process(delta: float) -> void:
 	
 	$SpringArm3D/Camera3D.look_at(Focus.global_position)
 	CurrentBasis = transform.basis
+
+
+func GetCamera() -> Camera3D:
+	return cam
+
+
+func GetCameraBasis() -> Basis:
+	return cam.global_transform.basis
 
 
 func shoulder_cam_input(_delta: float) -> void:
@@ -78,7 +85,7 @@ func cam_input() -> void:
 func CharRotation() -> void:
 	var speed = Char.Speed
 	if speed > 1.0:
-		var dotRight = Char.velocity.normalized().dot(-Cam.global_transform.basis.x)
+		var dotRight = Char.velocity.normalized().dot(-cam.global_transform.basis.x)
 		transform.basis = transform.basis.rotated(up_axis, dotRight * speed * 0.001)
 	
 	 

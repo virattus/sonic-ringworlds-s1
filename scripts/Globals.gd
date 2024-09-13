@@ -13,6 +13,7 @@ var DEBUG_SCENES = {
 	"MapLoader": "res://scenes/GLTFLoader/GLTFLoader.tscn",
 	"SphereTest": "res://scenes/SphereTest/SphereTest.tscn",
 	"ContinueZone": "res://scenes/ContinueSequence/ContinueSequence.tscn",
+	"BossScene": "res://scenes/BossScene/BossScene.tscn",
 }
 var CurrentScene = null
 

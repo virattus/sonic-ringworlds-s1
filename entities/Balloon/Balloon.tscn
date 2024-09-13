@@ -16,6 +16,7 @@ radius = 1.36325
 
 [node name="Balloon" instance=ExtResource("1_uj0vn")]
 script = ExtResource("2_dxsl7")
+HomeMaxDist = 10.0
 MaxVisibility = 80.0
 
 [node name="WorldCollision" parent="." index="0"]

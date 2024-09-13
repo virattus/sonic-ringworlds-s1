@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjcvup28k470r"]
+
+[ext_resource type="PackedScene" uid="uid://cbk11ie7m8c2r" path="res://entities/Enemy/Enemy.tscn" id="1_yg08d"]
+[ext_resource type="Script" path="res://entities/Boss/Boss.gd" id="2_nryd2"]
+
+[node name="Boss" groups=["Boss"] instance=ExtResource("1_yg08d")]
+script = ExtResource("2_nryd2")
+HomeMaxDist = 10.0

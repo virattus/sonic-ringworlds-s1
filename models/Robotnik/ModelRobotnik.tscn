@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://chbm1gg7i727c"]
+
+[ext_resource type="PackedScene" uid="uid://btcja3jdadjdr" path="res://models/Robotnik/Robotnik.glb" id="1_n557u"]
+
+[node name="ModelRobotnik" instance=ExtResource("1_n557u")]

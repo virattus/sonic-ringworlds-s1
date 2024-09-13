@@ -11,13 +11,13 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shw6i"]
 
-[sub_resource type="Sky" id="Sky_jehaj"]
+[sub_resource type="Sky" id="Sky_g8qa6"]
 sky_material = SubResource("ProceduralSkyMaterial_shw6i")
 
 [sub_resource type="Environment" id="Environment_jrfg5"]
 background_mode = 2
 background_color = Color(0.647059, 0.8, 0.996078, 1)
-sky = SubResource("Sky_jehaj")
+sky = SubResource("Sky_g8qa6")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.1
@@ -40,15 +40,20 @@ Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-1.53253e-08, 0.416555, 2.9833)
-bones/2/position = Vector3(-5.13685, 0.231419, 3.2108)
-bones/2/rotation = Quaternion(2.44817e-08, -0.780366, 0.625323, -3.69629e-08)
-bones/4/position = Vector3(5.13685, 0.231419, 3.2108)
-bones/4/rotation = Quaternion(2.44817e-08, -0.780366, 0.625323, -3.69629e-08)
-bones/6/position = Vector3(-1.53253e-08, 0.416555, 5.22225)
+bones/1/position = Vector3(-1.71918e-08, 0.395204, 2.98569)
+bones/2/position = Vector3(-5.13685, 0.219558, 3.23941)
+bones/2/rotation = Quaternion(2.43255e-08, -0.776829, 0.629712, -3.71563e-08)
+bones/4/position = Vector3(5.13685, 0.219558, 3.23941)
+bones/4/rotation = Quaternion(2.43255e-08, -0.776829, 0.629712, -3.71563e-08)
+bones/6/position = Vector3(-1.71918e-08, 0.395204, 5.22464)
+
+[node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
+transform = Transform3D(1, -9.00202e-09, -8.83644e-08, -2.70921e-08, -0.978357, -0.206926, -8.45891e-08, 0.206926, -0.978357, 5.13685, 3.23941, 0.219558)
+
+[node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
+transform = Transform3D(1, -9.00202e-09, -8.83644e-08, -2.70921e-08, -0.978357, -0.206926, -8.45891e-08, 0.206926, -0.978357, -5.13685, 3.23941, 0.219558)
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
-RightAnalogue = false
 Char = NodePath("../Sonic")
 Focus = NodePath("../Sonic/CameraFocus")
 

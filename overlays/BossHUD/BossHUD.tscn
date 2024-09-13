@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vpxtjlttauv0"]
+
+[ext_resource type="PackedScene" uid="uid://butvqg7bms767" path="res://overlays/HUD/HUD.tscn" id="1_syry3"]
+
+[node name="BossHUD" instance=ExtResource("1_syry3")]
+
+[node name="FlickyStack" parent="." index="6"]
+position = Vector2(19, -70)

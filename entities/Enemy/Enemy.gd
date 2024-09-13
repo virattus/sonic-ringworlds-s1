@@ -2,7 +2,7 @@ class_name Enemy
 extends Character
 
 
-@export var MaxDistFromHome := 10.0
+@export var HomeMaxDist := 10.0
 @export var MaxVisibility := 20.0
 
 @onready var Home: Vector3 = global_position
@@ -11,6 +11,7 @@ extends Character
 @onready var HitBox : Hitbox = $Hitbox
 
 var EnemyActive := true
+var EnemyInvincible := false
 var EnemyDefeated := false
 
 const DEFEATSOUND = preload("res://entities/Enemy/EnemyDefeatSound/EnemyDefeatSound.tscn")
@@ -20,6 +21,7 @@ const FLICKY = preload("res://entities/Flicky/Flicky.tscn")
 
 func _ready() -> void:
 	DebugMenu.AddMonitor(self, "EnemyActive")
+	DebugMenu.AddMonitor(self, "EnemyInvincible")
 	DebugMenu.AddMonitor(self, "EnemyDefeated")
 
 
@@ -37,6 +39,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hurtbox_hurtbox_activated(_Source: Hitbox, _Damage: int) -> void:
+	if EnemyInvincible:
+		return
+	
 	Health -= _Damage
 	if Health <= 0:
 		EnemyDeath()

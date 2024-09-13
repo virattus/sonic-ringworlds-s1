@@ -1,0 +1,64 @@
+[gd_scene load_steps=13 format=3 uid="uid://t3ugsgv4v5tg"]
+
+[ext_resource type="Script" path="res://scenes/BossScene/BossScene.gd" id="1_mt61t"]
+[ext_resource type="PackedScene" uid="uid://vpxtjlttauv0" path="res://overlays/BossHUD/BossHUD.tscn" id="2_6jt0q"]
+[ext_resource type="PackedScene" uid="uid://cspov7b53hufw" path="res://overlays/IngameOptions/IngameOptions.tscn" id="3_inlvv"]
+[ext_resource type="PackedScene" uid="uid://duk7ha7p415ep" path="res://entities/MusicController/MusicController.tscn" id="4_ikx2v"]
+[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="5_uc6vf"]
+[ext_resource type="PackedScene" uid="uid://c57jxsuxpisjc" path="res://entities/BossCamera/BossCamera.tscn" id="6_x77rv"]
+[ext_resource type="PackedScene" uid="uid://cafqmsgx6g5m" path="res://entities/Boss/BounceRobotnik/BounceRobotnik.tscn" id="7_fipk3"]
+[ext_resource type="PackedScene" uid="uid://rb42w1p46eb4" path="res://maps/BossArena1/BossArena1.tscn" id="8_mfab0"]
+[ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="9_8vy71"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n8whf"]
+
+[sub_resource type="Sky" id="Sky_jehaj"]
+sky_material = SubResource("ProceduralSkyMaterial_n8whf")
+
+[sub_resource type="Environment" id="Environment_crd66"]
+background_mode = 2
+background_color = Color(0.647059, 0.8, 0.996078, 1)
+sky = SubResource("Sky_jehaj")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.1
+
+[node name="BossScene" type="Node"]
+script = ExtResource("1_mt61t")
+
+[node name="BossHUD" parent="." node_paths=PackedStringArray("Sonic") instance=ExtResource("2_6jt0q")]
+Sonic = NodePath("../Sonic")
+
+[node name="IngameOptions" parent="." instance=ExtResource("3_inlvv")]
+
+[node name="MusicController" parent="." instance=ExtResource("4_ikx2v")]
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.589901, 0.557758, -0.583885, 0, 0.7231, 0.690744, 0.807475, -0.40747, 0.426557, 0, 6.26844, 0)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_crd66")
+
+[node name="Sonic" parent="." node_paths=PackedStringArray("Camera", "Controller") instance=ExtResource("5_uc6vf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81677, 7.97284)
+Camera = NodePath("../BossCamera")
+Controller = NodePath("../PlayerController")
+
+[node name="BossCamera" parent="." node_paths=PackedStringArray("player", "boss") instance=ExtResource("6_x77rv")]
+player = NodePath("../Sonic")
+boss = NodePath("../BounceRobotnik")
+
+[node name="PlayerController" parent="." instance=ExtResource("9_8vy71")]
+
+[node name="BounceRobotnik" parent="." instance=ExtResource("7_fipk3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33568, -8.88499)
+
+[node name="BossArena1" parent="." instance=ExtResource("8_mfab0")]
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="HealthEmpty" from="Sonic" to="." method="_on_sonic_health_empty"]

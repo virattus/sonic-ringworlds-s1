@@ -10,7 +10,7 @@
 [node name="Enemy" groups=["Enemy"] instance=ExtResource("1_pe7ty")]
 collision_layer = 8
 script = ExtResource("2_esaov")
-MaxDistFromHome = 10.0
+HomeMaxDist = 10.0
 MaxVisibility = 20.0
 
 [node name="Hitbox" parent="." index="5" instance=ExtResource("3_lrkkl")]
