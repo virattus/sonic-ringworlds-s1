@@ -5,6 +5,13 @@ extends Node
 @onready var Options = $IngameOptions
 @onready var MusicController = $MusicController
 @onready var DeathTimer = $DeathTimer
+@onready var player = $Sonic
+@onready var boss = $BounceRobotnik
+@onready var FightCam = $BossCamera
+
+
+func _ready() -> void:
+	Globals.PlayerChar = player
 
 
 func _on_death_timer_timeout() -> void:
@@ -18,5 +25,9 @@ func _on_death_timer_timeout() -> void:
 
 
 func _on_sonic_health_empty() -> void:
-	$ThirdPersonCamera.Active = false
+	FightCam.Activate(false)
 	DeathTimer.start()
+
+
+func _on_bounce_robotnik_camera_pan_complete() -> void:
+	$StateMachine.ChangeState("Fight")

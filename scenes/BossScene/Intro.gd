@@ -4,7 +4,11 @@ extends BasicState
 
 
 func Enter(_msg := {}) -> void:
-	owner.AnimTree.active = true
+	#ChangeState("Fight")
+	
+	owner.boss.PanCamera()
+	
+	pass
 
 
 func Exit() -> void:

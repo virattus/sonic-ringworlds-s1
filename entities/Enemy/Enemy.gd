@@ -49,13 +49,17 @@ func _on_hurtbox_hurtbox_activated(_Source: Hitbox, _Damage: int) -> void:
 
 
 func EnemyActivate(Active: bool) -> void:
+	SetPlayerCollision(Active)
 	CharMesh.visible = Active
 	SpotShadow.visible = Active
+	EnemyActive = Active
+
+
+func SetPlayerCollision(Active: bool) -> void:
 	HurtBox.monitoring = Active
 	HurtBox.monitorable = Active
 	HitBox.monitoring = Active
 	HitBox.monitorable = Active
-	EnemyActive = Active
 
 
 func EnemyDeath() -> void:

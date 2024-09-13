@@ -2,9 +2,12 @@ extends BasicState
 
 
 
+
 func Enter(_msg := {}) -> void:
 	owner.SpriteBit.visible = false
-	owner.SpriteBit.visible = true
+	owner.SpritePop.visible = true
+	owner.SetPlayerCollision(false)
+	owner.SpawnDefeatSound()
 
 
 func Exit() -> void:

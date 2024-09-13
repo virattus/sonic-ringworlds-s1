@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://cafqmsgx6g5m"]
+[gd_scene load_steps=8 format=3 uid="uid://cafqmsgx6g5m"]
 
 [ext_resource type="PackedScene" uid="uid://cjcvup28k470r" path="res://entities/Boss/Boss.tscn" id="1_jyjm4"]
 [ext_resource type="PackedScene" uid="uid://chbm1gg7i727c" path="res://models/Robotnik/ModelRobotnik.tscn" id="2_cu1jg"]
 [ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Idle.gd" id="3_c2wkl"]
 [ext_resource type="PackedScene" uid="uid://cqr1urum33k1o" path="res://entities/Boss/BounceRobotnik/Bit/Bit.tscn" id="3_jucgi"]
 [ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Move.gd" id="4_gka43"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Death.gd" id="6_mogd0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jxse"]
-radius = 1.24787
+radius = 1.25
 
 [node name="BounceRobotnik" instance=ExtResource("1_jyjm4")]
+MaxVisibility = 200.0
+Health = 8
+MaxHealth = 8
 
 [node name="WorldCollision" parent="." index="0"]
 shape = SubResource("SphereShape3D_4jxse")
@@ -20,34 +24,62 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 [node name="SpotShadow" parent="." index="3"]
 transform = Transform3D(1.33, 0, 0, 0, 1.33, 0, 0, 0, 1.33, 0, 0, 0)
 
-[node name="BitParent" type="Node3D" parent="." index="6"]
+[node name="HitTimer" type="Timer" parent="." index="4"]
+process_callback = 0
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("SphereShape3D_4jxse")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_4jxse")
+
+[node name="CameraPivot" type="Node3D" parent="." index="7"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.575, 2.84)
+
+[node name="BitParent" type="Node3D" parent="." index="8"]
 
 [node name="RobotnikBit" parent="BitParent" index="0" instance=ExtResource("3_jucgi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.74872)
+collision_mask = 3
 
 [node name="RobotnikBit2" parent="BitParent" index="1" instance=ExtResource("3_jucgi")]
 transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 1.23653, 0, 1.23653)
+collision_mask = 3
 
 [node name="RobotnikBit3" parent="BitParent" index="2" instance=ExtResource("3_jucgi")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.74872, 0, -7.64391e-08)
+collision_mask = 3
 
 [node name="RobotnikBit4" parent="BitParent" index="3" instance=ExtResource("3_jucgi")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 1.23653, 0, -1.23653)
+collision_mask = 3
 
 [node name="RobotnikBit5" parent="BitParent" index="4" instance=ExtResource("3_jucgi")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.52878e-07, 0, -1.74872)
+collision_mask = 3
 
 [node name="RobotnikBit6" parent="BitParent" index="5" instance=ExtResource("3_jucgi")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -1.23653, 0, -1.23653)
+collision_mask = 3
 
 [node name="RobotnikBit7" parent="BitParent" index="6" instance=ExtResource("3_jucgi")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -1.74872, 0, 2.08533e-08)
+collision_mask = 3
 
 [node name="RobotnikBit8" parent="BitParent" index="7" instance=ExtResource("3_jucgi")]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -1.23653, 0, 1.23653)
+collision_mask = 3
 
 [node name="Idle" parent="StateMachine" index="1"]
 script = ExtResource("3_c2wkl")
 
 [node name="Move" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("4_gka43")
+
+[node name="Death" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("6_mogd0")
+
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]

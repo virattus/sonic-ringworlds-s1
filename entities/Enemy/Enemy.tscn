@@ -9,6 +9,7 @@
 
 [node name="Enemy" groups=["Enemy"] instance=ExtResource("1_pe7ty")]
 collision_layer = 8
+collision_mask = 1
 script = ExtResource("2_esaov")
 HomeMaxDist = 10.0
 MaxVisibility = 20.0

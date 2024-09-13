@@ -2,9 +2,10 @@ extends BasicState
 
 
 
-
 func Enter(_msg := {}) -> void:
-	owner.AnimTree.active = true
+	owner.FightCam.Activate(true)
+	owner.player.StateM.ChangeState("Idle")
+	owner.boss.StateM.ChangeState("Idle")
 
 
 func Exit() -> void:

@@ -14,7 +14,7 @@
 
 [node name="RobotnikBit" instance=ExtResource("1_p3vco")]
 script = ExtResource("2_ij7s4")
-HomeMaxDist = 10.0
+MaxVisibility = 200.0
 
 [node name="SpriteBit" type="Sprite3D" parent="." index="0"]
 pixel_size = 0.04
@@ -47,3 +47,5 @@ script = ExtResource("3_6xqm4")
 
 [node name="Pop" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("6_3oey1")
+
+[connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]

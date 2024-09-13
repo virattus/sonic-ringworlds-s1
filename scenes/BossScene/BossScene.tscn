@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://t3ugsgv4v5tg"]
+[gd_scene load_steps=18 format=3 uid="uid://t3ugsgv4v5tg"]
 
 [ext_resource type="Script" path="res://scenes/BossScene/BossScene.gd" id="1_mt61t"]
 [ext_resource type="PackedScene" uid="uid://vpxtjlttauv0" path="res://overlays/BossHUD/BossHUD.tscn" id="2_6jt0q"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cafqmsgx6g5m" path="res://entities/Boss/BounceRobotnik/BounceRobotnik.tscn" id="7_fipk3"]
 [ext_resource type="PackedScene" uid="uid://rb42w1p46eb4" path="res://maps/BossArena1/BossArena1.tscn" id="8_mfab0"]
 [ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="9_8vy71"]
+[ext_resource type="PackedScene" uid="uid://y5djm215ls8v" path="res://entities/Coin/Coin.tscn" id="10_0wwvf"]
+[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="11_tqokn"]
+[ext_resource type="Script" path="res://scenes/BossScene/Intro.gd" id="12_qot1l"]
+[ext_resource type="Script" path="res://scenes/BossScene/Fight.gd" id="13_wyhpj"]
+[ext_resource type="Script" path="res://scenes/BossScene/Victory.gd" id="14_0j1ku"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n8whf"]
 
@@ -45,7 +50,7 @@ light_energy = 0.5
 environment = SubResource("Environment_crd66")
 
 [node name="Sonic" parent="." node_paths=PackedStringArray("Camera", "Controller") instance=ExtResource("5_uc6vf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.81677, 7.97284)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.558889, 7.97284)
 Camera = NodePath("../BossCamera")
 Controller = NodePath("../PlayerController")
 
@@ -60,5 +65,55 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.33568, -8.88499)
 
 [node name="BossArena1" parent="." instance=ExtResource("8_mfab0")]
 
+[node name="Coin13" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(-0.644564, 0, 0.76455, 0, 1, 0, -0.76455, 0, -0.644564, -13.1042, 1.17098, 13.9702)
+
+[node name="Coin14" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(-0.644564, 0, 0.76455, 0, 1, 0, -0.76455, 0, -0.644564, -14.3023, 1.17098, 12.5492)
+
+[node name="Coin15" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(-0.644564, 0, 0.76455, 0, 1, 0, -0.76455, 0, -0.644564, -15.4906, 1.17098, 11.1396)
+
+[node name="Coin10" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(0.698653, 0, 0.715461, 0, 1, 0, -0.715461, 0, 0.698653, -16.7017, 1.17098, -9.2884)
+
+[node name="Coin11" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(0.698653, 0, 0.715461, 0, 1, 0, -0.715461, 0, 0.698653, -15.4031, 1.17098, -10.6182)
+
+[node name="Coin12" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(0.698653, 0, 0.715461, 0, 1, 0, -0.715461, 0, 0.698653, -14.115, 1.17098, -11.9373)
+
+[node name="Coin7" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(-0.615386, 0, -0.788226, 0, 1, 0, 0.788226, 0, -0.615386, 13.0553, 1.17098, 11.2764)
+
+[node name="Coin8" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(-0.615386, 0, -0.788226, 0, 1, 0, 0.788226, 0, -0.615386, 11.9115, 1.17098, 12.7415)
+
+[node name="Coin9" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(-0.615386, 0, -0.788226, 0, 1, 0, 0.788226, 0, -0.615386, 10.7769, 1.17098, 14.1948)
+
+[node name="Coin4" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(0.801598, 0, -0.597863, 0, 1, 0, 0.597863, 0, 0.801598, 9.64407, 1.17098, -15.4611)
+
+[node name="Coin5" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(0.801598, 0, -0.597863, 0, 1, 0, 0.597863, 0, 0.801598, 11.134, 1.17098, -14.3499)
+
+[node name="Coin6" parent="BossArena1" instance=ExtResource("10_0wwvf")]
+transform = Transform3D(0.801598, 0, -0.597863, 0, 1, 0, 0.597863, 0, 0.801598, 12.6119, 1.17098, -13.2476)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("ActiveState")]
+script = ExtResource("11_tqokn")
+ActiveState = NodePath("Intro")
+
+[node name="Intro" type="Node" parent="StateMachine"]
+script = ExtResource("12_qot1l")
+
+[node name="Fight" type="Node" parent="StateMachine"]
+script = ExtResource("13_wyhpj")
+
+[node name="Victory" type="Node" parent="StateMachine"]
+script = ExtResource("14_0j1ku")
+
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 [connection signal="HealthEmpty" from="Sonic" to="." method="_on_sonic_health_empty"]
+[connection signal="CameraPanComplete" from="BounceRobotnik" to="." method="_on_bounce_robotnik_camera_pan_complete"]
