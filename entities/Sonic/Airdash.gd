@@ -23,7 +23,7 @@ func Enter(_msg := {}) -> void:
 		newVel = owner.CharMesh.GetForwardVector()
 	
 	#Clamp Y vel so the player can't just rocket straight up
-	newVel.y = clamp(newVel.y, -1.0, 0.6)
+	newVel.y = clamp(newVel.y, -1.0, 0.4)
 	
 	
 	owner.SetVelocity(newVel.normalized() * AIRDASH_FORWARD_SPEED)

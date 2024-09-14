@@ -6,7 +6,6 @@ var LeftGround := false
 
 
 const HURT_INITIAL_UP_SPEED = 5.0
-const HURT_INVINCIBILITY_TIME = 2.0
 const HURT_DROPPED_RING_COUNT = 20
 const HURT_DROPPED_RING_SPEED = 1.25
 
@@ -22,6 +21,9 @@ func Enter(_msg := {}) -> void:
 	if _msg.has("BounceDirection"):
 		owner.velocity = _msg["BounceDirection"] + owner.velocity
 	
+	if _msg.has("Bonk") and _msg["Bonk"]:
+		owner.SndBonk.play()
+	
 	#failsafe
 	owner.ActivateHitbox(false)
 	
@@ -29,12 +31,9 @@ func Enter(_msg := {}) -> void:
 	owner.CharMesh.look_at(owner.global_position - (owner.velocity * Vector3(1, 0, 1)).normalized())
 	
 	LeftGround = !owner.GroundCollision
+	owner.CanCollectRings = false
 	owner.StickToFloor = false
 	
-	if _msg.has("Bonk") and _msg["Bonk"]:
-		owner.SndBonk.play()
-	
-	owner.CanCollectRings = false
 	
 	if _msg.has("DropRings") and _msg["DropRings"]:
 		var DroppedRings = HURT_DROPPED_RING_COUNT
@@ -51,7 +50,6 @@ func Enter(_msg := {}) -> void:
 		owner.SndRingDrop.play()
 		
 		owner.Invincible = true
-		SetInvincible = true
 		owner.ActivateHurtbox(false)
 		
 		owner.DroppedRingSpeed += HURT_DROPPED_RING_SPEED
@@ -62,14 +60,17 @@ func Exit() -> void:
 	owner.AnimTree.set("parameters/OSHurt/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	
 	owner.StickToFloor = true
-	
-	owner.Flicker = true
 	owner.CanCollectRings = true
 	
+	owner.SetFlicker(owner.PARAMETERS.HURT_INVINCIBILITY_TIME)
+	
 	if SetInvincible:
-		owner.TimerInvincibility.start(HURT_INVINCIBILITY_TIME)
-		SetInvincible = false
 		owner.ActivateHurtbox(true)
+		owner.SetInvincible(owner.PARAMETERS.HURT_INVINCIBILITY_TIME)
+		SetInvincible = false
+	else:
+		owner.Invincible = false
+
 
 
 func Update(_delta: float) -> void:

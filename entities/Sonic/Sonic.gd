@@ -281,8 +281,23 @@ func BreatheAirBubble() -> void:
 	StateM.ChangeState("Fall")
 
 
-func SetInvincible(Active: bool) -> void:
-	pass
+func SetInvincible(time: float) -> void:
+	if time > 0.0:
+		Invincible = true
+		TimerInvincibility.start(time)
+	else:
+		Invincible = false
+		TimerInvincibility.stop()
+
+
+func SetFlicker(time: float) -> void:
+	if time > 0.0:
+		Flicker = true
+		TimerFlicker.start(time)
+	else:
+		Flicker = false
+		CharMesh.visible = true
+		TimerFlicker.stop()
 
 
 func SetShieldState(newState: ShieldState) -> void:	
@@ -368,13 +383,12 @@ func CreateSmoke() -> void:
 
 
 func _on_timer_invincibility_timeout() -> void:
-	Invincible = false
-	Flicker = false
-	CharMesh.visible = true
+	SetInvincible(-1.0)
+	SetFlicker(-1.0)
 
 
 func _on_timer_flicker_timeout() -> void:
-	Flicker = false
+	SetFlicker(-1.0)
 
 
 func ActivateHitbox(Active: bool) -> void:
@@ -404,7 +418,7 @@ func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
 
 
 func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
-	if Invincible or (Damage < DamageThreshold):
+	if Invincible or (Damage < DamageThreshold) or StateM.CurrentState == "Death":
 		return
 	
 	if CurrentShieldState != ShieldState.NONE:

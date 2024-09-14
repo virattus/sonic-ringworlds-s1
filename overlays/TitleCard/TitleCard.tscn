@@ -281,6 +281,7 @@ offset_right = 1540.0
 offset_bottom = 304.0
 
 [node name="clrTitle1" type="ColorRect" parent="Title1Pos"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.158472, 0.158472, 0.158472, 1)

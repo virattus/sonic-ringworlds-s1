@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	Mario64Update(delta)
+	#SonicXtremeUpdate(delta)
 	pass
 	
 
@@ -27,7 +28,7 @@ func Mario64Update(delta: float) -> void:
 	var Midpoint : Vector3 = (PlayerPos + BossPos) / 2.0
 	var Distance : float = PlayerPos.distance_to(BossPos)
 	
-	global_position =  Midpoint
+	global_position =  Midpoint + (Vector3.UP * maxf(player.global_position.y, boss.global_position.y))
 	
 	$SpringArm3D.spring_length = clamp(Distance, 3.0, 8.0)
 	$SpringArm3D.rotation.y = PlayerPos.angle_to(BossPos)
@@ -38,4 +39,12 @@ func Mario64Update(delta: float) -> void:
 	
 
 func SonicXtremeUpdate(delta: float) -> void:
-	pass
+	var PlayerPos : Vector3 = player.global_position
+	
+	global_position = Vector3.ZERO + Vector3(0, 1, 0)
+	
+	$SpringArm3D.rotation.y = (PlayerPos * Vector3(1, 0, 1)).angle_to(global_position * Vector3(1, 0, 1))
+	$SpringArm3D.spring_length = (PlayerPos * Vector3(1, 0, 1)).distance_to(global_position * Vector3(1, 0, 1))
+	#$SpringArm3D/Camera3D.position.y = to_local(PlayerPos).y
+	
+	

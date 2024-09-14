@@ -113,19 +113,19 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/1/position = Vector3(1.31104e-08, 0.149965, 3.01315)
+bones/1/position = Vector3(-2.71837e-08, 0.28091, 2.99848)
 bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/2/position = Vector3(-5.13685, 0.0833142, 3.56809)
-bones/2/rotation = Quaternion(3.21042e-08, -0.734459, 0.678653, -2.96649e-08)
+bones/2/position = Vector3(-5.13685, 0.156061, 3.39259)
+bones/2/rotation = Quaternion(2.34762e-08, -0.757474, 0.652866, -3.81717e-08)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.0833142, 3.56809)
-bones/4/rotation = Quaternion(3.21042e-08, -0.734459, 0.678653, -2.96649e-08)
+bones/4/position = Vector3(5.13685, 0.156061, 3.39259)
+bones/4/rotation = Quaternion(2.34762e-08, -0.757474, 0.652866, -3.81717e-08)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(1.31104e-08, 0.149965, 5.2521)
+bones/6/position = Vector3(-2.71837e-08, 0.28091, 5.23744)
 bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 bones/6/scale = Vector3(1, 1, 1)
 
@@ -165,7 +165,7 @@ Size = 0.5
 Colour = Color(1, 0, 0, 1)
 
 [node name="BoneAttachHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 6.89413e-09, -8.71505e-08, 2.4869e-14, -0.996886, -0.0788593, -8.74228e-08, 0.0788594, -0.996886, 5.13685, 3.56809, 0.0833142)
+transform = Transform3D(1, -1.42767e-08, -8.84817e-08, -2.71744e-08, -0.989057, -0.147532, -8.54072e-08, 0.147532, -0.989057, 5.13685, 3.39259, 0.156061)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -176,7 +176,7 @@ Active = false
 Size = 0.3
 
 [node name="BoneAttachHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 6.89413e-09, -8.71505e-08, 2.4869e-14, -0.996886, -0.0788593, -8.74228e-08, 0.0788594, -0.996886, -5.13685, 3.56809, 0.0833142)
+transform = Transform3D(1, -1.42767e-08, -8.84817e-08, -2.71744e-08, -0.989057, -0.147532, -8.54072e-08, 0.147532, -0.989057, -5.13685, 3.39259, 0.156061)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -196,6 +196,7 @@ texture_filter = 0
 texture = ExtResource("4_7go32")
 
 [node name="CollisionCast" type="RayCast3D" parent="." index="4"]
+collision_mask = 8193
 
 [node name="WaterSurfaceCast" type="RayCast3D" parent="." index="5"]
 collision_mask = 4096

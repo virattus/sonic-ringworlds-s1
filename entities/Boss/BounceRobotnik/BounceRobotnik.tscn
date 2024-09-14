@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cafqmsgx6g5m"]
+[gd_scene load_steps=9 format=3 uid="uid://cafqmsgx6g5m"]
 
 [ext_resource type="PackedScene" uid="uid://cjcvup28k470r" path="res://entities/Boss/Boss.tscn" id="1_jyjm4"]
 [ext_resource type="PackedScene" uid="uid://chbm1gg7i727c" path="res://models/Robotnik/ModelRobotnik.tscn" id="2_cu1jg"]
 [ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Idle.gd" id="3_c2wkl"]
 [ext_resource type="PackedScene" uid="uid://cqr1urum33k1o" path="res://entities/Boss/BounceRobotnik/Bit/Bit.tscn" id="3_jucgi"]
-[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Move.gd" id="4_gka43"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Follow.gd" id="4_gka43"]
 [ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Death.gd" id="6_mogd0"]
+[ext_resource type="Script" path="res://entities/Boss/BounceRobotnik/Freeze.gd" id="7_dhftt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4jxse"]
 radius = 1.25
@@ -76,10 +77,13 @@ collision_mask = 3
 [node name="Idle" parent="StateMachine" index="1"]
 script = ExtResource("3_c2wkl")
 
-[node name="Move" type="Node" parent="StateMachine" index="2"]
+[node name="Follow" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("4_gka43")
 
 [node name="Death" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("6_mogd0")
+
+[node name="Freeze" type="Node" parent="StateMachine" index="4"]
+script = ExtResource("7_dhftt")
 
 [connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]

@@ -3,7 +3,7 @@ extends "res://entities/Enemy/Idle.gd"
 
 
 func Enter(_msg := {}) -> void:
-	pass
+	ChangeState("Follow")
 
 
 func Exit() -> void:

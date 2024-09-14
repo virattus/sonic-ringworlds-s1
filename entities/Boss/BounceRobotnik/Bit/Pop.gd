@@ -1,6 +1,7 @@
 extends BasicState
 
 
+var Accumulator := 0.0
 
 
 func Enter(_msg := {}) -> void:
@@ -11,8 +12,10 @@ func Enter(_msg := {}) -> void:
 
 
 func Exit() -> void:
-	pass
+	Accumulator = 0.0
 
 
 func Update(_delta: float) -> void:
-	pass
+	Accumulator += _delta
+	if Accumulator >= 0.25:
+		owner.queue_free()

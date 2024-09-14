@@ -26,6 +26,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	pass
+	
+	
+func VisibilityRangeAndActivation():
 	var cam = get_viewport().get_camera_3d()
 	if cam.global_position.distance_to(global_position) > MaxVisibility:
 		if StateM.CurrentState != "Inactive":
