@@ -40,21 +40,30 @@ func EnemyDeath() -> void:
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
-	var bit = BitSpawnSequence[BitSpawnID]
-	BitSpawnID += 1
-	
-	remove_child(bit)
-	get_parent().add_child(bit)
-	bit.player = Globals.PlayerChar
-	bit.boss = self
-	bit.StateM.ChangeState("Follow")
-	
-	SpawnedBits.append(bit)
-	
 	super(Source, Damage)
 	
 	HitTimer.start()
 	EnemyInvincible = true
+	
+	var bit = null
+	while bit == null:
+		bit = BitSpawnSequence[BitSpawnID]
+		BitSpawnID += 1
+		if BitSpawnID >= 8:
+			break
+	
+	if bit == null:
+		return
+	
+	print("BounceRobotnik: spawning bit id: %s" % BitSpawnID)
+	BitParent.remove_child(bit)
+	bit.player = Globals.PlayerChar
+	bit.boss = self
+	get_parent().add_child(bit)
+	
+	bit.StateM.ChangeState("Follow")
+	
+	SpawnedBits.append(bit)
 
 
 func _on_hit_timer_timeout() -> void:

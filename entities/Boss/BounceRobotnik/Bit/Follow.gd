@@ -1,29 +1,34 @@
 extends BasicState
 
 
-var VerticalVelocity := 0.0
-
-
-const BOUNCE_VELOCITY = 10.0
+const BOUNCE_VELOCITY = 2.0
+const FOLLOW_SPEED = 2.5
+const GRAVITY = 4.3
 
 
 func Enter(_msg := {}) -> void:
 	owner.EnemyInvincible = false
+	
+	var newVel : Vector3 = owner.velocity
+	newVel.y = BOUNCE_VELOCITY
+	owner.SetVelocity(newVel)
 
 
 func Exit() -> void:
-	VerticalVelocity = 0.0
+	pass
 
 
 func Update(_delta: float) -> void:
 	owner.Move()
 
-	var newVel = owner.velocity
+	var newVel : Vector3 = owner.velocity * Vector3(1, 0, 1)
 	
-	newVel.y -= 10.0 * _delta
+	newVel.y -= GRAVITY * _delta
 	
-	if owner.is_on_floor():
-		var direction = owner.global_position.direction_to(owner.player.global_position)
-		newVel = (direction * Vector3(1, 0, 1)) + (Vector3.UP * BOUNCE_VELOCITY)
+	if newVel.y < 0.0:
+		var distToGround : float = owner.global_position.distance_to(owner.GroundCast.get_collision_point())
+		if distToGround <= 1.5:
+			var direction : Vector3 = owner.global_position.direction_to(owner.player.global_position)
+			newVel = ((direction * Vector3(1, 0, 1)).normalized() * FOLLOW_SPEED) + (Vector3.UP * BOUNCE_VELOCITY)
 	
 	owner.SetVelocity(newVel)
