@@ -22,6 +22,9 @@ func Enter(_msg := {}) -> void:
 	owner.SndDeath.play()
 	owner.DashModeDrain = false
 	
+	owner.ActivateHitbox(false)
+	owner.ActivateHurtbox(false)
+	
 	owner.HealthEmpty.emit()
 	
 

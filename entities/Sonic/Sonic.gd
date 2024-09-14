@@ -318,7 +318,8 @@ func SetShieldState(newState: ShieldState) -> void:
 		ShieldState.THUNDER_SHIELD:
 			CurrentShield = THUNDER_SHIELD.instantiate()
 	
-	add_child(CurrentShield)
+	if CurrentShield != null:
+		add_child(CurrentShield)
 
 
 

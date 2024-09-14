@@ -1,7 +1,7 @@
 extends Node
 
 
-@onready var HUD = $BossHUDHUD
+@onready var HUD = $BossHUD
 @onready var Options = $IngameOptions
 @onready var MusicController = $MusicController
 @onready var DeathTimer = $DeathTimer

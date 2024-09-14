@@ -60,10 +60,8 @@ func EnemyActivate(Active: bool) -> void:
 
 
 func SetPlayerCollision(Active: bool) -> void:
-	HurtBox.monitoring = Active
-	HurtBox.monitorable = Active
-	HitBox.monitoring = Active
-	HitBox.monitorable = Active
+	HurtBox.BeDamaged = Active
+	HitBox.ApplyDamage = Active
 
 
 func EnemyDeath() -> void:
