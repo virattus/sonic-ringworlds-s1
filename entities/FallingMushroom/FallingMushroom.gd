@@ -7,7 +7,7 @@ var CapTween = null
 var Fall := false
 
 
-const FALL_SPEED = 10.0
+const FALL_SPEED = 8.0
 
 
 func _physics_process(delta: float) -> void:

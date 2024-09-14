@@ -1265,8 +1265,9 @@ DEBUG_RemoveHeight={
 3d_physics/layer_9="WorldHitbox"
 3d_physics/layer_10="CameraCollision"
 3d_physics/layer_11="ItemBox"
-3d_physics/layer_12="Waters"
+3d_physics/layer_12="Water"
 3d_physics/layer_13="WaterSurface"
+3d_physics/layer_14="Lava"
 3d_physics/layer_32="Killbox"
 
 [physics]

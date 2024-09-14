@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://h4sy2it5qata"]
+
+[ext_resource type="Shader" path="res://entities/Lava/lava.gdshader" id="1_71b08"]
+[ext_resource type="Texture2D" uid="uid://b1ss3eqxr2dfx" path="res://entities/Lava/Lava.png" id="2_vpej5"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_71b08")
+shader_parameter/texture_albedo = ExtResource("2_vpej5")

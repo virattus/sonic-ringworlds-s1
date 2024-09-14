@@ -10,3 +10,6 @@ RightAnalogue = false
 
 [node name="SpringArm3D" parent="." index="0"]
 collision_mask = 0
+
+[node name="Camera3D" parent="SpringArm3D" index="0"]
+cull_mask = 524287

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bybnnf47w5dsd"]
+[gd_scene load_steps=18 format=3 uid="uid://bybnnf47w5dsd"]
 
 [ext_resource type="Script" path="res://scenes/SonicGame/SonicGame.gd" id="1_hlded"]
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="2_mpqm8"]
@@ -6,8 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://b4cv687hr7c4p" path="res://entities/ThirdPersonCamera/ThirdPersonCamera.tscn" id="3_t4fox"]
 [ext_resource type="PackedScene" uid="uid://c5hnh3fqc7u4p" path="res://entities/PlayerController/PlayerController.tscn" id="4_31dce"]
 [ext_resource type="PackedScene" uid="uid://duk7ha7p415ep" path="res://entities/MusicController/MusicController.tscn" id="4_40tvp"]
+[ext_resource type="PackedScene" uid="uid://chmdfa6yv2huo" path="res://overlays/TitleCard/TitleCard.tscn" id="4_uu87f"]
 [ext_resource type="PackedScene" uid="uid://butvqg7bms767" path="res://overlays/HUD/HUD.tscn" id="5_yctne"]
 [ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="7_gtpja"]
+[ext_resource type="PackedScene" uid="uid://cga0gbap1aupl" path="res://entities/StateMachine/StateMachine.tscn" id="9_ucvi7"]
+[ext_resource type="Script" path="res://scenes/SonicGame/IntroCard.gd" id="10_eqwts"]
+[ext_resource type="Script" path="res://scenes/SonicGame/Gameplay.gd" id="11_q3fq5"]
+[ext_resource type="Script" path="res://scenes/SonicGame/ActComplete.gd" id="12_oukvr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_shw6i"]
 
@@ -33,6 +38,9 @@ Sonic = NodePath("../Sonic")
 
 [node name="IngameOptions" parent="." instance=ExtResource("3_jth67")]
 
+[node name="TitleCard" parent="." instance=ExtResource("4_uu87f")]
+layer = 2
+
 [node name="MusicController" parent="." instance=ExtResource("4_40tvp")]
 
 [node name="Sonic" parent="." node_paths=PackedStringArray("Camera", "Controller") instance=ExtResource("2_mpqm8")]
@@ -40,18 +48,18 @@ Camera = NodePath("../ThirdPersonCamera")
 Controller = NodePath("../PlayerController")
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-1.71918e-08, 0.395204, 2.98569)
-bones/2/position = Vector3(-5.13685, 0.219558, 3.23941)
-bones/2/rotation = Quaternion(2.43255e-08, -0.776829, 0.629712, -3.71563e-08)
-bones/4/position = Vector3(5.13685, 0.219558, 3.23941)
-bones/4/rotation = Quaternion(2.43255e-08, -0.776829, 0.629712, -3.71563e-08)
-bones/6/position = Vector3(-1.71918e-08, 0.395204, 5.22464)
+bones/1/position = Vector3(3.08281e-08, 0.352633, 2.99045)
+bones/2/position = Vector3(-5.13685, 0.195907, 3.29647)
+bones/2/rotation = Quaternion(3.36448e-08, -0.769704, 0.638402, -2.79054e-08)
+bones/4/position = Vector3(5.13685, 0.195907, 3.29647)
+bones/4/rotation = Quaternion(3.36448e-08, -0.769704, 0.638402, -2.79054e-08)
+bones/6/position = Vector3(3.08281e-08, 0.352633, 5.22941)
 
 [node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, -9.00202e-09, -8.83644e-08, -2.70921e-08, -0.978357, -0.206926, -8.45891e-08, 0.206926, -0.978357, 5.13685, 3.23941, 0.219558)
+transform = Transform3D(1, 1.61634e-08, -8.59156e-08, 1.06581e-14, -0.98276, -0.184887, -8.74228e-08, 0.184887, -0.98276, 5.13685, 3.29647, 0.195907)
 
 [node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, -9.00202e-09, -8.83644e-08, -2.70921e-08, -0.978357, -0.206926, -8.45891e-08, 0.206926, -0.978357, -5.13685, 3.23941, 0.219558)
+transform = Transform3D(1, 1.61634e-08, -8.59156e-08, 1.06581e-14, -0.98276, -0.184887, -8.74228e-08, 0.184887, -0.98276, -5.13685, 3.29647, 0.195907)
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
 Char = NodePath("../Sonic")
@@ -68,6 +76,8 @@ environment = SubResource("Environment_jrfg5")
 transform = Transform3D(0.589901, 0.557758, -0.583885, 0, 0.7231, 0.690744, 0.807475, -0.40747, 0.426557, 0, 6.26844, 0)
 light_energy = 0.5
 
+[node name="Enemies" type="Node" parent="."]
+
 [node name="KillBox" parent="." instance=ExtResource("7_gtpja")]
 collision_mask = 2147483650
 
@@ -78,6 +88,19 @@ shape = SubResource("BoxShape3D_ig1oy")
 wait_time = 2.0
 one_shot = true
 
+[node name="StateMachine" parent="." node_paths=PackedStringArray("ActiveState") instance=ExtResource("9_ucvi7")]
+ActiveState = NodePath("IntroCard")
+
+[node name="IntroCard" type="Node" parent="StateMachine"]
+script = ExtResource("10_eqwts")
+
+[node name="Gameplay" type="Node" parent="StateMachine"]
+script = ExtResource("11_q3fq5")
+
+[node name="ActComplete" type="Node" parent="StateMachine"]
+script = ExtResource("12_oukvr")
+
+[connection signal="TitleCardAnimComplete" from="TitleCard" to="." method="_on_title_card_title_card_anim_complete"]
 [connection signal="HealthEmpty" from="Sonic" to="." method="_on_sonic_health_empty"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
 

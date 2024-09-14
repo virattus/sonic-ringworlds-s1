@@ -86,8 +86,8 @@ var DroppedRingSpeed := 1.0
 @onready var SndWaterBreathe = $SndWaterBreathe
 
 
-@onready var StartingPosition := global_position
-
+@onready var SpawnPosition := global_position
+var WorldRadius := 0.5
 
 const COLLISION_CAST_LENGTH = 1.0
 
@@ -233,6 +233,11 @@ func GetInputVector(up_dir: Vector3) -> Vector3:
 	DebugMoveVector = newVelocity
 
 	return newVelocity
+
+
+func SnapToGroundCast() -> void:
+	GroundCast.force_raycast_update()
+	global_position = GroundCast.get_collision_point() + (Vector3.UP * (WorldRadius / 2.0))
 
 
 func CollectRing(ringCount := 1) -> bool:

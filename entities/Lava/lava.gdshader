@@ -1,6 +1,6 @@
 shader_type spatial;
 
-render_mode blend_mix, cull_disabled;
+render_mode cull_disabled;
 
 uniform sampler2D texture_albedo : source_color,filter_nearest,repeat_enable;
 
@@ -14,7 +14,6 @@ void fragment()
 {
 	// Called for every pixel the material is visible on.
 	ALBEDO = texture(texture_albedo, UV).rgb;
-	ALPHA = 0.5;
 }
 
 //void light() {

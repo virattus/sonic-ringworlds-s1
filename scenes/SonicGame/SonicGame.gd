@@ -3,7 +3,8 @@ extends Node
 
 var DrowingMusicPlaying := false
 
-@onready var Player = $Sonic
+@onready var player = $Sonic
+@onready var enemies = $Enemies
 
 const PLAYER_DROWNING_MIN = 12.75 / 30.0
 
@@ -11,14 +12,15 @@ const PLAYER_DROWNING_MIN = 12.75 / 30.0
 func _ready() -> void:
 	Globals.RingCount = 0
 	Globals.CollectedFlickies = [false, false, false, false, false]
+	
 
 
 func _physics_process(delta: float) -> void:
-	if !DrowingMusicPlaying and Player.Oxygen <= (PLAYER_DROWNING_MIN):
+	if !DrowingMusicPlaying and player.Oxygen <= (PLAYER_DROWNING_MIN):
 		$MusicController.DrowningMusicInterrupt()
 		DrowingMusicPlaying = true
 	
-	if DrowingMusicPlaying and Player.Oxygen > (PLAYER_DROWNING_MIN):
+	if DrowingMusicPlaying and player.Oxygen > (PLAYER_DROWNING_MIN):
 		$MusicController.DrowningMusicStop()
 		DrowingMusicPlaying = false
 
@@ -40,3 +42,7 @@ func _on_death_timer_timeout() -> void:
 
 func _on_caged_flicky_cage_destroyed(ID: int) -> void:
 	$HUD.ActivateFlickyIcon(ID)
+
+
+func _on_title_card_title_card_anim_complete() -> void:
+	$StateMachine.ChangeState("Gameplay")

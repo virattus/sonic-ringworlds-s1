@@ -10,7 +10,7 @@ bounce = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_v7rtg"]
 radius = 0.60681
 
-[node name="RingBounce" type="RigidBody3D"]
+[node name="RingBounce" type="RigidBody3D" groups=["RingBounce"]]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_1y4fo")
 script = ExtResource("1_c0pbu")
