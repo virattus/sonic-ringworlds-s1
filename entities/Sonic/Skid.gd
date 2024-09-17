@@ -21,6 +21,8 @@ func Enter(_msg := {}) -> void:
 	
 	owner.CreateSmoke()
 	
+	owner.SetDashMode(false)
+	
 	#failsafe
 	$TimerMaxSkid.start()
 
