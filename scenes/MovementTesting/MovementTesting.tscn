@@ -31,15 +31,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541678, 0)
 
 [node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/1/position = Vector3(4.16019e-08, 0.475871, 2.97665)
+bones/1/position = Vector3(2.06526e-08, 0.236239, 3.00349)
 bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/2/position = Vector3(-5.13685, 0.264373, 3.1313)
-bones/2/rotation = Quaternion(3.45342e-08, -0.790051, 0.613041, -2.67969e-08)
+bones/2/position = Vector3(-5.13685, 0.131244, 3.45246)
+bones/2/rotation = Quaternion(3.27713e-08, -0.74972, 0.661756, -2.89263e-08)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/4/position = Vector3(5.13685, 0.264373, 3.1313)
-bones/4/rotation = Quaternion(3.45342e-08, -0.790051, 0.613041, -2.67969e-08)
+bones/4/position = Vector3(5.13685, 0.131244, 3.45246)
+bones/4/rotation = Quaternion(3.27713e-08, -0.74972, 0.661756, -2.89263e-08)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/6/position = Vector3(4.16019e-08, 0.475871, 5.21561)
+bones/6/position = Vector3(2.06526e-08, 0.236239, 5.24244)
 bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
 [node name="BoneAttachBody" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
@@ -52,10 +52,10 @@ transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 2.48036, 1.32379, 1.78814e-0
 transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -2.48036, 1.32379, 1.78814e-07)
 
 [node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 2.17124e-08, -8.46836e-08, 2.13163e-14, -0.968668, -0.248361, -8.74228e-08, 0.248361, -0.968668, 5.13685, 3.1313, 0.264373)
+transform = Transform3D(1, 1.08543e-08, -8.67463e-08, 1.77636e-14, -0.992262, -0.124159, -8.74228e-08, 0.124159, -0.992262, 5.13685, 3.45246, 0.131244)
 
 [node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 2.17124e-08, -8.46836e-08, 2.13163e-14, -0.968668, -0.248361, -8.74228e-08, 0.248361, -0.968668, -5.13685, 3.1313, 0.264373)
+transform = Transform3D(1, 1.08543e-08, -8.67463e-08, 1.77636e-14, -0.992262, -0.124159, -8.74228e-08, 0.124159, -0.992262, -5.13685, 3.45246, 0.131244)
 
 [node name="MovementTesting" parent="." index="9" instance=ExtResource("1_aqers")]
 

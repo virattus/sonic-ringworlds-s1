@@ -42,7 +42,7 @@ func Update(_delta: float) -> void:
 	var collision: SonicCollision = owner.GetCollision()
 	
 	if collision.CollisionType == SonicCollision.NONE:
-		ChangeState("Fall")
+		ChangeState("Teetering")
 		return
 	
 	if owner.Speed < SKID_TRANSITION_MIN_SPEED:

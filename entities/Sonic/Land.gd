@@ -32,9 +32,11 @@ func Enter(_msg := {}) -> void:
 	owner.CreateSmoke()
 	
 	var newInput = owner.GetInputVector(owner.up_direction)
+	
+	var LandingVel : Vector3 = owner.velocity - (owner.up_direction * owner.up_direction.dot(owner.velocity))
 
-	if newInput.length() > 0.0 or owner.up_direction.dot(owner.velocity) > LAND_CROUCH_MAX_SPEED:
-		if newInput.normalized().dot(owner.CharMesh.GetForwardVector()) < 0.0:
+	if LandingVel.length() > LAND_CROUCH_MAX_SPEED:
+		if owner.IsInputSkidding(newInput) and LandingVel.length() > owner.PARAMETERS.WALK_MAX_SPEED:
 			ChangeState("Skid")
 			return
 		else:

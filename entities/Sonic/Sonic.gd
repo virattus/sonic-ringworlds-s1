@@ -235,6 +235,17 @@ func GetInputVector(up_dir: Vector3) -> Vector3:
 	return newVelocity
 
 
+func IsInputSkidding(input: Vector3) -> bool:
+	var ForwardVector = CharMesh.GetForwardVector()
+	var forwardDot = ForwardVector.dot(input.normalized())
+	
+	if forwardDot < PARAMETERS.SKID_MAX_ANGLE:
+		#print("Input skidding? %s" % forwardDot)
+		return true
+	
+	return false
+
+
 func SnapToGroundCast() -> void:
 	GroundCast.force_raycast_update()
 	global_position = GroundCast.get_collision_point() + (Vector3.UP * (WorldRadius / 2.0))

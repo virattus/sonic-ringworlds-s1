@@ -8,9 +8,6 @@ var FootstepAccumulator := 0.0
 
 const RUN_RATIO_DIVISOR = 200.0
 
-const RUN_SKID_MIN_STICK_MAGNITUDE = 0.6
-const RUN_SKID_MAX_ANGLE = -0.75
-
 const MOVE_CHARMESH_VEL_ORIENT_MIN_SPEED = 2.0
 
 const FOOTSTEP_TIME_MOD = 0.5
@@ -150,21 +147,10 @@ func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
 
 
 func HandleSkid(input: Vector3) -> bool:
-	if input.length() > RUN_SKID_MIN_STICK_MAGNITUDE:
-		if IsInputSkidding(input):
+	if input.length() > owner.PARAMETERS.SKID_MIN_STICK_MAGNITUDE:
+		if owner.IsInputSkidding(input):
 			ChangeState("Skid")
 			return true
-	
-	return false
-
-
-func IsInputSkidding(input: Vector3) -> bool:
-	var ForwardVector = owner.CharMesh.GetForwardVector()
-	var forwardDot = ForwardVector.dot(input.normalized())
-	
-	if forwardDot < RUN_SKID_MAX_ANGLE:
-		print("Input skidding? %s" % forwardDot)
-		return true
 	
 	return false
 
