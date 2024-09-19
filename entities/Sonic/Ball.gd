@@ -66,7 +66,7 @@ func Update(_delta: float) -> void:
 	
 	var influence := CurveInfluence(_delta)
 	
-	if Vector3.UP.dot(owner.up_direction) > BALL_UNCURL_MIN_UP_DOT and influence.length() < 0.05 and newVel.length() < owner.PARAMETERS.BALL_MIN_SPEED:
+	if owner.GroundCollision and Vector3.UP.dot(owner.up_direction) > BALL_UNCURL_MIN_UP_DOT and influence.length() < 0.05 and newVel.length() < owner.PARAMETERS.BALL_MIN_SPEED:
 		UncurlAndIdle()
 		return
 	

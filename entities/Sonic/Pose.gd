@@ -9,7 +9,7 @@ const METER_MAX = 0.30
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/OSPose/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	
-	owner.FloorNormal = Vector3.UP
+	owner.UpdateUpDir(Vector3.UP, -1.0)
 	
 	owner.DashModeCharge += METER_MAX
 
@@ -20,6 +20,15 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
+	owner.Move()
+	
+	var collision : SonicCollision = owner.GetCollision()
+	if CheckGroundCollision(collision):
+		ChangeState("Land", {
+			
+		})
+		return
+
 	
 	var cam = get_viewport().get_camera_3d()
 	owner.CharMesh.look_at(-cam.global_transform.origin)
@@ -30,3 +39,5 @@ func Update(_delta: float) -> void:
 	if !owner.AnimTree.get("parameters/OSPose/active"):
 		ChangeState("Fall")
 		return
+
+	OldVel = owner.velocity

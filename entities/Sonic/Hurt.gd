@@ -91,4 +91,5 @@ func Update(_delta: float) -> void:
 	
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
+	OldVel = owner.velocity
 	owner.SetVelocity(newVel)

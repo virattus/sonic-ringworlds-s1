@@ -10,6 +10,7 @@ const PLAYER_DROWNING_MIN = 12.75 / 30.0
 
 
 func _ready() -> void:
+	$TitleCard.visible = true
 	Globals.RingCount = 0
 	Globals.CollectedFlickies = [false, false, false, false, false]
 	

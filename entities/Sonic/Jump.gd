@@ -105,15 +105,22 @@ func Update(_delta: float) -> void:
 		owner.UpdateUpDir(Vector3.UP, _delta)
 	
 	var newVel : Vector3 = owner.velocity
+	var newSpeed : float = owner.Speed
 	
 	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
 	
 	newVel += inputVel * owner.PARAMETERS.AIR_INPUT_VEL * _delta
 	
-	newVel = ApplyDrag(newVel, _delta)
+	newVel = newVel.normalized() * newSpeed
+	
+	#newVel = ApplyDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
+	if newVel.length() > owner.PARAMETERS.MOVE_MAX_SPEED:
+		newVel = newVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED
 	
+	
+	OldVel = owner.velocity
 	owner.SetVelocity(newVel)
 
 

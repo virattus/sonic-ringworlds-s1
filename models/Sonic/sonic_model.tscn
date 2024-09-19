@@ -1,21 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxw1ws66bfvth"]
+[gd_scene load_steps=4 format=3 uid="uid://dxw1ws66bfvth"]
 
 [ext_resource type="PackedScene" uid="uid://csdlei7hte13g" path="res://models/Sonic/Sonic.glb" id="1_ev4em"]
 [ext_resource type="Material" uid="uid://dmf1brhk80gvp" path="res://models/Sonic/Mat_SonicSpinKickWind.tres" id="2_rrdjf"]
+[ext_resource type="Script" path="res://models/Sonic/sonic_model.gd" id="2_x5fnc"]
 
 [node name="Sonic_Model" instance=ExtResource("1_ev4em")]
+script = ExtResource("2_x5fnc")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(-0.1, 0, -1.50996e-08, 0, 0.1, 0, 1.50996e-08, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/2/position = Vector3(-5.13685, 3.9457, 1.27562)
-bones/2/rotation = Quaternion(7.09525e-09, -0.986738, 0.16232, -4.31317e-08)
-bones/3/position = Vector3(-2.48036, -2.00025, -0.375058)
-bones/3/rotation = Quaternion(-0.440049, -9.77104e-17, 0, 0.897974)
-bones/4/position = Vector3(5.13685, -4.63072, 4.4815)
-bones/4/rotation = Quaternion(3.93349e-08, -0.436143, 0.899878, -1.90644e-08)
-bones/5/position = Vector3(2.48036, 5.37054, 4.06386)
-bones/5/rotation = Quaternion(0.652592, 1.44905e-16, -8.73349e-24, 0.757709)
-bones/6/position = Vector3(0, 0, 5.26889)
-bones/6/scale = Vector3(8, 4, 8)
+bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
+bones/1/position = Vector3(0, -0.334433, 3.08106)
+bones/1/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
+bones/2/position = Vector3(-4.61076, 3.13594e-07, 5.21584)
+bones/2/rotation = Quaternion(0.118361, -0.815134, 0.537942, 0.179351)
+bones/3/position = Vector3(-2.48036, -0.75626, 1.32379)
+bones/3/rotation = Quaternion(-0.254187, -5.64409e-17, 0, 0.967155)
+bones/4/position = Vector3(5.13685, -0.822021, 4.78839)
+bones/4/rotation = Quaternion(3.35483e-08, -0.641053, 0.767496, -2.80213e-08)
+bones/5/position = Vector3(2.48036, 1.24947, 1.75124)
+bones/5/rotation = Quaternion(-0.0922079, -2.04743e-17, 0, 0.99574)
+bones/6/position = Vector3(0, 0.334433, 5.21777)
+bones/6/rotation = Quaternion(2.58833e-08, 0.805835, 0.59214, 3.52242e-08)
 
 [node name="SpinKickWhoosh" parent="Armature/Skeleton3D" index="3"]
 surface_material_override/0 = ExtResource("2_rrdjf")

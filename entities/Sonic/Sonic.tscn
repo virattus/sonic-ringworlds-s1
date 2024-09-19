@@ -108,26 +108,27 @@ density_lengthwise = 10
 ColourStart = Color(0.278431, 0.631373, 1, 1)
 ColourEnd = Color(0.278431, 0.631373, 1, 0)
 
+[node name="CharacterMesh" parent="." index="2"]
+MeshTurningSpeed = 6.0
+
 [node name="SonicModel" parent="CharacterMesh" index="0" instance=ExtResource("3_u1arj")]
-transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/1/position = Vector3(8.63033e-09, 0.0987194, 3.01889)
+bones/1/position = Vector3(-1.8454e-08, 0.380767, 2.9873)
 bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/2/position = Vector3(-5.13685, 0.0548442, 3.63677)
-bones/2/rotation = Quaternion(3.17006e-08, -0.725226, 0.688511, -3.00958e-08)
+bones/2/position = Vector3(-5.13685, 0.211537, 3.25876)
+bones/2/rotation = Quaternion(2.42195e-08, -0.774424, 0.632668, -3.72864e-08)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.0548442, 3.63677)
-bones/4/rotation = Quaternion(3.17006e-08, -0.725226, 0.688511, -3.00958e-08)
+bones/4/position = Vector3(5.13685, 0.211537, 3.25876)
+bones/4/rotation = Quaternion(2.42195e-08, -0.774424, 0.632668, -3.72864e-08)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(8.63033e-09, 0.0987194, 5.25784)
+bones/6/position = Vector3(-1.8454e-08, 0.380767, 5.22626)
 bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/6/scale = Vector3(1, 1, 1)
 
 [node name="BoneAttachBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
 transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 1.00427e-08, 2.97653, 0.47698)
@@ -165,7 +166,7 @@ Size = 0.5
 Colour = Color(1, 0, 0, 1)
 
 [node name="BoneAttachHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, 4.53775e-09, -8.73049e-08, 1.42109e-14, -0.998652, -0.0519056, -8.74228e-08, 0.0519055, -0.998652, 5.13685, 3.63677, 0.0548442)
+transform = Transform3D(1, -9.66756e-09, -8.83967e-08, -2.71052e-08, -0.979905, -0.199463, -8.46921e-08, 0.199463, -0.979905, 5.13685, 3.25876, 0.211537)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -176,7 +177,7 @@ Active = false
 Size = 0.3
 
 [node name="BoneAttachHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, 4.53775e-09, -8.73049e-08, 1.42109e-14, -0.998652, -0.0519056, -8.74228e-08, 0.0519055, -0.998652, -5.13685, 3.63677, 0.0548442)
+transform = Transform3D(1, -9.66756e-09, -8.83967e-08, -2.71052e-08, -0.979905, -0.199463, -8.46921e-08, 0.199463, -0.979905, -5.13685, 3.25876, 0.211537)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -289,7 +290,7 @@ parameters/GroundSecondary/blend_amount = -1.0
 parameters/Hang/blend_amount = 0
 parameters/Hurt/blend_amount = 0.0
 parameters/Idle/blend_amount = 0
-parameters/Movement/blend_amount = 0
+parameters/Movement/blend_amount = 0.0
 parameters/OSHang/active = false
 parameters/OSHang/internal_active = false
 parameters/OSHang/request = 0
@@ -322,7 +323,7 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 17/scale" = 1.0
 "parameters/TimeScale 2/scale" = 1.0
 "parameters/TimeScale 3/scale" = 1.0
-"parameters/TimeScale 4/scale" = 1.0
+"parameters/TimeScale 4/scale" = 2.0
 "parameters/TimeScale 5/scale" = 1.0
 "parameters/TimeScale 6/scale" = 5.0
 "parameters/TimeScale 7/scale" = 1.0

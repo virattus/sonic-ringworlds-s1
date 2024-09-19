@@ -109,6 +109,8 @@ const WATER_SHIELD = preload("res://effects/Shield/WaterShield.tscn")
 func _ready() -> void:
 	super()
 	
+	
+	
 	CurrentGravity = PARAMETERS.GRAVITY
 	
 	DebugMenu.AddMonitor(self, "DebugMove")

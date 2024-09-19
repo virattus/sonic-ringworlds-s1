@@ -1,6 +1,8 @@
 extends BasicState
 
 
+var OldVel := Vector3.ZERO
+
 const AIR_WIPEOUT_MIN = 0.75
 
 
@@ -54,6 +56,7 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 				ChangeState("Land", {
 					"Type": "Normal",
 					"Normal": owner.CollisionCast.get_collision_normal(),
+					"Vel": OldVel,
 				})
 				return true
 			return false
@@ -62,6 +65,7 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 			ChangeState("Land", {
 				"Type": "Normal",
 				"Normal": owner.CollisionCast.get_collision_normal(),
+				"Vel": OldVel,
 			})
 			return true
 		else:

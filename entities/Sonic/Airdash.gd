@@ -21,9 +21,11 @@ func Enter(_msg := {}) -> void:
 	#if the player is standing still, shoot forward
 	if (newVel * Vector3(1, 0, 1)).length() <= 0.0:
 		newVel = owner.CharMesh.GetForwardVector()
+		
 	
+	newVel = newVel.normalized()
 	#Clamp Y vel so the player can't just rocket straight up
-	newVel.y = clamp(newVel.y, -1.0, 0.4)
+	newVel.y = clamp(newVel.y, -0.9, 0.4)
 	
 	
 	owner.SetVelocity(newVel.normalized() * AIRDASH_FORWARD_SPEED)
@@ -63,6 +65,10 @@ func Update(_delta: float) -> void:
 	newVel = ApplyDrag(owner.velocity, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
+	if newVel.length() > owner.PARAMETERS.MOVE_MAX_SPEED:
+		newVel = newVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED
+	
+	OldVel = newVel
 	owner.SetVelocity(newVel)
 
 
