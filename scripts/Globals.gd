@@ -30,4 +30,4 @@ var LivesCount := 3
 var PlayerChar = null
 var CollectedFlickies = [false, false, false, false, false]
 
-var InvertCamera := false
+var CameraSensitivity := Vector2(0.2, 0.2)

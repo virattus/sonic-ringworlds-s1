@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://overlays/IngameOptions/IngameOptions.gd" id="1_1uvum"]
 
 [node name="IngameOptions" type="CanvasLayer"]
-process_mode = 3
+process_mode = 2
 layer = 98
 visible = false
 script = ExtResource("1_1uvum")
@@ -15,11 +15,67 @@ offset_right = 1122.0
 offset_bottom = 618.0
 color = Color(0.231373, 0.231373, 0.231373, 0.545098)
 
-[node name="ChkInvertCamera" type="CheckBox" parent="."]
-offset_left = 65.0
-offset_top = 60.0
-offset_right = 204.0
-offset_bottom = 91.0
-text = "Invert Camera"
+[node name="CameraSettings" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 122.0
+offset_top = 101.0
+offset_right = 162.0
+offset_bottom = 141.0
 
-[connection signal="toggled" from="ChkInvertCamera" to="." method="_on_chk_invert_camera_toggled"]
+[node name="chkInvertCamX" type="CheckBox" parent="CameraSettings"]
+layout_mode = 2
+offset_left = 216.0
+offset_top = 60.0
+offset_right = 405.0
+offset_bottom = 91.0
+text = "Invert"
+
+[node name="chkInvertCamY" type="CheckBox" parent="CameraSettings"]
+layout_mode = 2
+offset_left = 216.0
+offset_top = 127.0
+offset_right = 404.0
+offset_bottom = 158.0
+text = "Invert"
+
+[node name="hsCamX" type="HSlider" parent="CameraSettings"]
+layout_mode = 2
+offset_top = 68.0
+offset_right = 194.0
+offset_bottom = 84.0
+min_value = 1.0
+value = 1.0
+
+[node name="hsCamY" type="HSlider" parent="CameraSettings"]
+layout_mode = 2
+offset_top = 135.0
+offset_right = 194.0
+offset_bottom = 151.0
+min_value = 1.0
+value = 1.0
+
+[node name="lblCam" type="Label" parent="CameraSettings"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Camera Settings"
+
+[node name="lblCamX" type="Label" parent="CameraSettings"]
+layout_mode = 0
+offset_top = 38.0
+offset_right = 46.0
+offset_bottom = 61.0
+text = "X Axis"
+
+[node name="lblCamY" type="Label" parent="CameraSettings"]
+layout_mode = 0
+offset_top = 105.0
+offset_right = 46.0
+offset_bottom = 128.0
+text = "Y Axis"
+
+[connection signal="toggled" from="CameraSettings/chkInvertCamX" to="." method="SetCameraSettings"]
+[connection signal="toggled" from="CameraSettings/chkInvertCamY" to="." method="SetCameraSettings"]
+[connection signal="drag_ended" from="CameraSettings/hsCamX" to="." method="SetCameraSettings"]
+[connection signal="drag_ended" from="CameraSettings/hsCamY" to="." method="SetCameraSettings"]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://df82xpw7e1ory"]
+
+[ext_resource type="Script" path="res://entities/PlayerSwapper/PlayerSwapper.gd" id="1_uh5c7"]
+
+[node name="PlayerSwapper" type="Node3D"]
+script = ExtResource("1_uh5c7")

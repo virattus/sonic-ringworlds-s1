@@ -6,6 +6,7 @@ signal HitboxActivated(Target: Hurtbox)
 
 @export var Damage := 1
 @export var ApplyDamage := true
+@export var ParentCharacter : Character
 
 
 func _on_area_entered(area: Area3D) -> void:

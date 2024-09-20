@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5mtejqts5ca4"]
+
+[ext_resource type="Script" path="res://entities/CameraFocus/CameraFocus.gd" id="1_nnicn"]
+[ext_resource type="Texture2D" uid="uid://b3jasmhu3jyr6" path="res://icons/CameraTarget.png" id="2_fhlv4"]
+
+[node name="CameraFocus" type="Node3D"]
+script = ExtResource("1_nnicn")
+
+[node name="Sprite3D" type="Sprite3D" parent="." groups=["CameraDebug"]]
+visible = false
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_fhlv4")

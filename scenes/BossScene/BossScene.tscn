@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://vpxtjlttauv0" path="res://overlays/BossHUD/BossHUD.tscn" id="2_6jt0q"]
 [ext_resource type="PackedScene" uid="uid://cspov7b53hufw" path="res://overlays/IngameOptions/IngameOptions.tscn" id="3_inlvv"]
 [ext_resource type="PackedScene" uid="uid://duk7ha7p415ep" path="res://entities/MusicController/MusicController.tscn" id="4_ikx2v"]
-[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Sonic/Sonic.tscn" id="5_uc6vf"]
+[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="5_uc6vf"]
 [ext_resource type="PackedScene" uid="uid://c57jxsuxpisjc" path="res://entities/BossCamera/BossCamera.tscn" id="6_x77rv"]
 [ext_resource type="PackedScene" uid="uid://cafqmsgx6g5m" path="res://entities/Boss/BounceRobotnik/BounceRobotnik.tscn" id="7_fipk3"]
 [ext_resource type="PackedScene" uid="uid://rb42w1p46eb4" path="res://maps/BossArena1/BossArena1.tscn" id="8_mfab0"]

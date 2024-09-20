@@ -29,22 +29,8 @@ size = Vector3(300, 200, 200)
 [node name="TitleCard" parent="." index="2"]
 visible = false
 
-[node name="Sonic" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.541678, 0)
-
-[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(-4.78435e-08, 0.0445898, 3.02495)
-bones/2/position = Vector3(-5.13685, 0.0247722, 3.70932)
-bones/2/rotation = Quaternion(2.16557e-08, -0.715343, 0.698774, -4.01573e-08)
-bones/4/position = Vector3(5.13685, 0.0247722, 3.70932)
-bones/4/rotation = Quaternion(2.16557e-08, -0.715343, 0.698774, -4.01573e-08)
-bones/6/position = Vector3(-4.78435e-08, 0.0445898, 5.2639)
-
-[node name="BoneAttachHandL" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(1, -2.51392e-08, -8.77174e-08, -2.71876e-08, -0.999725, -0.0234308, -8.71042e-08, 0.0234308, -0.999725, 5.13685, 3.70932, 0.0247722)
-
-[node name="BoneAttachHandR" parent="Sonic/CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(1, -2.51392e-08, -8.77174e-08, -2.71876e-08, -0.999725, -0.0234308, -8.71042e-08, 0.0234308, -0.999725, -5.13685, 3.70932, 0.0247722)
+[node name="PlayerSonic" parent="PlayerSwapper" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="MovementTesting" parent="." index="9" instance=ExtResource("1_aqers")]
 
@@ -693,6 +679,3 @@ shape = SubResource("BoxShape3D_cgjes")
 transform = Transform3D(13.835, 0, 0, 0, 1, 0, 0, 0, 20.335, -35.0067, 0, 61.57)
 
 [connection signal="CageDestroyed" from="MovementTesting/CagedFlicky" to="." method="_on_caged_flicky_cage_destroyed"]
-
-[editable path="Sonic"]
-[editable path="Sonic/CharacterMesh/SonicModel"]

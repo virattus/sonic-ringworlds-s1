@@ -3,7 +3,7 @@ extends Node
 
 var DrowingMusicPlaying := false
 
-@onready var player = $Sonic
+@onready var player = $PlayerSwapper/PlayerSonic
 @onready var enemies = $Enemies
 
 const PLAYER_DROWNING_MIN = 12.75 / 30.0

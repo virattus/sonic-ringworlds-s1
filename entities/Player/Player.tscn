@@ -1,0 +1,245 @@
+[gd_scene load_steps=34 format=3 uid="uid://tximpab5mrch"]
+
+[ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_1mpyw"]
+[ext_resource type="Script" path="res://entities/Player/Player.gd" id="2_k6uox"]
+[ext_resource type="PackedScene" uid="uid://cb1pkubp6xxtj" path="res://effects/CylinderTrail2/CylinderTrail2.tscn" id="3_qoyqs"]
+[ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="8_m2ywy"]
+[ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="10_ue3kp"]
+[ext_resource type="Script" path="res://entities/Player/Initial.gd" id="11_4xf35"]
+[ext_resource type="Script" path="res://entities/Player/DebugMove.gd" id="12_jwgrb"]
+[ext_resource type="AudioStream" uid="uid://bgwe6pbgsc4tj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A0.wav" id="30_8bisq"]
+[ext_resource type="AudioStream" uid="uid://bgvgybjs5n0j3" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_AA.wav" id="31_wtscm"]
+[ext_resource type="AudioStream" uid="uid://dle6efyausde4" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BB.wav" id="32_tk6k5"]
+[ext_resource type="AudioStream" uid="uid://dbfgnbue70wig" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A2.wav" id="33_gnfkd"]
+[ext_resource type="AudioStream" uid="uid://dqjyv327g7qnb" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A4.wav" id="34_m5x8k"]
+[ext_resource type="AudioStream" uid="uid://c7s62yxbwkvxj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_B5.wav" id="35_xp2qi"]
+[ext_resource type="AudioStream" uid="uid://bohjwgggfkvnh" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C6.wav" id="36_g2v08"]
+[ext_resource type="AudioStream" uid="uid://dssc8qyhyjml7" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A3.wav" id="37_23c3u"]
+[ext_resource type="AudioStream" uid="uid://y2ekxqu62ugy" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BE.wav" id="38_6lwqx"]
+[ext_resource type="AudioStream" uid="uid://ci4mwgnbes8o2" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BC.wav" id="39_5e8wq"]
+[ext_resource type="AudioStream" uid="uid://cthagnajjhpu0" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C5.wav" id="40_kmfbk"]
+[ext_resource type="AudioStream" uid="uid://bykct827tocf8" path="res://entities/Player/204017__duckduckpony__footsteps_water_light_004.wav" id="41_feaod"]
+[ext_resource type="AudioStream" uid="uid://cogy343od62no" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_AD.wav" id="42_a34cv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d4iho"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kteou"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hoqmv"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.376471)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_potmg"]
+top_radius = 0.0
+bottom_radius = 0.1
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvci8"]
+no_depth_test = true
+albedo_color = Color(1, 0, 0, 0.52549)
+
+[sub_resource type="SphereMesh" id="SphereMesh_02mkd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0akw7"]
+albedo_color = Color(0.796078, 0, 0.905882, 0.52549)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc5ap"]
+transparency = 1
+no_depth_test = true
+albedo_color = Color(0, 1, 0, 0.52549)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yv103"]
+radius = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8sh6a"]
+radius = 0.75
+
+[sub_resource type="SphereMesh" id="SphereMesh_kigcn"]
+radius = 0.75
+height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3sgk"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.415686)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_modop"]
+height = 12.0
+radius = 10.0
+
+[node name="Player" groups=["Player"] instance=ExtResource("1_1mpyw")]
+collision_mask = 2147491841
+floor_stop_on_slope = false
+floor_max_angle = 0.523599
+floor_snap_length = 1.0
+script = ExtResource("2_k6uox")
+Parameters = null
+
+[node name="WorldCollision" parent="." index="0"]
+shape = SubResource("SphereShape3D_d4iho")
+
+[node name="CylinderTrail2" parent="." index="1" instance=ExtResource("3_qoyqs")]
+skeleton = NodePath("../CharacterMesh")
+Active = false
+Lifetime = 0.5
+UpdateRate = 0.25
+density_lengthwise = 10
+ColourStart = Color(0.278431, 0.631373, 1, 1)
+ColourEnd = Color(0.278431, 0.631373, 1, 0)
+
+[node name="CharacterMesh" parent="." index="2"]
+MeshTurningSpeed = 6.0
+
+[node name="CollisionCast" type="RayCast3D" parent="." index="4"]
+collision_mask = 8193
+
+[node name="WaterSurfaceCast" type="RayCast3D" parent="." index="5"]
+collision_mask = 4096
+
+[node name="SpotShadow" parent="." index="6"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="UpVectorIndicator" type="Node3D" parent="." index="7"]
+
+[node name="UpVectorOrb" type="MeshInstance3D" parent="UpVectorIndicator" index="0"]
+mesh = SubResource("SphereMesh_kteou")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hoqmv")
+
+[node name="InputIndicator" type="Node3D" parent="." index="8"]
+
+[node name="InputIndicatorMesh" type="MeshInstance3D" parent="InputIndicator" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.7)
+mesh = SubResource("CylinderMesh_potmg")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hvci8")
+
+[node name="FloorNormalIndicator" type="Node3D" parent="." index="9"]
+
+[node name="FloorIndicatorMesh" type="MeshInstance3D" parent="FloorNormalIndicator" index="0"]
+transform = Transform3D(0.335, 0, 0, 0, 0.335, 0, 0, 0, 0.335, 0, 0, 0)
+mesh = SubResource("SphereMesh_02mkd")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_0akw7")
+
+[node name="VelocityIndicator" type="Node3D" parent="." index="10"]
+
+[node name="InputIndicatorMesh" type="MeshInstance3D" parent="VelocityIndicator" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.8)
+mesh = SubResource("CylinderMesh_potmg")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_cc5ap")
+
+[node name="Hurtbox" parent="." index="11" node_paths=PackedStringArray("ParentCharacter")]
+visible = false
+collision_layer = 32
+collision_mask = 64
+ParentCharacter = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+shape = SubResource("SphereShape3D_yv103")
+
+[node name="Hitbox" parent="." index="12" instance=ExtResource("8_m2ywy")]
+visible = false
+collision_layer = 16
+collision_mask = 128
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
+shape = SubResource("SphereShape3D_8sh6a")
+
+[node name="AttackAreaDebug" type="MeshInstance3D" parent="Hitbox" index="1"]
+visible = false
+mesh = SubResource("SphereMesh_kigcn")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_r3sgk")
+
+[node name="LockOnArea" type="Area3D" parent="." index="13"]
+visible = false
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LockOnArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+shape = SubResource("CylinderShape3D_modop")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="14"]
+
+[node name="TimerInvincibility" type="Timer" parent="." index="15"]
+one_shot = true
+
+[node name="TimerFlicker" type="Timer" parent="." index="16"]
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." index="17" node_paths=PackedStringArray("ActiveState")]
+script = ExtResource("10_ue3kp")
+ActiveState = NodePath("Initial")
+
+[node name="Initial" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("11_4xf35")
+
+[node name="DebugMove" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("12_jwgrb")
+
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="18"]
+stream = ExtResource("30_8bisq")
+bus = &"SoundEffects"
+
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="19"]
+stream = ExtResource("31_wtscm")
+bus = &"SoundEffects"
+
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="20"]
+stream = ExtResource("32_tk6k5")
+bus = &"SoundEffects"
+
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="21"]
+stream = ExtResource("33_gnfkd")
+bus = &"SoundEffects"
+
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="22"]
+stream = ExtResource("34_m5x8k")
+bus = &"SoundEffects"
+
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="23"]
+stream = ExtResource("35_xp2qi")
+bus = &"SoundEffects"
+
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="24"]
+stream = ExtResource("36_g2v08")
+bus = &"SoundEffects"
+
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="25"]
+stream = ExtResource("37_23c3u")
+bus = &"SoundEffects"
+
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="26"]
+stream = ExtResource("38_6lwqx")
+bus = &"SoundEffects"
+
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="27"]
+stream = ExtResource("39_5e8wq")
+bus = &"SoundEffects"
+
+[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="28"]
+stream = ExtResource("40_kmfbk")
+bus = &"SoundEffects"
+
+[node name="SndShieldActive" type="AudioStreamPlayer" parent="." index="29"]
+stream = ExtResource("40_kmfbk")
+bus = &"SoundEffects"
+
+[node name="SndWaterRunFootstep" type="AudioStreamPlayer" parent="." index="30"]
+stream = ExtResource("41_feaod")
+max_polyphony = 8
+bus = &"SoundEffects"
+
+[node name="SndWaterBreathe" type="AudioStreamPlayer" parent="." index="31"]
+stream = ExtResource("42_a34cv")
+bus = &"SoundEffects"
+
+[connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
+[connection signal="timeout" from="TimerInvincibility" to="." method="_on_timer_invincibility_timeout"]
+[connection signal="timeout" from="TimerFlicker" to="." method="_on_timer_flicker_timeout"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8p2u8bisvgr6"]
+
+[ext_resource type="Script" path="res://overlays/LevelComplete/LevelComplete.gd" id="1_8mo78"]
+
+[node name="LevelComplete" type="Node2D"]
+script = ExtResource("1_8mo78")
+
+[node name="lblBadniks" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Badniks Destroyed"
+
+[node name="lblFlickies" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Flickies Saved"
+
+[node name="lblTimeBonus" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Time Bonus"
+
+[node name="lblPreviousTime" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1:33:45"
+
+[node name="lblCurrentTime" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1:12:95"
+
+[node name="lblPreviousRings" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1:12:95"
+
+[node name="lblCurrentRings" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1:12:95"

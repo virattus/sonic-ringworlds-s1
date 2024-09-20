@@ -57,7 +57,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Coin" instance=ExtResource("2_6hck0")]
+[node name="Coin" groups=["Ring"] instance=ExtResource("2_6hck0")]
 collision_layer = 0
 script = ExtResource("3_wvgqs")
 
