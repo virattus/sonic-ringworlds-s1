@@ -23,9 +23,12 @@ func Update(_delta: float) -> void:
 		ChangeState("Idle")
 		return
 	
-	if owner.is_on_wall():
+	if !owner.is_on_wall():
+		ChangeState("Move")
+		return
+	else:
 		var wallNorm : Vector3 = owner.get_wall_normal()
-		owner.SetCollisionCastDir(wallNorm)
+		owner.SetCollisionCastDir(-wallNorm)
 		owner.CollisionCast.force_raycast_update()
 		if !owner.CollisionCast.is_colliding():
 			owner.SetCollisionCastDir(-owner.up_direction)
@@ -33,15 +36,13 @@ func Update(_delta: float) -> void:
 			return
 		else:
 			var realWallNorm : Vector3 = owner.CollisionCast.get_collision_normal()
+			owner.SetCollisionCastDir(-owner.up_direction)
 			if realWallNorm.dot(inputVel.normalized()) > -0.25:
 				owner.SetCollisionCastDir(-owner.up_direction)
 				ChangeState("Move")
 				return
 			else:
-				owner.CharMesh.LerpMeshOrientation(wallNorm)
 				
+				owner.CharMesh.LerpMeshOrientation(-realWallNorm, _delta)
 				owner.SetVelocity(inputVel * _delta)
-	else:
-		ChangeState("Move")
-		return
 	
