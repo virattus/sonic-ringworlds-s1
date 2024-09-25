@@ -74,6 +74,20 @@ func Update(_delta: float) -> void:
 		inputVel = Vector3.ZERO
 		IgnoreInput -= _delta
 	
+	
+	if owner.is_on_wall():
+		owner.SetCollisionCastDir(-owner.get_wall_normal())
+		owner.CollisionCast.force_raycast_update()
+		if owner.CollisionCast.is_colliding():
+			var collNormal : Vector3 = owner.CollisionCast.get_collision_normal()
+			if collNormal.dot(owner.velocity.normalized()) < -0.25:
+				if collNormal.dot(inputVel.normalized()) < -0.25:
+					owner.SetCollisionCastDir(-owner.up_direction)
+					ChangeState("Push")
+					return
+	
+		owner.SetCollisionCastDir(-owner.up_direction)
+	
 	if inputVel.length() > 0.0:
 		if newVel.length() > owner.Parameters.WALK_MAX_SPEED:
 			if owner.GroundCollision: #Only skid if not running on water

@@ -20,16 +20,14 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 		if collision.CollisionType == SonicCollision.FLOOR and CheckWallCollision():
 			#print("Colliding with wall and floor")
 			if owner.up_direction.dot(Vector3.UP) > 0.75:
-				ChangeState("Push")
-				return false
-			else:
 				if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
 					ChangeState("Land", {
 						"Normal": Vector3.UP,
 						"Type": "Normal",
 					})
 					return false
-			
+		
+		
 		
 		var minVel = WallRunMinVelocity()
 		#print(minVel)

@@ -25,7 +25,6 @@ func Exit() -> void:
 
 func Update(_delta: float) -> void:
 	if !HandleMovementAndCollisions(_delta):
-		ChangeState("Fall")
 		return
 
 	if owner.Speed < WIPEOUT_MIN_SPEED:

@@ -270,6 +270,10 @@ func SetDashMode(Active: bool) -> void:
 	pass
 
 
+func SetCollisionCastDir(newDir: Vector3) -> void:
+	CollisionCast.target_position = newDir.normalized() * COLLISION_CAST_LENGTH
+
+
 func CollectRing(ringCount := 1) -> bool:
 	if !CanCollectRings:
 		return false
