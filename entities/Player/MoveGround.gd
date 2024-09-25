@@ -19,12 +19,17 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 	if CheckGroundCollision(collision, delta):
 		if collision.CollisionType == SonicCollision.FLOOR and CheckWallCollision():
 			#print("Colliding with wall and floor")
-			if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
-				ChangeState("Land", {
-					"Normal": Vector3.UP,
-					"Type": "Normal",
-				})
+			if owner.up_direction.dot(Vector3.UP) > 0.75:
+				ChangeState("Push")
 				return false
+			else:
+				if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
+					ChangeState("Land", {
+						"Normal": Vector3.UP,
+						"Type": "Normal",
+					})
+					return false
+			
 		
 		var minVel = WallRunMinVelocity()
 		#print(minVel)
@@ -33,6 +38,7 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.Parameters.GROUND_NORMAL_HOP))
 			owner.GroundCollision = false
 			owner.StickToFloor = false
+			ChangeState("Fall")
 			return false
 		
 		owner.apply_floor_snap()
@@ -43,6 +49,9 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 			if owner.IsOnWaterSurface():
 				owner.UpdateUpDir(owner.WaterSurfaceCast.get_collision_normal(), -1.0)
 				return true
+		
+		#Not running on water
+		ChangeState("Fall")
 		return false 
 	
 	return true

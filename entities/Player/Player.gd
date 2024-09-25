@@ -2,12 +2,30 @@ class_name Player
 extends Character
 
 
-enum ShieldState {
+signal PlayDrowningMusic(play: bool)
+
+
+enum SHIELD {
 	NONE,
 	NORMAL_SHIELD,
 	FIRE_SHIELD,
 	WATER_SHIELD,
 	THUNDER_SHIELD,
+}
+
+enum OXYGEN {
+	NO_AIR_DRAIN,
+	START_AIR_DRAIN,
+	WARNING_CHIME_1,
+	WARNING_CHIME_2,
+	WARNING_CHIME_3,
+	WARNING_BUBBLE_5,
+	WARNING_BUBBLE_4,
+	WARNING_BUBBLE_3,
+	WARNING_BUBBLE_2,
+	WARNING_BUBBLE_1,
+	WARNING_BUBBLE_0,
+	EMPTY,
 }
 
 
@@ -33,9 +51,9 @@ var HangMovementAxis := Vector3.ZERO
 
 var RunOnWater := false
 var IsUnderwater := false
-var Oxygen := 1.0
+var OxygenState := OXYGEN.NO_AIR_DRAIN
 
-var CurrentShieldState := ShieldState.NONE
+var ShieldState := SHIELD.NONE
 var CurrentShield = null
 
 var DashMode := false
@@ -70,6 +88,7 @@ var DroppedRingSpeed := 1.0
 
 @onready var TimerInvincibility = $TimerInvincibility
 @onready var TimerFlicker = $TimerFlicker
+@onready var TimerOxygen = $TimerOxygen
 
 @onready var SndJump = $SndJump
 @onready var SndAirdash = $SndAirdash
@@ -85,14 +104,13 @@ var DroppedRingSpeed := 1.0
 @onready var SndShieldActive = $SndShieldActive
 @onready var SndWaterRunFootstep = $SndWaterRunFootstep
 @onready var SndWaterBreathe = $SndWaterBreathe
+@onready var SndOxygenChime = $SndOxygenChime
 
 
 @onready var SpawnPosition := global_position
 var WorldRadius := 0.5
 
 const COLLISION_CAST_LENGTH = 1.0
-
-const OXYGEN_DRAIN_RATE = 0.0333
 
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
@@ -123,7 +141,7 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "HasJumped")
 	DebugMenu.AddMonitor(self, "RunOnWater")
 	DebugMenu.AddMonitor(self, "IsUnderwater")
-	DebugMenu.AddMonitor(self, "Oxygen")
+	DebugMenu.AddMonitor(self, "OxygenState")
 	DebugMenu.AddMonitor(self, "Invincible")
 	DebugMenu.AddMonitor(self, "DashMode")
 	DebugMenu.AddMonitor(self, "DashModeCharge")
@@ -143,18 +161,6 @@ func _process(delta: float) -> void:
 			StateM.ChangeState("Fall", {})
 	
 	UpdateDebugIndicators(DebugMoveVector, DebugFloorNormal)
-	
-	#hacky, but whatever
-	if IsUnderwater:
-		if Oxygen <= 0.0:
-			if StateM.CurrentState != "Death":
-				StateM.ChangeState("Death", {})
-				return
-			
-		Oxygen -= delta * OXYGEN_DRAIN_RATE
-	else:
-		Oxygen = 1.0
-		
 	
 	if DashModeDrain:
 		if DashMode:
@@ -214,6 +220,11 @@ func UpdateUpDir(floor_normal: Vector3, delta := -1.0) -> void:
 		up_direction = floor_normal
 	
 	CollisionCast.target_position = -up_direction * COLLISION_CAST_LENGTH
+
+
+func SlipDir(CollisionNormal: Vector3) -> Vector3:
+	var UpDirInverse : Vector3 = Vector3.ONE - up_direction
+	return CollisionNormal - (UpDirInverse * UpDirInverse.dot(CollisionNormal))
 
 
 func SetVelocity(newVelocity: Vector3) -> void:
@@ -287,7 +298,57 @@ func SetRunOnWater(Active: bool) -> void:
 
 func SetUnderwater(Active: bool) -> void:
 	IsUnderwater = Active
-	Oxygen = 1.0
+	
+	if Active:
+		OxygenState = OXYGEN.START_AIR_DRAIN
+	else:
+		OxygenState = OXYGEN.NO_AIR_DRAIN
+	
+	UpdateOxygenState()
+
+
+func UpdateOxygenState() -> void:
+	match OxygenState:
+		OXYGEN.NO_AIR_DRAIN:
+			TimerOxygen.stop()
+			PlayDrowningMusic.emit(false)
+		OXYGEN.START_AIR_DRAIN:
+			TimerOxygen.start(Parameters.OXYGEN_CHIME_1)
+			OxygenState = OXYGEN.WARNING_CHIME_1
+		OXYGEN.WARNING_CHIME_1:
+			SndOxygenChime.play()
+			TimerOxygen.start(Parameters.OXYGEN_CHIME_2)
+			OxygenState = OXYGEN.WARNING_CHIME_2
+		OXYGEN.WARNING_CHIME_2:
+			SndOxygenChime.play()
+			TimerOxygen.start(Parameters.OXYGEN_CHIME_3)
+			OxygenState = OXYGEN.WARNING_CHIME_3
+		OXYGEN.WARNING_CHIME_3:
+			SndOxygenChime.play()
+			TimerOxygen.start(Parameters.OXYGEN_BUBBLE_5)
+			OxygenState = OXYGEN.WARNING_BUBBLE_5
+		OXYGEN.WARNING_BUBBLE_5:
+			PlayDrowningMusic.emit(true)
+			TimerOxygen.start(Parameters.OXYGEN_BUBBLE_4)
+			OxygenState = OXYGEN.WARNING_BUBBLE_4
+		OXYGEN.WARNING_BUBBLE_4:
+			TimerOxygen.start(Parameters.OXYGEN_BUBBLE_3)
+			OxygenState = OXYGEN.WARNING_BUBBLE_3
+		OXYGEN.WARNING_BUBBLE_3:
+			TimerOxygen.start(Parameters.OXYGEN_BUBBLE_2)
+			OxygenState = OXYGEN.WARNING_BUBBLE_2
+		OXYGEN.WARNING_BUBBLE_2:
+			TimerOxygen.start(Parameters.OXYGEN_BUBBLE_1)
+			OxygenState = OXYGEN.WARNING_BUBBLE_1
+		OXYGEN.WARNING_BUBBLE_1:
+			TimerOxygen.start(Parameters.OXYGEN_BUBBLE_0)
+			OxygenState = OXYGEN.WARNING_BUBBLE_0
+		OXYGEN.WARNING_BUBBLE_0:
+			TimerOxygen.start(Parameters.OXYGEN_LAST_GASP)
+			OxygenState = OXYGEN.EMPTY
+		OXYGEN.EMPTY:
+			Kill()
+
 
 
 func IsOnWaterSurface() -> bool:
@@ -295,7 +356,9 @@ func IsOnWaterSurface() -> bool:
 
 
 func BreatheAirBubble() -> void:
-	Oxygen = 1.0
+	OxygenState = OXYGEN.START_AIR_DRAIN
+	TimerOxygen.stop()
+	UpdateOxygenState()
 	SndWaterBreathe.play()
 	velocity = Vector3.ZERO
 	StateM.ChangeState("Fall")
@@ -320,26 +383,24 @@ func SetFlicker(time: float) -> void:
 		TimerFlicker.stop()
 
 
-func SetShieldState(newState: ShieldState) -> void:	
-	if CurrentShieldState != ShieldState.NONE:
+func SetShieldState(newState: SHIELD) -> void:	
+	if ShieldState != SHIELD.NONE:
 		CurrentShield.queue_free()
 		CurrentShield = null
 	
-	CurrentShieldState = newState
-
+	ShieldState = newState
+	if ShieldState == SHIELD.NONE:
+		return
 	
 	match newState:
-		ShieldState.NORMAL_SHIELD:
+		SHIELD.NORMAL_SHIELD:
 			CurrentShield = NORMAL_SHIELD.instantiate()
-		ShieldState.FIRE_SHIELD:
+		SHIELD.FIRE_SHIELD:
 			CurrentShield = FIRE_SHIELD.instantiate()
-		ShieldState.WATER_SHIELD:
+		SHIELD.WATER_SHIELD:
 			CurrentShield = WATER_SHIELD.instantiate()
-		ShieldState.THUNDER_SHIELD:
+		SHIELD.THUNDER_SHIELD:
 			CurrentShield = THUNDER_SHIELD.instantiate()
-	
-	if CurrentShield != null:
-		add_child(CurrentShield)
 
 
 func OrientCharMesh() -> void:
@@ -422,8 +483,8 @@ func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 	if Invincible or (Damage < DamageThreshold) or StateM.CurrentState == "Death":
 		return
 	
-	if CurrentShieldState != ShieldState.NONE:
-		SetShieldState(ShieldState.NONE)
+	if ShieldState != SHIELD.NONE:
+		SetShieldState(SHIELD.NONE)
 		StateM.ChangeState("Hurt", {
 			"BounceDirection": SourcePos.direction_to(global_position).normalized() * Vector3(3, 0, 3),
 			"DropRings": false,
@@ -440,8 +501,9 @@ func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 
 
 func Kill() -> void:
+	HealthEmpty.emit()
 	SetDashMode(false)
-	SetShieldState(ShieldState.NONE)
+	SetShieldState(SHIELD.NONE)
 	StateM.ChangeState("Death")
 
 

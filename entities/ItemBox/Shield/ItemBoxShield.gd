@@ -19,15 +19,15 @@ func _ready() -> void:
 
 
 func ActivateItemBox(source: Character) -> void:
-	var shieldstate = Player.ShieldState.NORMAL_SHIELD
+	var shieldstate = Player.SHIELD.NORMAL_SHIELD
 	
 	match ShieldType:
 		"FIRE":
-			shieldstate = Player.ShieldState.FIRE_SHIELD
+			shieldstate = Player.SHIELD.FIRE_SHIELD
 		"WATER":
-			shieldstate = Player.ShieldState.WATER_SHIELD
+			shieldstate = Player.SHIELD.WATER_SHIELD
 		"THUNDER":
-			shieldstate = Player.ShieldState.THUNDER_SHIELD
+			shieldstate = Player.SHIELD.THUNDER_SHIELD
 	
 	source.SetShieldState(shieldstate)
 

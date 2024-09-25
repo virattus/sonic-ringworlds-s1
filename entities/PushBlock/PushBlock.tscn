@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpy5sdvh4ooji"]
+
+[ext_resource type="Script" path="res://entities/PushBlock/PushBlock.gd" id="1_bnpf8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eyx4s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_yk78w"]
+
+[node name="PushBlock" type="CharacterBody3D" groups=["PushBlock"]]
+script = ExtResource("1_bnpf8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_eyx4s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_yk78w")

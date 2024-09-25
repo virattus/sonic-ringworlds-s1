@@ -92,4 +92,5 @@ script = ExtResource("11_q3fq5")
 script = ExtResource("12_oukvr")
 
 [connection signal="TitleCardAnimComplete" from="TitleCard" to="." method="_on_title_card_title_card_anim_complete"]
+[connection signal="PlayDrowningMusic" from="PlayerSwapper/PlayerSonic" to="." method="_on_player_play_drowning_music"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

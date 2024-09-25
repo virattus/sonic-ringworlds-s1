@@ -1,12 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=36 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_1mpyw"]
 [ext_resource type="Script" path="res://entities/Player/Player.gd" id="2_k6uox"]
 [ext_resource type="PackedScene" uid="uid://cb1pkubp6xxtj" path="res://effects/CylinderTrail2/CylinderTrail2.tscn" id="3_qoyqs"]
+[ext_resource type="Script" path="res://entities/Player/Push.gd" id="8_jcus7"]
 [ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="8_m2ywy"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="10_ue3kp"]
 [ext_resource type="Script" path="res://entities/Player/Initial.gd" id="11_4xf35"]
 [ext_resource type="Script" path="res://entities/Player/DebugMove.gd" id="12_jwgrb"]
+[ext_resource type="AudioStream" uid="uid://dfb3jnuvxypvi" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C2.wav" id="22_5l48w"]
 [ext_resource type="AudioStream" uid="uid://bgwe6pbgsc4tj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A0.wav" id="30_8bisq"]
 [ext_resource type="AudioStream" uid="uid://bgvgybjs5n0j3" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_AA.wav" id="31_wtscm"]
 [ext_resource type="AudioStream" uid="uid://dle6efyausde4" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BB.wav" id="32_tk6k5"]
@@ -173,7 +175,11 @@ one_shot = true
 [node name="TimerFlicker" type="Timer" parent="." index="16"]
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="." index="17" node_paths=PackedStringArray("ActiveState")]
+[node name="TimerOxygen" type="Timer" parent="." index="17"]
+process_callback = 0
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="." index="18" node_paths=PackedStringArray("ActiveState")]
 script = ExtResource("10_ue3kp")
 ActiveState = NodePath("Initial")
 
@@ -183,63 +189,71 @@ script = ExtResource("11_4xf35")
 [node name="DebugMove" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("12_jwgrb")
 
-[node name="SndJump" type="AudioStreamPlayer" parent="." index="18"]
+[node name="Push" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("8_jcus7")
+
+[node name="SndJump" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("30_8bisq")
 bus = &"SoundEffects"
 
-[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="19"]
+[node name="SndAirdash" type="AudioStreamPlayer" parent="." index="20"]
 stream = ExtResource("31_wtscm")
 bus = &"SoundEffects"
 
-[node name="SndLand" type="AudioStreamPlayer" parent="." index="20"]
+[node name="SndLand" type="AudioStreamPlayer" parent="." index="21"]
 stream = ExtResource("32_tk6k5")
 bus = &"SoundEffects"
 
-[node name="SndBonk" type="AudioStreamPlayer" parent="." index="21"]
+[node name="SndBonk" type="AudioStreamPlayer" parent="." index="22"]
 stream = ExtResource("33_gnfkd")
 bus = &"SoundEffects"
 
-[node name="SndSkid" type="AudioStreamPlayer" parent="." index="22"]
+[node name="SndSkid" type="AudioStreamPlayer" parent="." index="23"]
 stream = ExtResource("34_m5x8k")
 bus = &"SoundEffects"
 
-[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="23"]
+[node name="SndRingCollect" type="AudioStreamPlayer" parent="." index="24"]
 stream = ExtResource("35_xp2qi")
 bus = &"SoundEffects"
 
-[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="24"]
+[node name="SndRingDrop" type="AudioStreamPlayer" parent="." index="25"]
 stream = ExtResource("36_g2v08")
 bus = &"SoundEffects"
 
-[node name="SndDeath" type="AudioStreamPlayer" parent="." index="25"]
+[node name="SndDeath" type="AudioStreamPlayer" parent="." index="26"]
 stream = ExtResource("37_23c3u")
 bus = &"SoundEffects"
 
-[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="26"]
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="27"]
 stream = ExtResource("38_6lwqx")
 bus = &"SoundEffects"
 
-[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="27"]
+[node name="SndSpinLaunch" type="AudioStreamPlayer" parent="." index="28"]
 stream = ExtResource("39_5e8wq")
 bus = &"SoundEffects"
 
-[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="28"]
+[node name="SndOneUp" type="AudioStreamPlayer" parent="." index="29"]
 stream = ExtResource("40_kmfbk")
 bus = &"SoundEffects"
 
-[node name="SndShieldActive" type="AudioStreamPlayer" parent="." index="29"]
+[node name="SndShieldActive" type="AudioStreamPlayer" parent="." index="30"]
 stream = ExtResource("40_kmfbk")
 bus = &"SoundEffects"
 
-[node name="SndWaterRunFootstep" type="AudioStreamPlayer" parent="." index="30"]
+[node name="SndWaterRunFootstep" type="AudioStreamPlayer" parent="." index="31"]
 stream = ExtResource("41_feaod")
 max_polyphony = 8
 bus = &"SoundEffects"
 
-[node name="SndWaterBreathe" type="AudioStreamPlayer" parent="." index="31"]
+[node name="SndWaterBreathe" type="AudioStreamPlayer" parent="." index="32"]
 stream = ExtResource("42_a34cv")
+bus = &"SoundEffects"
+
+[node name="SndOxygenChime" type="AudioStreamPlayer" parent="." index="33"]
+stream = ExtResource("22_5l48w")
 bus = &"SoundEffects"
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
 [connection signal="timeout" from="TimerInvincibility" to="." method="_on_timer_invincibility_timeout"]
 [connection signal="timeout" from="TimerFlicker" to="." method="_on_timer_flicker_timeout"]
+[connection signal="timeout" from="TimerOxygen" to="." method="UpdateOxygenState"]

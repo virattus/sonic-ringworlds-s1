@@ -1,7 +1,7 @@
 extends PlayerParameters
 
 
-const JUMP_POWER = 6.5
+
 
 const ATTACK_BOUNCE_POW = 8.0
 
@@ -31,3 +31,5 @@ const BALL_MIN_SPEED = 1.0
 
 const AIR_INPUT_VEL = 2.0
 const AIR_WATER_INPUT_VEL = 1.0
+
+const JUMP_POWER = 10.0

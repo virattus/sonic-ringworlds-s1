@@ -69,10 +69,16 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 			})
 			return true
 		else:
-			ChangeState("Teetering", {
-				
-			})
-			return true
+			var slipdir : Vector3 = owner.SlipDir(collision.CollisionNormal)
+			if slipdir.length() < 0.1:
+				ChangeState("Teetering", {
+					
+				})
+				return true
+			else:
+				#Slightly missed the platform, slip off
+				owner.global_position += slipdir
+				return false
 	elif collision.CollisionType == SonicCollision.WALL:
 		#This only fires if we're hitting just a wall, so we need to make certain that we're 
 		#actually colliding with a wall specifically, and not just rubbing on one as we fall down
