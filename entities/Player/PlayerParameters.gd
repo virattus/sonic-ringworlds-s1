@@ -2,13 +2,14 @@ class_name PlayerParameters
 extends Node
 
 
-const GRAVITY = 9.8
+#const GRAVITY = 9.8
+const GRAVITY = 13.125 #2D Sonic gravity I think
 const UPDIR_SLERP_RATE = 10.0
 const FLOOR_NORMAL_TRANSITION_MAX = 0.1
 const FLICKER_CYCLE_TIME = 0.0625
 
-const OXYGEN_MAX_TIME = 30.0
-const OXYGEN_CHIME_1 = 5.0
+const OXYGEN_MAX_TIME = 60.0
+const OXYGEN_CHIME_1 = 5.0 + 30.0
 const OXYGEN_CHIME_2 = 5.0
 const OXYGEN_CHIME_3 = 5.0
 const OXYGEN_BUBBLE_5 = 2.0
@@ -17,13 +18,15 @@ const OXYGEN_BUBBLE_3 = 2.0
 const OXYGEN_BUBBLE_2 = 2.0
 const OXYGEN_BUBBLE_1 = 2.0
 const OXYGEN_BUBBLE_0 = 2.0
-const OXYGEN_LAST_GASP = 3.0
+const OXYGEN_LAST_GASP = 2.0
 
 const GROUND_NORMAL_TRANSITION_MIN = 0.85
 const GROUND_NORMAL_HOP = 0.1
 
 const MOVE_MAX_SPEED = 25.0
 const TERMINAL_VELOCITY = 16.0 #yep, we have a max -Y speed exclusively
+
+const JUMP_RELEASE_MAX_Y_SPEED = 4.0
 
 const FALL_DRAG = 0.125
 const FALL_MAX_Y_DRAG_SPEED = -4.0 #Only apply XZ drag when falling faster than this

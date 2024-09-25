@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://kob8pbavna3"]
+
+[ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="1_0xuxf"]
+[ext_resource type="Script" path="res://entities/PlayerAmy/PlayerAmy.gd" id="2_tikin"]
+
+[node name="PlayerAmy" instance=ExtResource("1_0xuxf")]
+script = ExtResource("2_tikin")

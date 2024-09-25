@@ -82,7 +82,6 @@ var DroppedRingSpeed := 1.0
 @onready var FloorNormalIndicator = $FloorNormalIndicator
 @onready var InputIndicator = $InputIndicator
 @onready var VelocityIndicator = $VelocityIndicator
-@onready var CameraFocus = $CameraFocus
 @onready var HitBox : Hitbox = $Hitbox
 @onready var LockOnArea = $LockOnArea
 

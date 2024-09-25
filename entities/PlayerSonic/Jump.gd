@@ -12,9 +12,7 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
 	
-	if _msg.has("JumpSound") and _msg["JumpSound"] != true:
-		pass
-	else:
+	if _msg.has("JumpSound") and _msg["JumpSound"]:
 		owner.SndJump.play()
 	
 	var JumpForce = owner.Parameters.JUMP_POWER
@@ -29,7 +27,7 @@ func Enter(_msg := {}) -> void:
 		owner.CharMesh.AlignToY(owner.up_direction)
 
 	var newVel : Vector3 = owner.velocity
-	if _msg.has("IgnoreVel") and _msg["IgnoreVel"] == true:
+	if _msg.has("IgnoreVel") and _msg["IgnoreVel"]:
 		newVel = Vector3.ZERO
 	
 	#Set velocity to only forward direction + jump direction, fixes bug with jumping after circling sphere
@@ -113,8 +111,14 @@ func Update(_delta: float) -> void:
 	
 	newVel = newVel.normalized() * newSpeed
 	
+	if owner.HasJumped and Input.is_action_just_released("Jump"):
+		if newVel.y > owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED:
+			newVel.y = owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED
+
+	
 	#newVel = ApplyDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
+
 	
 	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
 		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED

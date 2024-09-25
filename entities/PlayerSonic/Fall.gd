@@ -57,8 +57,13 @@ func Update(_delta: float) -> void:
 	
 	newVel = newVel.normalized() * newSpeed
 	
+	if owner.HasJumped and Input.is_action_just_released("Jump"):
+		if newVel.y > owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED:
+			newVel.y = owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED
+	
 	#newVel = ApplyDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
+	
 	
 	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
 		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=23 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://daqpkl6e5l87k" path="res://entities/CagedFlicky/CagedFlicky.tscn" id="16_0mtxn"]
 [ext_resource type="PackedScene" uid="uid://io6exwde1xx0" path="res://entities/HangPoint/HangPoint.tscn" id="17_eomso"]
 [ext_resource type="PackedScene" uid="uid://bja1oipslqy4q" path="res://entities/FallingMushroom/FallingMushroom.tscn" id="17_h1ucm"]
+[ext_resource type="PackedScene" uid="uid://cpy5sdvh4ooji" path="res://entities/PushBlock/PushBlock.tscn" id="19_otfhm"]
 [ext_resource type="PackedScene" uid="uid://us76ejn435yq" path="res://entities/Lava/Lava.tscn" id="20_rehot"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
@@ -664,6 +665,9 @@ MovementAxis = Vector3(1, 1, 1)
 
 [node name="FallingMushroom" parent="MovementTesting" index="47" instance=ExtResource("17_h1ucm")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -101.772, 10.9206, 26.1243)
+
+[node name="PushBlock" parent="MovementTesting" index="48" instance=ExtResource("19_otfhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2806, 0.5, -13.7179)
 
 [node name="EnemyCrabmeat" parent="." index="10" instance=ExtResource("9_dh6p0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2104)

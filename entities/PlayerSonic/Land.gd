@@ -51,7 +51,7 @@ func Enter(_msg := {}) -> void:
 	
 
 	owner.SetVelocity(Vector3.ZERO)
-	owner.CameraFocus.position = Vector3(0, 0.5, 0)
+	#owner.CameraFocus.position = Vector3(0, 0.5, 0)
 	
 	
 	#Activate landing anim

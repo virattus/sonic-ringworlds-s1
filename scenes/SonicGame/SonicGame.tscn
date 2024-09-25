@@ -45,17 +45,19 @@ layer = 2
 
 [node name="MusicController" parent="." instance=ExtResource("4_40tvp")]
 
-[node name="PlayerSwapper" type="Node3D" parent="."]
+[node name="PlayerSwapper" type="Node3D" parent="." node_paths=PackedStringArray("CurrentPlayer")]
 script = ExtResource("6_fvivd")
+CurrentPlayer = NodePath("PlayerSonic")
 
 [node name="PlayerSonic" parent="PlayerSwapper" node_paths=PackedStringArray("Camera") instance=ExtResource("7_w6d2k")]
 Camera = NodePath("../../ThirdPersonCamera")
 
-[node name="CameraFocus" parent="PlayerSwapper/PlayerSonic" instance=ExtResource("8_3yo3k")]
+[node name="CameraFocus" parent="PlayerSwapper" node_paths=PackedStringArray("Target") instance=ExtResource("8_3yo3k")]
+Target = NodePath("../PlayerSonic")
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
 Char = NodePath("../PlayerSwapper/PlayerSonic")
-Focus = NodePath("../PlayerSwapper/PlayerSonic/CameraFocus")
+Focus = NodePath("../PlayerSwapper/CameraFocus")
 
 [node name="PlayerController" parent="." node_paths=PackedStringArray("Camera_Node") instance=ExtResource("4_31dce")]
 Camera_Node = NodePath("../ThirdPersonCamera")
