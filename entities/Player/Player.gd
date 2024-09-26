@@ -68,9 +68,7 @@ var DroppedRingSpeed := 1.0
 
 
 
-
-@onready var SonicModel = $CharacterMesh/SonicModel
-@onready var SonicBall = $CharacterMesh/SonicBall
+@onready var PushCast : RayCast3D = $CharacterMesh/PushCast
 
 @onready var AnimTree: AnimationTree = $AnimationTree
 @onready var StateM: StateMachine = $StateMachine

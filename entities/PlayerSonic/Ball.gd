@@ -1,6 +1,8 @@
 extends "res://entities/Player/MoveGround.gd"
 
 
+const BALL_GROUND_FRICTION = 0.0234375
+
 const BALL_UNCURL_MIN_UP_DOT = 0.85
 
 
@@ -57,7 +59,8 @@ func Update(_delta: float) -> void:
 		newVel += inputVel * owner.Parameters.WALK_SPEED_POWER * _delta
 	else:
 		if owner.GroundCollision:
-			newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+			#newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+			newVel *= 1.0 - BALL_GROUND_FRICTION
 		else:
 			newVel = ApplyAirDrag(newVel, _delta / 2.0)
 		

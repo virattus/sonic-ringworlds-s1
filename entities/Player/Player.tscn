@@ -1,13 +1,19 @@
-[gd_scene load_steps=36 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=42 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_1mpyw"]
 [ext_resource type="Script" path="res://entities/Player/Player.gd" id="2_k6uox"]
 [ext_resource type="PackedScene" uid="uid://cb1pkubp6xxtj" path="res://effects/CylinderTrail2/CylinderTrail2.tscn" id="3_qoyqs"]
 [ext_resource type="Script" path="res://entities/Player/Push.gd" id="8_jcus7"]
 [ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="8_m2ywy"]
+[ext_resource type="Script" path="res://entities/Player/FireShieldAbility.gd" id="9_0b7m0"]
+[ext_resource type="Script" path="res://entities/Player/WaterShieldAbility.gd" id="10_l8pww"]
 [ext_resource type="Script" path="res://entities/StateMachine/StateMachine.gd" id="10_ue3kp"]
+[ext_resource type="Script" path="res://entities/Player/ThunderShieldAbility.gd" id="11_01pes"]
 [ext_resource type="Script" path="res://entities/Player/Initial.gd" id="11_4xf35"]
+[ext_resource type="Script" path="res://entities/Player/NormalShield.gd" id="12_8763j"]
 [ext_resource type="Script" path="res://entities/Player/DebugMove.gd" id="12_jwgrb"]
+[ext_resource type="Script" path="res://entities/Player/Hurt.gd" id="13_exhjx"]
+[ext_resource type="Script" path="res://entities/Player/Death.gd" id="14_h1vfh"]
 [ext_resource type="AudioStream" uid="uid://dfb3jnuvxypvi" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C2.wav" id="22_5l48w"]
 [ext_resource type="AudioStream" uid="uid://bgwe6pbgsc4tj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A0.wav" id="30_8bisq"]
 [ext_resource type="AudioStream" uid="uid://bgvgybjs5n0j3" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_AA.wav" id="31_wtscm"]
@@ -92,6 +98,9 @@ ColourEnd = Color(0.278431, 0.631373, 1, 0)
 
 [node name="CharacterMesh" parent="." index="2"]
 MeshTurningSpeed = 6.0
+
+[node name="PushCast" type="RayCast3D" parent="CharacterMesh" index="0"]
+target_position = Vector3(0, 0, -0.6)
 
 [node name="CollisionCast" type="RayCast3D" parent="." index="4"]
 collision_mask = 8193
@@ -191,6 +200,24 @@ script = ExtResource("12_jwgrb")
 
 [node name="Push" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("8_jcus7")
+
+[node name="FireShieldAbility" type="Node" parent="StateMachine" index="3"]
+script = ExtResource("9_0b7m0")
+
+[node name="WaterShieldAbility" type="Node" parent="StateMachine" index="4"]
+script = ExtResource("10_l8pww")
+
+[node name="ThunderShieldAbility" type="Node" parent="StateMachine" index="5"]
+script = ExtResource("11_01pes")
+
+[node name="NormalShieldAbility" type="Node" parent="StateMachine" index="6"]
+script = ExtResource("12_8763j")
+
+[node name="Hurt" type="Node" parent="StateMachine" index="7"]
+script = ExtResource("13_exhjx")
+
+[node name="Death" type="Node" parent="StateMachine" index="8"]
+script = ExtResource("14_h1vfh")
 
 [node name="SndJump" type="AudioStreamPlayer" parent="." index="19"]
 stream = ExtResource("30_8bisq")

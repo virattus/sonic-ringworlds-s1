@@ -6,6 +6,8 @@ var IgnoreInput := 0.0
 var FootstepAccumulator := 0.0
 
 
+const RUN_FRICTION_SPEED = 0.046875
+
 const RUN_RATIO_DIVISOR = 200.0
 
 const MOVE_CHARMESH_VEL_ORIENT_MIN_SPEED = 2.0
@@ -21,12 +23,21 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Ground/blend_amount", 1.0)
 	owner.AnimTree.set("parameters/GroundSecondary/blend_amount", -1.0)
 	
+	if _msg.has("Velocity"):
+		owner.SetVelocity(_msg["Velocity"])
+	
 	if _msg.has("IgnoreInput"):
 		IgnoreInput = _msg["IgnoreInput"]
 		
 	if _msg.has("Boost"):
 		owner.SetVelocity(_msg["Boost"])
 		owner.SndSpinLaunch.play()
+	
+	if _msg.has("UpdateModelOrientation") and _msg["UpdateModelOrientation"]:
+		owner.CharMesh.LerpMeshOrientation(owner.global_position + owner.velocity, -1.0)
+
+	
+	UpdateMoveAnimations()
 
 
 func Exit() -> void:
@@ -74,19 +85,14 @@ func Update(_delta: float) -> void:
 		inputVel = Vector3.ZERO
 		IgnoreInput -= _delta
 	
-	
 	if owner.is_on_wall():
-		owner.SetCollisionCastDir(-owner.get_wall_normal())
-		owner.CollisionCast.force_raycast_update()
-		if owner.CollisionCast.is_colliding():
-			var collNormal : Vector3 = owner.CollisionCast.get_collision_normal()
-			if collNormal.dot(owner.velocity.normalized()) < -0.25:
+		if owner.PushCast.is_colliding():
+			if owner.up_direction.dot(Vector3.UP) > 0.9:
+				var collNormal : Vector3 = owner.PushCast.get_collision_normal()
+				#if collNormal.dot(owner.velocity.normalized()) < -0.25:
 				if collNormal.dot(inputVel.normalized()) < -0.25:
-					owner.SetCollisionCastDir(-owner.up_direction)
 					ChangeState("Push")
 					return
-	
-		owner.SetCollisionCastDir(-owner.up_direction)
 	
 	if inputVel.length() > 0.0:
 		if newVel.length() > owner.Parameters.WALK_MAX_SPEED:
@@ -98,7 +104,8 @@ func Update(_delta: float) -> void:
 		else:
 			newVel = CalculateWalkVelocity(inputVel, _delta)
 	else:
-		newVel = owner.ApplyDrag(newVel, _delta)
+		#newVel = owner.ApplyDrag(newVel, _delta)
+		newVel *= 1.0 - RUN_FRICTION_SPEED
 	
 	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
 		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED

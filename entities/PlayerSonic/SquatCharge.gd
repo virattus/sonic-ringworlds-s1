@@ -3,6 +3,7 @@ extends "res://entities/Player/MoveGround.gd"
 
 var ChargePower := 0.0
 
+const CHARGE_MIN_POWER = 8.0
 const CHARGE_MAX_POWER = 20.0
 const CHARGE_POWER_GENERATE_POWER = 200.0
 const CHARGE_POWER_IDLE_DRAIN = 0.0
@@ -48,5 +49,5 @@ func LaunchStrikeDash() -> void:
 	if owner.DashModeCharge >= 1.0:
 		owner.SetDashMode(true)
 	#owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
-	owner.SetVelocity(owner.CharMesh.GetForwardVector() * ChargePower)
+	owner.SetVelocity(owner.CharMesh.GetForwardVector() * clamp(ChargePower, CHARGE_MIN_POWER, CHARGE_MAX_POWER))
 	ChangeState("Move")

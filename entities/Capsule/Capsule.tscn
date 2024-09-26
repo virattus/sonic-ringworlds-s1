@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj5oyioly1dmv"]
+
+[ext_resource type="PackedScene" uid="uid://1xxjeshkifye" path="res://models/Capsule/Capsule.glb" id="1_id0xc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vx2ql"]
+height = 4.79873
+radius = 2.39657
+
+[node name="Capsule" instance=ExtResource("1_id0xc")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.34625, 0)
+shape = SubResource("CylinderShape3D_vx2ql")

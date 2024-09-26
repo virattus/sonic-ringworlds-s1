@@ -1,6 +1,9 @@
 extends "res://entities/Player/Push.gd"
 
 
+var WallNormal := Vector3.ZERO
+
+const PUSH_SPEED = 8.0
 
 
 func Enter(_msg := {}) -> void:
@@ -23,26 +26,26 @@ func Update(_delta: float) -> void:
 		ChangeState("Idle")
 		return
 	
-	if !owner.is_on_wall():
+	if !UpdateWallNormal():
 		ChangeState("Move")
 		return
-	else:
-		var wallNorm : Vector3 = owner.get_wall_normal()
-		owner.SetCollisionCastDir(-wallNorm)
-		owner.CollisionCast.force_raycast_update()
-		if !owner.CollisionCast.is_colliding():
-			owner.SetCollisionCastDir(-owner.up_direction)
-			ChangeState("Move")
-			return
-		else:
-			var realWallNorm : Vector3 = owner.CollisionCast.get_collision_normal()
-			owner.SetCollisionCastDir(-owner.up_direction)
-			if realWallNorm.dot(inputVel.normalized()) > -0.25:
-				owner.SetCollisionCastDir(-owner.up_direction)
-				ChangeState("Move")
-				return
-			else:
-				
-				owner.CharMesh.LerpMeshOrientation(-realWallNorm, _delta)
-				owner.SetVelocity(inputVel * _delta)
 	
+	
+	if WallNormal.dot(inputVel.normalized()) > -0.25:
+		ChangeState("Move")
+		return
+		
+	var collider = owner.PushCast.get_collider()
+	if collider.is_in_group("PushBlock"):
+		collider.Push(owner)
+				
+	owner.CharMesh.LerpMeshOrientation(-WallNormal, _delta)
+	owner.SetVelocity(inputVel * PUSH_SPEED * _delta)
+
+
+func UpdateWallNormal() -> bool:
+	if !owner.PushCast.is_colliding():
+		return false
+	
+	WallNormal = owner.PushCast.get_collision_normal()
+	return true

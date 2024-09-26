@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bqldi14hjdj3t"]
+[gd_scene load_steps=25 format=3 uid="uid://bqldi14hjdj3t"]
 
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="1_h7krl"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/PlayerSonic.gd" id="2_gfmlf"]
@@ -11,10 +11,6 @@
 [ext_resource type="Script" path="res://entities/PlayerSonic/Teetering.gd" id="9_gq1o4"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Move.gd" id="10_k7u8l"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Ball.gd" id="11_oo7vq"]
-[ext_resource type="Script" path="res://entities/PlayerSonic/FireShieldAbility.gd" id="12_y15y7"]
-[ext_resource type="Script" path="res://entities/Player/WaterShieldAbility.gd" id="13_mswic"]
-[ext_resource type="Script" path="res://entities/Player/ThunderShieldAbility.gd" id="14_5vp3p"]
-[ext_resource type="Script" path="res://entities/Player/NormalShield.gd" id="15_1vngp"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Skid.gd" id="16_10v48"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/SquatCharge.gd" id="17_x2v8p"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Jump.gd" id="18_yivov"]
@@ -25,8 +21,6 @@
 [ext_resource type="Script" path="res://entities/PlayerSonic/Pose.gd" id="23_oq4j6"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Land.gd" id="24_knifn"]
 [ext_resource type="Script" path="res://entities/Player/Wipeout.gd" id="25_du4gh"]
-[ext_resource type="Script" path="res://entities/PlayerSonic/Hurt.gd" id="26_j0bb7"]
-[ext_resource type="Script" path="res://entities/PlayerSonic/Death.gd" id="27_uvfc1"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Swap.gd" id="28_3ketm"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/VictoryPose.gd" id="29_o7p3b"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Push.gd" id="30_caun3"]
@@ -39,23 +33,23 @@ Parameters = ExtResource("3_3q6jm")
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/1/position = Vector3(-1.72447e-08, 0.394599, 2.98575)
+bones/1/position = Vector3(-4.96284e-08, 0.0241725, 3.02723)
 bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/2/position = Vector3(-5.13685, 0.219222, 3.24022)
-bones/2/rotation = Quaternion(2.43211e-08, -0.776729, 0.629836, -3.71618e-08)
+bones/2/position = Vector3(-5.13685, 0.0134293, 3.73669)
+bones/2/rotation = Quaternion(2.14949e-08, -0.711582, 0.702603, -4.03211e-08)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.219222, 3.24022)
-bones/4/rotation = Quaternion(2.43211e-08, -0.776729, 0.629836, -3.71618e-08)
+bones/4/position = Vector3(5.13685, 0.0134293, 3.73669)
+bones/4/rotation = Quaternion(2.14949e-08, -0.711582, 0.702603, -4.03211e-08)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(-1.72447e-08, 0.394599, 5.22471)
+bones/6/position = Vector3(-4.96284e-08, 0.0241725, 5.26618)
 bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
 [node name="ba3DBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 1.72447e-08, 2.98575, 0.394599)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 4.96284e-08, 3.02723, 0.0241725)
 bone_name = "Head_2"
 bone_idx = 1
 
@@ -65,7 +59,7 @@ Size = 1.25
 Colour = Color(0, 0.287371, 0.725397, 1)
 
 [node name="ba3DHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, -9.02984e-09, -8.83658e-08, -2.70927e-08, -0.978422, -0.206614, -8.45934e-08, 0.206615, -0.978422, 5.13685, 3.24022, 0.219222)
+transform = Transform3D(1, -2.60686e-08, -8.75883e-08, -2.71788e-08, -0.999919, -0.0126992, -8.72502e-08, 0.0126992, -0.999919, 5.13685, 3.73669, 0.0134293)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -74,7 +68,7 @@ SceneRoot = NodePath("../../../../../..")
 Size = 0.5
 
 [node name="ba3DHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, -9.02984e-09, -8.83658e-08, -2.70927e-08, -0.978422, -0.206614, -8.45934e-08, 0.206615, -0.978422, -5.13685, 3.24022, 0.219222)
+transform = Transform3D(1, -2.60686e-08, -8.75883e-08, -2.71788e-08, -0.999919, -0.0126992, -8.72502e-08, 0.0126992, -0.999919, -5.13685, 3.73669, 0.0134293)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -177,38 +171,26 @@ script = ExtResource("10_k7u8l")
 [node name="Ball" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("11_oo7vq")
 
-[node name="FireShieldAbility" type="Node" parent="StateMachine" index="6"]
-script = ExtResource("12_y15y7")
-
-[node name="WaterShieldAbility" type="Node" parent="StateMachine" index="7"]
-script = ExtResource("13_mswic")
-
-[node name="ThunderShieldAbility" type="Node" parent="StateMachine" index="8"]
-script = ExtResource("14_5vp3p")
-
-[node name="NormalShieldAbility" type="Node" parent="StateMachine" index="9"]
-script = ExtResource("15_1vngp")
-
-[node name="Skid" type="Node" parent="StateMachine" index="10"]
+[node name="Skid" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("16_10v48")
 
 [node name="TimerMaxSkid" type="Timer" parent="StateMachine/Skid" index="0"]
 wait_time = 5.0
 one_shot = true
 
-[node name="SquatCharge" type="Node" parent="StateMachine" index="11"]
+[node name="SquatCharge" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("17_x2v8p")
 
-[node name="Jump" type="Node" parent="StateMachine" index="12"]
+[node name="Jump" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("18_yivov")
 
-[node name="Hang" type="Node" parent="StateMachine" index="13"]
+[node name="Hang" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("19_yvpjm")
 
-[node name="Fall" type="Node" parent="StateMachine" index="14"]
+[node name="Fall" type="Node" parent="StateMachine" index="10"]
 script = ExtResource("20_ttjxt")
 
-[node name="Airdash" type="Node" parent="StateMachine" index="15"]
+[node name="Airdash" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("21_16mxj")
 
 [node name="TimerAirdash" type="Timer" parent="StateMachine/Airdash" index="0"]
@@ -216,31 +198,25 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 
-[node name="SpinKick" type="Node" parent="StateMachine" index="16"]
+[node name="SpinKick" type="Node" parent="StateMachine" index="12"]
 script = ExtResource("22_n0qhp")
 
-[node name="Pose" type="Node" parent="StateMachine" index="17"]
+[node name="Pose" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("23_oq4j6")
 
-[node name="Land" type="Node" parent="StateMachine" index="18"]
+[node name="Land" type="Node" parent="StateMachine" index="14"]
 script = ExtResource("24_knifn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="19"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="15"]
 script = ExtResource("25_du4gh")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="20"]
-script = ExtResource("26_j0bb7")
-
-[node name="Death" type="Node" parent="StateMachine" index="21"]
-script = ExtResource("27_uvfc1")
-
-[node name="Swap" type="Node" parent="StateMachine" index="22"]
+[node name="Swap" type="Node" parent="StateMachine" index="16"]
 script = ExtResource("28_3ketm")
 
-[node name="VictoryPose" type="Node" parent="StateMachine" index="23"]
+[node name="VictoryPose" type="Node" parent="StateMachine" index="17"]
 script = ExtResource("29_o7p3b")
 
-[node name="Push" parent="StateMachine" index="24"]
+[node name="Push" parent="StateMachine" index="18"]
 script = ExtResource("30_caun3")
 
 [connection signal="timeout" from="StateMachine/Skid/TimerMaxSkid" to="StateMachine/Skid" method="_on_tmr_max_skid_timeout"]

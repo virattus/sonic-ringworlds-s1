@@ -2,6 +2,10 @@ extends Player
 
 
 
+@onready var SonicModel = $CharacterMesh/SonicModel
+@onready var SonicBall = $CharacterMesh/SonicBall
+
+
 func _ready() -> void:
 	super()
 	
