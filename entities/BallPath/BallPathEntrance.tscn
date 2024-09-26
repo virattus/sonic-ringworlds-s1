@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://br1scfm0a133f"]
+
+[ext_resource type="Script" path="res://entities/BallPath/BallPathEntrance.gd" id="1_2ir1c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kd4vg"]
+
+[node name="BallPathEntrance" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_2ir1c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_kd4vg")

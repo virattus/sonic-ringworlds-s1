@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://by4464be1ie7"]
+
+[ext_resource type="Script" path="res://entities/BallPath/BallPath.gd" id="1_cy8x4"]
+
+[sub_resource type="Curve3D" id="Curve3D_puihx"]
+
+[node name="BallPath" type="Path3D"]
+curve = SubResource("Curve3D_puihx")
+script = ExtResource("1_cy8x4")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
