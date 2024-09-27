@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8alxw0nignyd"]
+
+[ext_resource type="PackedScene" uid="uid://b65cg5ag0bcv6" path="res://models/SCurveParts/TubeStraight.glb" id="1_wmvs3"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4sfu0"]
+data = PackedVector3Array(-4, 0, -0.6559, 4, -0.5681, -0.328, 4, 0, -0.6559, -4, 0, -0.6559, -4, -0.5681, -0.328, 4, -0.5681, -0.328, -4, -0.5681, -0.328, 4, -0.5681, 0.328, 4, -0.5681, -0.328, -4, -0.5681, -0.328, -4, -0.5681, 0.328, 4, -0.5681, 0.328, -4, -0.5681, 0.328, 4, 0, 0.6559, 4, -0.5681, 0.328, -4, -0.5681, 0.328, -4, 0, 0.6559, 4, 0, 0.6559, -4, 0, 0.6559, 4, 0.568, 0.328, 4, 0, 0.6559, -4, 0, 0.6559, -4, 0.5681, 0.328, 4, 0.568, 0.328, -4, 0.5681, 0.328, 4, 0.568, -0.328, 4, 0.568, 0.328, -4, 0.5681, 0.328, -4, 0.5681, -0.328, 4, 0.568, -0.328, -4, 0.5681, -0.328, 4, 0, -0.6559, 4, 0.568, -0.328, -4, 0.5681, -0.328, -4, 0, -0.6559, 4, 0, -0.6559)
+
+[node name="TubeStraight" instance=ExtResource("1_wmvs3")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cylinder" index="0"]
+collision_layer = 32768
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_4sfu0")

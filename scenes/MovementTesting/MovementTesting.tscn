@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=29 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -22,6 +22,11 @@
 [ext_resource type="PackedScene" uid="uid://cpy5sdvh4ooji" path="res://entities/PushBlock/PushBlock.tscn" id="19_otfhm"]
 [ext_resource type="PackedScene" uid="uid://dj5oyioly1dmv" path="res://entities/Capsule/Capsule.tscn" id="20_q2enj"]
 [ext_resource type="PackedScene" uid="uid://us76ejn435yq" path="res://entities/Lava/Lava.tscn" id="20_rehot"]
+[ext_resource type="Curve3D" uid="uid://cdn2ulpusbb4" path="res://scenes/MovementTesting/SCurveTest.tres" id="21_d1xud"]
+[ext_resource type="PackedScene" uid="uid://by4464be1ie7" path="res://entities/BallPath/BallPath.tscn" id="21_s3cm5"]
+[ext_resource type="PackedScene" uid="uid://br1scfm0a133f" path="res://entities/BallPath/BallPathEntrance.tscn" id="23_o47er"]
+[ext_resource type="PackedScene" uid="uid://d1hbkmfls6oe1" path="res://models/SCurveParts/TubeJunction.tscn" id="24_hlw6k"]
+[ext_resource type="PackedScene" uid="uid://b8alxw0nignyd" path="res://models/SCurveParts/TubeStraight.tscn" id="25_8oo3j"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(300, 200, 200)
@@ -33,6 +38,7 @@ visible = false
 
 [node name="PlayerSonic" parent="PlayerSwapper" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_mask = 2147491841
 
 [node name="MovementTesting" parent="." index="9" instance=ExtResource("1_aqers")]
 
@@ -677,6 +683,74 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2806, 1, -13.7179)
 
 [node name="Capsule" parent="MovementTesting" index="50" instance=ExtResource("20_q2enj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.1057, 0, 23.5779)
+
+[node name="BallPath" parent="MovementTesting" index="51" instance=ExtResource("21_s3cm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 46)
+curve = ExtResource("21_d1xud")
+
+[node name="BallPathEntrance" parent="MovementTesting/BallPath" index="1" node_paths=PackedStringArray("Exit") instance=ExtResource("23_o47er")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.940022)
+Exit = NodePath("../BallPathEntrance2")
+
+[node name="BallPathEntrance2" parent="MovementTesting/BallPath" index="2" node_paths=PackedStringArray("Exit") instance=ExtResource("23_o47er")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68, 7, 0)
+Exit = NodePath("../BallPathEntrance")
+
+[node name="TubeJunction" parent="MovementTesting/BallPath" index="3" instance=ExtResource("24_hlw6k")]
+
+[node name="TubeJunction2" parent="MovementTesting/BallPath" index="4" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 0)
+
+[node name="TubeJunction3" parent="MovementTesting/BallPath" index="5" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 11, 0)
+
+[node name="TubeJunction4" parent="MovementTesting/BallPath" index="6" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 11, 15)
+
+[node name="TubeJunction5" parent="MovementTesting/BallPath" index="7" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 11, 15)
+
+[node name="TubeJunction6" parent="MovementTesting/BallPath" index="8" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 30, 15)
+
+[node name="TubeJunction7" parent="MovementTesting/BallPath" index="9" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 30, 15)
+
+[node name="TubeJunction8" parent="MovementTesting/BallPath" index="10" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 30, 0)
+
+[node name="TubeJunction9" parent="MovementTesting/BallPath" index="11" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 8, 0)
+
+[node name="TubeJunction10" parent="MovementTesting/BallPath" index="12" instance=ExtResource("24_hlw6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68, 8, 0)
+
+[node name="TubeStraight" parent="MovementTesting/BallPath" index="13" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(-5.24537e-08, -1, 0, 1.2, -4.37114e-08, 0, 0, 0, 1, 0, 5.46368, 0)
+
+[node name="TubeStraight2" parent="MovementTesting/BallPath" index="14" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(1.8, 0, 0, 0, 1, 0, 0, 0, 1, 8, 11, 0)
+
+[node name="TubeStraight3" parent="MovementTesting/BallPath" index="15" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(-7.86805e-08, 0, 1, 0, 1, 0, -1.8, 0, -4.37114e-08, 16, 11, 7.10518)
+
+[node name="TubeStraight4" parent="MovementTesting/BallPath" index="16" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(3.5, 0, 0, 0, 1, 0, 0, 0, 1, 2.24017, 11, 15)
+
+[node name="TubeStraight5" parent="MovementTesting/BallPath" index="17" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(-9.61651e-08, -1, 0, 2.2, -4.37114e-08, 0, 0, 0, 1, -12, 20.5542, 15)
+
+[node name="TubeStraight6" parent="MovementTesting/BallPath" index="18" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(4.2, 0, 0, 0, 1, 0, 0, 0, 1, -28.8947, 30, 15)
+
+[node name="TubeStraight7" parent="MovementTesting/BallPath" index="19" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(-1.1365e-07, -1, 0, 2.6, -4.37114e-08, 0, 0, 0, 1, -46, 18.944, 0)
+
+[node name="TubeStraight9" parent="MovementTesting/BallPath" index="20" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(2.6, 0, 0, 0, 1, 0, 0, 0, 1, -56.7119, 8, 0)
+
+[node name="TubeStraight8" parent="MovementTesting/BallPath" index="21" instance=ExtResource("25_8oo3j")]
+transform = Transform3D(-7.86805e-08, 0, 1, 0, 1, 0, -1.8, 0, -4.37114e-08, -46, 30, 7.51297)
 
 [node name="EnemyCrabmeat" parent="." index="10" instance=ExtResource("9_dh6p0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2104)

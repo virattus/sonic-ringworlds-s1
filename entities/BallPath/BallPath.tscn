@@ -9,3 +9,5 @@ curve = SubResource("Curve3D_puihx")
 script = ExtResource("1_cy8x4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="."]
+loop = false
+tilt_enabled = false

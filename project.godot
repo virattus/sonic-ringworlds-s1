@@ -1248,6 +1248,7 @@ DEBUG_RemoveHeight={
 3d_physics/layer_13="WaterSurface"
 3d_physics/layer_14="Lava"
 3d_physics/layer_15="PushBlock"
+3d_physics/layer_16="BallPath"
 3d_physics/layer_32="Killbox"
 
 [physics]

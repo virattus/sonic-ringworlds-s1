@@ -13,6 +13,13 @@ func _ready() -> void:
 	SetAfterimageLimbs(false)
 
 
+func DisplayBody(Active: bool) -> void:
+	SonicModel.visible = Active
+
+
+func DisplayBall(Active: bool) -> void:
+	SonicBall.visible = Active
+
 
 func SetDashMode(Active: bool) -> void:
 	DashMode = Active

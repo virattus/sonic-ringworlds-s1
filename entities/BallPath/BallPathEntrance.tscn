@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://entities/BallPath/BallPathEntrance.gd" id="1_2ir1c"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kd4vg"]
+radius = 1.0
 
 [node name="BallPathEntrance" type="Area3D"]
 collision_layer = 0
@@ -11,3 +12,5 @@ script = ExtResource("1_2ir1c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_kd4vg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
