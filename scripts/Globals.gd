@@ -24,10 +24,11 @@ var WindowedModeScreenSize := Vector2i.ZERO
 
 var PreviousMouseMode := -1
 
+var PlayerChar = null
 
 var RingCount := 0
+var DroppedRingSpeed := 1.0
 var LivesCount := 3
-var PlayerChar = null
 var CollectedFlickies = [false, false, false, false, false]
 
 var CameraSensitivity := Vector2(0.2, 0.2)

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Sonic Ringworlds Stage 1"
+config/version="69"
 run/main_scene="res://scenes/ControllerBinding/ControllerBinding.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"

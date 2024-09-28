@@ -64,9 +64,6 @@ var Invincible := false
 var Flicker := false
 var DamageThreshold := 0
 
-var DroppedRingSpeed := 1.0
-
-
 
 @onready var PushCast : RayCast3D = $CharacterMesh/PushCast
 
@@ -287,7 +284,7 @@ func CollectRing(ringCount := 1) -> bool:
 
 func CollectOneUp() -> bool:
 	$SndOneUp.play()
-	DroppedRingSpeed = 1.0
+	Globals.DroppedRingSpeed = 1.0
 	Globals.LivesCount += 1
 	return true
 

@@ -44,7 +44,7 @@ func Enter(_msg := {}) -> void:
 			var newRing = RING.instantiate()
 			owner.get_parent().add_child(newRing)
 			newRing.global_position = owner.global_position
-			newRing.SetVelocity(owner.DroppedRingSpeed)
+			newRing.SetVelocity(Globals.DroppedRingSpeed)
 		
 		Globals.RingCount -= DroppedRings
 		owner.SndRingDrop.play()
@@ -52,7 +52,7 @@ func Enter(_msg := {}) -> void:
 		owner.Invincible = true
 		owner.ActivateHurtbox(false)
 		
-		owner.DroppedRingSpeed += HURT_DROPPED_RING_SPEED
+		Globals.DroppedRingSpeed += HURT_DROPPED_RING_SPEED
 
 
 func Exit() -> void:
