@@ -8,6 +8,9 @@ size = Vector3(400, 200, 400)
 
 [node name="RadicalCity" instance=ExtResource("1_b8q1r")]
 
+[node name="TitleCard" parent="." index="2"]
+Title1 = "radical city"
+
 [node name="PlayerSonic" parent="PlayerSwapper" index="0"]
 transform = Transform3D(0.789716, 0, 0.613472, 0, 1, 0, -0.613472, 0, 0.789716, 9.34377, 13.664, 8.88185)
 

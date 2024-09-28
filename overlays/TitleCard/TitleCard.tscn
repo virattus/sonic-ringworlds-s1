@@ -290,11 +290,14 @@ color = Color(0.158472, 0.158472, 0.158472, 1)
 layout_mode = 0
 offset_left = 8.0
 offset_top = -32.0
-offset_right = 86.0
+offset_right = 218.0
 offset_bottom = 33.0
 theme_override_fonts/font = ExtResource("2_0mhdf")
 theme_override_font_sizes/font_size = 60
-text = "test"
+text = "test string"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_direction = 1
 
 [node name="clrTitle2" type="ColorRect" parent="."]
 offset_left = 1400.0
@@ -324,3 +327,5 @@ libraries = {
 "": SubResource("AnimationLibrary_3sakg")
 }
 autoplay = "TitleCardAnim"
+
+[connection signal="item_rect_changed" from="Title1Pos/clrTitle1/Label" to="." method="_on_label_item_rect_changed"]

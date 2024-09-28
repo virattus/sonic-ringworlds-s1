@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bybnnf47w5dsd"]
+[gd_scene load_steps=19 format=3 uid="uid://bybnnf47w5dsd"]
 
 [ext_resource type="Script" path="res://scenes/SonicGame/SonicGame.gd" id="1_hlded"]
 [ext_resource type="PackedScene" uid="uid://cspov7b53hufw" path="res://overlays/IngameOptions/IngameOptions.tscn" id="3_jth67"]
@@ -7,10 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://duk7ha7p415ep" path="res://entities/MusicController/MusicController.tscn" id="4_40tvp"]
 [ext_resource type="PackedScene" uid="uid://chmdfa6yv2huo" path="res://overlays/TitleCard/TitleCard.tscn" id="4_uu87f"]
 [ext_resource type="PackedScene" uid="uid://butvqg7bms767" path="res://overlays/HUD/HUD.tscn" id="5_yctne"]
-[ext_resource type="Script" path="res://entities/PlayerSwapper/PlayerSwapper.gd" id="6_fvivd"]
+[ext_resource type="PackedScene" uid="uid://df82xpw7e1ory" path="res://entities/PlayerSwapper/PlayerSwapper.tscn" id="6_fkwoh"]
 [ext_resource type="PackedScene" uid="uid://c3omr25ilj113" path="res://entities/KillBox/KillBox.tscn" id="7_gtpja"]
 [ext_resource type="PackedScene" uid="uid://bqldi14hjdj3t" path="res://entities/PlayerSonic/PlayerSonic.tscn" id="7_w6d2k"]
-[ext_resource type="PackedScene" uid="uid://c5mtejqts5ca4" path="res://entities/CameraFocus/CameraFocus.tscn" id="8_3yo3k"]
 [ext_resource type="PackedScene" uid="uid://cga0gbap1aupl" path="res://entities/StateMachine/StateMachine.tscn" id="9_ucvi7"]
 [ext_resource type="Script" path="res://scenes/SonicGame/IntroCard.gd" id="10_eqwts"]
 [ext_resource type="Script" path="res://scenes/SonicGame/Gameplay.gd" id="11_q3fq5"]
@@ -45,19 +44,14 @@ layer = 2
 
 [node name="MusicController" parent="." instance=ExtResource("4_40tvp")]
 
-[node name="PlayerSwapper" type="Node3D" parent="." node_paths=PackedStringArray("CurrentPlayer")]
-script = ExtResource("6_fvivd")
+[node name="PlayerSwapper" parent="." node_paths=PackedStringArray("Cam", "CurrentPlayer") instance=ExtResource("6_fkwoh")]
+Cam = NodePath("../ThirdPersonCamera")
 CurrentPlayer = NodePath("PlayerSonic")
 
-[node name="PlayerSonic" parent="PlayerSwapper" node_paths=PackedStringArray("Camera") instance=ExtResource("7_w6d2k")]
-Camera = NodePath("../../ThirdPersonCamera")
+[node name="PlayerSonic" parent="PlayerSwapper" instance=ExtResource("7_w6d2k")]
 
-[node name="CameraFocus" parent="PlayerSwapper" node_paths=PackedStringArray("Target") instance=ExtResource("8_3yo3k")]
-Target = NodePath("../PlayerSonic")
-
-[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char", "Focus") instance=ExtResource("3_t4fox")]
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char") instance=ExtResource("3_t4fox")]
 Char = NodePath("../PlayerSwapper/PlayerSonic")
-Focus = NodePath("../PlayerSwapper/CameraFocus")
 
 [node name="PlayerController" parent="." node_paths=PackedStringArray("Camera_Node") instance=ExtResource("4_31dce")]
 Camera_Node = NodePath("../ThirdPersonCamera")
@@ -94,5 +88,4 @@ script = ExtResource("11_q3fq5")
 script = ExtResource("12_oukvr")
 
 [connection signal="TitleCardAnimComplete" from="TitleCard" to="." method="_on_title_card_title_card_anim_complete"]
-[connection signal="PlayDrowningMusic" from="PlayerSwapper/PlayerSonic" to="." method="_on_player_play_drowning_music"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

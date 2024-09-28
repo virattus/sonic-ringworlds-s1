@@ -6,6 +6,7 @@ signal PlayerDeath
 
 
 @export var Cam : ThirdPersonCamera
+@export var CamFocus : CameraFocus
 @export var CurrentPlayer : Player
 
 
@@ -18,11 +19,19 @@ const AMY = preload("res://entities/PlayerAmy/PlayerAmy.tscn")
 func _ready() -> void:
 	assert(CurrentPlayer)
 	
+	CamFocus.Target = CurrentPlayer
+	Cam.Focus = CamFocus
+	
 	CurrentPlayer.HealthEmpty.connect(CharDeath)
 
 
 func SwapCharacter() -> void:
 	CurrentPlayer.HealthEmpty.disconnect(CharDeath)
+	
+	#post swap
+	CamFocus.Target = CurrentPlayer
+	CurrentPlayer.Camera = Cam
+	CurrentPlayer.HealthEmpty.connect(CharDeath)
 
 
 func CharDeath() -> void:

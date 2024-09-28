@@ -149,7 +149,7 @@ func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
 	var newVel : Vector3 = owner.velocity
 	
 	var ratio : float = (owner.Speed - owner.Parameters.WALK_MAX_SPEED) / RUN_RATIO_DIVISOR
-	print("Run ratio: %s" % ratio)
+	#print("Run ratio: %s" % ratio)
 	
 	var newSpeed : float = (newVel + (inputVel * owner.Parameters.RUN_SPEED_POWER * delta)).length()
 	

@@ -1,6 +1,9 @@
 extends "res://entities/Player/MoveGround.gd"
 
 
+var BallJump := false
+
+
 const BALL_GROUND_FRICTION = 0.0234375
 
 const BALL_UNCURL_MIN_UP_DOT = 0.85
@@ -23,6 +26,8 @@ func Exit() -> void:
 	owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_NORMAL
 	
 	owner.SndSpinCharge.stop()
+	
+	BallJump = false
 
 
 func Update(_delta: float) -> void:
@@ -46,8 +51,9 @@ func Update(_delta: float) -> void:
 			owner.SetVelocity(planeVel + (owner.up_direction * owner.Parameters.GROUND_NORMAL_HOP))
 			owner.GroundCollision = false
 		else:
-			owner.apply_floor_snap()
-			owner.SetVelocity(planeVel)
+			if !BallJump:
+				owner.apply_floor_snap()
+				owner.SetVelocity(planeVel)
 	
 	var newVel = owner.velocity
 	
@@ -59,12 +65,22 @@ func Update(_delta: float) -> void:
 		newVel += inputVel * owner.Parameters.WALK_SPEED_POWER * _delta
 	else:
 		if owner.GroundCollision:
-			#newVel = owner.ApplyDrag(newVel, _delta / 2.0)
-			newVel *= 1.0 - BALL_GROUND_FRICTION
+			if SlowBallInput(inputVel, newVel):
+				newVel = owner.ApplyDrag(newVel, _delta * 4.0)
+			else:
+				#newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+				newVel *= 1.0 - BALL_GROUND_FRICTION
 		else:
 			newVel = ApplyAirDrag(newVel, _delta / 2.0)
-		
-	if !owner.GroundCollision:
+	
+	if owner.GroundCollision:
+		if Input.is_action_just_pressed("Jump"):
+			BallJump = true
+			owner.GroundCollision = false
+			newVel += owner.up_direction * owner.Parameters.JUMP_POWER
+			owner.SndJump.play()
+			
+	else:
 		newVel = owner.ApplyGravity(newVel, _delta)
 	
 	var influence := CurveInfluence(_delta)
@@ -74,9 +90,6 @@ func Update(_delta: float) -> void:
 		return
 	
 	newVel += influence
-	
-	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
-		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED
 	
 	owner.SetVelocity(newVel)
 
@@ -91,6 +104,7 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 			return false
 	elif collision.CollisionType == SonicCollision.FLOOR:
 		if CheckFloorRaycast(delta):
+			BallJump = false
 			return true
 		else:
 			#Too large of an angle to transition
@@ -143,3 +157,8 @@ func UncurlAndIdle() -> void:
 	owner.CharMesh.AlignToY(owner.up_direction)
 	ChangeState("Idle")
 	
+
+func SlowBallInput(inputVel: Vector3, vel: Vector3) -> bool:
+	if inputVel.normalized().dot(vel.normalized()) < -owner.Parameters.SKID_MIN_STICK_MAGNITUDE:
+		return true
+	return false

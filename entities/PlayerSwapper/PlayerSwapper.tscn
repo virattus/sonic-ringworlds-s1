@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://df82xpw7e1ory"]
+[gd_scene load_steps=3 format=3 uid="uid://df82xpw7e1ory"]
 
 [ext_resource type="Script" path="res://entities/PlayerSwapper/PlayerSwapper.gd" id="1_uh5c7"]
+[ext_resource type="PackedScene" uid="uid://c5mtejqts5ca4" path="res://entities/CameraFocus/CameraFocus.tscn" id="2_xsa2v"]
 
-[node name="PlayerSwapper" type="Node3D"]
+[node name="PlayerSwapper" type="Node3D" node_paths=PackedStringArray("CamFocus")]
 script = ExtResource("1_uh5c7")
+CamFocus = NodePath("CameraFocus")
+
+[node name="CameraFocus" parent="." instance=ExtResource("2_xsa2v")]
