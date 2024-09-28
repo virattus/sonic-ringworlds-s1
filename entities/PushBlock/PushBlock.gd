@@ -39,13 +39,13 @@ func _physics_process(delta: float) -> void:
 			
 
 
-func Push(char: Player) -> void:
+func Push(_char: Player) -> void:
 	#print("pushing")
 	var initial := false
 	if velocity.length() <= 0.0:
 		initial = true
 	
-	var Direction : Vector3 = -global_position.direction_to(char.global_position)
+	var Direction : Vector3 = -global_position.direction_to(_char.global_position)
 	if abs(Direction.x) > abs(Direction.z):
 		velocity.x = clamp(velocity.x + PUSH_MAGNITUDE * sign(Direction.x), -MAX_MAGNITUDE, MAX_MAGNITUDE)
 	else:

@@ -31,6 +31,9 @@ func _on_body_entered(body: Node3D) -> void:
 
 
 func _on_body_exited(body: Node3D) -> void:
+	if body != Body:
+		return 
+	
 	Body = null
 	
 	if $Cap.position.y != 0.0:

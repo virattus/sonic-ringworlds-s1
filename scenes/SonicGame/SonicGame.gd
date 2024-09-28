@@ -8,12 +8,6 @@ extends Node
 func _ready() -> void:
 	$TitleCard.visible = true
 	Globals.RingCount = 0
-	Globals.CollectedFlickies = [false, false, false, false, false]
-
-
-func _on_sonic_health_empty() -> void:
-	$ThirdPersonCamera.Active = false
-	$DeathTimer.start()
 
 
 func _on_death_timer_timeout() -> void:
@@ -39,3 +33,8 @@ func _on_player_play_drowning_music(play: bool) -> void:
 		$MusicController.DrowningMusicInterrupt()
 	else:
 		$MusicController.DrowningMusicStop()
+
+
+func _on_player_death() -> void:
+	$ThirdPersonCamera.Active = false
+	$DeathTimer.start()

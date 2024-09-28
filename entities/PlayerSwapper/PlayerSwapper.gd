@@ -19,7 +19,7 @@ const AMY = preload("res://entities/PlayerAmy/PlayerAmy.tscn")
 func _ready() -> void:
 	assert(CurrentPlayer)
 	
-	CamFocus.Target = CurrentPlayer
+	BindCameraFocus()
 	Cam.Focus = CamFocus
 	
 	CurrentPlayer.HealthEmpty.connect(CharDeath)
@@ -29,10 +29,16 @@ func SwapCharacter() -> void:
 	CurrentPlayer.HealthEmpty.disconnect(CharDeath)
 	
 	#post swap
-	CamFocus.Target = CurrentPlayer
+	BindCameraFocus()
 	CurrentPlayer.Camera = Cam
 	CurrentPlayer.HealthEmpty.connect(CharDeath)
 
 
 func CharDeath() -> void:
 	PlayerDeath.emit()
+
+
+func BindCameraFocus() -> void:
+	CamFocus.get_parent().remove_child(CamFocus)
+	CurrentPlayer.add_child(CamFocus)
+	CamFocus.Target = CurrentPlayer
