@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bte2xds3my4rk"]
+[gd_scene load_steps=6 format=3 uid="uid://bte2xds3my4rk"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_b8q1r"]
 [ext_resource type="AudioStream" uid="uid://owiionm2tukf" path="res://music/MarbleGardenZone.ogg" id="2_a1gmk"]
+[ext_resource type="PackedScene" uid="uid://dn6vfjo5tgnbi" path="res://entities/Spring/Spring.tscn" id="4_ftuvx"]
 [ext_resource type="PackedScene" uid="uid://bt3e41ek421or" path="res://maps/SonicRRadicalCity/RadicalCity.tscn" id="5_8uw1g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l1jw5"]
@@ -22,6 +23,22 @@ transform = Transform3D(0.789716, 0, 0.613472, 0, 1, 0, -0.613472, 0, 0.789716, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80455, 17.2688, 8.44519)
 
 [node name="RadicalCity" parent="." index="7" instance=ExtResource("5_8uw1g")]
+
+[node name="Spring" parent="RadicalCity" index="3" instance=ExtResource("4_ftuvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.0914, 0.969465, 17.8557)
+SpringPower = 20.0
+
+[node name="Spring2" parent="RadicalCity" index="4" instance=ExtResource("4_ftuvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78.5369, 0.969465, 16.6301)
+SpringPower = 20.0
+
+[node name="Spring3" parent="RadicalCity" index="5" instance=ExtResource("4_ftuvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.951, 0.969465, 15.326)
+SpringPower = 20.0
+
+[node name="Spring4" parent="RadicalCity" index="6" instance=ExtResource("4_ftuvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.3652, 0.969465, 14.0061)
+SpringPower = 20.0
 
 [node name="CollisionShape3D" parent="KillBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.7457, 47.0767, 0)
