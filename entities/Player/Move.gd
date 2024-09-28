@@ -52,14 +52,12 @@ func Update(_delta: float) -> void:
 	UpdateMoveAnimations()
 	
 	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Jump", {
-			"JumpSound": true,
-		})
-		return
+		if !HandleJumpInput():
+			return
 	
 	if Input.is_action_just_pressed("Attack"):
-		ChangeState("Ball")
-		return
+		if !HandleAttackInput():
+			return
 	
 	if owner.Speed > owner.Parameters.WALK_MAX_SPEED:
 		owner.SetRunOnWater(true)
@@ -132,6 +130,18 @@ func Update(_delta: float) -> void:
 			owner.CharMesh.LerpMeshOrientation(orientation, _delta)
 	
 	owner.SetVelocity(newVel)
+
+
+
+func HandleJumpInput() -> bool:
+	ChangeState("Jump", {
+			"JumpSound": true,
+	})
+	return false
+
+func HandleAttackInput() -> bool:
+	ChangeState("Ball")
+	return false
 
 
 func CalculateWalkVelocity(inputVel: Vector3, delta: float) -> Vector3:

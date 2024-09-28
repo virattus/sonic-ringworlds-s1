@@ -66,10 +66,11 @@ func Update(_delta: float) -> void:
 	else:
 		if owner.GroundCollision:
 			if SlowBallInput(inputVel, newVel):
-				newVel = owner.ApplyDrag(newVel, _delta * 4.0)
-			else:
-				#newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+				#newVel = owner.ApplyDrag(newVel, _delta * 16.0)
 				newVel *= 1.0 - BALL_GROUND_FRICTION
+			else:
+				newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+				#newVel *= 1.0 - BALL_GROUND_FRICTION
 		else:
 			newVel = ApplyAirDrag(newVel, _delta / 2.0)
 	
@@ -91,6 +92,7 @@ func Update(_delta: float) -> void:
 	
 	newVel += influence
 	
+	owner.CharMesh.LerpMeshOrientation(newVel.normalized(), _delta)
 	owner.SetVelocity(newVel)
 
 

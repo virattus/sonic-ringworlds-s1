@@ -35,6 +35,10 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
+	if Input.is_action_just_pressed("Jump"):
+		if !HandleJumpInput():
+			return
+	
 	SmokeAccumulator += _delta
 	if SmokeAccumulator >= SMOKE_EMIT_RATE:
 		SmokeAccumulator -= SMOKE_EMIT_RATE 
@@ -57,6 +61,14 @@ func Update(_delta: float) -> void:
 	newVel = owner.ApplyDrag(newVel, SKID_DRAG_COEFF * _delta)
 	
 	owner.SetVelocity(newVel)
+
+
+
+func HandleJumpInput() -> bool:
+	ChangeState("Jump", {
+			"JumpSound": true,
+	})
+	return false
 
 
 func _on_tmr_max_skid_timeout() -> void:

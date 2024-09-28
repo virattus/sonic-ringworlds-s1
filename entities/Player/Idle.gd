@@ -20,14 +20,12 @@ func Update(_delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("Jump"):
-		ChangeState("Jump", {
-			"JumpSound": true,
-		})
-		return
+		if !HandleJumpInput():
+			return
 	
 	if Input.is_action_just_pressed("Attack"):
-		ChangeState("SquatCharge")
-		return
+		if !HandleAttackInput():
+			return
 	
 	var newVel : Vector3 = owner.velocity
 	
@@ -41,3 +39,15 @@ func Update(_delta: float) -> void:
 		owner.SetVelocity(newVel)
 		ChangeState("Move")
 		return
+
+
+func HandleJumpInput() -> bool:
+	ChangeState("Jump", {
+			"JumpSound": true,
+	})
+	return false
+
+func HandleAttackInput() -> bool:
+	ChangeState("SquatCharge")
+	return false
+	

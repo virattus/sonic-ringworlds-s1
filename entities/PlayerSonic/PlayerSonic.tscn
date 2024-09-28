@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqldi14hjdj3t"]
+[gd_scene load_steps=22 format=3 uid="uid://bqldi14hjdj3t"]
 
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="1_h7krl"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/PlayerSonic.gd" id="2_gfmlf"]
@@ -7,11 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dnwju36a7f23x" path="res://models/Sonic/Ball.png" id="3_w8k11"]
 [ext_resource type="PackedScene" uid="uid://bkhmplefq77tp" path="res://effects/AfterimageOrb/AfterimageOrbEmitter.tscn" id="5_foc4m"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cpldlngx4kjuf" path="res://entities/PlayerSonic/Sonic_AnimTree.tres" id="7_ify46"]
-[ext_resource type="Script" path="res://entities/PlayerSonic/Idle.gd" id="8_lgarp"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Teetering.gd" id="9_gq1o4"]
-[ext_resource type="Script" path="res://entities/PlayerSonic/Move.gd" id="10_k7u8l"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Ball.gd" id="11_oo7vq"]
-[ext_resource type="Script" path="res://entities/PlayerSonic/Skid.gd" id="16_10v48"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/SquatCharge.gd" id="17_x2v8p"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Jump.gd" id="18_yivov"]
 [ext_resource type="Script" path="res://entities/PlayerSonic/Hang.gd" id="19_yvpjm"]
@@ -33,23 +30,23 @@ Parameters = ExtResource("3_3q6jm")
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/1/position = Vector3(-4.74291e-08, 0.0493296, 3.02442)
+bones/1/position = Vector3(6.50705e-09, 0.074432, 3.0216)
 bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/2/position = Vector3(-5.13685, 0.0274054, 3.70297)
-bones/2/rotation = Quaternion(2.1693e-08, -0.716214, 0.697881, -4.0119e-08)
+bones/2/position = Vector3(-5.13685, 0.0413512, 3.66933)
+bones/2/rotation = Quaternion(3.15075e-08, -0.720808, 0.693135, -3.02979e-08)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.0274054, 3.70297)
-bones/4/rotation = Quaternion(2.1693e-08, -0.716214, 0.697881, -4.0119e-08)
+bones/4/position = Vector3(5.13685, 0.0413512, 3.66933)
+bones/4/rotation = Quaternion(3.15075e-08, -0.720808, 0.693135, -3.02979e-08)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(-4.74291e-08, 0.0493296, 5.26337)
+bones/6/position = Vector3(6.50705e-09, 0.074432, 5.26056)
 bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
 [node name="ba3DBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 4.74291e-08, 3.02442, 0.0493296)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, -6.50705e-09, 3.0216, 0.074432)
 bone_name = "Head_2"
 bone_idx = 1
 
@@ -59,7 +56,7 @@ Size = 1.25
 Colour = Color(0, 0.287371, 0.725397, 1)
 
 [node name="ba3DHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, -2.4923e-08, -8.77459e-08, -2.71894e-08, -0.999664, -0.0259244, -8.70703e-08, 0.0259243, -0.999664, 5.13685, 3.70297, 0.0274054)
+transform = Transform3D(1, 3.42067e-09, -8.73558e-08, 1.77636e-14, -0.999234, -0.0391277, -8.74228e-08, 0.0391277, -0.999234, 5.13685, 3.66933, 0.0413512)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -68,7 +65,7 @@ SceneRoot = NodePath("../../../../../..")
 Size = 0.5
 
 [node name="ba3DHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, -2.4923e-08, -8.77459e-08, -2.71894e-08, -0.999664, -0.0259244, -8.70703e-08, 0.0259243, -0.999664, -5.13685, 3.70297, 0.0274054)
+transform = Transform3D(1, 3.42067e-09, -8.73558e-08, 1.77636e-14, -0.999234, -0.0391277, -8.74228e-08, 0.0391277, -0.999234, -5.13685, 3.66933, 0.0413512)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -159,38 +156,25 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 8/scale" = 1.0
 "parameters/TimeScale 9/scale" = 1.0
 
-[node name="Idle" type="Node" parent="StateMachine" index="2"]
-script = ExtResource("8_lgarp")
-
-[node name="Teetering" type="Node" parent="StateMachine" index="3"]
+[node name="Teetering" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("9_gq1o4")
 
-[node name="Move" type="Node" parent="StateMachine" index="4"]
-script = ExtResource("10_k7u8l")
-
-[node name="Ball" type="Node" parent="StateMachine" index="5"]
+[node name="Ball" type="Node" parent="StateMachine" index="3"]
 script = ExtResource("11_oo7vq")
 
-[node name="Skid" type="Node" parent="StateMachine" index="6"]
-script = ExtResource("16_10v48")
-
-[node name="TimerMaxSkid" type="Timer" parent="StateMachine/Skid" index="0"]
-wait_time = 5.0
-one_shot = true
-
-[node name="SquatCharge" type="Node" parent="StateMachine" index="7"]
+[node name="SquatCharge" type="Node" parent="StateMachine" index="4"]
 script = ExtResource("17_x2v8p")
 
-[node name="Jump" type="Node" parent="StateMachine" index="8"]
+[node name="Jump" type="Node" parent="StateMachine" index="5"]
 script = ExtResource("18_yivov")
 
-[node name="Hang" type="Node" parent="StateMachine" index="9"]
+[node name="Hang" type="Node" parent="StateMachine" index="6"]
 script = ExtResource("19_yvpjm")
 
-[node name="Fall" type="Node" parent="StateMachine" index="10"]
+[node name="Fall" type="Node" parent="StateMachine" index="7"]
 script = ExtResource("20_ttjxt")
 
-[node name="Airdash" type="Node" parent="StateMachine" index="11"]
+[node name="Airdash" type="Node" parent="StateMachine" index="8"]
 script = ExtResource("21_16mxj")
 
 [node name="TimerAirdash" type="Timer" parent="StateMachine/Airdash" index="0"]
@@ -198,28 +182,27 @@ process_callback = 0
 wait_time = 2.0
 one_shot = true
 
-[node name="SpinKick" type="Node" parent="StateMachine" index="12"]
+[node name="SpinKick" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("22_n0qhp")
 
-[node name="Pose" type="Node" parent="StateMachine" index="13"]
+[node name="Pose" type="Node" parent="StateMachine" index="10"]
 script = ExtResource("23_oq4j6")
 
-[node name="Land" type="Node" parent="StateMachine" index="14"]
+[node name="Land" type="Node" parent="StateMachine" index="11"]
 script = ExtResource("24_knifn")
 
-[node name="Wipeout" type="Node" parent="StateMachine" index="15"]
+[node name="Wipeout" type="Node" parent="StateMachine" index="12"]
 script = ExtResource("25_du4gh")
 
-[node name="Swap" type="Node" parent="StateMachine" index="16"]
+[node name="Swap" type="Node" parent="StateMachine" index="13"]
 script = ExtResource("28_3ketm")
 
-[node name="VictoryPose" type="Node" parent="StateMachine" index="17"]
+[node name="VictoryPose" type="Node" parent="StateMachine" index="14"]
 script = ExtResource("29_o7p3b")
 
-[node name="Push" parent="StateMachine" index="18"]
+[node name="Push" parent="StateMachine" index="17"]
 script = ExtResource("30_caun3")
 
-[connection signal="timeout" from="StateMachine/Skid/TimerMaxSkid" to="StateMachine/Skid" method="_on_tmr_max_skid_timeout"]
 [connection signal="timeout" from="StateMachine/Airdash/TimerAirdash" to="StateMachine/Airdash" method="_on_timer_airdash_timeout"]
 
 [editable path="CharacterMesh/SonicModel"]

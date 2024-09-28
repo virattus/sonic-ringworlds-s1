@@ -1,4 +1,4 @@
-class_name ThirdPersonCamera
+class_name ThirdPersonCameraOLD
 extends Node3D
 
 @export var Active := true
