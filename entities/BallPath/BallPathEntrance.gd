@@ -19,4 +19,4 @@ func _on_body_entered(body: Node3D) -> void:
 	body.DisplayBody(false)
 	body.DisplayBall(true)
 	body.StateM.ChangeState("Inactive")
-	get_parent().MovePlayer(body)
+	get_parent().MovePlayer(body, global_position)

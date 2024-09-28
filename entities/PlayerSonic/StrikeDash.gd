@@ -1,4 +1,4 @@
-extends "res://entities/Sonic/MoveGround.gd"
+extends "res://entities/Player/MoveGround.gd"
 
 
 

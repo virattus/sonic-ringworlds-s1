@@ -8,16 +8,10 @@ size = Vector3(250, 200, 200)
 
 [node name="RegalRuin" instance=ExtResource("1_j7jm6")]
 
-[node name="Sonic" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
+[node name="PlayerSonic" parent="PlayerSwapper" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.9438, 0.549201, 37.83)
 
-[node name="Skeleton3D" parent="Sonic/CharacterMesh/SonicModel/Armature" index="0"]
-bones/2/position = Vector3(-4.70212, 2.78649e-07, 4.78187)
-bones/3/position = Vector3(-2.5032, -0.75626, 0.958341)
-bones/4/position = Vector3(5.02265, -0.822021, 4.49147)
-bones/5/position = Vector3(2.54888, 0.420875, 0.677619)
-
-[node name="ThirdPersonCamera" parent="." index="3"]
+[node name="ThirdPersonCamera" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
 
 [node name="RegalRuin" parent="." index="7" instance=ExtResource("5_px6x5")]
@@ -25,6 +19,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -82.5845, 6.49683, 44.8276)
 [node name="CollisionShape3D" parent="KillBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0959, 53.8017, 0)
 shape = SubResource("BoxShape3D_2yhfb")
-
-[editable path="Sonic"]
-[editable path="Sonic/CharacterMesh/SonicModel"]

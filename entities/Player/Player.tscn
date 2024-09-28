@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=43 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_1mpyw"]
 [ext_resource type="Script" path="res://entities/Player/Player.gd" id="2_k6uox"]
+[ext_resource type="Script" path="res://entities/Player/PlayerParameters.gd" id="3_p8btj"]
 [ext_resource type="PackedScene" uid="uid://cb1pkubp6xxtj" path="res://effects/CylinderTrail2/CylinderTrail2.tscn" id="3_qoyqs"]
 [ext_resource type="Script" path="res://entities/Player/Push.gd" id="8_jcus7"]
 [ext_resource type="PackedScene" uid="uid://bns3nobq38fx6" path="res://entities/Hitbox/Hitbox.tscn" id="8_m2ywy"]
@@ -82,7 +83,7 @@ floor_stop_on_slope = false
 floor_max_angle = 0.523599
 floor_snap_length = 1.0
 script = ExtResource("2_k6uox")
-Parameters = null
+Parameters = ExtResource("3_p8btj")
 
 [node name="WorldCollision" parent="." index="0"]
 shape = SubResource("SphereShape3D_d4iho")

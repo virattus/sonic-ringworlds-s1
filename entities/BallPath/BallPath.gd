@@ -32,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	PlayerNode.global_position = $PathFollow3D.global_position
 
 
-func MovePlayer(playerNode: Player) -> void:
+func MovePlayer(playerNode: Player, startingPos: Vector3) -> void:
+	
 	PlayerNode = playerNode
 	Active = true

@@ -23,6 +23,9 @@ const OXYGEN_LAST_GASP = 2.0
 const GROUND_NORMAL_TRANSITION_MIN = 0.85
 const GROUND_NORMAL_HOP = 0.1
 
+const SKID_MIN_STICK_MAGNITUDE = 0.3
+const SKID_MAX_ANGLE = -0.75
+
 const MOVE_MAX_SPEED = 25.0
 const TERMINAL_VELOCITY = 16.0 #yep, we have a max -Y speed exclusively
 
