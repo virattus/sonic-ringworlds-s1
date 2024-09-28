@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=66 format=3 uid="uid://cpldlngx4kjuf"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=69 format=3 uid="uid://cpldlngx4kjuf"]
 
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_x3pje"]
 
@@ -52,6 +52,9 @@ animation = &"Teetering2"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rypm1"]
 animation = &"Push"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8nikr"]
+animation = &"VictoryPose"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mlt63"]
 animation = &"Run"
 
@@ -98,6 +101,8 @@ animation = &"Idle"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_njuro"]
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_wtybf"]
+
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_meik8"]
 
 [sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_kqgwt"]
@@ -136,6 +141,8 @@ animation = &"Idle"
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_m07yp"]
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_nayn7"]
+
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1iv5j"]
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_d26tf"]
@@ -155,7 +162,7 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_403m5"]
 
 [resource]
-graph_offset = Vector2(-481.524, 69.934)
+graph_offset = Vector2(891.536, -103.488)
 nodes/Air/node = SubResource("AnimationNodeBlend3_x3pje")
 nodes/Air/position = Vector2(-1000, 1040)
 nodes/AirSpinKick/node = SubResource("AnimationNodeBlend2_c6se8")
@@ -194,6 +201,8 @@ nodes/Animation/position = Vector2(-1320, -320)
 "nodes/Animation 23/position" = Vector2(304.983, 1127.33)
 "nodes/Animation 24/node" = SubResource("AnimationNodeAnimation_rypm1")
 "nodes/Animation 24/position" = Vector2(-360, 480)
+"nodes/Animation 25/node" = SubResource("AnimationNodeAnimation_8nikr")
+"nodes/Animation 25/position" = Vector2(2380, 600)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_mlt63")
 "nodes/Animation 3/position" = Vector2(-1760, 120)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_77j5q")
@@ -230,6 +239,8 @@ nodes/OSLand/node = SubResource("AnimationNodeOneShot_hny65")
 nodes/OSLand/position = Vector2(-580, 60)
 nodes/OSPose/node = SubResource("AnimationNodeOneShot_njuro")
 nodes/OSPose/position = Vector2(-560, 880)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_wtybf")
+nodes/OneShot/position = Vector2(2700, 400)
 nodes/Push/node = SubResource("AnimationNodeBlend2_meik8")
 nodes/Push/position = Vector2(20, 320)
 nodes/Run/node = SubResource("AnimationNodeBlend3_kqgwt")
@@ -270,6 +281,8 @@ nodes/TimeScale/position = Vector2(-1180, -320)
 "nodes/TimeScale 17/position" = Vector2(480, 1120)
 "nodes/TimeScale 18/node" = SubResource("AnimationNodeTimeScale_m07yp")
 "nodes/TimeScale 18/position" = Vector2(-160, 460)
+"nodes/TimeScale 19/node" = SubResource("AnimationNodeTimeScale_nayn7")
+"nodes/TimeScale 19/position" = Vector2(2540, 560)
 "nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_1iv5j")
 "nodes/TimeScale 2/position" = Vector2(-1320, 940)
 "nodes/TimeScale 3/node" = SubResource("AnimationNodeTimeScale_d26tf")
@@ -286,5 +299,5 @@ nodes/TimeScale/position = Vector2(-1180, -320)
 "nodes/TimeScale 8/position" = Vector2(2020, 640)
 "nodes/TimeScale 9/node" = SubResource("AnimationNodeTimeScale_lh6ay")
 "nodes/TimeScale 9/position" = Vector2(-1120, 500)
-nodes/output/position = Vector2(2400, 520)
-node_connections = [&"Air", 0, &"TimeScale 2", &"Air", 1, &"TimeScale 3", &"Air", 2, &"TimeScale 7", &"AirSpinKick", 0, &"Air", &"AirSpinKick", 1, &"TimeScale 11", &"Death", 0, &"Hurt", &"Death", 1, &"TimeScale 8", &"Ground", 0, &"OSLand", &"Ground", 1, &"GroundSecondary", &"GroundSecondary", 0, &"StrikeDash", &"GroundSecondary", 1, &"TimeScale 9", &"GroundSecondary", 2, &"TimeScale 10", &"Hang", 0, &"TSHang", &"Hang", 1, &"TimeScale 13", &"Hurt", 0, &"Teetering", &"Hurt", 1, &"OSHurt", &"Idle", 0, &"TimeScale", &"Idle", 1, &"Animation 4", &"Movement", 0, &"OSHang", &"Movement", 1, &"Push", &"Movement", 2, &"OSPose", &"OSHang", 0, &"Hang", &"OSHang", 1, &"TimeScale 14", &"OSHurt", 0, &"TimeScale 5", &"OSHurt", 1, &"TimeScale 6", &"OSLand", 0, &"Idle", &"OSLand", 1, &"TimeScale 12", &"OSPose", 0, &"AirSpinKick", &"OSPose", 1, &"TimeScale 4", &"Push", 0, &"Ground", &"Push", 1, &"TimeScale 18", &"Run", 0, &"TSWalk", &"Run", 1, &"TSRun", &"Run", 2, &"TSSprint", &"StrikeDash", 0, &"Run", &"StrikeDash", 1, &"TSStrikeDash", &"TSHang", 0, &"Animation 18", &"TSRun", 0, &"Animation 3", &"TSSprint", 0, &"Animation 17", &"TSStrikeDash", 0, &"Animation 7", &"TSWalk", 0, &"Animation 2", &"Teetering", 0, &"Movement", &"Teetering", 1, &"TeeteringLevel", &"TeeteringLevel", 0, &"TimeScale 15", &"TeeteringLevel", 1, &"TimeScale 16", &"TeeteringLevel", 2, &"TimeScale 17", &"TimeScale", 0, &"Animation", &"TimeScale 10", 0, &"Animation 13", &"TimeScale 11", 0, &"Animation 15", &"TimeScale 12", 0, &"Animation 16", &"TimeScale 13", 0, &"Animation 19", &"TimeScale 14", 0, &"Animation 20", &"TimeScale 15", 0, &"Animation 21", &"TimeScale 16", 0, &"Animation 22", &"TimeScale 17", 0, &"Animation 23", &"TimeScale 18", 0, &"Animation 24", &"TimeScale 2", 0, &"Animation 5", &"TimeScale 3", 0, &"Animation 6", &"TimeScale 4", 0, &"Animation 14", &"TimeScale 5", 0, &"Animation 8", &"TimeScale 6", 0, &"Animation 9", &"TimeScale 7", 0, &"Animation 10", &"TimeScale 8", 0, &"Animation 11", &"TimeScale 9", 0, &"Animation 12", &"output", 0, &"Death"]
+nodes/output/position = Vector2(3020, 300)
+node_connections = [&"Air", 0, &"TimeScale 2", &"Air", 1, &"TimeScale 3", &"Air", 2, &"TimeScale 7", &"AirSpinKick", 0, &"Air", &"AirSpinKick", 1, &"TimeScale 11", &"Death", 0, &"Hurt", &"Death", 1, &"TimeScale 8", &"Ground", 0, &"OSLand", &"Ground", 1, &"GroundSecondary", &"GroundSecondary", 0, &"StrikeDash", &"GroundSecondary", 1, &"TimeScale 9", &"GroundSecondary", 2, &"TimeScale 10", &"Hang", 0, &"TSHang", &"Hang", 1, &"TimeScale 13", &"Hurt", 0, &"Teetering", &"Hurt", 1, &"OSHurt", &"Idle", 0, &"TimeScale", &"Idle", 1, &"Animation 4", &"Movement", 0, &"OSHang", &"Movement", 1, &"Push", &"Movement", 2, &"OSPose", &"OSHang", 0, &"Hang", &"OSHang", 1, &"TimeScale 14", &"OSHurt", 0, &"TimeScale 5", &"OSHurt", 1, &"TimeScale 6", &"OSLand", 0, &"Idle", &"OSLand", 1, &"TimeScale 12", &"OSPose", 0, &"AirSpinKick", &"OSPose", 1, &"TimeScale 4", &"OneShot", 0, &"Death", &"OneShot", 1, &"TimeScale 19", &"Push", 0, &"Ground", &"Push", 1, &"TimeScale 18", &"Run", 0, &"TSWalk", &"Run", 1, &"TSRun", &"Run", 2, &"TSSprint", &"StrikeDash", 0, &"Run", &"StrikeDash", 1, &"TSStrikeDash", &"TSHang", 0, &"Animation 18", &"TSRun", 0, &"Animation 3", &"TSSprint", 0, &"Animation 17", &"TSStrikeDash", 0, &"Animation 7", &"TSWalk", 0, &"Animation 2", &"Teetering", 0, &"Movement", &"Teetering", 1, &"TeeteringLevel", &"TeeteringLevel", 0, &"TimeScale 15", &"TeeteringLevel", 1, &"TimeScale 16", &"TeeteringLevel", 2, &"TimeScale 17", &"TimeScale", 0, &"Animation", &"TimeScale 10", 0, &"Animation 13", &"TimeScale 11", 0, &"Animation 15", &"TimeScale 12", 0, &"Animation 16", &"TimeScale 13", 0, &"Animation 19", &"TimeScale 14", 0, &"Animation 20", &"TimeScale 15", 0, &"Animation 21", &"TimeScale 16", 0, &"Animation 22", &"TimeScale 17", 0, &"Animation 23", &"TimeScale 18", 0, &"Animation 24", &"TimeScale 19", 0, &"Animation 25", &"TimeScale 2", 0, &"Animation 5", &"TimeScale 3", 0, &"Animation 6", &"TimeScale 4", 0, &"Animation 14", &"TimeScale 5", 0, &"Animation 8", &"TimeScale 6", 0, &"Animation 9", &"TimeScale 7", 0, &"Animation 10", &"TimeScale 8", 0, &"Animation 11", &"TimeScale 9", 0, &"Animation 12", &"output", 0, &"OneShot"]

@@ -48,7 +48,8 @@ layer = 2
 Cam = NodePath("../ThirdPersonCamera")
 CurrentPlayer = NodePath("PlayerSonic")
 
-[node name="PlayerSonic" parent="PlayerSwapper" instance=ExtResource("7_w6d2k")]
+[node name="PlayerSonic" parent="PlayerSwapper" node_paths=PackedStringArray("Camera") instance=ExtResource("7_w6d2k")]
+Camera = NodePath("../../ThirdPersonCamera")
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("Char") instance=ExtResource("3_t4fox")]
 Char = NodePath("../PlayerSwapper/PlayerSonic")

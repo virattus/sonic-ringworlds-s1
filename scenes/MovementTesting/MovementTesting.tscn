@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=30 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
+[ext_resource type="AudioStream" uid="uid://c3qc4cj04sqdu" path="res://music/Sonic The Hedgehog OST - Scrap Brain Zone.ogg" id="2_csmd6"]
 [ext_resource type="PackedScene" uid="uid://bhjlx7c3xcjwo" path="res://entities/RingRespawn/RingRespawn.tscn" id="3_pb2kp"]
 [ext_resource type="PackedScene" uid="uid://dwv57vyogn2kk" path="res://entities/Balloon/Balloon.tscn" id="7_b7r6t"]
 [ext_resource type="PackedScene" uid="uid://dtd6sg2crg1n8" path="res://entities/Checkpoint/CheckPoint.tscn" id="8_axbsj"]
@@ -36,6 +37,9 @@ size = Vector3(300, 200, 200)
 [node name="TitleCard" parent="." index="2"]
 visible = false
 Title1 = "movement testing"
+
+[node name="MusicController" parent="." index="3"]
+StageMusic = ExtResource("2_csmd6")
 
 [node name="PlayerSonic" parent="PlayerSwapper" index="1" node_paths=PackedStringArray("Camera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -18,17 +18,20 @@ func _ready() -> void:
 	$ItemBoxClassic/SpriteIcon.region_rect = IconRect
 
 
-func ActivateItemBox(source: Character) -> void:
+func ActivateItem():
 	var shieldstate = Player.SHIELD.NORMAL_SHIELD
 	
 	match ShieldType:
+		"NORMAL":
+			$SndNormalShield.play()
 		"FIRE":
+			$SndFireShield.play()
 			shieldstate = Player.SHIELD.FIRE_SHIELD
 		"WATER":
+			$SndWaterShield.play()
 			shieldstate = Player.SHIELD.WATER_SHIELD
 		"THUNDER":
+			$SndThunderShield.play()
 			shieldstate = Player.SHIELD.THUNDER_SHIELD
 	
-	source.SetShieldState(shieldstate)
-
-	super(source)
+	Target.SetShieldState(shieldstate)

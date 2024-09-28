@@ -30,23 +30,22 @@ Parameters = ExtResource("3_3q6jm")
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
 bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
-bones/1/position = Vector3(6.50705e-09, 0.074432, 3.0216)
 bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
-bones/2/position = Vector3(-5.13685, 0.0413512, 3.66933)
-bones/2/rotation = Quaternion(3.15075e-08, -0.720808, 0.693135, -3.02979e-08)
+bones/2/position = Vector3(-5.13685, -1.06558, 2.36099)
+bones/2/rotation = Quaternion(0.192434, -0.453324, 0.864455, 0.100914)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
-bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.0413512, 3.66933)
-bones/4/rotation = Quaternion(3.15075e-08, -0.720808, 0.693135, -3.02979e-08)
+bones/3/position = Vector3(-2.48036, -3.58949, 1.51559)
+bones/3/rotation = Quaternion(-0.927768, 0.0484538, 0.129734, 0.346509)
+bones/4/position = Vector3(5.13685, -1.06558, 2.36099)
+bones/4/rotation = Quaternion(-0.145089, -0.458146, 0.873649, -0.0760853)
 bones/4/scale = Vector3(1, 1, 1)
-bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
-bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(6.50705e-09, 0.074432, 5.26056)
+bones/5/position = Vector3(2.48036, -3.58949, 1.51559)
+bones/5/rotation = Quaternion(-0.929363, -0.0439835, -0.117764, 0.347105)
+bones/6/position = Vector3(0, 0, 5.26889)
 bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
 [node name="ba3DBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, -6.50705e-09, 3.0216, 0.074432)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 0, 3.02994, 0)
 bone_name = "Head_2"
 bone_idx = 1
 
@@ -56,7 +55,7 @@ Size = 1.25
 Colour = Color(0, 0.287371, 0.725397, 1)
 
 [node name="ba3DHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 3.42067e-09, -8.73558e-08, 1.77636e-14, -0.999234, -0.0391277, -8.74228e-08, 0.0391277, -0.999234, 5.13685, 3.66933, 0.0413512)
+transform = Transform3D(0.905571, 0.348941, -0.241209, 0.424195, -0.744918, 0.514932, 2.98023e-08, -0.568627, -0.822595, 5.13685, 2.36099, -1.06558)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -65,7 +64,7 @@ SceneRoot = NodePath("../../../../../..")
 Size = 0.5
 
 [node name="ba3DHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 3.42067e-09, -8.73558e-08, 1.77636e-14, -0.999234, -0.0391277, -8.74228e-08, 0.0391277, -0.999234, -5.13685, 3.66933, 0.0413512)
+transform = Transform3D(0.946321, -0.265887, 0.183797, -0.32323, -0.778439, 0.538104, -1.19209e-07, -0.568627, -0.822595, -5.13685, 2.36099, -1.06558)
 bone_name = "Hand.R"
 bone_idx = 4
 
@@ -74,7 +73,7 @@ SceneRoot = NodePath("../../../../../..")
 Size = 0.5
 
 [node name="ba3DFootL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="7"]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 2.48036, 1.32379, 1.78814e-07)
+transform = Transform3D(-0.961643, 0.179815, 0.207146, -0.274305, -0.630387, -0.726202, -4.47035e-08, -0.755168, 0.655532, 2.48036, 1.51559, -3.58949)
 bone_name = "Foot.L"
 bone_idx = 3
 
@@ -84,7 +83,7 @@ Size = 0.5
 Colour = Color(1, 0.145098, 0.141176, 1)
 
 [node name="ba3DFootR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="8"]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -2.48036, 1.32379, 1.78814e-07)
+transform = Transform3D(-0.968394, -0.163506, -0.188358, 0.249426, -0.634813, -0.7313, 2.98023e-08, -0.755168, 0.655532, -2.48036, 1.51559, -3.58949)
 bone_name = "Foot.R"
 bone_idx = 5
 
@@ -127,6 +126,9 @@ parameters/OSLand/request = 0
 parameters/OSPose/active = false
 parameters/OSPose/internal_active = false
 parameters/OSPose/request = 0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
 parameters/Push/blend_amount = 0.0
 parameters/Run/blend_amount = 0
 parameters/StrikeDash/blend_amount = 0
@@ -147,6 +149,7 @@ parameters/TimeScale/scale = 1.0
 "parameters/TimeScale 16/scale" = 1.0
 "parameters/TimeScale 17/scale" = 1.0
 "parameters/TimeScale 18/scale" = 1.0
+"parameters/TimeScale 19/scale" = 1.0
 "parameters/TimeScale 2/scale" = 1.0
 "parameters/TimeScale 3/scale" = 1.0
 "parameters/TimeScale 4/scale" = 1.0

@@ -1,16 +1,15 @@
 extends "res://entities/ItemBox/ItemBox.gd"
 
 
-func ActivateItemBox(source: Character) -> void:
+func OpenItemBox(source: Character) -> void:
 	$SndSpikes.play()
 	DeactivateCollision()
 	ItemBoxModel.visible = false
 	source.DamageReceived(global_position, 1)
 
 
-
 func _on_hitbox_hitbox_activated(Target: Hurtbox) -> void:
-	ActivateItemBox(Target.get_parent())
+	OpenItemBox(Target.get_parent())
 	
 
 

@@ -3,9 +3,22 @@ extends Node
 
 signal ActClearMusicFinished
 
+@export var StageMusic : AudioStream
 
-func PlayMusic(musicSource) -> void:
-	pass
+
+@onready var MusicActiveTrack = $MusicActiveTrack
+
+
+func _ready() -> void:
+	PlayMusic()
+
+
+func PlayMusic() -> void:
+	if StageMusic == null:
+		return
+	
+	MusicActiveTrack.stream = StageMusic
+	MusicActiveTrack.play()
 
 
 func DrowningMusicInterrupt() -> void:

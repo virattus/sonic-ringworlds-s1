@@ -9,3 +9,11 @@ ShieldType = "NORMAL"
 
 [node name="SpriteIcon" parent="ItemBoxClassic" index="1"]
 region_rect = Rect2(32, 32, 16, 16)
+
+[node name="SndNormalShield" type="AudioStreamPlayer" parent="." index="7"]
+
+[node name="SndFireShield" type="AudioStreamPlayer" parent="." index="8"]
+
+[node name="SndThunderShield" type="AudioStreamPlayer" parent="." index="9"]
+
+[node name="SndWaterShield" type="AudioStreamPlayer" parent="." index="10"]
