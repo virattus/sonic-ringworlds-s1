@@ -20,4 +20,7 @@ bus = &"Music"
 bus = &"Music"
 playback_type = 1
 
+[node name="MusicSpeedup" type="AudioStreamPlayer" parent="."]
+
 [connection signal="finished" from="MusicActClear" to="." method="_on_music_act_clear_finished"]
+[connection signal="finished" from="MusicSpeedup" to="." method="_on_music_speedup_finished"]

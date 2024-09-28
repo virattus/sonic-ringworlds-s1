@@ -149,7 +149,6 @@ func ApplyAirDrag(vel: Vector3, delta: float) -> Vector3:
 
 func AttackHit(_Target: Hurtbox) -> void:
 	print("Ball: Hit enemy")
-	owner.DashModeCharge += 0.2
 	if !owner.GroundCollision:
 		owner.velocity.y = owner.Parameters.ATTACK_BOUNCE_POW
 

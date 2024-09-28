@@ -158,6 +158,5 @@ func GetNextTarget(inputDir: Vector3) -> void:
 
 func AttackHit(_Target: Hurtbox) -> void:
 	print("SpinKick: Hit enemy")
-	owner.DashModeCharge += 0.2
 	owner.velocity.y = owner.PARAMETERS.ATTACK_BOUNCE_POW
 	Target = null

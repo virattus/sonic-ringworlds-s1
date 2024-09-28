@@ -383,6 +383,7 @@ func SetFlicker(time: float) -> void:
 
 func SetShieldState(newState: SHIELD) -> void:	
 	if ShieldState != SHIELD.NONE:
+		remove_child(CurrentShield)
 		CurrentShield.queue_free()
 		CurrentShield = null
 	
@@ -399,6 +400,8 @@ func SetShieldState(newState: SHIELD) -> void:
 			CurrentShield = WATER_SHIELD.instantiate()
 		SHIELD.THUNDER_SHIELD:
 			CurrentShield = THUNDER_SHIELD.instantiate()
+		
+	add_child(CurrentShield)
 
 
 func OrientCharMesh() -> void:

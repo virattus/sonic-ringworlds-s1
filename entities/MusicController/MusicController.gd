@@ -38,3 +38,7 @@ func ActClearMusicInterrupt() -> void:
 
 func _on_music_act_clear_finished() -> void:
 	ActClearMusicFinished.emit()
+
+
+func _on_music_speedup_finished() -> void:
+	$MusicActiveTrack.stream_paused = false

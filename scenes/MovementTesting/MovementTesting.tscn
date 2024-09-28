@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=31 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://br1scfm0a133f" path="res://entities/BallPath/BallPathEntrance.tscn" id="23_o47er"]
 [ext_resource type="PackedScene" uid="uid://d1hbkmfls6oe1" path="res://models/SCurveParts/TubeJunction.tscn" id="24_hlw6k"]
 [ext_resource type="PackedScene" uid="uid://b8alxw0nignyd" path="res://models/SCurveParts/TubeStraight.tscn" id="25_8oo3j"]
+[ext_resource type="PackedScene" uid="uid://d2dagcf2axymc" path="res://entities/ItemBox/SpeedUp/ItemBoxSpeedUp.tscn" id="27_jjwkj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
 size = Vector3(300, 200, 200)
@@ -41,10 +42,9 @@ Title1 = "movement testing"
 [node name="MusicController" parent="." index="3"]
 StageMusic = ExtResource("2_csmd6")
 
-[node name="PlayerSonic" parent="PlayerSwapper" index="1" node_paths=PackedStringArray("Camera")]
+[node name="PlayerSonic" parent="PlayerSwapper" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 2147491841
-Camera = NodePath("../../ThirdPersonCamera")
 
 [node name="MovementTesting" parent="." index="9" instance=ExtResource("1_aqers")]
 
@@ -757,6 +757,9 @@ transform = Transform3D(2.6, 0, 0, 0, 1, 0, 0, 0, 1, -56.7119, 8, 0)
 
 [node name="TubeStraight8" parent="MovementTesting/BallPath" index="21" instance=ExtResource("25_8oo3j")]
 transform = Transform3D(-7.86805e-08, 0, 1, 0, 1, 0, -1.8, 0, -4.37114e-08, -46, 30, 7.51297)
+
+[node name="ItemBoxSpeedUp" parent="MovementTesting" index="52" instance=ExtResource("27_jjwkj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7858, 41.9975, 66.9097)
 
 [node name="EnemyCrabmeat" parent="." index="10" instance=ExtResource("9_dh6p0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2104)
