@@ -9,6 +9,7 @@ signal HealthEmpty
 @export var Controller := CharController.new()
 @export var Health := 1
 @export var MaxHealth := 1
+@export var Invincible := true
 
 var Speed := 0.0
 
@@ -35,6 +36,7 @@ func _ready() -> void:
 	var newRotation = rotation_degrees
 	global_transform.basis = Basis.IDENTITY
 	CharMesh.rotation_degrees = newRotation
+	Invincible = false
 
 
 func _process(_delta: float) -> void:

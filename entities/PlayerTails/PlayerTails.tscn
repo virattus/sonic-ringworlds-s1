@@ -1,7 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8e6hh7yfleue"]
+[gd_scene load_steps=6 format=3 uid="uid://c8e6hh7yfleue"]
 
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="1_5lxvg"]
 [ext_resource type="Script" path="res://entities/PlayerTails/PlayerTails.gd" id="2_fbqdf"]
+[ext_resource type="Script" path="res://entities/PlayerSonic/SonicParameters.gd" id="3_21in4"]
+[ext_resource type="PackedScene" uid="uid://dxpucy1t0uc84" path="res://models/Tails/Model_Tails.tscn" id="3_n4tbk"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://0yhfx0fi4055" path="res://entities/PlayerTails/Tails_AnimTree.tres" id="4_1j4c7"]
 
 [node name="PlayerTails" instance=ExtResource("1_5lxvg")]
 script = ExtResource("2_fbqdf")
+Parameters = ExtResource("3_21in4")
+
+[node name="Model_Tails" parent="CharacterMesh" index="1" instance=ExtResource("3_n4tbk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.5, 0)
+
+[node name="Skeleton3D" parent="CharacterMesh/Model_Tails/Armature" index="1"]
+bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
+bones/1/position = Vector3(2.17111e-08, 0.248346, 3.00213)
+bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+bones/4/position = Vector3(-5.13685, 0.13797, 3.43624)
+bones/4/rotation = Quaternion(3.28636e-08, -0.751831, 0.659355, -2.88213e-08)
+bones/6/position = Vector3(5.13685, 0.13797, 3.43624)
+bones/6/rotation = Quaternion(3.28636e-08, -0.751831, 0.659355, -2.88213e-08)
+
+[node name="AnimationTree" parent="." index="14"]
+root_node = NodePath("../CharacterMesh/Model_Tails")
+tree_root = ExtResource("4_1j4c7")
+anim_player = NodePath("../CharacterMesh/Model_Tails/AnimationPlayer")
+parameters/Air/blend_amount = 0
+parameters/AirSpinKick/blend_amount = 0
+parameters/Death/blend_amount = 0
+parameters/Ground/blend_amount = 0
+parameters/GroundSecondary/blend_amount = 0
+parameters/Hang/blend_amount = 0
+parameters/Hurt/blend_amount = 0
+parameters/Idle/blend_amount = 0
+parameters/Movement/blend_amount = 0
+parameters/OSHang/active = false
+parameters/OSHang/internal_active = false
+parameters/OSHang/request = 0
+parameters/OSHurt/active = false
+parameters/OSHurt/internal_active = false
+parameters/OSHurt/request = 0
+parameters/OSLand/active = false
+parameters/OSLand/internal_active = false
+parameters/OSLand/request = 0
+parameters/OSPose/active = false
+parameters/OSPose/internal_active = false
+parameters/OSPose/request = 0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/Push/blend_amount = 0
+parameters/Run/blend_amount = 0
+parameters/StrikeDash/blend_amount = 0
+parameters/TSHang/scale = 1.0
+parameters/TSRun/scale = 1.0
+parameters/TSSprint/scale = 1.0
+parameters/TSStrikeDash/scale = 1.0
+parameters/TSWalk/scale = 1.0
+parameters/Teetering/blend_amount = 0
+parameters/TeeteringLevel/blend_amount = 0
+parameters/TimeScale/scale = 1.0
+"parameters/TimeScale 10/scale" = 1.0
+"parameters/TimeScale 11/scale" = 1.0
+"parameters/TimeScale 12/scale" = 1.0
+"parameters/TimeScale 13/scale" = 1.0
+"parameters/TimeScale 14/scale" = 1.0
+"parameters/TimeScale 15/scale" = 1.0
+"parameters/TimeScale 16/scale" = 1.0
+"parameters/TimeScale 17/scale" = 1.0
+"parameters/TimeScale 18/scale" = 1.0
+"parameters/TimeScale 19/scale" = 1.0
+"parameters/TimeScale 2/scale" = 1.0
+"parameters/TimeScale 3/scale" = 1.0
+"parameters/TimeScale 4/scale" = 1.0
+"parameters/TimeScale 5/scale" = 1.0
+"parameters/TimeScale 6/scale" = 1.0
+"parameters/TimeScale 7/scale" = 1.0
+"parameters/TimeScale 8/scale" = 1.0
+"parameters/TimeScale 9/scale" = 1.0
+
+[editable path="CharacterMesh/Model_Tails"]

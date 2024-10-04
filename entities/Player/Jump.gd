@@ -1,0 +1,142 @@
+extends "res://entities/Player/MoveAir.gd"
+
+
+#If the player jumps while upside down, the state will change immediately to negative,
+#this just sets a minimum time to be jumping
+var JumpTimeAccumulator := 0.0
+
+const MIN_JUMP_TIME = 1.5
+
+
+func Enter(_msg := {}) -> void:
+	owner.AnimTree.set("parameters/Movement/blend_amount", 1.0)
+	owner.AnimTree.set("parameters/Air/blend_amount", -1.0)
+	
+	if _msg.has("JumpSound") and _msg["JumpSound"]:
+		owner.SndJump.play()
+	
+	var JumpForce = owner.Parameters.JUMP_POWER
+	if owner.IsUnderwater:
+		JumpForce = owner.Parameters.JUMP_POWER / 3.0
+	
+	if _msg.has("JumpForce"):
+		JumpForce = _msg["JumpForce"]
+	
+	if _msg.has("JumpDirection"):
+		owner.up_direction = _msg["JumpDirection"]
+		owner.CharMesh.AlignToY(owner.up_direction)
+
+	var newVel : Vector3 = owner.velocity
+	if _msg.has("IgnoreVel") and _msg["IgnoreVel"]:
+		newVel = Vector3.ZERO
+	
+	#Set velocity to only forward direction + jump direction, fixes bug with jumping after circling sphere
+	#thanks to https://gamedev.stackexchange.com/questions/198103/how-can-i-zero-out-velocity-in-an-arbitrary-direction
+	#Up direction should be normalised, but not newVel
+	var frontVel = newVel - (owner.up_direction * owner.up_direction.dot(newVel))
+	newVel = frontVel + owner.up_direction * JumpForce
+	
+	owner.SetVelocity(newVel)
+	
+	owner.CharMesh.LookAt(owner.global_position + frontVel.normalized())
+	owner.CharMesh.AlignToY(owner.up_direction)
+	
+	owner.GroundCollision = false
+	owner.StickToFloor = false
+	owner.HasJumped = true
+	
+	print("Jumped")
+
+
+func Exit() -> void:
+	JumpTimeAccumulator = 0.0
+
+
+func Update(_delta: float) -> void:
+	owner.Move()
+	
+	var collision : SonicCollision = owner.GetCollision()
+	if collision.CollisionType == SonicCollision.CEILING:
+		if owner.CanHang and Input.is_action_pressed("Jump"):
+			#We might be able to hang, see if it's possible
+			if AbleToHang():
+				ChangeState("Hang")
+				return
+			
+	if CheckGroundCollision(collision):
+		return
+	
+	if Input.is_action_just_pressed("Jump"):
+		if !HandleJumpInput():
+			return
+	
+	if Input.is_action_just_pressed("Attack"):
+		if !HandleAttackInput():
+			return
+	
+	JumpTimeAccumulator += _delta
+	
+	if owner.velocity.y < 0.0:
+		if owner.up_direction.dot(Vector3.UP) > 0.0:
+			ChangeState("Fall")
+			return
+		elif JumpTimeAccumulator > MIN_JUMP_TIME:
+			ChangeState("Fall")
+			return
+
+	
+	owner.CharMesh.AlignToY(owner.up_direction)
+	
+	if owner.IsUnderwater:
+		owner.UpdateUpDir(Vector3.UP, _delta)
+	
+	var newVel : Vector3 = owner.velocity
+	var newSpeed : float = owner.Speed
+	
+	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
+	
+	newVel += inputVel * owner.Parameters.AIR_INPUT_VEL * _delta
+	
+	newVel = newVel.normalized() * newSpeed
+	
+	if owner.HasJumped and Input.is_action_just_released("Jump"):
+		if newVel.y > owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED:
+			newVel.y = owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED
+
+	
+	#newVel = ApplyDrag(newVel, _delta)
+	newVel = owner.ApplyGravity(newVel, _delta)
+
+	
+	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
+		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED
+	
+	
+	OldVel = owner.velocity
+	owner.SetVelocity(newVel)
+
+
+func HandleJumpInput() -> bool:
+	if owner.IsUnderwater:
+		ChangeState("Jump")
+		return false
+	else:
+		if Input.is_action_just_pressed("Attack"):
+			ChangeState("Pose")
+			return false
+		else:
+			ChangeState("Airdash")
+			return false
+
+
+func HandleAttackInput() -> bool:
+	if owner.DashMode:
+		ChangeState("SpinKick")
+		return false
+	else:
+		ChangeState("Ball")
+		return false
+
+
+func AbleToHang() -> bool:
+	return true

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://by6y01vgcwjw5"]
+
+[ext_resource type="PackedScene" uid="uid://ufrt1mxudpfc" path="res://models/Amy/Amy.glb" id="1_rhh45"]
+
+[node name="Model_Amy" instance=ExtResource("1_rhh45")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/2/scale = Vector3(1, 1, 1)
+bones/4/scale = Vector3(1, 1, 1)

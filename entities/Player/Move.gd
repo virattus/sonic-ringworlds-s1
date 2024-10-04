@@ -139,6 +139,7 @@ func HandleJumpInput() -> bool:
 	})
 	return false
 
+
 func HandleAttackInput() -> bool:
 	ChangeState("Ball")
 	return false

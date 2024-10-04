@@ -34,8 +34,7 @@ size = Vector3(8000, 8000, 8000)
 [node name="SonicGame" type="Node"]
 script = ExtResource("1_hlded")
 
-[node name="HUD" parent="." node_paths=PackedStringArray("Sonic") instance=ExtResource("5_yctne")]
-Sonic = NodePath("../PlayerSwapper/PlayerSonic")
+[node name="HUD" parent="." instance=ExtResource("5_yctne")]
 
 [node name="IngameOptions" parent="." instance=ExtResource("3_jth67")]
 
@@ -90,4 +89,5 @@ script = ExtResource("12_oukvr")
 
 [connection signal="TitleCardAnimComplete" from="TitleCard" to="." method="_on_title_card_title_card_anim_complete"]
 [connection signal="PlayerDeath" from="PlayerSwapper" to="." method="_on_player_death"]
+[connection signal="PlayerSwap" from="PlayerSwapper" to="." method="_on_player_swapper_player_swap"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

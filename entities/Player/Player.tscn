@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=50 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_1mpyw"]
 [ext_resource type="Script" path="res://entities/Player/Player.gd" id="2_k6uox"]
@@ -18,6 +18,10 @@
 [ext_resource type="Script" path="res://entities/PlayerSonic/Skid.gd" id="12_tl0px"]
 [ext_resource type="Script" path="res://entities/Player/Hurt.gd" id="13_exhjx"]
 [ext_resource type="Script" path="res://entities/Player/Death.gd" id="14_h1vfh"]
+[ext_resource type="Script" path="res://entities/Player/Jump.gd" id="17_jhid6"]
+[ext_resource type="Script" path="res://entities/Player/Hang.gd" id="18_5k6se"]
+[ext_resource type="Script" path="res://entities/Player/Fall.gd" id="19_vsofh"]
+[ext_resource type="Script" path="res://entities/Player/Land.gd" id="20_bjwe3"]
 [ext_resource type="AudioStream" uid="uid://dfb3jnuvxypvi" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C2.wav" id="22_5l48w"]
 [ext_resource type="AudioStream" uid="uid://bgwe6pbgsc4tj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A0.wav" id="30_8bisq"]
 [ext_resource type="AudioStream" uid="uid://bgvgybjs5n0j3" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_AA.wav" id="31_wtscm"]
@@ -230,10 +234,22 @@ script = ExtResource("11_01pes")
 [node name="NormalShieldAbility" type="Node" parent="StateMachine" index="9"]
 script = ExtResource("12_8763j")
 
-[node name="Hurt" type="Node" parent="StateMachine" index="10"]
+[node name="Jump" type="Node" parent="StateMachine" index="10"]
+script = ExtResource("17_jhid6")
+
+[node name="Hang" type="Node" parent="StateMachine" index="11"]
+script = ExtResource("18_5k6se")
+
+[node name="Fall" type="Node" parent="StateMachine" index="12"]
+script = ExtResource("19_vsofh")
+
+[node name="Land" type="Node" parent="StateMachine" index="13"]
+script = ExtResource("20_bjwe3")
+
+[node name="Hurt" type="Node" parent="StateMachine" index="14"]
 script = ExtResource("13_exhjx")
 
-[node name="Death" type="Node" parent="StateMachine" index="11"]
+[node name="Death" type="Node" parent="StateMachine" index="15"]
 script = ExtResource("14_h1vfh")
 
 [node name="SndJump" type="AudioStreamPlayer" parent="." index="19"]

@@ -38,3 +38,7 @@ func _on_player_play_drowning_music(play: bool) -> void:
 func _on_player_death() -> void:
 	$ThirdPersonCamera.Active = false
 	$DeathTimer.start()
+
+
+func _on_player_swapper_player_swap(active: bool) -> void:
+	$KillBox.Active = !active

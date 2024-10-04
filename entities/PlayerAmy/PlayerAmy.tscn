@@ -1,7 +1,85 @@
-[gd_scene load_steps=3 format=3 uid="uid://kob8pbavna3"]
+[gd_scene load_steps=6 format=3 uid="uid://kob8pbavna3"]
 
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="1_0xuxf"]
 [ext_resource type="Script" path="res://entities/PlayerAmy/PlayerAmy.gd" id="2_tikin"]
+[ext_resource type="Script" path="res://entities/PlayerSonic/SonicParameters.gd" id="3_fanwl"]
+[ext_resource type="PackedScene" uid="uid://by6y01vgcwjw5" path="res://models/Amy/Model_Amy.tscn" id="3_kxrva"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://w6ixk4cuf4cg" path="res://entities/PlayerAmy/Amy_AnimTree.tres" id="4_jyl4i"]
 
 [node name="PlayerAmy" instance=ExtResource("1_0xuxf")]
 script = ExtResource("2_tikin")
+Parameters = ExtResource("3_fanwl")
+
+[node name="Model_Amy" parent="CharacterMesh" index="1" instance=ExtResource("3_kxrva")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, -0.5, 0)
+
+[node name="Skeleton3D" parent="CharacterMesh/Model_Amy/Armature" index="0"]
+bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
+bones/1/position = Vector3(4.41022e-08, 0.50447, 2.97345)
+bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+bones/2/position = Vector3(-5.13685, 0.280261, 3.09297)
+bones/2/rotation = Quaternion(3.47351e-08, -0.794646, 0.607073, -2.6536e-08)
+bones/4/position = Vector3(5.13685, 0.280261, 3.09297)
+bones/4/rotation = Quaternion(3.47351e-08, -0.794646, 0.607073, -2.6536e-08)
+bones/7/position = Vector3(4.41022e-08, 0.50447, 5.2124)
+bones/7/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+
+[node name="AnimationTree" parent="." index="14"]
+root_node = NodePath("../CharacterMesh/Model_Amy")
+tree_root = ExtResource("4_jyl4i")
+anim_player = NodePath("../CharacterMesh/Model_Amy/AnimationPlayer")
+parameters/Air/blend_amount = 0
+parameters/AirSpinKick/blend_amount = 0
+parameters/Death/blend_amount = 0
+parameters/Ground/blend_amount = 0
+parameters/GroundSecondary/blend_amount = 0
+parameters/Hang/blend_amount = 0
+parameters/Hurt/blend_amount = 0
+parameters/Idle/blend_amount = 0
+parameters/Movement/blend_amount = 0
+parameters/OSHang/active = false
+parameters/OSHang/internal_active = false
+parameters/OSHang/request = 0
+parameters/OSHurt/active = false
+parameters/OSHurt/internal_active = false
+parameters/OSHurt/request = 0
+parameters/OSLand/active = false
+parameters/OSLand/internal_active = false
+parameters/OSLand/request = 0
+parameters/OSPose/active = false
+parameters/OSPose/internal_active = false
+parameters/OSPose/request = 0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/Push/blend_amount = 0
+parameters/Run/blend_amount = 0
+parameters/StrikeDash/blend_amount = 0
+parameters/TSHang/scale = 1.0
+parameters/TSRun/scale = 1.0
+parameters/TSSprint/scale = 1.0
+parameters/TSStrikeDash/scale = 1.0
+parameters/TSWalk/scale = 1.0
+parameters/Teetering/blend_amount = 0
+parameters/TeeteringLevel/blend_amount = 0
+parameters/TimeScale/scale = 1.0
+"parameters/TimeScale 10/scale" = 1.0
+"parameters/TimeScale 11/scale" = 1.0
+"parameters/TimeScale 12/scale" = 1.0
+"parameters/TimeScale 13/scale" = 1.0
+"parameters/TimeScale 14/scale" = 1.0
+"parameters/TimeScale 15/scale" = 1.0
+"parameters/TimeScale 16/scale" = 1.0
+"parameters/TimeScale 17/scale" = 1.0
+"parameters/TimeScale 18/scale" = 1.0
+"parameters/TimeScale 19/scale" = 1.0
+"parameters/TimeScale 2/scale" = 1.0
+"parameters/TimeScale 3/scale" = 1.0
+"parameters/TimeScale 4/scale" = 1.0
+"parameters/TimeScale 5/scale" = 1.0
+"parameters/TimeScale 6/scale" = 1.0
+"parameters/TimeScale 7/scale" = 1.0
+"parameters/TimeScale 8/scale" = 1.0
+"parameters/TimeScale 9/scale" = 1.0
+
+[editable path="CharacterMesh/Model_Amy"]

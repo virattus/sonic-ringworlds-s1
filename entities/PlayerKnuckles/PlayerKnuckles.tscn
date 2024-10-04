@@ -1,7 +1,83 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcv7ovi60ghq6"]
+[gd_scene load_steps=6 format=3 uid="uid://dcv7ovi60ghq6"]
 
 [ext_resource type="PackedScene" uid="uid://tximpab5mrch" path="res://entities/Player/Player.tscn" id="1_7hrpq"]
 [ext_resource type="Script" path="res://entities/PlayerKnuckles/PlayerKnuckles.gd" id="2_dw87j"]
+[ext_resource type="PackedScene" uid="uid://1jg88ekabd6h" path="res://models/Knuckles/Model_Knuckles.tscn" id="3_4wmrp"]
+[ext_resource type="Script" path="res://entities/PlayerSonic/SonicParameters.gd" id="3_oll16"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://b4t4at4xlapks" path="res://entities/PlayerKnuckles/Knuckles_AnimTree.tres" id="4_23ts5"]
 
 [node name="PlayerKnuckles" instance=ExtResource("1_7hrpq")]
 script = ExtResource("2_dw87j")
+Parameters = ExtResource("3_oll16")
+
+[node name="Model_Knuckles" parent="CharacterMesh" index="1" instance=ExtResource("3_4wmrp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.5, 0)
+
+[node name="Skeleton3D" parent="CharacterMesh/Model_Knuckles/Armature" index="0"]
+bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
+bones/1/position = Vector3(1.02419e-08, 0.117154, 3.01682)
+bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+bones/2/position = Vector3(-5.13685, 0.0650855, 3.61207)
+bones/2/rotation = Quaternion(3.18465e-08, -0.728562, 0.68498, -2.99414e-08)
+bones/4/position = Vector3(5.13685, 0.0650855, 3.61207)
+bones/4/rotation = Quaternion(3.18465e-08, -0.728562, 0.68498, -2.99414e-08)
+
+[node name="AnimationTree" parent="." index="14"]
+root_node = NodePath("../CharacterMesh/Model_Knuckles")
+tree_root = ExtResource("4_23ts5")
+anim_player = NodePath("../CharacterMesh/Model_Knuckles/AnimationPlayer")
+parameters/Air/blend_amount = 0
+parameters/AirSpinKick/blend_amount = 0
+parameters/Death/blend_amount = 0
+parameters/Ground/blend_amount = 0
+parameters/GroundSecondary/blend_amount = 0
+parameters/Hang/blend_amount = 0
+parameters/Hurt/blend_amount = 0
+parameters/Idle/blend_amount = 0
+parameters/Movement/blend_amount = 0
+parameters/OSHang/active = false
+parameters/OSHang/internal_active = false
+parameters/OSHang/request = 0
+parameters/OSHurt/active = false
+parameters/OSHurt/internal_active = false
+parameters/OSHurt/request = 0
+parameters/OSLand/active = false
+parameters/OSLand/internal_active = false
+parameters/OSLand/request = 0
+parameters/OSPose/active = false
+parameters/OSPose/internal_active = false
+parameters/OSPose/request = 0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/Push/blend_amount = 0
+parameters/Run/blend_amount = 0
+parameters/StrikeDash/blend_amount = 0
+parameters/TSHang/scale = 1.0
+parameters/TSRun/scale = 1.0
+parameters/TSSprint/scale = 1.0
+parameters/TSStrikeDash/scale = 1.0
+parameters/TSWalk/scale = 1.0
+parameters/Teetering/blend_amount = 0
+parameters/TeeteringLevel/blend_amount = 0
+parameters/TimeScale/scale = 1.0
+"parameters/TimeScale 10/scale" = 1.0
+"parameters/TimeScale 11/scale" = 1.0
+"parameters/TimeScale 12/scale" = 1.0
+"parameters/TimeScale 13/scale" = 1.0
+"parameters/TimeScale 14/scale" = 1.0
+"parameters/TimeScale 15/scale" = 1.0
+"parameters/TimeScale 16/scale" = 1.0
+"parameters/TimeScale 17/scale" = 1.0
+"parameters/TimeScale 18/scale" = 1.0
+"parameters/TimeScale 19/scale" = 1.0
+"parameters/TimeScale 2/scale" = 1.0
+"parameters/TimeScale 3/scale" = 1.0
+"parameters/TimeScale 4/scale" = 1.0
+"parameters/TimeScale 5/scale" = 1.0
+"parameters/TimeScale 6/scale" = 1.0
+"parameters/TimeScale 7/scale" = 1.0
+"parameters/TimeScale 8/scale" = 1.0
+"parameters/TimeScale 9/scale" = 1.0
+
+[editable path="CharacterMesh/Model_Knuckles"]

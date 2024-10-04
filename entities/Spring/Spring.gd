@@ -8,9 +8,7 @@ extends Area3D
 
 
 func _on_body_entered(body: Node3D) -> void:
-	$sndBounce.stop()
-	$sndBounce.play()
-	
+
 	if UpDirection.y <= 0.0:
 		body.StateM.ChangeState("Move", {
 			"Velocity": UpDirection * SpringPower,
@@ -18,6 +16,9 @@ func _on_body_entered(body: Node3D) -> void:
 			"IgnoreInput": 0.5,
 		})
 	else:
+		if body.StateM.CurrentState == "Jump":
+			return
+			
 		body.global_position = global_position
 		body.StateM.ChangeState("Jump", {
 			"JumpForce": SpringPower,
@@ -26,3 +27,5 @@ func _on_body_entered(body: Node3D) -> void:
 			"JumpSound": false,
 		})
 	
+	$sndBounce.stop()
+	$sndBounce.play()

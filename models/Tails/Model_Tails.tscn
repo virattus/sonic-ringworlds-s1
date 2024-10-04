@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxpucy1t0uc84"]
+
+[ext_resource type="PackedScene" uid="uid://ctlauo4ksmskl" path="res://models/Tails/Tails.glb" id="1_bxqxh"]
+
+[node name="Model_Tails" instance=ExtResource("1_bxqxh")]
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

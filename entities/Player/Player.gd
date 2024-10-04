@@ -60,7 +60,6 @@ var DashMode := false
 var DashModeCharge := 0.0
 var DashModeDrain := true
 
-var Invincible := false
 var Flicker := false
 var DamageThreshold := 0
 
