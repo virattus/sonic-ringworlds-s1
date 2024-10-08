@@ -47,3 +47,37 @@ func ApplyAirDrag(vel: Vector3, delta: float) -> Vector3:
 	vel.z = lerp(vel.z, 0.0, delta)
 	
 	return vel
+
+
+func CheckGroundCollision(collision: SonicCollision) -> bool:
+	if collision.CollisionType == SonicCollision.NONE:
+		if owner.GroundCollision:
+			print("Left Ground")
+		return false
+	elif collision.CollisionType == SonicCollision.FLOOR:
+		return true
+	elif collision.CollisionType == SonicCollision.WALL:
+		if owner.is_on_wall_only():
+			owner.CollisionCast.target_position = -collision.CollisionNormal
+			if CheckCollisionCast():
+				owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
+				return true
+			else:
+				return false
+		else:
+			return false
+	else: #ceiling hit
+		if Vector3.UP.dot(owner.up_direction) > 0.75:
+			#hit ceiling
+			
+			return false
+		else:
+			#falling down
+			owner.CollisionCast.target_position = owner.up_direction
+			owner.CollisionCast.force_raycast_update()
+			if CheckCollisionCast():
+				owner.UpdateUpDir(owner.CollisionCast.get_collision_normal(), -1.0)
+			
+			return true
+	
+	return true
