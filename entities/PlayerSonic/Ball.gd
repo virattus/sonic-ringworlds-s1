@@ -20,9 +20,7 @@ func Exit() -> void:
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
 	owner.ActivateHitbox(false)
-	owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_NORMAL
-	
-	owner.SndSpinCharge.stop()
+	#owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_NORMAL
 
 
 func Update(_delta: float) -> void:
@@ -49,6 +47,11 @@ func Update(_delta: float) -> void:
 		else:
 			owner.apply_floor_snap()
 			owner.SetVelocity(planeVel)
+	else:
+		ChangeState("BallAir", {
+			
+		})
+		return
 	
 	if Input.is_action_just_pressed("Jump"):
 		owner.SndJump.play()
@@ -63,14 +66,15 @@ func Update(_delta: float) -> void:
 	if inputVel.length() > 0.0:
 		#var combinedVel = newVel + (inputVel * owner.PARAMETERS.WALK_SPEED_POWER * _delta)
 		#newVel = (inputVel.normalized() * combinedVel.length())
-		newVel += inputVel * owner.Parameters.WALK_SPEED_POWER * _delta
-	else:
-		if SlowBallInput(inputVel, newVel):
-			#newVel = owner.ApplyDrag(newVel, _delta * 16.0)
-			newVel *= 1.0 - BALL_GROUND_FRICTION
+		if newVel.normalized().dot(inputVel.normalized()) < -0.25:
+			newVel = newVel.lerp(Vector3.ZERO, _delta)
 		else:
-			newVel = owner.ApplyDrag(newVel, _delta / 2.0)
-			#newVel *= 1.0 - BALL_GROUND_FRICTION
+			var tempSpeed = newVel.length()
+			newVel += inputVel * owner.Parameters.WALK_SPEED_POWER * _delta
+			newVel = newVel.normalized() * tempSpeed
+	else:
+		newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+		#newVel *= 1.0 - BALL_GROUND_FRICTION
 	
 	var influence := CurveInfluence(_delta)
 	
@@ -136,10 +140,6 @@ func AttackHit(_Target: Hurtbox) -> void:
 func UncurlAndIdle() -> void:
 	owner.CharMesh.look_at(owner.global_position + owner.velocity)
 	owner.CharMesh.AlignToY(owner.up_direction)
+	owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_NORMAL
+	owner.SndSpinCharge.stop()
 	ChangeState("Idle")
-	
-
-func SlowBallInput(inputVel: Vector3, vel: Vector3) -> bool:
-	if inputVel.normalized().dot(vel.normalized()) < -owner.Parameters.SKID_MIN_STICK_MAGNITUDE:
-		return true
-	return false
