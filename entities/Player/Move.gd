@@ -141,8 +141,7 @@ func HandleJumpInput() -> bool:
 
 
 func HandleAttackInput() -> bool:
-	ChangeState("Ball")
-	return false
+	return true
 
 
 func CalculateWalkVelocity(inputVel: Vector3, delta: float) -> Vector3:

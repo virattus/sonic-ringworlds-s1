@@ -43,7 +43,8 @@ layer = 2
 
 [node name="MusicController" parent="." instance=ExtResource("4_40tvp")]
 
-[node name="PlayerSwapper" parent="." node_paths=PackedStringArray("Cam", "CurrentPlayer") instance=ExtResource("6_fkwoh")]
+[node name="PlayerSwapper" parent="." node_paths=PackedStringArray("HUD", "Cam", "CurrentPlayer") instance=ExtResource("6_fkwoh")]
+HUD = NodePath("../HUD")
 Cam = NodePath("../ThirdPersonCamera")
 CurrentPlayer = NodePath("PlayerSonic")
 

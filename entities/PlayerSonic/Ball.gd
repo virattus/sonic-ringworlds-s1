@@ -1,12 +1,8 @@
 extends "res://entities/Player/MoveGround.gd"
 
 
-var BallJump := false
-
 
 const BALL_GROUND_FRICTION = 0.0234375
-
-const BALL_UNCURL_MIN_UP_DOT = 0.85
 
 
 func Enter(_msg := {}) -> void:
@@ -15,7 +11,8 @@ func Enter(_msg := {}) -> void:
 	owner.ActivateHitbox(true)
 	owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_BALL
 	
-	owner.SndSpinCharge.play()
+	if _msg.has("PlayChargeSound") and _msg["PlayChargeSound"]:
+		owner.SndSpinCharge.play()
 
 
 func Exit() -> void:
@@ -26,8 +23,6 @@ func Exit() -> void:
 	owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_NORMAL
 	
 	owner.SndSpinCharge.stop()
-	
-	BallJump = false
 
 
 func Update(_delta: float) -> void:
@@ -49,14 +44,20 @@ func Update(_delta: float) -> void:
 		if planeSpeed < minVel:
 			print("Moving too slowly to stick to wall, Speed: %s ReqSpeed: %s" % [planeSpeed, minVel])
 			owner.SetVelocity(planeVel + (owner.up_direction * owner.Parameters.GROUND_NORMAL_HOP))
-			owner.GroundCollision = false
+			ChangeState("BallAir")
+			return
 		else:
-			if !BallJump:
-				owner.apply_floor_snap()
-				owner.SetVelocity(planeVel)
+			owner.apply_floor_snap()
+			owner.SetVelocity(planeVel)
+	
+	if Input.is_action_just_pressed("Jump"):
+		owner.SndJump.play()
+		owner.velocity += owner.up_direction * owner.Parameters.JUMP_POWER
+		ChangeState("BallAir")
+		return
 	
 	var newVel = owner.velocity
-	
+
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
 	if inputVel.length() > 0.0:
@@ -64,29 +65,16 @@ func Update(_delta: float) -> void:
 		#newVel = (inputVel.normalized() * combinedVel.length())
 		newVel += inputVel * owner.Parameters.WALK_SPEED_POWER * _delta
 	else:
-		if owner.GroundCollision:
-			if SlowBallInput(inputVel, newVel):
-				#newVel = owner.ApplyDrag(newVel, _delta * 16.0)
-				newVel *= 1.0 - BALL_GROUND_FRICTION
-			else:
-				newVel = owner.ApplyDrag(newVel, _delta / 2.0)
-				#newVel *= 1.0 - BALL_GROUND_FRICTION
+		if SlowBallInput(inputVel, newVel):
+			#newVel = owner.ApplyDrag(newVel, _delta * 16.0)
+			newVel *= 1.0 - BALL_GROUND_FRICTION
 		else:
-			newVel = ApplyAirDrag(newVel, _delta / 2.0)
-	
-	if owner.GroundCollision:
-		if Input.is_action_just_pressed("Jump"):
-			BallJump = true
-			owner.GroundCollision = false
-			newVel += owner.up_direction * owner.Parameters.JUMP_POWER
-			owner.SndJump.play()
-			
-	else:
-		newVel = owner.ApplyGravity(newVel, _delta)
+			newVel = owner.ApplyDrag(newVel, _delta / 2.0)
+			#newVel *= 1.0 - BALL_GROUND_FRICTION
 	
 	var influence := CurveInfluence(_delta)
 	
-	if owner.GroundCollision and Vector3.UP.dot(owner.up_direction) > BALL_UNCURL_MIN_UP_DOT and influence.length() < 0.05 and newVel.length() < owner.Parameters.BALL_MIN_SPEED:
+	if Vector3.UP.dot(owner.up_direction) > owner.Parameters.BALL_UNCURL_MIN_UP_DOT and influence.length() < 0.05 and newVel.length() < owner.Parameters.BALL_MIN_SPEED:
 		UncurlAndIdle()
 		return
 	
@@ -106,7 +94,6 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 			return false
 	elif collision.CollisionType == SonicCollision.FLOOR:
 		if CheckFloorRaycast(delta):
-			BallJump = false
 			return true
 		else:
 			#Too large of an angle to transition
@@ -138,13 +125,6 @@ func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
 			return true
 	
 	return true
-
-
-func ApplyAirDrag(vel: Vector3, delta: float) -> Vector3:
-	vel.x = lerp(vel.x, 0.0, delta)
-	vel.z = lerp(vel.z, 0.0, delta)
-	
-	return vel
 
 
 func AttackHit(_Target: Hurtbox) -> void:

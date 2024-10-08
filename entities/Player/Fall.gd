@@ -24,23 +24,11 @@ func Update(_delta: float) -> void:
 		return
 
 	if Input.is_action_just_pressed("Jump"):
-		if owner.IsUnderwater:
-			ChangeState("Jump")
+		if !HandleJumpInput():
 			return
-		else:
-			if Input.is_action_just_pressed("Attack"):
-				ChangeState("Pose")
-				return
-			else:
-				ChangeState("Airdash")
-				return
 	
 	if Input.is_action_just_pressed("Attack"):
-		if owner.DashMode:
-			ChangeState("SpinKick")
-			return
-		else:
-			ChangeState("Ball")
+		if !HandleAttackInput():
 			return
 
 
@@ -50,18 +38,14 @@ func Update(_delta: float) -> void:
 		owner.UpdateUpDir(Vector3.UP, _delta)
 
 	var newVel : Vector3 = owner.velocity
-	var newSpeed : float = owner.Speed
 	
-	var inputVel = owner.GetInputVector(Vector3.UP)
-	newVel += inputVel * owner.Parameters.AIR_INPUT_VEL * _delta
-	
-	newVel = newVel.normalized() * newSpeed
+	newVel = HandleAirInput(newVel, _delta)
 	
 	if owner.HasJumped and Input.is_action_just_released("Jump"):
 		if newVel.y > owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED:
 			newVel.y = owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED
 	
-	#newVel = ApplyDrag(newVel, _delta)
+	#newVel = ApplyAirDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
 	
@@ -70,3 +54,15 @@ func Update(_delta: float) -> void:
 
 	OldVel = owner.velocity
 	owner.SetVelocity(newVel)
+
+
+
+func HandleJumpInput() -> bool:
+	if owner.IsUnderwater:
+		ChangeState("Jump")
+		return false
+	return true
+
+
+func HandleAttackInput() -> bool:
+	return true

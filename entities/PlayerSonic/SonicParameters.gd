@@ -1,7 +1,7 @@
 extends PlayerParameters
 
 
-const JUMP_POWER = 6.5
+const JUMP_POWER = 9.0#6.5
 
 const ATTACK_BOUNCE_POW = 8.0
 
@@ -25,6 +25,7 @@ const SPRINT_ANIM_SPEED_MOD = 1.0
 const TEETER_MAX_SPEED = 3.0
 
 const BALL_MIN_SPEED = 1.0
+const BALL_UNCURL_MIN_UP_DOT = 0.85
 
 const AIR_INPUT_VEL = 2.0
 const AIR_WATER_INPUT_VEL = 1.0

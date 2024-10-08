@@ -64,7 +64,7 @@ func Update(_delta: float) -> void:
 
 	var newVel = owner.velocity
 	
-	newVel = ApplyDrag(owner.velocity, _delta)
+	newVel = ApplyAirDrag(owner.velocity, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
 	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:

@@ -7,7 +7,7 @@ extends Area3D
 @onready var UpDirection = global_transform.basis.y
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(body: Player) -> void:
 
 	if UpDirection.y <= 0.0:
 		body.StateM.ChangeState("Move", {
@@ -17,7 +17,8 @@ func _on_body_entered(body: Node3D) -> void:
 		})
 	else:
 		if body.StateM.CurrentState == "Jump":
-			return
+			if body.Speed > SpringPower:
+				return
 			
 		body.global_position = global_position
 		body.StateM.ChangeState("Jump", {

@@ -6,16 +6,33 @@ var OldVel := Vector3.ZERO
 const AIR_WIPEOUT_MIN = 0.75
 
 
-func ApplyDrag(velocity: Vector3, delta: float) -> Vector3:
+func ApplyAirDrag(velocity: Vector3, delta: float) -> Vector3:
 	var delMod = 1.0
 	if owner.IsUnderwater:
 		delMod = 2.0
 	
-	velocity.x = lerp(velocity.x, 0.0, delta * delMod)
-	velocity.z = lerp(velocity.z, 0.0, delta * delMod)
+	#velocity.x = lerp(velocity.x, 0.0, delta * delMod)
+	#velocity.z = lerp(velocity.z, 0.0, delta * delMod)
+	
+	velocity.x -= (velocity.x / 0.125) / 256
+	velocity.z -= (velocity.z / 0.125) / 256
 	
 	return velocity
 
+
+func HandleAirInput(newVel: Vector3, delta: float) -> Vector3:
+	var inputVel : Vector3 = owner.GetInputVector(Vector3.UP)
+	var newSpeed : float = owner.Speed
+	
+	var horizVel : Vector3 = owner.velocity * Vector3(1, 0, 1)
+	if horizVel.dot(inputVel.normalized()) > -0.25:
+		newVel += inputVel * owner.Parameters.AIR_INPUT_VEL * delta
+		newVel = newVel.normalized() * newSpeed
+	else:
+		newVel = (newVel * Vector3(1, 0, 1)).lerp(Vector3.ZERO, delta) + (Vector3(0, newVel.y, 0))
+		#print("reducing speed")
+	
+	return newVel
 
 
 func CheckCollisionCast() -> bool:

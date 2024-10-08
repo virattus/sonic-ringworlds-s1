@@ -57,7 +57,7 @@ func Update(_delta: float) -> void:
 	
 	if AttackReleased or Target == null:
 		newVel += inputVel * SPINKICK_INPUT_MOD * _delta
-		newVel = ApplyDrag(newVel, _delta)
+		newVel = ApplyAirDrag(newVel, _delta)
 	else:
 		var direction = owner.global_position.direction_to(Target.global_position)
 		newVel = (direction * Vector3(1, 0, 1) * CurrentSpeed) + (newVel * Vector3.UP)

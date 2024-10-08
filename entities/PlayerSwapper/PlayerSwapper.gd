@@ -15,6 +15,7 @@ enum CHAR_SELECT {
 }
 
 
+@export var HUD : CanvasLayer
 @export var Cam : ThirdPersonCamera
 @export var CamFocus : CameraFocus
 @export var CurrentPlayer : Player
@@ -34,6 +35,8 @@ func _ready() -> void:
 	Cam.Focus = CamFocus
 	
 	CurrentPlayer.HealthEmpty.connect(CharDeath)
+	
+	HUD.CurrentPlayer = CurrentPlayer
 
 
 func _physics_process(delta: float) -> void:
@@ -63,6 +66,7 @@ func SwapCharacter(char: CHAR_SELECT) -> void:
 	PlayerSwap.emit(true)
 	
 	Cam.Active = false
+	HUD.CurrentPlayer = null
 	
 	CurrentPlayer.HealthEmpty.disconnect(CharDeath)
 	var CurrentTransform : Transform3D = CurrentPlayer.global_transform
@@ -92,6 +96,7 @@ func SwapCharacter(char: CHAR_SELECT) -> void:
 	CurrentPlayer.StateM.ChangeState(CurrentState)
 
 	Cam.Active = true
+	HUD.CurrentPlayer = CurrentPlayer
 
 	PlayerSwap.emit(false)
 
