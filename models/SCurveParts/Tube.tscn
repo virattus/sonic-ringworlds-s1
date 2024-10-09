@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e00q3p2fqfj1"]
+
+[ext_resource type="Script" path="res://models/SCurveParts/Tube.gd" id="1_cpmk6"]
+
+[node name="Tube" type="Node3D"]
+script = ExtResource("1_cpmk6")

@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1hbkmfls6oe1"]
+[gd_scene load_steps=6 format=3 uid="uid://d1hbkmfls6oe1"]
 
 [ext_resource type="PackedScene" uid="uid://qikcj2s4c0b4" path="res://models/SCurveParts/TubeJunction.glb" id="1_21ieu"]
+[ext_resource type="Script" path="res://models/SCurveParts/TubeJunction.gd" id="2_kwg5e"]
+[ext_resource type="AudioStream" uid="uid://y2ekxqu62ugy" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BE.wav" id="3_f24cg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ola33"]
 size = Vector3(2, 2, 2)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_wpe1h"]
+
 [node name="TubeJunction" instance=ExtResource("1_21ieu")]
+script = ExtResource("2_kwg5e")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
 collision_layer = 32768
@@ -13,3 +18,16 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
 shape = SubResource("BoxShape3D_ola33")
+
+[node name="SndSpinCharge" type="AudioStreamPlayer" parent="." index="2"]
+stream = ExtResource("3_f24cg")
+bus = &"SoundEffects"
+
+[node name="Area3D" type="Area3D" parent="." index="3"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("SphereShape3D_wpe1h")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

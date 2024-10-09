@@ -20,14 +20,14 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	if Input.is_action_just_pressed("DEBUG_ResetPosition"):
-		owner.DebugMove = false
-		owner.global_position = owner.StartingPosition
-		owner.Speed = 0.0
-		owner.velocity = Vector3.ZERO
-		owner.UpdateUpDir(Vector3.UP, -1.0)
-		ChangeState("Fall", {
-		})
+	#if Input.is_action_just_pressed("DEBUG_ResetPosition"):
+	#	owner.DebugMove = false
+	#	owner.global_position = owner.StartingPosition
+	#	owner.Speed = 0.0
+	#	owner.velocity = Vector3.ZERO
+	#	owner.UpdateUpDir(Vector3.UP, -1.0)
+	#	ChangeState("Fall", {
+	#	})
 	
 	var InputAnalogue = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward", 0.25)
 	

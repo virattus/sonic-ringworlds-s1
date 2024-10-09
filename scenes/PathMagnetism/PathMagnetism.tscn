@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5dlv3raxh3vp"]
+
+[ext_resource type="Script" path="res://scenes/PathMagnetism/path_magnetism.gd" id="1_1sy5u"]
+
+[sub_resource type="Curve3D" id="Curve3D_s6ixm"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.0127335, 0, -0.0254668, 0, 0, 0, 0, 0, 0, -0.437181, 0.140137, -0.254668, 0, 0, 0, 0, 0, 0, -0.717316, 0.295898, -0.806449, 0, 0, 0, 0, 0, 0, -0.403225, 0.502197, -1.36672, 0, 0, 0, 0, 0, 0, 0.207979, 0.768799, -1.62988, 0, 0, 0, 0, 0, 0, 0.912561, 0.999329, -1.50254, 0, 0, 0, 0, 0, 0, 1.00594, 1.19276, -0.865872, 0, 0, 0, 0, 0, 0, 0.878605, 1.47624, -0.466892, 0, 0, 0, 0, 0, 0, 0.479625, 1.68721, -0.178268),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_klki4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o20hu"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_befc6"]
+material = SubResource("StandardMaterial3D_o20hu")
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="PathMagnetism" type="Node3D"]
+script = ExtResource("1_1sy5u")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.94653)
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_s6ixm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.77045, 0, -3.93579)
+mesh = SubResource("CapsuleMesh_klki4")
+
+[node name="TestChar" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TestChar"]
+mesh = SubResource("BoxMesh_befc6")
