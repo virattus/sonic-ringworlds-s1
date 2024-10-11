@@ -30,21 +30,24 @@ Invincible = false
 [node name="SonicModel" parent="CharacterMesh" index="0" instance=ExtResource("3_d1b4a")]
 
 [node name="Skeleton3D" parent="CharacterMesh/SonicModel/Armature" index="0"]
-bones/1/position = Vector3(5.13306e-10, 0.00587153, 3.02928)
-bones/2/position = Vector3(-5.13685, 0.00326208, 3.76121)
-bones/2/rotation = Quaternion(3.09562e-08, -0.708196, 0.706016, -3.08609e-08)
+bones/0/rotation = Quaternion(0, 0.707107, 0.707107, 0)
+bones/1/position = Vector3(-4.32674e-08, 0.0969342, 3.01908)
+bones/1/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
+bones/2/position = Vector3(-5.13685, 0.0538525, 3.63917)
+bones/2/rotation = Quaternion(2.20657e-08, -0.724902, 0.688852, -3.97315e-08)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/position = Vector3(-2.48036, 1.78814e-07, 1.32379)
 bones/3/rotation = Quaternion(0, 0, 0, 1)
-bones/4/position = Vector3(5.13685, 0.00326208, 3.76121)
-bones/4/rotation = Quaternion(3.09562e-08, -0.708196, 0.706016, -3.08609e-08)
+bones/4/position = Vector3(5.13685, 0.0538525, 3.63917)
+bones/4/rotation = Quaternion(2.20657e-08, -0.724902, 0.688852, -3.97315e-08)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(2.48036, 1.78814e-07, 1.32379)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
-bones/6/position = Vector3(5.13306e-10, 0.00587153, 5.26823)
+bones/6/position = Vector3(-4.32674e-08, 0.0969342, 5.25804)
+bones/6/rotation = Quaternion(3.09086e-08, 0.707107, 0.707107, 3.09086e-08)
 
 [node name="ba3DBody" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, -5.13306e-10, 3.02928, 0.00587153)
+transform = Transform3D(1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, 1, 4.32674e-08, 3.01908, 0.0969342)
 bone_name = "Head_2"
 bone_idx = 1
 
@@ -54,7 +57,7 @@ Size = 1.25
 Colour = Color(0, 0.287371, 0.725397, 1)
 
 [node name="ba3DHandL" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 2.69551e-10, -8.74224e-08, 3.19744e-14, -0.999995, -0.00308299, -8.74228e-08, 0.00308287, -0.999995, 5.13685, 3.76121, 0.00326208)
+transform = Transform3D(1, -2.27473e-08, -8.80028e-08, -2.72029e-08, -0.9987, -0.0509659, -8.67291e-08, 0.050966, -0.9987, 5.13685, 3.63917, 0.0538525)
 bone_name = "Hand.L"
 bone_idx = 2
 
@@ -63,7 +66,7 @@ SceneRoot = NodePath("../../../../../..")
 Size = 0.5
 
 [node name="ba3DHandR" type="BoneAttachment3D" parent="CharacterMesh/SonicModel/Armature/Skeleton3D" index="6"]
-transform = Transform3D(1, 2.69551e-10, -8.74224e-08, 3.19744e-14, -0.999995, -0.00308299, -8.74228e-08, 0.00308287, -0.999995, -5.13685, 3.76121, 0.00326208)
+transform = Transform3D(1, -2.27473e-08, -8.80028e-08, -2.72029e-08, -0.9987, -0.0509659, -8.67291e-08, 0.050966, -0.9987, -5.13685, 3.63917, 0.0538525)
 bone_name = "Hand.R"
 bone_idx = 4
 
