@@ -13,7 +13,7 @@ var UpdateCount := false
 
 
 const TUBE_SEGMENT = preload("res://models/SCurveParts/TubeStraight.tscn")
-const TUBE_LENGTH = 5.6
+const TUBE_LENGTH = 6.0
 
 
 func _ready() -> void:
