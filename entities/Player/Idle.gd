@@ -36,6 +36,7 @@ func Update(_delta: float) -> void:
 	newVel += inputVel * owner.Parameters.WALK_SPEED_POWER
 	
 	if newVel.length() > owner.Parameters.IDLE_MAX_SPEED:
+		owner.TrueVelocity = newVel
 		owner.SetVelocity(newVel)
 		ChangeState("Move")
 		return

@@ -73,9 +73,8 @@ func Update(_delta: float) -> void:
 			splash.global_transform = owner.CharMesh.global_transform
 			
 		FootstepAccumulator = 0.0
-			
 	
-	var newVel = owner.velocity
+	var newVel = owner.TrueVelocity
 	
 	var inputVel = owner.GetInputVector(owner.up_direction)
 	
@@ -129,6 +128,7 @@ func Update(_delta: float) -> void:
 			
 			owner.CharMesh.LerpMeshOrientation(orientation, _delta)
 	
+	owner.TrueVelocity = newVel
 	owner.SetVelocity(newVel)
 
 

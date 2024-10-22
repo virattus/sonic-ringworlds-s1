@@ -40,6 +40,8 @@ var DebugCollisionPositionDeviation := Vector3.ZERO
 var DebugCollisionNormal := Vector3.ZERO
 var DebugCollisionNormalDeviation := Vector3.ZERO
 
+var TrueVelocity := Vector3.ZERO
+
 var CurrentGravity := 1.0
 var StickToFloor := true
 var AlignToSurface := true
@@ -121,6 +123,7 @@ func _ready() -> void:
 	
 	CurrentGravity = Parameters.GRAVITY
 	
+	DebugMenu.AddMonitor(self, "TrueVelocity")
 	DebugMenu.AddMonitor(self, "DebugMove")
 	DebugMenu.AddMonitor(self, "DebugMoveVector")
 	DebugMenu.AddMonitor(self, "DebugFloorNormal")
