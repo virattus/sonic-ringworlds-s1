@@ -49,6 +49,10 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
+	var collision : CharCollision = owner.GetCollision()
+	if !CheckGroundCollision(collision, _delta):
+		return
+	
 	owner.CharMesh.LookAt(owner.global_position + owner.TrueVelocity)
 	owner.CharMesh.AlignToY(owner.up_direction)
 	UpdateMoveAnimations()
