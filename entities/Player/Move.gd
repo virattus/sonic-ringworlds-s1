@@ -30,6 +30,7 @@ func Enter(_msg := {}) -> void:
 		IgnoreInput = _msg["IgnoreInput"]
 		
 	if _msg.has("Boost"):
+		owner.TrueVelocity = _msg["Boost"]
 		owner.SetVelocity(_msg["Boost"])
 		owner.SndSpinLaunch.play()
 	
@@ -46,7 +47,34 @@ func Exit() -> void:
 	
 
 func Update(_delta: float) -> void:
+	owner.Move()
 	
+	owner.CharMesh.LookAt(owner.global_position + owner.TrueVelocity)
+	owner.CharMesh.AlignToY(owner.up_direction)
+	UpdateMoveAnimations()
+
+	
+	if owner.BounceVelocity.length() > 0.1:
+		owner.BounceVelocity = owner.BounceVelocity.move_toward(Vector3.ZERO, _delta)
+	
+	var newVel : Vector3 = owner.TrueVelocity
+	
+	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
+
+	if inputVel.length() > 0.0:
+		if newVel.length() > owner.Parameters.WALK_MAX_SPEED:
+			newVel = CalculateRunVelocity(newVel, inputVel, _delta)
+		else:
+			newVel = CalculateWalkVelocity(newVel, inputVel, _delta)
+	else:
+		newVel = newVel.move_toward(Vector3.ZERO, _delta * 3.0)
+	
+	owner.TrueVelocity = newVel
+	owner.SetVelocity(newVel + owner.BounceVelocity)
+	
+
+
+func ignore(_delta):
 	#if owner.is_on_wall():
 	#	var angle : float = owner.CharMesh.GetForwardVector.dot(owner.get_wall_normal())
 	#	owner.BounceVelocity = owner.get_wall_normal() * ((angle - 1.0) * -0.5)
@@ -104,9 +132,9 @@ func Update(_delta: float) -> void:
 				if HandleSkid(inputVel):
 					return
 					
-			newVel = CalculateRunVelocity(inputVel, _delta)
+			newVel = CalculateRunVelocity(owner.velocity, inputVel, _delta)
 		else:
-			newVel = CalculateWalkVelocity(inputVel, _delta)
+			newVel = CalculateWalkVelocity(owner.velocity, inputVel, _delta)
 	else:
 		#newVel = owner.ApplyDrag(newVel, _delta)
 		newVel *= 1.0 - RUN_FRICTION_SPEED
@@ -140,31 +168,19 @@ func Update(_delta: float) -> void:
 	owner.SetVelocity(newVel)
 
 
-
-func HandleJumpInput() -> bool:
-	ChangeState("Jump", {
-			"JumpSound": true,
-	})
-	return false
-
-
-func HandleAttackInput() -> bool:
-	return true
-
-
-func CalculateWalkVelocity(inputVel: Vector3, delta: float) -> Vector3:
+func CalculateWalkVelocity(vel: Vector3, inputVel: Vector3, delta: float) -> Vector3:
 	var speedMod = owner.Parameters.WALK_SPEED_POWER
 	if owner.IsUnderwater:
 		speedMod = owner.Parameters.WALK_SPEED_POWER / 3.0
 	
-	var inputValue : Vector3 = (inputVel * speedMod * delta) + (inputVel.normalized() * owner.Speed)
+	var inputValue : Vector3 = (inputVel * speedMod * delta) + (inputVel.normalized() * vel.length())
 	var newVel = inputValue
 	
 	return newVel
 
 
-func CalculateRunVelocity(inputVel: Vector3, delta: float) -> Vector3:
-	var newVel : Vector3 = owner.velocity
+func CalculateRunVelocity(vel: Vector3, inputVel: Vector3, delta: float) -> Vector3:
+	var newVel : Vector3 = vel
 	
 	var ratio : float = (owner.Speed - owner.Parameters.WALK_MAX_SPEED) / RUN_RATIO_DIVISOR
 	#print("Run ratio: %s" % ratio)
@@ -196,8 +212,6 @@ func HandleSkid(input: Vector3) -> bool:
 
 
 func UpdateMoveAnimations() -> void:
-	owner.CharMesh.AlignToY(owner.up_direction)
-	
 	if owner.DashMode:
 		if owner.Speed > owner.Parameters.WALK_MAX_SPEED:
 			owner.AnimTree.set("parameters/StrikeDash/blend_amount", 1.0)
@@ -217,3 +231,14 @@ func UpdateMoveAnimations() -> void:
 		else:
 			owner.AnimTree.set("parameters/Run/blend_amount", -1.0)
 			owner.AnimTree.set("parameters/TSWalk/scale", owner.Speed * owner.Parameters.WALK_ANIM_SPEED_MOD)
+
+
+func HandleJumpInput() -> bool:
+	ChangeState("Jump", {
+			"JumpSound": true,
+	})
+	return false
+
+
+func HandleAttackInput() -> bool:
+	return true

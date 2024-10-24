@@ -646,7 +646,7 @@ transform = Transform3D(48, 0, 0, 0, 8, 0, 0, 0, 32, 28.736, -4.01, 71.286)
 
 [node name="BoosterGround" parent="MovementTesting" index="35" instance=ExtResource("11_kueol")]
 transform = Transform3D(-0.89685, 0, -0.442336, 0, 1, 0, 0.442336, 0, -0.89685, -8.26461, 0, 11.5962)
-BoostForce = 20.0
+BoostForce = 120.0
 
 [node name="BoosterGround2" parent="MovementTesting" index="36" instance=ExtResource("11_kueol")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46.038, 0, 33.9684)
