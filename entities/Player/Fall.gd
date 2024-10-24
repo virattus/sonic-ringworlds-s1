@@ -41,7 +41,7 @@ func Update(_delta: float) -> void:
 	
 	newVel = HandleAirInput(newVel, _delta)
 	
-	if owner.HasJumped and Input.is_action_just_released("Jump"):
+	if !owner.CanJump and Input.is_action_just_released("Jump"):
 		if newVel.y > owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED:
 			newVel.y = owner.Parameters.JUMP_RELEASE_MAX_Y_SPEED
 	

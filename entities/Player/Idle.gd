@@ -43,9 +43,12 @@ func Update(_delta: float) -> void:
 
 
 func HandleJumpInput() -> bool:
-	ChangeState("Jump", {
-			"JumpSound": true,
-	})
+	if owner.CanJump:
+		if !owner.IsUnderwater:
+			owner.CanJump = false
+		ChangeState("Jump", {
+				"JumpSound": true,
+		})
 	return false
 
 

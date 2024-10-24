@@ -4,7 +4,8 @@ extends "res://entities/Player/Fall.gd"
 
 func HandleJumpInput() -> bool:
 	if owner.IsUnderwater:
-		ChangeState("Jump")
+		if owner.CanJump:
+			ChangeState("Jump")
 		return false
 	else:
 		if Input.is_action_just_pressed("Attack"):

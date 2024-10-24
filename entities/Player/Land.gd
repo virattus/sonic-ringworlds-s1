@@ -27,7 +27,7 @@ func Enter(_msg := {}) -> void:
 	
 	owner.GroundCollision = true
 	owner.StickToFloor = true
-	owner.HasJumped = false
+	owner.CanJump = true
 	owner.SndLand.play()
 	owner.CharMesh.AlignToY(owner.up_direction)
 	

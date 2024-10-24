@@ -48,7 +48,7 @@ var StickToFloor := true
 var AlignToSurface := true
 
 var CanCollectRings := true
-var HasJumped := false
+var CanJump := false
 var CanHang := false
 var HangMovementAxis := Vector3.ZERO
 
@@ -135,7 +135,7 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "StickToFloor")
 	DebugMenu.AddMonitor(self, "AlignToSurface")
 	DebugMenu.AddMonitor(self, "CanCollectRings")
-	DebugMenu.AddMonitor(self, "HasJumped")
+	DebugMenu.AddMonitor(self, "CanJump")
 	DebugMenu.AddMonitor(self, "RunOnWater")
 	DebugMenu.AddMonitor(self, "IsUnderwater")
 	DebugMenu.AddMonitor(self, "OxygenState")
@@ -214,7 +214,7 @@ func ApplyDrag(vel: Vector3, delta: float) -> Vector3:
 
 func UpdateUpDir(floor_normal: Vector3, delta := -1.0) -> void:
 	if delta > 0.0 and floor_normal.is_normalized():
-		up_direction = up_direction.slerp(floor_normal, Parameters.UPDIR_SLERP_RATE * delta)
+		up_direction = up_direction.slerp(floor_normal.normalized(), Parameters.UPDIR_SLERP_RATE * delta).normalized()
 	else:
 		up_direction = floor_normal.normalized()
 	
@@ -363,6 +363,7 @@ func BreatheAirBubble() -> void:
 	TimerOxygen.stop()
 	UpdateOxygenState()
 	SndWaterBreathe.play()
+	CanJump = false
 	velocity = Vector3.ZERO
 	StateM.ChangeState("Fall")
 
@@ -410,6 +411,7 @@ func SetShieldState(newState: SHIELD) -> void:
 
 
 func OrientCharMesh() -> void:
+	assert(velocity.length() > 0.0)
 	CharMesh.look_at(global_position + velocity)
 
 

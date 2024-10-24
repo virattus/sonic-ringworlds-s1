@@ -117,7 +117,8 @@ func Update(_delta: float) -> void:
 	
 	if inputVel.length() > 0.0:
 		#only update model's direction if player moves stick
-		owner.OrientCharMesh()
+		if owner.velocity.length() > 0.0:
+			owner.OrientCharMesh()
 		
 	else:
 		var influence = CurveInfluence(_delta)
