@@ -55,8 +55,8 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	var collision : SonicCollision = owner.GetCollision()
-	if collision.CollisionType == SonicCollision.CEILING:
+	var collision : CharCollision = owner.GetCollision()
+	if collision.CollisionType == CharCollision.CEILING:
 		if owner.CanHang and Input.is_action_pressed("Jump"):
 			#We might be able to hang, see if it's possible
 			if AbleToHang():

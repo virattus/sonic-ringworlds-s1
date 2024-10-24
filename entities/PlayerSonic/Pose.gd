@@ -22,7 +22,7 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	var collision : SonicCollision = owner.GetCollision()
+	var collision : CharCollision = owner.GetCollision()
 	if CheckGroundCollision(collision):
 		ChangeState("Land", {
 			

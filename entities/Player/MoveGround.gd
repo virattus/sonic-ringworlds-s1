@@ -15,9 +15,10 @@ func CurveInfluence(delta: float) -> Vector3:
 func HandleMovementAndCollisions(delta: float) -> bool:
 	owner.Move()
 	
-	var collision : SonicCollision = owner.GetCollision()
+	var collision : CharCollision = owner.GetCollision()
+	
 	if CheckGroundCollision(collision, delta):
-		if collision.CollisionType == SonicCollision.FLOOR and CheckWallCollision():
+		if collision.CollisionType == CharCollision.FLOOR and CheckWallCollision():
 			#print("Colliding with wall and floor")
 			if owner.up_direction.dot(Vector3.UP) > 0.75:
 				if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
@@ -86,17 +87,17 @@ func CheckFloorRaycast(delta: float) -> bool:
 		return false
 
 
-func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:
-	if collision.CollisionType == SonicCollision.NONE:
+func CheckGroundCollision(collision: CharCollision, delta: float) -> bool:
+	if collision.CollisionType == CharCollision.NONE:
 		return CheckFloorRaycast(delta)
-	elif collision.CollisionType == SonicCollision.FLOOR:
+	elif collision.CollisionType == CharCollision.FLOOR:
 		if CheckFloorRaycast(delta):
 			return true
 		else:
 			print("Left Ground")
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.Parameters.GROUND_NORMAL_HOP))
 			return false
-	elif collision.CollisionType == SonicCollision.WALL:
+	elif collision.CollisionType == CharCollision.WALL:
 		if owner.is_on_wall_only():
 			if CheckFloorRaycast(delta):
 				return true

@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgpjgh5qhs2ok"]
+
+[ext_resource type="PackedScene" uid="uid://by4464be1ie7" path="res://entities/BallPath/BallPath.tscn" id="1_0dkjo"]
+[ext_resource type="Curve3D" uid="uid://cdn2ulpusbb4" path="res://scenes/MovementTesting/SCurveTest.tres" id="2_h5lmn"]
+[ext_resource type="PackedScene" uid="uid://br1scfm0a133f" path="res://entities/BallPath/BallPathEntrance.tscn" id="3_uho3w"]
+[ext_resource type="PackedScene" uid="uid://d1hbkmfls6oe1" path="res://models/SCurveParts/TubeJunction.tscn" id="4_mm3yh"]
+[ext_resource type="PackedScene" uid="uid://e00q3p2fqfj1" path="res://models/SCurveParts/Tube.tscn" id="5_i6ha0"]
+
+[node name="BallPathTest" type="Node3D"]
+
+[node name="BallPath" parent="." instance=ExtResource("1_0dkjo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 46)
+curve = ExtResource("2_h5lmn")
+
+[node name="BallPathEntrance" parent="BallPath" node_paths=PackedStringArray("Exit") instance=ExtResource("3_uho3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.940022)
+Exit = NodePath("../BallPathEntrance2")
+
+[node name="BallPathEntrance2" parent="BallPath" node_paths=PackedStringArray("Exit") instance=ExtResource("3_uho3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 7, 1)
+Exit = NodePath("../BallPathEntrance")
+
+[node name="TubeJunction" parent="BallPath" instance=ExtResource("4_mm3yh")]
+
+[node name="TubeJunction2" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
+
+[node name="TubeJunction3" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 14, 0)
+
+[node name="TubeJunction4" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 14, 14)
+
+[node name="TubeJunction5" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 14, 14)
+
+[node name="TubeJunction6" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 28, 14)
+
+[node name="TubeJunction7" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 28, 14)
+
+[node name="TubeJunction8" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 28, 0)
+
+[node name="TubeJunction9" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 8, 0)
+
+[node name="TubeJunction10" parent="BallPath" instance=ExtResource("4_mm3yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 8, 0)
+
+[node name="Tube" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
+Count = 2
+
+[node name="Tube2" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 14, 0)
+Count = 3
+
+[node name="Tube3" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 14, 1)
+Count = 2
+
+[node name="Tube4" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 19, 14, 14)
+Count = 5
+
+[node name="Tube6" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -13, 28, 14)
+Count = 5
+
+[node name="Tube7" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, -44, 28, 13)
+Count = 2
+
+[node name="Tube8" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(1.31134e-07, 7.54979e-08, 1, -1, -4.37114e-08, 1.31134e-07, 4.37114e-08, -1, 7.54979e-08, -44, 27, 0)
+Count = 3
+
+[node name="Tube9" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, -45, 8, 0)
+Count = 4
+
+[node name="Tube5" parent="BallPath" instance=ExtResource("5_i6ha0")]
+transform = Transform3D(4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, -8.74225e-08, -8.74225e-08, 8.74228e-08, -1, -12, 15, 14)
+Count = 2

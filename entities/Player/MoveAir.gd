@@ -66,8 +66,8 @@ func CheckFloorRaycast(delta: float) -> bool:
 		return false
 
 
-func CheckGroundCollision(collision: SonicCollision) -> bool:
-	if collision.CollisionType == SonicCollision.NONE:
+func CheckGroundCollision(collision: CharCollision) -> bool:
+	if collision.CollisionType == CharCollision.NONE:
 		if owner.StickToFloor:
 			if CheckFloorRaycast(1.0):
 				ChangeState("Land", {
@@ -77,7 +77,7 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 				})
 				return true
 			return false
-	elif collision.CollisionType == SonicCollision.FLOOR:
+	elif collision.CollisionType == CharCollision.FLOOR:
 		if CheckFloorRaycast(1.0):
 			ChangeState("Land", {
 				"Type": "Normal",
@@ -96,7 +96,7 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 				#Slightly missed the platform, slip off
 				owner.global_position += slipdir
 				return false
-	elif collision.CollisionType == SonicCollision.WALL:
+	elif collision.CollisionType == CharCollision.WALL:
 		#This only fires if we're hitting just a wall, so we need to make certain that we're 
 		#actually colliding with a wall specifically, and not just rubbing on one as we fall down
 		owner.CollisionCast.target_position = owner.to_local(owner.get_last_slide_collision().get_position()).normalized()
@@ -117,7 +117,7 @@ func CheckGroundCollision(collision: SonicCollision) -> bool:
 		else:
 			#Failed to find wall
 			return false
-	elif collision.CollisionType == SonicCollision.CEILING:
+	elif collision.CollisionType == CharCollision.CEILING:
 		if Vector3.UP.dot(owner.up_direction) < 0.0:
 			#Landed upside down
 			owner.GroundCast.force_raycast_update() #Need a ground normal

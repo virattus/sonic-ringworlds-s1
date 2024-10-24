@@ -48,12 +48,12 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	var collision : SonicCollision = owner.GetCollision()
+	var collision : CharCollision = owner.GetCollision()
 	if CheckGroundCollision(collision):
 		#Landed
 		return
 	
-	if collision.CollisionType == SonicCollision.WALL:
+	if collision.CollisionType == CharCollision.WALL:
 		if collision.CollisionNormal.dot(owner.velocity.normalized()) < 0.25:
 			#Bounce off wall
 			owner.SndBonk.play()

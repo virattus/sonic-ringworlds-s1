@@ -41,6 +41,7 @@ var DebugCollisionNormal := Vector3.ZERO
 var DebugCollisionNormalDeviation := Vector3.ZERO
 
 var TrueVelocity := Vector3.ZERO
+var BounceVelocity := Vector3.ZERO
 
 var CurrentGravity := 1.0
 var StickToFloor := true
@@ -143,8 +144,6 @@ func _ready() -> void:
 	DebugMenu.AddMonitor(self, "DashModeCharge")
 	DebugMenu.AddMonitor(self, "DashModeDrain")
 	DebugMenu.AddMonitor(self, "DamageThreshold")
-	DebugMenu.AddMonitor(self, "DroppedRingSpeed")
-
 
 
 func _process(delta: float) -> void:
@@ -176,7 +175,11 @@ func _process(delta: float) -> void:
 		CharMesh.visible = (fmod(round(TimerFlicker.time_left / Parameters.FLICKER_CYCLE_TIME), 2.0) == 0)
 
 
-func GetCollision() -> SonicCollision:
+func Move() -> void:
+	move_and_slide()
+
+
+func GetCollision() -> CharCollision:
 	var collision = get_last_slide_collision()
 	if collision:
 		DebugCollisionPos = collision.get_position()
@@ -185,16 +188,16 @@ func GetCollision() -> SonicCollision:
 	if is_on_floor():
 		DebugFloorNormal = get_floor_normal()
 		DebugCollisionNormalDeviation = DebugFloorNormal - DebugCollisionNormal
-		return SonicCollision.new(SonicCollision.FLOOR, get_floor_normal())
+		return CharCollision.new(CharCollision.FLOOR, get_floor_normal())
 	elif is_on_wall():
 		DebugFloorNormal = get_wall_normal()
 		DebugCollisionNormalDeviation = DebugFloorNormal - DebugCollisionNormal
-		return SonicCollision.new(SonicCollision.WALL, get_wall_normal())
+		return CharCollision.new(CharCollision.WALL, get_wall_normal())
 	elif is_on_ceiling():
 		DebugCollisionNormalDeviation = Vector3.ZERO
-		return SonicCollision.new(SonicCollision.CEILING, DebugCollisionNormal) #Can't get ceiling normal
+		return CharCollision.new(CharCollision.CEILING, DebugCollisionNormal) #Can't get ceiling normal
 	else:
-		return SonicCollision.new(SonicCollision.NONE)
+		return CharCollision.new(CharCollision.NONE)
 
 
 func ApplyGravity(vel: Vector3, delta: float) -> Vector3:

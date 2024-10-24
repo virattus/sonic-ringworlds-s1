@@ -24,7 +24,7 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	var collision: SonicCollision = owner.GetCollision()
+	var collision: CharCollision = owner.GetCollision()
 	owner.GroundCollision = CheckGroundCollision(collision)
 	
 	if owner.GroundCollision:
@@ -49,14 +49,14 @@ func ApplyAirDrag(vel: Vector3, delta: float) -> Vector3:
 	return vel
 
 
-func CheckGroundCollision(collision: SonicCollision) -> bool:
-	if collision.CollisionType == SonicCollision.NONE:
+func CheckGroundCollision(collision: CharCollision) -> bool:
+	if collision.CollisionType == CharCollision.NONE:
 		if owner.GroundCollision:
 			print("Left Ground")
 		return false
-	elif collision.CollisionType == SonicCollision.FLOOR:
+	elif collision.CollisionType == CharCollision.FLOOR:
 		return true
-	elif collision.CollisionType == SonicCollision.WALL:
+	elif collision.CollisionType == CharCollision.WALL:
 		if owner.is_on_wall_only():
 			owner.CollisionCast.target_position = -collision.CollisionNormal
 			if CheckCollisionCast():

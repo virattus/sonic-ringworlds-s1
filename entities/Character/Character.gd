@@ -22,6 +22,8 @@ var GroundCollision := false
 @onready var HurtBox: Hurtbox = $Hurtbox
 
 
+const COLL_MARGIN = 0.001
+
 
 func _ready() -> void:
 	DebugMenu.AddMonitor(self,"global_position")
@@ -41,11 +43,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	GroundCollision = is_on_floor() #or (global_position.y - GroundCast.get_collision_point().y < GROUND_CAST_MIN_DISTANCE)
-
-
-func Move() -> void:
-	move_and_slide()
-	Speed = velocity.length()
 
 
 func SetVelocity(newVelocity: Vector3) -> void:

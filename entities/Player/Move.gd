@@ -46,6 +46,13 @@ func Exit() -> void:
 	
 
 func Update(_delta: float) -> void:
+	
+	#if owner.is_on_wall():
+	#	var angle : float = owner.CharMesh.GetForwardVector.dot(owner.get_wall_normal())
+	#	owner.BounceVelocity = owner.get_wall_normal() * ((angle - 1.0) * -0.5)
+		
+		
+	
 	if !HandleMovementAndCollisions(_delta):
 		return
 	

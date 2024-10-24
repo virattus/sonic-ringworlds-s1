@@ -18,7 +18,7 @@ func Exit() -> void:
 
 
 func Update(_delta: float) -> void:
-	owner.Move()
+	owner.MoveStep()
 	
 	#if Input.is_action_just_pressed("DEBUG_ResetPosition"):
 	#	owner.DebugMove = false

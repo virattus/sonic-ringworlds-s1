@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://db5ju6ees4ngi"]
+[gd_scene load_steps=29 format=3 uid="uid://db5ju6ees4ngi"]
 
 [ext_resource type="PackedScene" uid="uid://bybnnf47w5dsd" path="res://scenes/SonicGame/SonicGame.tscn" id="1_8w2gn"]
 [ext_resource type="PackedScene" uid="uid://bw0sq0wob8irs" path="res://maps/MovementTesting/MovementTesting.tscn" id="1_aqers"]
@@ -23,12 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cpy5sdvh4ooji" path="res://entities/PushBlock/PushBlock.tscn" id="19_otfhm"]
 [ext_resource type="PackedScene" uid="uid://dj5oyioly1dmv" path="res://entities/Capsule/Capsule.tscn" id="20_q2enj"]
 [ext_resource type="PackedScene" uid="uid://us76ejn435yq" path="res://entities/Lava/Lava.tscn" id="20_rehot"]
-[ext_resource type="Curve3D" uid="uid://cdn2ulpusbb4" path="res://scenes/MovementTesting/SCurveTest.tres" id="21_d1xud"]
-[ext_resource type="PackedScene" uid="uid://by4464be1ie7" path="res://entities/BallPath/BallPath.tscn" id="21_s3cm5"]
 [ext_resource type="PackedScene" uid="uid://dnab1k8guqsw2" path="res://entities/MagTrigger/MagTrigger.tscn" id="23_0a7s3"]
-[ext_resource type="PackedScene" uid="uid://br1scfm0a133f" path="res://entities/BallPath/BallPathEntrance.tscn" id="23_o47er"]
-[ext_resource type="PackedScene" uid="uid://d1hbkmfls6oe1" path="res://models/SCurveParts/TubeJunction.tscn" id="24_hlw6k"]
-[ext_resource type="PackedScene" uid="uid://e00q3p2fqfj1" path="res://models/SCurveParts/Tube.tscn" id="27_gg378"]
 [ext_resource type="PackedScene" uid="uid://d2dagcf2axymc" path="res://entities/ItemBox/SpeedUp/ItemBoxSpeedUp.tscn" id="27_jjwkj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cgjes"]
@@ -55,7 +50,7 @@ Title1 = "movement testing"
 StageMusic = ExtResource("2_csmd6")
 
 [node name="PlayerSonic" parent="PlayerSwapper" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48975, 0)
 collision_mask = 2147491841
 
 [node name="EnemyCrabmeat" parent="Enemies" index="0" instance=ExtResource("9_dh6p0")]
@@ -734,82 +729,5 @@ curve = SubResource("Curve3D_idb8o")
 
 [node name="Lava" parent="MovementTesting" index="54" instance=ExtResource("20_rehot")]
 transform = Transform3D(30.91, 0, 0, 0, 1, 0, 0, 0, 28.65, -16.839, -0.6, 71.192)
-
-[node name="BallPath" parent="MovementTesting" index="55" instance=ExtResource("21_s3cm5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 46)
-curve = ExtResource("21_d1xud")
-
-[node name="BallPathEntrance" parent="MovementTesting/BallPath" index="1" node_paths=PackedStringArray("Exit") instance=ExtResource("23_o47er")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.940022)
-Exit = NodePath("../BallPathEntrance2")
-
-[node name="BallPathEntrance2" parent="MovementTesting/BallPath" index="2" node_paths=PackedStringArray("Exit") instance=ExtResource("23_o47er")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 7, 1)
-Exit = NodePath("../BallPathEntrance")
-
-[node name="TubeJunction" parent="MovementTesting/BallPath" index="3" instance=ExtResource("24_hlw6k")]
-
-[node name="TubeJunction2" parent="MovementTesting/BallPath" index="4" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
-
-[node name="TubeJunction3" parent="MovementTesting/BallPath" index="5" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 14, 0)
-
-[node name="TubeJunction4" parent="MovementTesting/BallPath" index="6" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 14, 14)
-
-[node name="TubeJunction5" parent="MovementTesting/BallPath" index="7" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 14, 14)
-
-[node name="TubeJunction6" parent="MovementTesting/BallPath" index="8" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 28, 14)
-
-[node name="TubeJunction7" parent="MovementTesting/BallPath" index="9" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 28, 14)
-
-[node name="TubeJunction8" parent="MovementTesting/BallPath" index="10" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 28, 0)
-
-[node name="TubeJunction9" parent="MovementTesting/BallPath" index="11" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 8, 0)
-
-[node name="TubeJunction10" parent="MovementTesting/BallPath" index="12" instance=ExtResource("24_hlw6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70, 8, 0)
-
-[node name="Tube" parent="MovementTesting/BallPath" index="13" instance=ExtResource("27_gg378")]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
-Count = 2
-
-[node name="Tube2" parent="MovementTesting/BallPath" index="14" instance=ExtResource("27_gg378")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 14, 0)
-Count = 3
-
-[node name="Tube3" parent="MovementTesting/BallPath" index="15" instance=ExtResource("27_gg378")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 14, 1)
-Count = 2
-
-[node name="Tube4" parent="MovementTesting/BallPath" index="16" instance=ExtResource("27_gg378")]
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 19, 14, 14)
-Count = 5
-
-[node name="Tube6" parent="MovementTesting/BallPath" index="17" instance=ExtResource("27_gg378")]
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -13, 28, 14)
-Count = 5
-
-[node name="Tube7" parent="MovementTesting/BallPath" index="18" instance=ExtResource("27_gg378")]
-transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, -44, 28, 13)
-Count = 2
-
-[node name="Tube8" parent="MovementTesting/BallPath" index="19" instance=ExtResource("27_gg378")]
-transform = Transform3D(1.31134e-07, 7.54979e-08, 1, -1, -4.37114e-08, 1.31134e-07, 4.37114e-08, -1, 7.54979e-08, -44, 27, 0)
-Count = 3
-
-[node name="Tube9" parent="MovementTesting/BallPath" index="20" instance=ExtResource("27_gg378")]
-transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, -45, 8, 0)
-Count = 4
-
-[node name="Tube5" parent="MovementTesting/BallPath" index="21" instance=ExtResource("27_gg378")]
-transform = Transform3D(4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, -8.74225e-08, -8.74225e-08, 8.74228e-08, -1, -12, 15, 14)
-Count = 2
 
 [connection signal="CageDestroyed" from="MovementTesting/CagedFlicky" to="." method="_on_caged_flicky_cage_destroyed"]

@@ -45,9 +45,9 @@ func Update(_delta: float) -> void:
 		owner.CreateSmoke()
 	
 	
-	var collision: SonicCollision = owner.GetCollision()
+	var collision: CharCollision = owner.GetCollision()
 	
-	if collision.CollisionType == SonicCollision.NONE:
+	if collision.CollisionType == CharCollision.NONE:
 		ChangeState("Teetering")
 		return
 	

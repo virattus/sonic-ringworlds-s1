@@ -26,11 +26,11 @@ func Exit() -> void:
 func Update(_delta: float) -> void:
 	owner.Move()
 	
-	var collision: SonicCollision = owner.GetCollision()
+	var collision: CharCollision = owner.GetCollision()
 	owner.GroundCollision = CheckGroundCollision(collision, _delta)
 	
 	if owner.GroundCollision:
-		if collision.CollisionType == SonicCollision.FLOOR and CheckWallCollision():
+		if collision.CollisionType == CharCollision.FLOOR and CheckWallCollision():
 			print("Ball: Colliding with wall and floor")
 			if owner.get_wall_normal().dot(Vector3.UP) > 0.8:
 				owner.up_direction = owner.get_wall_normal()
@@ -88,22 +88,22 @@ func Update(_delta: float) -> void:
 	owner.SetVelocity(newVel)
 
 
-func CheckGroundCollision(collision: SonicCollision, delta: float) -> bool:	
-	if collision.CollisionType == SonicCollision.NONE:
+func CheckGroundCollision(collision: CharCollision, delta: float) -> bool:	
+	if collision.CollisionType == CharCollision.NONE:
 		if CheckFloorRaycast(delta):
 			return true
 		else:
 			if owner.GroundCollision:
 				print("Left Ground")
 			return false
-	elif collision.CollisionType == SonicCollision.FLOOR:
+	elif collision.CollisionType == CharCollision.FLOOR:
 		if CheckFloorRaycast(delta):
 			return true
 		else:
 			#Too large of an angle to transition
 			owner.SetVelocity(owner.velocity + (owner.up_direction * owner.Parameters.GROUND_NORMAL_HOP))
 			return false
-	elif collision.CollisionType == SonicCollision.WALL:
+	elif collision.CollisionType == CharCollision.WALL:
 		if owner.is_on_wall_only():
 			owner.CollisionCast.target_position = -collision.CollisionNormal
 			if CheckCollisionCast():
