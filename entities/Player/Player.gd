@@ -108,6 +108,7 @@ var WorldRadius := 0.5
 
 const COLLISION_CAST_LENGTH = 1.0
 
+const BOUNCE_REDUCTION_MOD = 2.5
 
 const COLLISION_INDICATOR = preload("res://entities/Collision/Collision.tscn")
 const SMOKE = preload("res://effects/Smoke/Smoke.tscn")
@@ -125,6 +126,7 @@ func _ready() -> void:
 	CurrentGravity = Parameters.GRAVITY
 	
 	DebugMenu.AddMonitor(self, "TrueVelocity")
+	DebugMenu.AddMonitor(self, "BounceVelocity")
 	DebugMenu.AddMonitor(self, "DebugMove")
 	DebugMenu.AddMonitor(self, "DebugMoveVector")
 	DebugMenu.AddMonitor(self, "DebugFloorNormal")
@@ -154,6 +156,9 @@ func _process(delta: float) -> void:
 			StateM.ChangeState("DebugMove", {})
 		else:
 			StateM.ChangeState("Fall", {})
+	
+	if !BounceVelocity.is_zero_approx():
+		BounceVelocity = BounceVelocity.move_toward(Vector3.ZERO, BOUNCE_REDUCTION_MOD * delta)
 	
 	UpdateDebugIndicators(DebugMoveVector, DebugFloorNormal)
 	
@@ -231,6 +236,13 @@ func SetVelocity(newVelocity: Vector3) -> void:
 		newVelocity = newVelocity.normalized() * Parameters.MOVE_MAX_SPEED
 	
 	super(newVelocity)
+
+
+func SetTrueVelocity(newVel: Vector3) -> void:
+	if newVel.length() > Parameters.VEL_TRUE_CAP:
+		newVel = newVel.normalized() * Parameters.VEL_TRUE_CAP
+	
+	TrueVelocity = newVel
 
 
 func GetInputVector(up_dir: Vector3) -> Vector3:

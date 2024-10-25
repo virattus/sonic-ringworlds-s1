@@ -55,11 +55,9 @@ collision_mask = 2147491841
 
 [node name="EnemyCrabmeat" parent="Enemies" index="0" instance=ExtResource("9_dh6p0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2104)
-visible = false
 
 [node name="KillBox" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.7569, 0, 0)
-visible = false
 
 [node name="CollisionShape3D" parent="KillBox" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.93445, 34.0933, 0)

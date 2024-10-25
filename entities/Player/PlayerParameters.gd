@@ -27,6 +27,7 @@ const SKID_MIN_STICK_MAGNITUDE = 0.15
 const SKID_MAX_ANGLE = -0.75
 
 const MOVE_MAX_SPEED = 25.0
+const VEL_TRUE_CAP = 255.0
 const TERMINAL_VELOCITY = 16.0 #yep, we have a max -Y speed exclusively
 
 const JUMP_RELEASE_MAX_Y_SPEED = 4.0

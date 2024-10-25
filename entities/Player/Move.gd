@@ -6,6 +6,12 @@ var IgnoreInput := 0.0
 var FootstepAccumulator := 0.0
 
 
+const BOUNCE_REFLECTION_POWER = 3.0
+
+const WALK_BRAKE_POWER = 8.0
+
+const MOVE_NO_STICK_REDUCTION = 3.0
+
 const RUN_FRICTION_SPEED = 0.046875
 
 const RUN_RATIO_DIVISOR = 200.0
@@ -30,7 +36,7 @@ func Enter(_msg := {}) -> void:
 		IgnoreInput = _msg["IgnoreInput"]
 		
 	if _msg.has("Boost"):
-		owner.TrueVelocity = _msg["Boost"]
+		owner.SetTrueVelocity(_msg["Boost"])
 		owner.SetVelocity(_msg["Boost"])
 		owner.SndSpinLaunch.play()
 	
@@ -51,29 +57,70 @@ func Update(_delta: float) -> void:
 	
 	var collision : CharCollision = owner.GetCollision()
 	if !CheckGroundCollision(collision, _delta):
+		owner.SetTrueVelocity(owner.TrueVelocity + owner.BounceVelocity)
+		owner.SetVelocity(owner.TrueVelocity)
+		owner.BounceVelocity = Vector3.ZERO
+		ChangeState("Fall")
 		return
 	
-	owner.CharMesh.LookAt(owner.global_position + owner.TrueVelocity)
-	owner.CharMesh.AlignToY(owner.up_direction)
-	UpdateMoveAnimations()
-
 	
-	if owner.BounceVelocity.length() > 0.1:
-		owner.BounceVelocity = owner.BounceVelocity.move_toward(Vector3.ZERO, _delta)
+	if Input.is_action_just_pressed("Jump"):
+		if !HandleJumpInput():
+			return
+	
+	if Input.is_action_just_pressed("Attack"):
+		if !HandleAttackInput():
+			return
+	
+	UpdateMoveAnimations()
+	
+	if owner.TrueVelocity.length() > owner.Parameters.WALK_MAX_SPEED:
+		owner.SetRunOnWater(true)
+	else:
+		owner.SetRunOnWater(false)
+
 	
 	var newVel : Vector3 = owner.TrueVelocity
-	
 	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
 
+	if owner.is_on_wall():
+		owner.BounceVelocity = newVel.bounce(owner.get_wall_normal()).normalized() * BOUNCE_REFLECTION_POWER
+		newVel = Vector3.ZERO
+
+	if !owner.GroundCollision and owner.IsOnWaterSurface(): #raycast doesn't hit solid ground idiot
+		UpdateWaterFootsteps(_delta)
+
 	if inputVel.length() > 0.0:
-		if newVel.length() > owner.Parameters.WALK_MAX_SPEED:
-			newVel = CalculateRunVelocity(newVel, inputVel, _delta)
+		#only update model's direction if player moves stick
+		if owner.velocity.length() > 0.0:
+			owner.OrientCharMesh()
+		
+		if owner.IsInputSkidding(inputVel):
+			if newVel.length() > owner.Parameters.WALK_MAX_SPEED:
+				#Don't skid on water
+				if owner.GroundCollision:
+					if HandleSkid(inputVel):
+						return
+			else:
+				newVel = newVel.move_toward(Vector3.ZERO, _delta * WALK_BRAKE_POWER)
 		else:
-			newVel = CalculateWalkVelocity(newVel, inputVel, _delta)
+			if newVel.length() > owner.Parameters.WALK_MAX_SPEED:
+				newVel = CalculateRunVelocity(newVel, inputVel, _delta)
+			else:
+				newVel = CalculateWalkVelocity(newVel, inputVel, _delta)
 	else:
-		newVel = newVel.move_toward(Vector3.ZERO, _delta * 3.0)
+		newVel = newVel.move_toward(Vector3.ZERO, _delta * MOVE_NO_STICK_REDUCTION)
 	
-	owner.TrueVelocity = newVel
+	
+	if owner.BounceVelocity.is_zero_approx():
+		if newVel.is_zero_approx():
+			owner.BounceVelocity = Vector3.ZERO
+			ChangeState("Idle")
+			return
+	else:
+		owner.CreateSmoke()
+		
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel + owner.BounceVelocity)
 	
 
@@ -103,15 +150,7 @@ func ignore(_delta):
 	else:
 		owner.SetRunOnWater(false)
 	
-	FootstepAccumulator += _delta
-	if FootstepAccumulator > (1.0 - (owner.Speed / owner.Parameters.MOVE_MAX_SPEED)) * FOOTSTEP_TIME_MOD:
-		if !owner.GroundCollision and owner.IsOnWaterSurface(): #raycast doesn't hit solid ground idiot
-			owner.SndWaterRunFootstep.play()
-			var splash = WATER_RUN_SPLASH.instantiate()
-			owner.get_parent().add_child(splash)
-			splash.global_transform = owner.CharMesh.global_transform
-			
-		FootstepAccumulator = 0.0
+
 	
 	var newVel = owner.TrueVelocity
 	
@@ -172,6 +211,26 @@ func ignore(_delta):
 	owner.SetVelocity(newVel)
 
 
+func UpdateWaterFootsteps(delta: float) -> void:
+	FootstepAccumulator += delta
+	if FootstepAccumulator > (1.0 - (owner.Speed / owner.Parameters.MOVE_MAX_SPEED)) * FOOTSTEP_TIME_MOD:
+		owner.SndWaterRunFootstep.play()
+		var splash = WATER_RUN_SPLASH.instantiate()
+		owner.get_parent().add_child(splash)
+		splash.global_transform = owner.CharMesh.global_transform
+			
+		FootstepAccumulator = 0.0
+
+
+func UpdateMeshOrientation(Backwards: bool) -> void:
+	var vel = owner.TrueVelocity.normalized()
+	if Backwards:
+		vel = -vel
+	
+	owner.CharMesh.LookAt(owner.global_position + vel)
+	owner.CharMesh.AlignToY(owner.up_direction)
+
+
 func CalculateWalkVelocity(vel: Vector3, inputVel: Vector3, delta: float) -> Vector3:
 	var speedMod = owner.Parameters.WALK_SPEED_POWER
 	if owner.IsUnderwater:
@@ -208,9 +267,8 @@ func CalculateRunVelocity(vel: Vector3, inputVel: Vector3, delta: float) -> Vect
 
 func HandleSkid(input: Vector3) -> bool:
 	if input.length() > owner.Parameters.SKID_MIN_STICK_MAGNITUDE:
-		if owner.IsInputSkidding(input):
-			ChangeState("Skid")
-			return true
+		ChangeState("Skid")
+		return true
 	
 	return false
 

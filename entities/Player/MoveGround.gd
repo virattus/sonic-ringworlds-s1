@@ -46,7 +46,7 @@ func HandleMovementAndCollisions(delta: float) -> bool:
 		owner.GroundCollision = false
 		if owner.RunOnWater:
 			if owner.IsOnWaterSurface():
-				owner.UpdateUpDir(owner.WaterSurfaceCast.get_collision_normal(), -1.0)
+				owner.UpdateUpDir(owner.WaterSurfaceCast.get_collision_normal().normalized(), -1.0)
 				return true
 		
 		#Not running on water
@@ -76,7 +76,7 @@ func CheckFloorRaycast(delta: float) -> bool:
 		if CheckGroundTransition():
 			if !owner.GroundCollision:
 				owner.CreateCollisionIndicator(owner.CollisionCast.get_collision_point(), owner.CollisionCast.get_collision_normal())
-			owner.UpdateUpDir(owner.CollisionCast.get_collision_normal(), delta)
+			owner.UpdateUpDir(owner.CollisionCast.get_collision_normal().normalized(), delta)
 			return true
 		else:
 			#ground angle too steep

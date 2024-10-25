@@ -49,5 +49,6 @@ func LaunchStrikeDash() -> void:
 	if owner.DashModeCharge >= 1.0:
 		owner.SetDashMode(true)
 	#owner.DashModeCharge = clamp(owner.DashModeCharge, owner.PARAMETERS.DASHMODE_ABS_MIN_CHARGE, owner.PARAMETERS.DASHMODE_ABS_MAX_CHARGE)
-	owner.SetVelocity(owner.CharMesh.GetForwardVector() * clamp(ChargePower, CHARGE_MIN_POWER, CHARGE_MAX_POWER))
+	owner.SetTrueVelocity(owner.CharMesh.GetForwardVector() * clamp(ChargePower, CHARGE_MIN_POWER, CHARGE_MAX_POWER))
+	owner.SetVelocity(owner.TrueVelocity)
 	ChangeState("Move")
