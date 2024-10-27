@@ -21,7 +21,7 @@ func PlayMusic() -> void:
 	MusicActiveTrack.play()
 
 
-func DrowningMusicInterrupt() -> void:
+func DrowningMusicStart() -> void:
 	$MusicActiveTrack.stream_paused = true
 	$MusicDrowning.play()
 
@@ -31,9 +31,14 @@ func DrowningMusicStop() -> void:
 	$MusicActiveTrack.stream_paused = false
 
 
-func ActClearMusicInterrupt() -> void:
+func ActClearMusicStart() -> void:
 	$MusicActiveTrack.stream_paused = true
 	$MusicActClear.play()
+
+
+func ActClearMusicStop() -> void:
+	$MusicActClear.stop()
+	$MusicActiveTrack.play(0.0)
 
 
 func _on_music_act_clear_finished() -> void:

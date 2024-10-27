@@ -100,6 +100,7 @@ var DamageThreshold := 0
 @onready var SndShieldActive = $SndShieldActive
 @onready var SndWaterRunFootstep = $SndWaterRunFootstep
 @onready var SndWaterBreathe = $SndWaterBreathe
+@onready var SndWaterDrown = $SndWaterDrown
 @onready var SndOxygenChime = $SndOxygenChime
 
 
@@ -117,6 +118,7 @@ const NORMAL_SHIELD = preload("res://effects/Shield/NormalShield.tscn")
 const FIRE_SHIELD = preload("res://effects/Shield/FireShield.tscn")
 const THUNDER_SHIELD = preload("res://effects/Shield/ThunderShield.tscn")
 const WATER_SHIELD = preload("res://effects/Shield/WaterShield.tscn")
+
 
 
 
@@ -524,7 +526,12 @@ func Kill() -> void:
 	HealthEmpty.emit()
 	SetDashMode(false)
 	SetShieldState(SHIELD.NONE)
-	StateM.ChangeState("Death")
+	
+	var deathState = "DROWN" if IsUnderwater else "NORMAL"
+	
+	StateM.ChangeState("Death", {
+		"DeathType": deathState,
+	})
 
 
 func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:

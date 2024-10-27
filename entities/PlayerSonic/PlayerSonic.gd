@@ -1,6 +1,8 @@
 extends Player
 
 
+var BallJump := false
+
 
 @onready var SonicModel = $CharacterMesh/SonicModel
 @onready var SonicBall = $CharacterMesh/SonicBall
@@ -8,6 +10,8 @@ extends Player
 
 func _ready() -> void:
 	super()
+	
+	DebugMenu.AddMonitor(self, "BallJump")
 	
 	SetAfterimageBody(false)
 	SetAfterimageLimbs(false)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct4e7thp4jsxh"]
+
+[ext_resource type="SpriteFrames" uid="uid://b3kn6sgnkv5h3" path="res://effects/BubbleNumbers/BubbleFrames.tres" id="1_6y2u7"]
+[ext_resource type="Script" path="res://effects/BubbleNumbers/BubbleNumbers.gd" id="1_uat06"]
+
+[node name="BubbleNumbers" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_6y2u7")
+script = ExtResource("1_uat06")

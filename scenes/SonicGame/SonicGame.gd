@@ -30,8 +30,10 @@ func _on_title_card_title_card_anim_complete() -> void:
 
 func _on_player_play_drowning_music(play: bool) -> void:
 	if play:
-		$MusicController.DrowningMusicInterrupt()
+		$HUD.UpdateUnderwaterStatus(true)
+		$MusicController.DrowningMusicStart()
 	else:
+		$HUD.UpdateUnderwaterStatus(false)
 		$MusicController.DrowningMusicStop()
 
 

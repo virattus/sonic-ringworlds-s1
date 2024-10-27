@@ -11,15 +11,18 @@ const DEATH_INITIAL_VERTICAL_VELOCITY = 5.0
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
 	
-	VerticalVelocity = DEATH_INITIAL_VERTICAL_VELOCITY
-	if _msg.has("InitialVerticalVel"):
-		VerticalVelocity = _msg["InitialVerticalVelocity"]
-
-	Gravity = owner.Parameters.GRAVITY
-	if _msg.has("Gravity"):
-		Gravity = _msg["Gravity"]
+	if !_msg.has("DeathType"):
+		assert(false)
+		
+	if _msg["DeathType"] == "DROWN":
+		VerticalVelocity = 0.0
+		owner.SndWaterDrown = true
+		Gravity = owner.Parameters.GRAVITY * 0.25
+	else:
+		VerticalVelocity = DEATH_INITIAL_VERTICAL_VELOCITY
+		owner.SndDeath.play()
+		Gravity = owner.Parameters.GRAVITY
 	
-	owner.SndDeath.play()
 	owner.DashModeDrain = false
 	
 	owner.ActivateHitbox(false)

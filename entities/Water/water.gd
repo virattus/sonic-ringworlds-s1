@@ -2,7 +2,7 @@ extends Area3D
 
 
 
-const AUDIO_BUS_SF = 2
+const AUDIO_BUS_SF = 3
 const AUDIO_EFF_REVERB = 0
 
 const WATER_SPLASH = preload("res://effects/WaterSplash/WaterSplash.tscn")

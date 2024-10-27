@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://tximpab5mrch"]
+[gd_scene load_steps=51 format=3 uid="uid://tximpab5mrch"]
 
 [ext_resource type="PackedScene" uid="uid://c38nbc66jwdhn" path="res://entities/Character/Character.tscn" id="1_1mpyw"]
 [ext_resource type="Script" path="res://entities/Player/Player.gd" id="2_k6uox"]
@@ -30,6 +30,7 @@
 [ext_resource type="AudioStream" uid="uid://dqjyv327g7qnb" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A4.wav" id="34_m5x8k"]
 [ext_resource type="AudioStream" uid="uid://c7s62yxbwkvxj" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_B5.wav" id="35_xp2qi"]
 [ext_resource type="AudioStream" uid="uid://bohjwgggfkvnh" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_C6.wav" id="36_g2v08"]
+[ext_resource type="AudioStream" uid="uid://cfrl8qrxhql6w" path="res://entities/Player/Sonic 1 Drowning Sound.ogg" id="36_q1vi0"]
 [ext_resource type="AudioStream" uid="uid://dssc8qyhyjml7" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_A3.wav" id="37_23c3u"]
 [ext_resource type="AudioStream" uid="uid://y2ekxqu62ugy" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BE.wav" id="38_6lwqx"]
 [ext_resource type="AudioStream" uid="uid://ci4mwgnbes8o2" path="res://sounds/Genesis 32X SCD - Sonic the Hedgehog - Sound Effects/Sonic 1/S1_BC.wav" id="39_5e8wq"]
@@ -309,9 +310,13 @@ bus = &"SoundEffects"
 stream = ExtResource("42_a34cv")
 bus = &"SoundEffects"
 
-[node name="SndOxygenChime" type="AudioStreamPlayer" parent="." index="33"]
+[node name="SndWaterDrown" type="AudioStreamPlayer" parent="." index="33"]
+stream = ExtResource("36_q1vi0")
+bus = &"SoundEffectsNonDiagetic"
+
+[node name="SndOxygenChime" type="AudioStreamPlayer" parent="." index="34"]
 stream = ExtResource("22_5l48w")
-bus = &"SoundEffects"
+bus = &"SoundEffectsNonDiagetic"
 
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]
 [connection signal="timeout" from="TimerInvincibility" to="." method="_on_timer_invincibility_timeout"]

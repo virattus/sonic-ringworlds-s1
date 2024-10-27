@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://butvqg7bms767"]
+[gd_scene load_steps=5 format=3 uid="uid://butvqg7bms767"]
 
 [ext_resource type="Script" path="res://overlays/HUD/HUD.gd" id="1_wqwwu"]
 [ext_resource type="Script" path="res://overlays/HUD/ArcCanvas.gd" id="2_bgv3t"]
 [ext_resource type="PackedScene" uid="uid://denld17jxxl47" path="res://overlays/HUD/Flicky/FlickyStack.tscn" id="3_2sepo"]
+[ext_resource type="PackedScene" uid="uid://ct4e7thp4jsxh" path="res://effects/BubbleNumbers/BubbleNumbers.tscn" id="4_kt465"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_wqwwu")
@@ -77,3 +78,8 @@ text = "Lives: 0"
 
 [node name="FlickyStack" parent="." instance=ExtResource("3_2sepo")]
 position = Vector2(906, 48)
+
+[node name="BubbleNumbers" parent="." instance=ExtResource("4_kt465")]
+visible = false
+position = Vector2(896, 103)
+scale = Vector2(3, 3)

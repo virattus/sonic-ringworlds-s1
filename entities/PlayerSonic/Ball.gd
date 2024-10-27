@@ -17,6 +17,7 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	#owner.CharMesh.LookAt(owner.velocity.normalized())
+	owner.BallJump = false
 	owner.SonicModel.visible = true
 	owner.SonicBall.visible = false
 	owner.ActivateHitbox(false)
@@ -48,6 +49,7 @@ func Update(_delta: float) -> void:
 			owner.apply_floor_snap()
 			owner.SetVelocity(planeVel)
 	else:
+		owner.BallJump = true
 		ChangeState("BallAir", {
 			
 		})

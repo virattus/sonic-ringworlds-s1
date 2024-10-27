@@ -7,8 +7,10 @@ var AirBubbleEmitRate := 1.0
 
 var WaterMaxHeight := 0.0
 
+const BUBBLE_EMIT_MIN_RATE = 1.0
 const BUBBLE_EMIT_RATE = 3.0
-const AIR_BUBBLE_EMIT_RATE = 4.0
+const AIR_BUBBLE_EMIT_MIN_RATE = 5.0
+const AIR_BUBBLE_EMIT_RATE = 3.0
 
 const AIR_BUBBLE = preload("res://entities/AirBubble/AirBubble.tscn")
 const BUBBLE = preload("res://effects/Bubble/Bubble.tscn")
@@ -27,13 +29,13 @@ func _physics_process(delta: float) -> void:
 	AirBubbleAccumulator += delta
 	if AirBubbleAccumulator >= AirBubbleEmitRate:
 		AirBubbleAccumulator -= AirBubbleEmitRate
-		AirBubbleEmitRate = (randf() + 1.0) * AIR_BUBBLE_EMIT_RATE
+		AirBubbleEmitRate = (randf() * AIR_BUBBLE_EMIT_RATE) + AIR_BUBBLE_EMIT_MIN_RATE
 		EmitBubble(AIR_BUBBLE.instantiate())
 	else:
 		BubbleAccumulator += delta
 		if BubbleAccumulator >= BubbleEmitRate:
 			BubbleAccumulator -= BubbleEmitRate
-			BubbleEmitRate = randf() * BUBBLE_EMIT_RATE
+			BubbleEmitRate = (randf() * BUBBLE_EMIT_RATE) + BUBBLE_EMIT_MIN_RATE
 			EmitBubble(BUBBLE.instantiate())
 
 

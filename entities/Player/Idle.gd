@@ -55,4 +55,7 @@ func HandleJumpInput() -> bool:
 func HandleAttackInput() -> bool:
 	ChangeState("SquatCharge")
 	return false
-	
+
+
+func HandleShieldInput() -> bool:
+	return false

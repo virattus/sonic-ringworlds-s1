@@ -10,6 +10,9 @@ extends CanvasLayer
 func _process(_delta: float) -> void:
 	if !CurrentPlayer:
 		return
+		
+	
+	$BubbleNumbers.MoveTo(get_viewport().get_camera_3d().unproject_position(CurrentPlayer.global_position))
 	
 	#UpdateDashModeMeter(_delta)
 	lblSpeed.text = "Speed: " + str(roundf(CurrentPlayer.Speed)) 
@@ -24,3 +27,7 @@ func UpdateDashModeMeter(_delta: float) -> void:
 
 func ActivateFlickyIcon(FlickyID: int) -> void:
 	$FlickyStack.ActivateIcon(FlickyID)
+
+
+func UpdateUnderwaterStatus(play: bool) -> void:
+	$BubbleNumbers.PlayAnim(play)

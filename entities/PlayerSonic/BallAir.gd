@@ -28,7 +28,11 @@ func Update(_delta: float) -> void:
 	owner.GroundCollision = CheckGroundCollision(collision)
 	
 	if owner.GroundCollision:
-		ChangeState("Ball")
+		if owner.BallJump:
+			ChangeState("Land")
+		else:
+			owner.BallJump = false
+			ChangeState("Ball")
 		return
 
 	var newVel = owner.velocity

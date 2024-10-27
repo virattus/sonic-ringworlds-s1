@@ -728,4 +728,5 @@ curve = SubResource("Curve3D_idb8o")
 [node name="Lava" parent="MovementTesting" index="54" instance=ExtResource("20_rehot")]
 transform = Transform3D(30.91, 0, 0, 0, 1, 0, 0, 0, 28.65, -16.839, -0.6, 71.192)
 
+[connection signal="PlayDrowningMusic" from="PlayerSwapper" to="." method="_on_player_play_drowning_music"]
 [connection signal="CageDestroyed" from="MovementTesting/CagedFlicky" to="." method="_on_caged_flicky_cage_destroyed"]

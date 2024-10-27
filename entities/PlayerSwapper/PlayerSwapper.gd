@@ -4,6 +4,7 @@ extends Node3D
 
 signal PlayerDeath
 signal PlayerSwap(active: bool)
+signal PlayDrowningMusic(play: bool)
 
 
 enum CHAR_SELECT {
@@ -34,7 +35,7 @@ func _ready() -> void:
 	BindCameraFocus()
 	Cam.Focus = CamFocus
 	
-	CurrentPlayer.HealthEmpty.connect(CharDeath)
+	BindSignals()
 	
 	HUD.CurrentPlayer = CurrentPlayer
 
@@ -58,8 +59,6 @@ func _physics_process(delta: float) -> void:
 					Selection = CHAR_SELECT.KNUCKLES
 				else:
 					Selection = CHAR_SELECT.TAILS
-		
-
 
 
 func SwapCharacter(char: CHAR_SELECT) -> void:
@@ -68,7 +67,7 @@ func SwapCharacter(char: CHAR_SELECT) -> void:
 	Cam.Active = false
 	HUD.CurrentPlayer = null
 	
-	CurrentPlayer.HealthEmpty.disconnect(CharDeath)
+	UnbindSignals()
 	var CurrentTransform : Transform3D = CurrentPlayer.global_transform
 	var CurrentState : String = CurrentPlayer.StateM.CurrentState
 	remove_child(CurrentPlayer)
@@ -90,13 +89,15 @@ func SwapCharacter(char: CHAR_SELECT) -> void:
 	BindCameraFocus()
 	Cam.Char = CurrentPlayer
 	CurrentPlayer.Camera = Cam
-	CurrentPlayer.HealthEmpty.connect(CharDeath)
+	BindSignals()
 	
 	CurrentPlayer.global_transform = CurrentTransform
 	CurrentPlayer.StateM.ChangeState(CurrentState)
 
 	Cam.Active = true
 	HUD.CurrentPlayer = CurrentPlayer
+	
+	
 
 	PlayerSwap.emit(false)
 
@@ -105,7 +106,21 @@ func CharDeath() -> void:
 	PlayerDeath.emit()
 
 
+func CharDrownMusic(state: bool) -> void:
+	PlayDrowningMusic.emit(state)
+
+
 func BindCameraFocus() -> void:
 	CamFocus.get_parent().remove_child(CamFocus)
 	CurrentPlayer.add_child(CamFocus)
 	CamFocus.Target = CurrentPlayer
+
+
+func BindSignals() -> void:
+	CurrentPlayer.HealthEmpty.connect(CharDeath)
+	CurrentPlayer.PlayDrowningMusic.connect(CharDrownMusic)
+
+
+func UnbindSignals() -> void:
+	CurrentPlayer.HealthEmpty.disconnect(CharDeath)
+	CurrentPlayer.PlayDrowningMusic.disconnect(CharDrownMusic)
