@@ -19,7 +19,8 @@ func Enter(_msg := {}) -> void:
 	
 	owner.velocity = Vector3(0, HURT_INITIAL_UP_SPEED, 0)
 	if _msg.has("BounceDirection"):
-		owner.velocity = _msg["BounceDirection"] + owner.velocity
+		owner.SetVelocity(_msg["BounceDirection"] + owner.velocity)
+		owner.SetTrueVelocity(owner.velocity)
 	
 	if _msg.has("Bonk") and _msg["Bonk"]:
 		owner.SndBonk.play()
@@ -43,12 +44,13 @@ func Enter(_msg := {}) -> void:
 		for i in range(DroppedRings):
 			var newRing = RING.instantiate()
 			owner.get_parent().add_child(newRing)
-			newRing.global_position = owner.global_position
+			newRing.global_position = owner.global_position + Vector3(0, 0.25, 0)
 			newRing.SetVelocity(Globals.DroppedRingSpeed)
 		
 		Globals.RingCount -= DroppedRings
 		owner.SndRingDrop.play()
 		
+		SetInvincible = true
 		owner.Invincible = true
 		owner.ActivateHurtbox(false)
 		

@@ -11,5 +11,5 @@ signal HitboxActivated(Target: Hurtbox)
 
 func _on_area_entered(area: Area3D) -> void:
 	if ApplyDamage:
-		area.ReceiveDamage(self, Damage)
+		area.ReceiveDamage(self, Damage, false)
 	HitboxActivated.emit(area)

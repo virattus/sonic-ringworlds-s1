@@ -208,11 +208,7 @@ func GetCollision() -> CharCollision:
 
 
 func ApplyGravity(vel: Vector3, delta: float) -> Vector3:
-	var gravity = CurrentGravity
-	if IsUnderwater:
-		gravity = CurrentGravity / 4.0
-	
-	return vel - Vector3.UP * (gravity * delta)
+	return vel - Vector3.UP * (CurrentGravity * delta)
 
 
 func ApplyDrag(vel: Vector3, delta: float) -> Vector3:
@@ -313,12 +309,14 @@ func SetRunOnWater(Active: bool) -> void:
 	set_collision_mask_value(13, Active)
 
 
-func SetUnderwater(Active: bool) -> void:
-	IsUnderwater = Active
+func SetUnderwater(underwater: bool) -> void:
+	IsUnderwater = underwater
 	
-	if Active:
+	if underwater:
+		CurrentGravity = Parameters.GRAVITY_UNDERWATER
 		OxygenState = OXYGEN.START_AIR_DRAIN
 	else:
+		CurrentGravity = Parameters.GRAVITY
 		OxygenState = OXYGEN.NO_AIR_DRAIN
 	
 	UpdateOxygenState()
@@ -505,21 +503,27 @@ func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 	if Invincible or (Damage < DamageThreshold) or StateM.CurrentState == "Death":
 		return
 	
+	var bounceDir = SourcePos.direction_to(global_position)
+	if bounceDir.length() <= 0.01:
+		bounceDir = CharMesh.GetForwardVector()
+	
 	if ShieldState != SHIELD.NONE:
 		SetShieldState(SHIELD.NONE)
 		StateM.ChangeState("Hurt", {
-			"BounceDirection": SourcePos.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+			"BounceDirection": bounceDir * Vector3(3, 0, 3),
 			"DropRings": false,
 		})
 		return
 	
 	if Globals.RingCount > 0:
 		StateM.ChangeState("Hurt", {
-			"BounceDirection": SourcePos.direction_to(global_position).normalized() * Vector3(3, 0, 3),
+			"BounceDirection": bounceDir * Vector3(3, 0, 3),
 			"DropRings": true,
 		})
 	else:
-		StateM.ChangeState("Death")
+		StateM.ChangeState("Death", {
+			"DeathType": "NORMAL",
+		})
 
 
 func Kill() -> void:
@@ -532,7 +536,3 @@ func Kill() -> void:
 	StateM.ChangeState("Death", {
 		"DeathType": deathState,
 	})
-
-
-func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
-	DamageReceived(Source.global_position, Damage)

@@ -65,5 +65,5 @@ func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
 		HealthEmpty.emit()
 
 
-func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
-	DamageReceived(Source.global_position, Damage)
+func _on_hurtbox_hurtbox_activated(SourcePos: Vector3, Damage: int) -> void:
+	DamageReceived(SourcePos, Damage)

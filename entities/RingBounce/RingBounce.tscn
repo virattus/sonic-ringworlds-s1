@@ -11,8 +11,9 @@ bounce = 1.0
 radius = 0.60681
 
 [node name="RingBounce" type="RigidBody3D" groups=["RingBounce"]]
-collision_layer = 0
+collision_layer = 4
 physics_material_override = SubResource("PhysicsMaterial_1y4fo")
+can_sleep = false
 script = ExtResource("1_c0pbu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -23,10 +24,5 @@ shape = SubResource("SphereShape3D_v7rtg")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="TimerFlicker" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [connection signal="Collected" from="Coin" to="." method="_on_coin_collected"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="TimerFlicker" to="." method="_on_timer_flicker_timeout"]

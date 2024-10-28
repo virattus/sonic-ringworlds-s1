@@ -42,7 +42,7 @@ func VisibilityRangeAndActivation():
 			StateM.ChangeState("Idle")
 
 
-func _on_hurtbox_hurtbox_activated(_Source: Hitbox, _Damage: int) -> void:
+func _on_hurtbox_hurtbox_activated(_SourcePos: Vector3, _Damage: int) -> void:
 	if EnemyInvincible:
 		return
 	

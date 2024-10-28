@@ -4,6 +4,7 @@ extends Node
 
 #const GRAVITY = 9.8
 const GRAVITY = 13.125 #2D Sonic gravity I think
+const GRAVITY_UNDERWATER = 3.75 #2D sonic
 const UPDIR_SLERP_RATE = 10.0
 const FLOOR_NORMAL_TRANSITION_MAX = 0.1
 const FLICKER_CYCLE_TIME = 0.0625

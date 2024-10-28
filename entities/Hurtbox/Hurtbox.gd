@@ -2,13 +2,16 @@ class_name Hurtbox
 extends Area3D
 
 
-signal HurtboxActivated(Source: Hitbox, Damage: int)
+signal HurtboxActivated(SourcePos: Vector3, Damage: int)
 
 
 @export var BeDamaged := true
 @export var ParentCharacter : Character
 
 
-func ReceiveDamage(Source: Hitbox, Damage: int) -> void:
+func ReceiveDamage(Source: Hitbox, Damage: int, ignorePos: bool) -> void:
 	if BeDamaged:
-		HurtboxActivated.emit(Source, Damage)
+		if ignorePos:
+			HurtboxActivated.emit(ParentCharacter.global_position, Damage)
+		else:
+			HurtboxActivated.emit(Source.global_position, Damage)
