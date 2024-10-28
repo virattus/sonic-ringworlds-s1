@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 
-const OFFSET = Vector2(50.0, -50.0)
+const OFFSET = Vector2(50.0, -80.0)
 
 
 func MoveTo(pos: Vector2) -> void:

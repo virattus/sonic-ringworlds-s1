@@ -20,7 +20,8 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	body.SetUnderwater(true)
-	body.velocity.y = 0.0
+	body.SetVelocity(body.velocity * Vector3(0.5, 0.25, 0.5))
+	body.SetTrueVelocity(body.velocity)
 	CreateSplash(body.global_position)
 	AudioServer.set_bus_effect_enabled(AUDIO_BUS_SF, AUDIO_EFF_REVERB, true)
 

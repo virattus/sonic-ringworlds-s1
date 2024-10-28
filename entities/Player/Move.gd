@@ -234,7 +234,7 @@ func UpdateMeshOrientation(Backwards: bool) -> void:
 func CalculateWalkVelocity(vel: Vector3, inputVel: Vector3, delta: float) -> Vector3:
 	var speedMod = owner.Parameters.WALK_SPEED_POWER
 	if owner.IsUnderwater:
-		speedMod = owner.Parameters.WALK_SPEED_POWER / 3.0
+		speedMod = owner.Parameters.WALK_SPEED_POWER / 2.0
 	
 	var inputValue : Vector3 = (inputVel * speedMod * delta) + (inputVel.normalized() * vel.length())
 	var newVel = inputValue

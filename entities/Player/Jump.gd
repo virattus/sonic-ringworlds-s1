@@ -16,11 +16,12 @@ func Enter(_msg := {}) -> void:
 		owner.SndJump.play()
 	
 	var JumpForce = owner.Parameters.JUMP_POWER
-	if owner.IsUnderwater:
-		JumpForce = owner.Parameters.JUMP_POWER / 3.0
 	
 	if _msg.has("JumpForce"):
 		JumpForce = _msg["JumpForce"]
+	
+	if owner.IsUnderwater:
+		JumpForce *= 0.5
 	
 	if _msg.has("JumpDirection"):
 		owner.up_direction = _msg["JumpDirection"]
