@@ -248,12 +248,14 @@ func CalculateRunVelocity(vel: Vector3, inputVel: Vector3, delta: float) -> Vect
 	var ratio : float = (owner.Speed - owner.Parameters.WALK_MAX_SPEED) / RUN_RATIO_DIVISOR
 	#print("Run ratio: %s" % ratio)
 	
-	var newSpeed : float = (newVel + (inputVel * owner.Parameters.RUN_SPEED_POWER * delta)).length()
+	var SpeedPower : float = owner.Parameters.RUN_SPEED_POWER if !owner.IsUnderwater else owner.Parameters.RUN_SPEED_POWER * 0.5
+	
+	var newSpeed : float = (newVel + (inputVel * SpeedPower * delta)).length()
 	
 	if newVel.length() >= owner.Parameters.RUN_MAX_SPEED:
 		newSpeed = lerp(newSpeed, owner.Parameters.RUN_MAX_SPEED, delta)
 	
-	newVel = (newVel * ratio) + ((inputVel * owner.Parameters.RUN_SPEED_POWER * delta) * (1.0 - ratio))
+	newVel = (newVel * ratio) + ((inputVel * SpeedPower * delta) * (1.0 - ratio))
 	
 	newVel = newVel.normalized() * newSpeed
 	

@@ -371,12 +371,17 @@ func IsOnWaterSurface() -> bool:
 
 
 func BreatheAirBubble() -> void:
+	if StateM.CurrentState == "Death":
+		return
+	
 	OxygenState = OXYGEN.START_AIR_DRAIN
 	TimerOxygen.stop()
 	UpdateOxygenState()
 	SndWaterBreathe.play()
 	CanJump = false
-	velocity = Vector3.ZERO
+	SetVelocity(Vector3.ZERO)
+	SetTrueVelocity(Vector3.ZERO)
+	PlayDrowningMusic.emit(false)
 	StateM.ChangeState("Fall")
 
 
