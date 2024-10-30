@@ -40,4 +40,7 @@ func Update(_delta: float) -> void:
 		ChangeState("Fall")
 		return
 
-	OldVel = owner.velocity
+	var newVel = owner.TrueVelocity
+	
+	owner.SetTrueVelocity(newVel)
+	owner.SetVelocity(newVel)

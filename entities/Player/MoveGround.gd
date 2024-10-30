@@ -101,17 +101,17 @@ func CheckGroundCollision(collision: CharCollision, delta: float) -> bool:
 		if owner.is_on_wall_only():
 			if CheckFloorRaycast(delta):
 				return true
-			else:
-				owner.CollisionCast.target_position = owner.to_local(owner.get_last_slide_collision().get_position()).normalized()
-				owner.CollisionCast.force_raycast_update()
-				owner.CollisionCast.target_position = -owner.up_direction * owner.COLLISION_CAST_LENGTH
+			#else:
+				#owner.CollisionCast.target_position = owner.to_local(owner.get_last_slide_collision().get_position()).normalized()
+				#owner.CollisionCast.force_raycast_update()
+				#owner.CollisionCast.target_position = -owner.up_direction * owner.COLLISION_CAST_LENGTH
 				
-				if owner.CollisionCast.is_colliding():
-					if owner.Speed < owner.Parameters.TEETER_MAX_SPEED:
-						ChangeState("Teetering", {
+				#if owner.CollisionCast.is_colliding():
+				#	if owner.Speed < owner.Parameters.TEETER_MAX_SPEED:
+				#		ChangeState("Teetering", {
 							
-						})
-						return true
+				#		})
+				#		return true
 			return false
 		else:
 			return true

@@ -48,7 +48,7 @@ func Update(_delta: float) -> void:
 	var collision: CharCollision = owner.GetCollision()
 	
 	if collision.CollisionType == CharCollision.NONE:
-		ChangeState("Teetering")
+		ChangeState("Fall")
 		return
 	
 	if owner.Speed < SKID_TRANSITION_MIN_SPEED:

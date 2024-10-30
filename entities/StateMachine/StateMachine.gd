@@ -36,5 +36,4 @@ func ChangeState(newState : String, msg := {}) -> void:
 	ActiveState = get_node(newState)
 	ActiveState.Enter(msg)
 	CurrentState = ActiveState.GetFullName()
-	emit_signal("StateChange", CurrentState)
-	
+	StateChange.emit(CurrentState)

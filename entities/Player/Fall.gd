@@ -37,7 +37,7 @@ func Update(_delta: float) -> void:
 	if owner.IsUnderwater:
 		owner.UpdateUpDir(Vector3.UP, _delta)
 
-	var newVel : Vector3 = owner.velocity
+	var newVel : Vector3 = owner.TrueVelocity
 	
 	newVel = HandleAirInput(newVel, _delta)
 	
@@ -47,12 +47,8 @@ func Update(_delta: float) -> void:
 	
 	#newVel = ApplyAirDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
-	
-	
-	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
-		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED
 
-	OldVel = owner.velocity
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel)
 
 

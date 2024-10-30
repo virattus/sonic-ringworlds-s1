@@ -1,7 +1,7 @@
 extends "res://entities/CharController/CharController.gd"
 
 
-@export var Player: Character
+@export var TargetPlayer: Character
 @export var Camera_Node: ThirdPersonCamera
 @export_enum("1", "2") var PlayerID: int
 

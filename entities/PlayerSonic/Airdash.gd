@@ -17,7 +17,7 @@ func Enter(_msg := {}) -> void:
 	owner.SndAirdash.play()
 	$TimerAirdash.start()
 	
-	var newVel : Vector3 = owner.velocity
+	var newVel : Vector3 = owner.TrueVelocity
 	
 	#if the player is standing still, shoot forward
 	if (newVel * Vector3(1, 0, 1)).length() <= 0.0:
@@ -29,7 +29,8 @@ func Enter(_msg := {}) -> void:
 	newVel.y = clamp(newVel.y, -0.9, 0.4)
 	
 	
-	owner.SetVelocity(newVel.normalized() * AIRDASH_FORWARD_SPEED)
+	owner.SetTrueVelocity(newVel.normalized() * AIRDASH_FORWARD_SPEED)
+	owner.SetVelocity(owner.TrueVelocity)
 
 	owner.UpdateUpDir(Vector3.UP, -1.0)
 	owner.CharMesh.AlignToY(Vector3.UP)
@@ -62,15 +63,12 @@ func Update(_delta: float) -> void:
 			})
 			return
 
-	var newVel = owner.velocity
+	var newVel = owner.TrueVelocity
 	
-	newVel = ApplyAirDrag(owner.velocity, _delta)
+	newVel = ApplyAirDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
-	if newVel.length() > owner.Parameters.MOVE_MAX_SPEED:
-		newVel = newVel.normalized() * owner.Parameters.MOVE_MAX_SPEED
-	
-	OldVel = newVel
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel)
 
 

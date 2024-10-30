@@ -3,6 +3,7 @@ extends BasicState
 
 
 
+
 func Enter(_msg := {}) -> void:
 	owner.player.StateM.ChangeState("Idle")
 	

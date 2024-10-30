@@ -39,8 +39,8 @@ func EnemyDeath() -> void:
 	EnemyDefeated = true
 
 
-func _on_hurtbox_hurtbox_activated(Source: Hitbox, Damage: int) -> void:
-	super(Source, Damage)
+func _on_hurtbox_hurtbox_activated(SourcePos: Vector3, Damage: int) -> void:
+	super(SourcePos, Damage)
 	
 	HitTimer.start()
 	EnemyInvincible = true

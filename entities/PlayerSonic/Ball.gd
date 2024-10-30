@@ -144,4 +144,6 @@ func UncurlAndIdle() -> void:
 	owner.CharMesh.AlignToY(owner.up_direction)
 	owner.DamageThreshold = owner.Parameters.DAMAGE_THRESHOLD_NORMAL
 	owner.SndSpinCharge.stop()
+	owner.SetTrueVelocity(Vector3.ZERO)
+	owner.SetVelocity(Vector3.ZERO)
 	ChangeState("Idle")

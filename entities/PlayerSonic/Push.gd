@@ -10,7 +10,9 @@ func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Movement/blend_amount", 0.0)
 	owner.AnimTree.set("parameters/Push/blend_amount", 1.0)
 	
-	print("pushing")
+	owner.SetTrueVelocity(owner.velocity)
+	
+	#print("pushing")
 
 
 func Exit() -> void:

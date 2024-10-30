@@ -19,7 +19,7 @@ const OXYGEN_BUBBLE_3 = 2.0
 const OXYGEN_BUBBLE_2 = 2.0
 const OXYGEN_BUBBLE_1 = 2.0
 const OXYGEN_BUBBLE_0 = 2.0
-const OXYGEN_LAST_GASP = 2.0
+const OXYGEN_LAST_GASP = 2.0 + 2.0 # just extend the last state to account for the animation
 
 const GROUND_NORMAL_TRANSITION_MIN = 0.85
 const GROUND_NORMAL_HOP = 0.1

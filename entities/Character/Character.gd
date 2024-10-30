@@ -54,7 +54,7 @@ func LookAt(target: Vector3) -> void:
 	CharMesh.look_at(target)
 
 
-func DamageReceived(SourcePos: Vector3, Damage: int) -> void:
+func DamageReceived(_SourcePos: Vector3, Damage: int) -> void:
 	if Health <= 0:
 		return
 	

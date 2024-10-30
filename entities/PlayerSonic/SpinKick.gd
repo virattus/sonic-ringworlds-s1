@@ -51,7 +51,7 @@ func Update(_delta: float) -> void:
 	if !AttackReleased and Target == null:
 		GetNextTarget(inputVel)
 	
-	var newVel = owner.velocity
+	var newVel = owner.TrueVelocity
 	
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
@@ -62,10 +62,8 @@ func Update(_delta: float) -> void:
 		var direction = owner.global_position.direction_to(Target.global_position)
 		newVel = (direction * Vector3(1, 0, 1) * CurrentSpeed) + (newVel * Vector3.UP)
 	
-	if newVel.length() > owner.PARAMETERS.MOVE_MAX_SPEED:
-		newVel = newVel.normalized() * owner.PARAMETERS.MOVE_MAX_SPEED
 	
-	OldVel = owner.velocity
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel)
 
 

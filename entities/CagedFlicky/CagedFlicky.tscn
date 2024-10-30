@@ -20,9 +20,6 @@ radius = 1.0
 script = ExtResource("2_e0vns")
 FlickyID = 1
 
-[node name="Skeleton3D" parent="Armature" index="0"]
-bones/1/rotation = Quaternion(-1.34359e-07, 4.37114e-08, -4.37114e-08, 1)
-
 [node name="Cylinder" parent="Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_ktsw6")
 
@@ -40,7 +37,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="CageBone" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -4.92967e-15, 1.42109e-14, 6.25408e-15, -1, -1.51495e-08, 0, 1.51495e-08, -1, -4.37114e-08, 0, -1.19209e-07)
+transform = Transform3D(1, -4.92967e-15, 7.10543e-15, 6.25408e-15, -1, -1.51495e-08, -7.10543e-15, 1.51495e-08, -1, -4.37114e-08, 0, -1.19209e-07)
 bone_name = "Cage"
 bone_idx = 1
 

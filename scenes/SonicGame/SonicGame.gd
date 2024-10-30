@@ -44,3 +44,7 @@ func _on_player_death() -> void:
 
 func _on_player_swapper_player_swap(active: bool) -> void:
 	$KillBox.Active = !active
+
+
+func _on_capsule_capsule_broken() -> void:
+	$StateMachine.ChangeState("ActComplete")

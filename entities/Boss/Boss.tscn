@@ -5,4 +5,3 @@
 
 [node name="Boss" groups=["Boss"] instance=ExtResource("1_yg08d")]
 script = ExtResource("2_nryd2")
-HomeMaxDist = 10.0

@@ -9,10 +9,10 @@ extends Area3D
 
 func _on_body_entered(body: Player) -> void:
 
-	if UpDirection.y <= 0.0:
+	if body.is_on_floor() and UpDirection.y <= 0.0:
 		body.StateM.ChangeState("Move", {
-			"Velocity": UpDirection * SpringPower,
-			"UpdateModelOrientation": true,
+			"Boost": UpDirection * SpringPower,
+			#"UpdateModelOrientation": true,
 			"IgnoreInput": 0.5,
 		})
 	else:

@@ -27,7 +27,7 @@ func Enter(_msg := {}) -> void:
 		owner.up_direction = _msg["JumpDirection"]
 		owner.CharMesh.AlignToY(owner.up_direction)
 
-	var newVel : Vector3 = owner.velocity
+	var newVel : Vector3 = owner.TrueVelocity
 	if _msg.has("IgnoreVel") and _msg["IgnoreVel"]:
 		newVel = Vector3.ZERO
 	
@@ -37,6 +37,7 @@ func Enter(_msg := {}) -> void:
 	var frontVel = newVel - (owner.up_direction * owner.up_direction.dot(newVel))
 	newVel = frontVel + owner.up_direction * JumpForce
 	
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel)
 	
 	owner.CharMesh.LookAt(owner.global_position + frontVel.normalized())
@@ -90,7 +91,7 @@ func Update(_delta: float) -> void:
 	if owner.IsUnderwater:
 		owner.UpdateUpDir(Vector3.UP, _delta)
 	
-	var newVel : Vector3 = owner.velocity
+	var newVel : Vector3 = owner.TrueVelocity
 	
 	newVel = HandleAirInput(newVel, _delta)
 	
@@ -103,7 +104,7 @@ func Update(_delta: float) -> void:
 	#	newVel = ApplyAirDrag(newVel, _delta)
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
-	OldVel = owner.velocity
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel)
 
 

@@ -50,7 +50,7 @@ Title1 = "movement testing"
 StageMusic = ExtResource("2_csmd6")
 
 [node name="PlayerSonic" parent="PlayerSwapper" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48975, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_mask = 2147491841
 
 [node name="EnemyCrabmeat" parent="Enemies" index="0" instance=ExtResource("9_dh6p0")]
@@ -647,74 +647,78 @@ transform = Transform3D(-0.89685, 0, -0.442336, 0, 1, 0, 0.442336, 0, -0.89685, 
 BoostForce = 120.0
 
 [node name="BoosterGround2" parent="MovementTesting" index="36" instance=ExtResource("11_kueol")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46.038, 0, 33.9684)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 49.7939, 0, 33.1995)
 BoostForce = 20.0
 
 [node name="BoosterGround3" parent="MovementTesting" index="37" instance=ExtResource("11_kueol")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 41.1228, 0, 33.9684)
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 43.6958, 0, 33.7614)
 BoostForce = 20.0
 
 [node name="BoosterGround4" parent="MovementTesting" index="38" instance=ExtResource("11_kueol")]
-transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 41.1228, 0, 38.8311)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 39.748, 0, 39.009)
 BoostForce = 20.0
 
 [node name="BoosterGround5" parent="MovementTesting" index="39" instance=ExtResource("11_kueol")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.0643, 0, 38.8311)
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 40.09, 0, 45.6131)
 BoostForce = 20.0
 
-[node name="ItemBoxRobotnik" parent="MovementTesting" index="40" instance=ExtResource("12_f252l")]
+[node name="BoosterGround6" parent="MovementTesting" index="40" instance=ExtResource("11_kueol")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 46.0046, 0, 48.7917)
+BoostForce = 20.0
+
+[node name="ItemBoxRobotnik" parent="MovementTesting" index="41" instance=ExtResource("12_f252l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.33, 20.0886, 0)
 collision_layer = 1
 collision_mask = 10
 
-[node name="ItemBoxRobotnik2" parent="MovementTesting" index="41" instance=ExtResource("12_f252l")]
+[node name="ItemBoxRobotnik2" parent="MovementTesting" index="42" instance=ExtResource("12_f252l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.2589, 40.1414, -18.2042)
 collision_layer = 1
 collision_mask = 10
 
-[node name="ItemBoxRing" parent="MovementTesting" index="42" instance=ExtResource("14_cms30")]
+[node name="ItemBoxRing" parent="MovementTesting" index="43" instance=ExtResource("14_cms30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.6347, 40.1414, -18.2042)
 collision_layer = 1
 collision_mask = 10
 
-[node name="ItemBoxRing2" parent="MovementTesting" index="43" instance=ExtResource("14_cms30")]
+[node name="ItemBoxRing2" parent="MovementTesting" index="44" instance=ExtResource("14_cms30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.2918, 40.1414, -18.2042)
 collision_layer = 1
 collision_mask = 10
 
-[node name="ItemBoxRing3" parent="MovementTesting" index="44" instance=ExtResource("14_cms30")]
+[node name="ItemBoxRing3" parent="MovementTesting" index="45" instance=ExtResource("14_cms30")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74.7256, 40.1414, -18.2042)
 collision_layer = 1
 collision_mask = 10
 
-[node name="ItemBoxOneUp" parent="MovementTesting" index="45" instance=ExtResource("14_fgacc")]
+[node name="ItemBoxOneUp" parent="MovementTesting" index="46" instance=ExtResource("14_fgacc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.14419, 9.03581, -7.20331)
 collision_layer = 1
 collision_mask = 10
 
-[node name="AirBubbleSpawner" parent="MovementTesting" index="46" instance=ExtResource("15_ef6lu")]
+[node name="AirBubbleSpawner" parent="MovementTesting" index="47" instance=ExtResource("15_ef6lu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.8712, -6, 71.989)
 
-[node name="CagedFlicky" parent="MovementTesting" index="47" instance=ExtResource("16_0mtxn")]
+[node name="CagedFlicky" parent="MovementTesting" index="48" instance=ExtResource("16_0mtxn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -69.4715, 28.1241, 38.1081)
 
-[node name="HangPoint" parent="MovementTesting" index="48" instance=ExtResource("17_eomso")]
+[node name="HangPoint" parent="MovementTesting" index="49" instance=ExtResource("17_eomso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7207, 14.7603)
 MovementAxis = Vector3(1, 1, 1)
 
-[node name="FallingMushroom" parent="MovementTesting" index="49" instance=ExtResource("17_h1ucm")]
+[node name="FallingMushroom" parent="MovementTesting" index="50" instance=ExtResource("17_h1ucm")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -101.772, 10.9206, 26.1243)
 
-[node name="PushBlock" parent="MovementTesting" index="50" instance=ExtResource("19_otfhm")]
+[node name="PushBlock" parent="MovementTesting" index="51" instance=ExtResource("19_otfhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2806, 1, -13.7179)
 
-[node name="Capsule" parent="MovementTesting" index="51" instance=ExtResource("20_q2enj")]
+[node name="Capsule" parent="MovementTesting" index="52" instance=ExtResource("20_q2enj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.1057, 0, 23.5779)
 
-[node name="ItemBoxSpeedUp" parent="MovementTesting" index="52" instance=ExtResource("27_jjwkj")]
+[node name="ItemBoxSpeedUp" parent="MovementTesting" index="53" instance=ExtResource("27_jjwkj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.7858, 41.9975, 66.9097)
 
-[node name="MagTrigger" parent="MovementTesting" index="53" node_paths=PackedStringArray("Path") instance=ExtResource("23_0a7s3")]
+[node name="MagTrigger" parent="MovementTesting" index="54" node_paths=PackedStringArray("Path") instance=ExtResource("23_0a7s3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.9913, 5.91543, 9.11945)
 Path = NodePath("Path3D")
 
@@ -725,8 +729,9 @@ shape = SubResource("CylinderShape3D_uxoi7")
 [node name="Path3D" type="Path3D" parent="MovementTesting/MagTrigger" index="1"]
 curve = SubResource("Curve3D_idb8o")
 
-[node name="Lava" parent="MovementTesting" index="54" instance=ExtResource("20_rehot")]
+[node name="Lava" parent="MovementTesting" index="55" instance=ExtResource("20_rehot")]
 transform = Transform3D(30.91, 0, 0, 0, 1, 0, 0, 0, 28.65, -16.839, -0.6, 71.192)
 
 [connection signal="PlayDrowningMusic" from="PlayerSwapper" to="." method="_on_player_play_drowning_music"]
 [connection signal="CageDestroyed" from="MovementTesting/CagedFlicky" to="." method="_on_caged_flicky_cage_destroyed"]
+[connection signal="CapsuleBroken" from="MovementTesting/Capsule" to="." method="_on_capsule_capsule_broken"]

@@ -1,8 +1,6 @@
 extends BasicState
 
 
-var OldVel := Vector3.ZERO
-
 const AIR_WIPEOUT_MIN = 0.75
 
 
@@ -14,8 +12,8 @@ func ApplyAirDrag(velocity: Vector3, delta: float) -> Vector3:
 	#velocity.x = lerp(velocity.x, 0.0, delta * delMod)
 	#velocity.z = lerp(velocity.z, 0.0, delta * delMod)
 	
-	velocity.x -= (velocity.x / 0.125) / 256
-	velocity.z -= (velocity.z / 0.125) / 256
+	velocity.x -= (velocity.x / 0.125) / 256.0
+	velocity.z -= (velocity.z / 0.125) / 256.0
 	
 	return velocity
 
@@ -73,7 +71,7 @@ func CheckGroundCollision(collision: CharCollision) -> bool:
 				ChangeState("Land", {
 					"Type": "Normal",
 					"Normal": owner.CollisionCast.get_collision_normal(),
-					"Vel": OldVel,
+					"Vel": owner.TrueVelocity,
 				})
 				return true
 			return false
@@ -82,7 +80,7 @@ func CheckGroundCollision(collision: CharCollision) -> bool:
 			ChangeState("Land", {
 				"Type": "Normal",
 				"Normal": owner.CollisionCast.get_collision_normal(),
-				"Vel": OldVel,
+				"Vel": owner.TrueVelocity,
 			})
 			return true
 		else:

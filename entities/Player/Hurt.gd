@@ -89,9 +89,9 @@ func Update(_delta: float) -> void:
 			if owner.velocity.y < 0.0:
 				LeftGround = true
 		
-	var newVel : Vector3 = owner.velocity
+	var newVel : Vector3 = owner.TrueVelocity
 	
 	newVel = owner.ApplyGravity(newVel, _delta)
 	
-	OldVel = owner.velocity
+	owner.SetTrueVelocity(newVel)
 	owner.SetVelocity(newVel)

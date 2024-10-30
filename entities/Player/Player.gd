@@ -40,6 +40,8 @@ var DebugCollisionPositionDeviation := Vector3.ZERO
 var DebugCollisionNormal := Vector3.ZERO
 var DebugCollisionNormalDeviation := Vector3.ZERO
 
+var IgnoreInput := false
+
 var TrueVelocity := Vector3.ZERO
 var BounceVelocity := Vector3.ZERO
 
@@ -162,7 +164,7 @@ func _process(delta: float) -> void:
 	if !BounceVelocity.is_zero_approx():
 		BounceVelocity = BounceVelocity.move_toward(Vector3.ZERO, BOUNCE_REDUCTION_MOD * delta)
 	
-	UpdateDebugIndicators(DebugMoveVector, DebugFloorNormal)
+	UpdateDebugIndicators(DebugMoveVector)
 	
 	if DashModeDrain:
 		if DashMode:
@@ -244,10 +246,10 @@ func SetTrueVelocity(newVel: Vector3) -> void:
 
 
 func GetInputVector(up_dir: Vector3) -> Vector3:
-	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward", 0.4)
+	if IgnoreInput:
+		return Vector3.ZERO
 	
-	#var CameraForward = Camera.global_transform.basis.z
-	#var CameraRight = Camera.global_transform.basis.x
+	var playerInput = Input.get_vector("Move_Left", "Move_Right", "Move_Forward", "Move_Backward", 0.4)
 	
 	var CameraForward = (Camera.GetBasis().z * Vector3(1, 0, 1)).normalized()
 	var CameraRight = (Camera.GetBasis().x * Vector3(1, 0, 1)).normalized()
@@ -440,7 +442,7 @@ func AlignToY(newY: Vector3) -> Basis:
 	return newBasis
 
 
-func UpdateDebugIndicators(new_input_vector: Vector3, new_floor_normal: Vector3) -> void:
+func UpdateDebugIndicators(new_input_vector: Vector3) -> void:
 	UpVectorIndicator.position = up_direction
 	FloorNormalIndicator.position = -CollisionCast.target_position.normalized()
 	

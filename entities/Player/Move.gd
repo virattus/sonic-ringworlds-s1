@@ -7,6 +7,7 @@ var FootstepAccumulator := 0.0
 
 
 const BOUNCE_REFLECTION_POWER = 3.0
+const BOUNCE_MIN_SPEED = 8.0
 
 const WALK_BRAKE_POWER = 8.0
 
@@ -72,6 +73,8 @@ func Update(_delta: float) -> void:
 		if !HandleAttackInput():
 			return
 	
+	IgnoreInput = move_toward(IgnoreInput, 0.0, _delta)
+	
 	UpdateMoveAnimations()
 	
 	if owner.TrueVelocity.length() > owner.Parameters.WALK_MAX_SPEED:
@@ -82,10 +85,21 @@ func Update(_delta: float) -> void:
 	
 	var newVel : Vector3 = owner.TrueVelocity
 	var inputVel : Vector3 = owner.GetInputVector(owner.up_direction)
+	if IgnoreInput > 0.0:
+		inputVel = Vector3.ZERO
 
 	if owner.is_on_wall():
-		owner.BounceVelocity = newVel.bounce(owner.get_wall_normal()).normalized() * BOUNCE_REFLECTION_POWER
-		newVel = Vector3.ZERO
+		if owner.TrueVelocity.length() > BOUNCE_MIN_SPEED:
+			owner.BounceVelocity = newVel.bounce(owner.get_wall_normal()).normalized() * BOUNCE_REFLECTION_POWER
+			owner.SndSkid.play()
+			newVel = Vector3.ZERO
+		elif owner.PushCast.is_colliding():
+			if owner.up_direction.dot(Vector3.UP) > 0.9:
+				var collNormal : Vector3 = owner.PushCast.get_collision_normal()
+				#if collNormal.dot(owner.velocity.normalized()) < -0.25:
+				if collNormal.dot(inputVel.normalized()) < -0.25:
+					ChangeState("Push")
+					return
 
 	if !owner.GroundCollision and owner.IsOnWaterSurface(): #raycast doesn't hit solid ground idiot
 		UpdateWaterFootsteps(_delta)
@@ -113,8 +127,9 @@ func Update(_delta: float) -> void:
 	
 	
 	if owner.BounceVelocity.is_zero_approx():
+		owner.BounceVelocity = Vector3.ZERO
+		owner.SndSkid.stop()
 		if newVel.is_zero_approx():
-			owner.BounceVelocity = Vector3.ZERO
 			ChangeState("Idle")
 			return
 	else:
