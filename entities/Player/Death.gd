@@ -11,16 +11,23 @@ const DEATH_INITIAL_VERTICAL_VELOCITY = 5.0
 func Enter(_msg := {}) -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 1.0)
 	
+	var SkipSoundSFX := false
+	if _msg.has("NoSound") and _msg["NoSound"]:
+		SkipSoundSFX = true
+	
+	
 	if !_msg.has("DeathType"):
 		assert(false)
 		
 	if _msg["DeathType"] == "DROWN":
 		VerticalVelocity = 0.0
-		owner.SndWaterDrown = true
+		if !SkipSoundSFX:
+			owner.SndWaterDrown.play()
 		Gravity = owner.Parameters.GRAVITY * 0.25
 	else:
 		VerticalVelocity = DEATH_INITIAL_VERTICAL_VELOCITY
-		owner.SndDeath.play()
+		if !SkipSoundSFX:
+			owner.SndDeath.play()
 		Gravity = owner.Parameters.GRAVITY
 	
 	owner.DashModeDrain = false
@@ -33,7 +40,7 @@ func Enter(_msg := {}) -> void:
 
 func Exit() -> void:
 	owner.AnimTree.set("parameters/Death/blend_amount", 0.0)
-	owner.SndDeath.play()
+	owner.SndDeath.stop()
 
 
 func Update(_delta: float) -> void:

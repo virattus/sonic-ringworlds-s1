@@ -17,4 +17,6 @@ ApplyDamage = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.360356, 0)
 shape = SubResource("BoxShape3D_i544w")
 
+[node name="sndSpikes" type="AudioStreamPlayer" parent="." index="3"]
+
 [connection signal="HitboxActivated" from="Hitbox" to="." method="_on_hitbox_hitbox_activated"]

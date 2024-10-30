@@ -136,3 +136,7 @@ func WallRunMinVelocity() -> float:
 	var reqSpeed = (floorAngle) * WALLRUN_ANGLE_SPEED_RATIO
 	
 	return reqSpeed
+
+
+func ApplyBounce() -> void:
+	pass
